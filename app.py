@@ -33,6 +33,7 @@ def home():
 @app.route("/users")
 def get_user():
     users = get_all_users()
+    print(users)
     return render_template('users.html', users=users)
 
 @app.route("/add-user", methods=['post'])

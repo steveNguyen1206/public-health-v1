@@ -16,17 +16,20 @@ engine = create_engine(
 
 def row2dict(row):
     d = {}
-    for name in row._fields:
-        d[name] = row.name
+    fields = row._fields
+    for i in range(len(fields)):
+        d[fields[i]] = row.__getitem__(i)
+    print(d)
     return d
 
 def get_all_users():
     with engine.connect() as conn:
-        data = conn.execute(text("select * from user"))
+        data = conn.execute(text("select * from user")).all()
         users = []
-        for row in data.all():
+        # print(data[0].__getitem__(0))
+        for row in data:
             users.append(row2dict(row))
-        # print(users)
+        print(users)
         return users
 
 def add_user(user):
@@ -38,5 +41,5 @@ def add_user(user):
         conn.commit()
         # print(insert(user))
 
-# add_user("")
+get_all_users()
     
