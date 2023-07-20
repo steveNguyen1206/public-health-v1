@@ -33,12 +33,13 @@ def home():
 @app.route("/users")
 def get_user():
     users = get_all_users()
-    print(users)
+    # print(users)
     return render_template('users.html', users=users)
 
 @app.route("/add-user", methods=['post'])
 def add_user_route():
     data=request.form
+    # print(data['gender'])
     add_user(data)
     return redirect(url_for('get_user'))
 
