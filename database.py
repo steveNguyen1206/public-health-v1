@@ -19,7 +19,7 @@ def row2dict(row):
     fields = row._fields
     for i in range(len(fields)):
         d[fields[i]] = row.__getitem__(i)
-    print(d)
+    # print(d)
     return d
 
 def get_all_users():
@@ -29,14 +29,14 @@ def get_all_users():
         # print(data[0].__getitem__(0))
         for row in data:
             users.append(row2dict(row))
-        print(users)
+        # print(users)
         return users
 
 def add_user(user):
     with engine.connect() as conn:
-        query = text("INSERT INTO user (name, email, age) VALUES (:name, :email, :age)")
+        query = text("INSERT INTO user (name, email, age, gender) VALUES (:name, :email, :age, :gender)")
         conn.execute(query,
-                    [{"name": user['name'], "email":user['email'], "age":user['age']}],
+                    [{"name": user['name'], "email":user['email'], "age":user['age'], "gender":user['gender']}],
                     )
         conn.commit()
         # print(insert(user))
