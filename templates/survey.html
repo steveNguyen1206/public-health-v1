@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='survey.css')}}">
+<div class="survey-container ">
+    <form action="/survey" method="post"  id="form1" class="form-control form-container">
+      <h3>Collect user information</h3>
+
+      <div class="mb-3">
+        <label for="household-size" class="form-labe1">Houseshold size</label>
+        <input type="number" class="form-control" name="household-size" id="household-size">
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-labe1 mb-1">Address</label>
+
+        <div class=" row align-items-center">
+          <div class="col-sm mb-3">
+            <label class="form-labe1 ">Province</label>
+            <select class="form-select" aria-label="Default select example" id="provinces" name="province">
+              <option disabled selected>Province</option>
+            </select>
+          </div>
+
+          <div class="col-sm mb-3">
+            <label class="form-labe1 ">District</label>
+            <select class="form-select" aria-label="Default select example" id="districts" name="district">
+              <option disabled selected>District</option>
+            </select>
+          </div>
+
+          <div class="col-sm mb-3">
+            <label class="form-labe1 ">Wards</label>
+            <select class="form-select" aria-label="Default select example" id="wardses" name="wards">
+              <option disabled selected>Wards</option>
+            </select>
+          </div>
+        </div>
+       
+      </div>
+      <div id="persons-wrapper">
+          <div class="form-control mb-3">
+            <h5>Person 1</h5>
+            
+            <p for="" class="form-label">Gender</p>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender_1" id="male_1" value="male" checked="">
+              <label class="form-check-label" for="male1">
+                Male
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender_1" id="female_1" value="female">
+              <label class="form-check-label" for="female_1">
+                Female
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender_1" id="others_1" value="others">
+              <label class="form-check-label" for="others_1">
+                Others
+              </label>
+            </div>
+            
+            
+            <div class="mb-3">
+              <label>Year of birth</label>
+              <input type="text" class="form-control" id="datepicker_1" name="birth-year_1"/>
+            </div>        
+                  <script type="text/javascript">
+      
+                    $("#datepicker_1").datepicker({
+                        format: "yyyy",
+                        viewMode: "years", 
+                        minViewMode: "years"
+                    });
+                </script>
+          
+                <label class="form-labe1">Occupation</label>
+                    <div class="mb-3">
+                      <select class="form-select" aria-label="Default select example" id="occupation_1" name="occupation_1">
+                      </select>
+                    </div>
+                </div>
+
+          </div>
+
+      <div class="row">
+        <div class="col align-self-end">
+          <button class="btn btn-primary mb-3" id="add-person">Add person</button>
+        </div>
+      </div>
+
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+      </div>
+
+
+    </form>
+  </div>
+  <script src="{{url_for('static', filename='survey.js')}}" ></script>
+{% endblock %}
