@@ -3,15 +3,20 @@
 {%block title %}Survey | Diseases Simulation{%endblock%}
 
 {%block content%}
-    <section id="survey_cndct-26723">
-        <style>
-            #survey_cndct_container-26723{  
-              background: url('../images/Large_Card.jpg') no-repeat;
-              background-size: 100%;
-            }
-          </style>
-        <div class="pt-lg-5 pb-lg-5 px-lg-5 px-lg-5 container-fluid" id="survey_cndct_container-26723">
-            {%include 'form.html'%}
-        </div>
-    </section>
+  <section id="survey_header-26723" class="pt-4  container-lg" >
+    <div class="container-fluid py-lg-5 px-lg-5" id="survey_header_container-26723" style="color: white;text-align: center;" >
+      <h2>
+        Khảo sát hộ gia đình
+      </h2>
+      <div>
+        Nhập các trường thông tin bên dưới để thực hiện khảo sát. Các thông tin khảo sát được đảm bảo riêng tư và chỉ được dùng cho mục đích nghiên cứu.
+      </div>
+      
+    </div>
+  </section>
+  <section id="survey_cndct-26723">
+      <div class="pt-3 pb-lg-5 px-lg-5 container-fluid" id="survey_cndct_container-26723">
+          {%include 'form.html'%}
+      </div>
+  </section>
 {%endblock%}
