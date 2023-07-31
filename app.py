@@ -1,5 +1,5 @@
 from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, url_for
-from database import get_all_users, add_user
+from database import get_all_persons, add_family_person, get_all_families
 
 app = Flask(__name__)
 
@@ -7,21 +7,29 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@app.route("/api/users")
-def api_get_user():
-    users = get_all_users()
+@app.route("/api/person/all")
+def api_get_all_persons():
+    persons = get_all_persons()
     # print(users)
-    return jsonify(users)
+    return jsonify(persons)
+
+@app.route("/api/family/all")
+def api_get_all_families():
+    families = get_all_families()
+    # print(users)
+    return jsonify(families)
 
 
-@app.route("/add-user", methods=['post'])
-def add_user_route():
+@app.route("/add-family", methods=['post'])
+def add_family_route():
     data=request.form
+    print(data)
     # print(data['gender'])
-    add_user(data)
-    return redirect(url_for('get_user'))
+    add_family_person(data)
+    return redirect(url_for('api_get_all_persons'))
 
-@app.route('/survey', methods = ['POST', 'GET'])
+
+@app.route('/survey', methods = ['GET'])
 def render_survey():
     if request.method == 'POST':
         return jsonify({'test': 'pass'})

@@ -1,98 +1,135 @@
 <link rel="stylesheet" href="{{url_for('static', filename='survey.css')}}">
 <div class="survey-container ">
-    <form action="/survey" method="post"  id="form1" class="form-control form-container">
-      <h3>Collect user information</h3>
+    <form action="/add-family" method="post"  id="form1" class="form-control form-container">
+      <h4 class="mb-5 text-center">Phiếu khảo sát thông tin gia đình</h4>
 
-      <div class="mb-3">
-        <label for="household-size" class="form-labe1">Houseshold size</label>
-        <input type="number" class="form-control" name="household-size" id="household-size">
-      </div>
+      <h5 class="mb-3">Thông tin chung</h5>
+      <!-- <button id="a">a</button> -->
 
-      <div class="mb-3">
-        <label for="address" class="form-labe1 mb-1">Address</label>
+      <div class="address-warpper mb-3">
+        <label for="address" class="form-labe1 mb-1">Địa chỉ</label>
 
         <div class=" row align-items-center">
           <div class="col-sm mb-3">
-            <label class="form-labe1 ">Province</label>
-            <select class="form-select" aria-label="Default select example" id="provinces" name="province">
+            <label class="form-labe1 ">Tỉnh/ Thành phố</label>
+            <input type="text" list="provinces-list" class="form-select" id="provinces" name="province"/>
+            <datalist id="provinces-list">
+              <option selected>TP Hồ Chí Minh</option>
+            </datalist>
+            <!-- <select class="form-select" aria-label="Default select example" id="provinces" name="province">
               <option disabled selected>Province</option>
-            </select>
+            </select> -->
           </div>
 
           <div class="col-sm mb-3">
-            <label class="form-labe1 ">District</label>
-            <select class="form-select" aria-label="Default select example" id="districts" name="district">
+            <label class="form-labe1 ">Quận/ Huyện</label>
+            <!-- <select class="form-select" aria-label="Default select example" id="districts" name="district">
               <option disabled selected>District</option>
-            </select>
+            </select> -->
+            <input type="text" list="districts-list" class="form-select" id="districts" name="district"/>
+            <datalist id="districts-list">
+              <option disabled selected></option>
+            </datalist>
           </div>
 
           <div class="col-sm mb-3">
-            <label class="form-labe1 ">Wards</label>
-            <select class="form-select" aria-label="Default select example" id="wardses" name="wards">
+            <label class="form-labe1 ">Xã/ Phường/ Thị trấn</label>
+            <!-- <select class="form-select" aria-label="Default select example" id="wardses" name="wards">
               <option disabled selected>Wards</option>
-            </select>
+            </select> -->
+            <input type="text" list="wardses-list" class="form-select" id="wardses" name="wards"/>
+            <datalist id="wardses-list">
+              <option disabled selected></option>
+            </datalist>
           </div>
         </div>
-       
       </div>
-      <div id="persons-wrapper">
-          <div class="form-control mb-3">
-            <h5>Person 1</h5>
-            
-            <p for="" class="form-label">Gender</p>
 
-            <div class="form-check form-check-inline">
+      <h5 class="mb-3">Thông tin thành viên</h5>
+      <div class="row">
+        <div class="col-auto mb-3">
+          <label for="household-size" class="form-labe1">Số lượng thành viên</label>
+          <input type="number" class="form-control" name="household-size" id="household-size" value="1"  min="1">
+        </div>
+
+        <div class="col-auto align-self-end">
+          <button class="btn btn-primary mb-3" id="add-person" disabled>Cập nhật</button>
+        </div>
+      </div>
+
+      <datalist id="occupation-list">
+      </datalist>
+      
+      <div id="persons-wrapper">
+
+        <div id="person_1" class="form-control mb-3"> 
+          <div class="row">
+            <h6>Thành viên 1</h6>
+
+            <div class="col">
+              <label for="" class="form-label">Giới tính</label>
+              <select class="form-select" id="gender_1" name="gender_1">
+                <option selected disabled></option>
+                <option >Nam</option>
+                <option >Nữ</option>
+                <option >Khác</option>
+              </select>
+            </div>
+  
+            <div class="col mb-3">
+              <label class="form-label">Năm sinh</label>
+              <input type="text" class="form-control" id="datepicker_1" name="birth-year_1"/>     
+                    <script type="text/javascript">
+                      $("#datepicker_1").datepicker({
+                          format: "yyyy",
+                          viewMode: "years", 
+                          minViewMode: "years"
+                      });
+                  </script>
+            </div>
+  
+            <div class="col">
+              <label class="form-label">Nghề nghiệp</label>
+                    <input class="form-select" type="text" id="occupation_1" list="occupation-list" name="occupation_1">
+            </div>
+          
+            <div class="col" style="height: 100%;">
+                <button id="reset_1" class="btn btn-primary mb-1" person="1">Đặt lại</button>
+                <button id="remove_1" class="btn btn-primary" person="1">Xóa thành viên</button>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+           
+            
+
+
+            <!-- <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="gender_1" id="male_1" value="male" checked="">
               <label class="form-check-label" for="male1">
-                Male
+                Nam
               </label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="gender_1" id="female_1" value="female">
               <label class="form-check-label" for="female_1">
-                Female
+                Nữ
               </label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="gender_1" id="others_1" value="others">
               <label class="form-check-label" for="others_1">
-                Others
+                Khác
               </label>
-            </div>
-            
-            
-            <div class="mb-3">
-              <label>Year of birth</label>
-              <input type="text" class="form-control" id="datepicker_1" name="birth-year_1"/>
-            </div>        
-                  <script type="text/javascript">
-      
-                    $("#datepicker_1").datepicker({
-                        format: "yyyy",
-                        viewMode: "years", 
-                        minViewMode: "years"
-                    });
-                </script>
-          
-                <label class="form-labe1">Occupation</label>
-                    <div class="mb-3">
-                      <select class="form-select" aria-label="Default select example" id="occupation_1" name="occupation_1">
-                      </select>
-                    </div>
-                </div>
-
-          </div>
-
-      <div class="row">
-        <div class="col align-self-end">
-          <button class="btn btn-primary mb-3" id="add-person">Add person</button>
-        </div>
-      </div>
+            </div> -->
 
       <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        <button type="submit" class="btn btn-primary mb-3">Gửi kết quả</button>
       </div>
-
 
     </form>
   </div>

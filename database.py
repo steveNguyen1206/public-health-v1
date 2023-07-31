@@ -22,24 +22,51 @@ def row2dict(row):
     # print(d)
     return d
 
-def get_all_users():
+def get_all_persons():
     with engine.connect() as conn:
-        data = conn.execute(text("select * from user")).all()
-        users = []
+        data = conn.execute(text("select * from person")).all()
+        res = []
         # print(data[0].__getitem__(0))
         for row in data:
-            users.append(row2dict(row))
+            res.append(row2dict(row))
         # print(users)
-        return users
-
-def add_user(user):
+        return res
+    
+def get_all_families():
     with engine.connect() as conn:
-        query = text("INSERT INTO user (name, email, age, gender) VALUES (:name, :email, :age, :gender)")
-        conn.execute(query,
-                    [{"name": user['name'], "email":user['email'], "age":user['age'], "gender":user['gender']}],
-                    )
-        conn.commit()
-        # print(insert(user))
+        data = conn.execute(text("select * from family")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(res)
+        return res
 
-get_all_users()
+def add_family_person(data):
+    with engine.connect() as conn:
+        insert_family_query = text("insert into family(hhsize, addr1,addr2,addr3) values (:hhsize, :addr1, :addr2, :addr3)")
+        get_last_id_query = text("SELECT LAST_INSERT_ID()")
+        insert_person_query = text("INSERT INTO person (family_id, birth_year, gender, occupation) VALUES (:famID, :birth_year, :gender, :occupation)")
+
+        hhsize = data['household-size']
+        addr1 = data['province']
+        addr2 = data['district']
+        addr3 = data['wards']
+        conn.execute(insert_family_query, 
+                     [
+                         {"hhsize": hhsize, "addr1": addr1, "addr2": addr2, "addr3": addr3}
+                     ])
+
+        last_id = conn.execute(get_last_id_query).all()[0].__getitem__(0)
+        print(last_id)
+        for i in range (1, int(hhsize)+1):
+            gender = data[f"gender_{i}"]
+            birth_year = data[f"birth-year_{i}"]
+            occupation = data[f"occupation_{i}"]
+            conn.execute(insert_person_query,
+                        [
+                            {"famID": last_id, "birth_year": birth_year, "gender":gender, "occupation": occupation}
+                        ])
+        conn.commit()
+
     
