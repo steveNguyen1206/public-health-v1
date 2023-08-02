@@ -15,6 +15,38 @@ body.device-mobile-optimized {
   overflow-y: scroll
 }
 
+#options_container-2823{
+  background-color: transparent; /* Transparent background */
+  border: 2px solid white; /* White border */
+  border-radius: 7px; /* 7px border radius */
+  padding: 10px; /* Optional: Add padding inside the container */
+  display: inline-block; /* Make the container extend its height according to content */
+  margin-bottom: 5%;
+}
+
+
+.option_buttons-2823{
+  /* width: 100% !important; */
+  background-color: transparent; /* Transparent background */
+  border: 2px solid white; /* White border */
+  border-radius: 4px; /* 7px border radius */
+  font-size: medium;
+  text-align: center;
+  color: white;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  /* padding-left: 4%;
+  padding-right: 4%; */
+}
+
+
+
+.form-labe1{
+  font-size: small;
+  font-family: Arial;
+  color: white;
+}
+
 body.device-mobile-optimized:not(.responsive) #SITE_CONTAINER {
   margin-left: auto;
   margin-right: auto;

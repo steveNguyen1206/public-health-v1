@@ -7,7 +7,7 @@
 {%endblock%}
 
 {%block content%}
-    <!-- <script id="wix-first-paint">
+    <script id="wix-first-paint">
       if (window.ResizeObserver && (!window.PerformanceObserver || !PerformanceObserver.supportedEntryTypes || PerformanceObserver.supportedEntryTypes.indexOf('paint') === -1)) {
         new ResizeObserver(function(entries, observer) {
           entries.some(function(entry) {
@@ -23,7 +23,7 @@
           });
         }).observe(document.body);
       }
-    </script> -->
+    </script>
     
     <div id="SITE_PAGES" data-page-transition="none" class="JshATs SITE_PAGES">
         <div id="uk6in" class="P0dCOY uk6in">
@@ -53,28 +53,22 @@
                     </div>
                 </div>
                 <div id="comp-lksji3gt" class="QOX0dS JCRlLH comp-lksji3gt-container-fluid comp-lksji3gt wixui-box">
-                    <div class="AG_P7Z MAs5Tr container-fluid">
+
+                    <div id="options_container-2823"class="container-fluid">
                         <div class="row row-cols-3" style="margin-top: 3%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-                            <script src="../static/chart.js"></script>
-                            <style>
-                                .form-labe1{
-                                    font-size: small;
-                                    font-family: Arial;
-                                    color: white;
-                                }
-                            </style>
                             <div class="col mb-3">
-                                <label class="form-labe1" style="">Tỉnh/Thành phố</label>
+                                <label class="form-labe1">Tỉnh/Thành phố</label>
                                 <br>
-                                <div class="container-fluid">
-                                    <div class="row row-cols-2 justify-content-md-center    ">
-                                        <div class="col-sm-3">
-                                            <input type="checkbox" class="btn-check" id="btn-check-4" autocomplete="off">
-                                            <label class="btn" for="btn-check-4">Tổng quát</label>
+                                <div class="container-fluid text-center">
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-4">
+                                            <!-- <div class="option_buttons-2823"> Tổng quát</div> -->
+                                            <input type="checkbox" class="btn-check" id="btn-check-outlined-1" autocomplete="off">
+                                            <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-1">Tổng quát</label>
                                         </div>
                                         <div class="col">
-                                            <select class="form-select " aria-label="Default select example" id="provinces_stat" name="provinces_stat">
-                                                <option disabled selected>Tỉnh/Thành phố</option>
+                                            <select class="form-select" aria-label="Default select example" id="provinces_stat" name="provinces_stat">
+                                                <option disabled selected>None</option>
                                             </select>
                                         </div>
                                     </div>
@@ -83,21 +77,57 @@
                             </div>
                             <div class="col mb-3">
                                 <label class="form-labe1 ">Quận/Huyện/Thị xã</label>
-                                <select class="form-select " aria-label="Default select example" id="districts_stat" name="districts_stat">
-                                    <option disabled selected></option>
-                                </select>
+                                <br>
+                                <div class="container-fluid text-center">
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-4">
+                                            <!-- <div class="option_buttons-2823"> Tổng quát</div> -->
+                                            <input type="checkbox" class="btn-check" id="btn-check-outlined-2" autocomplete="off">
+                                            <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-2">Tổng quát</label>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-select" aria-label="Default select example" id="provinces_stat" name="provinces_stat">
+                                                <option disabled selected>None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col mb-3">
                                 <label class="form-labe1">Phường/Xã/Thị trấn</label>
-                                <select class="form-select " aria-label="Default select example" id="wardses_stat" name="wardses_stat">
-                                    <option disabled selected></option>
-                                </select>
+                                <br>
+                                <div class="container-fluid text-center">
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-4">
+                                            <!-- <div class="option_buttons-2823"> Tổng quát</div> -->
+                                            <input type="checkbox" class="btn-check" id="btn-check-outlined-3" autocomplete="off">
+                                            <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-3">Tổng quát</label>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-select" aria-label="Default select example" id="provinces_stat" name="provinces_stat">
+                                                <option disabled selected>None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col mb-3">
                                 <label class="form-labe1 ">Năm sinh</label>
-                                <select class="form-select " aria-label="Default select example" id="provinces" name="province">
-                                    <option disabled selected></option>
-                                </select>
+                                <br>
+                                <div class="container-fluid text-center">
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-4">
+                                            <!-- <div class="option_buttons-2823"> Tổng quát</div> -->
+                                            <input type="checkbox" class="btn-check" id="btn-check-outlined-4" autocomplete="off">
+                                            <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-4">Tổng quát</label>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-select" aria-label="Default select example" id="provinces_stat" name="provinces_stat">
+                                                <option disabled selected>None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
