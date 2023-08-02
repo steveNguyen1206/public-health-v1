@@ -43,6 +43,10 @@ def add_user_route():
     add_user(data)
     return redirect(url_for('get_user'))
 
+@app.route("/survey")
+def survey():
+    return render_template('survey.html')
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

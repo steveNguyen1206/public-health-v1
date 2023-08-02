@@ -1,8 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <div class="">
     <form action="/add-user" method="post" class="form-control">
       <h3>Collect user information</h3>
       <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
+        <label for="numOfMem" class="form-label">Số thành viên trong gia đình</label>
         <input type="text" class="form-control" name="name" placeholder="Nguyen Van A">
       </div>
       <div class="mb-3">
@@ -33,3 +36,5 @@
 
     </form>
   </div>
+
+{% endblock %}

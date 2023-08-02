@@ -31,6 +31,16 @@ def get_all_users():
             users.append(row2dict(row))
         # print(users)
         return users
+    
+def get_num_of_district():
+    with engine.connect() as conn:
+        data = conn.execute(text("select * from user group by dictrict")).all()
+        users = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            users.append(row2dict(row))
+        # print(users)
+        return users
 
 def add_user(user):
     with engine.connect() as conn:
