@@ -3,7 +3,9 @@ from dotenv.main import load_dotenv
 import os
 
 load_dotenv()
-db_connection_string = os.environ['DB_CONNECTION_STRING']
+db_connection_string = os.getenv('DB_CONNECTION_STRING')
+# print(db_connection_string)
+# db_connection_string = os.environ['DB_CONNECTION_STRING']
 
 engine = create_engine(
     db_connection_string,

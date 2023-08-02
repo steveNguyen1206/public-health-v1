@@ -1,0 +1,120 @@
+{%extends 'base.html'%}
+
+{%block title%}Statistic | Diseases Simulation{%endblock%}
+
+{%block head%}
+    <link rel="stylesheet" href="../css/stat.css">
+{%endblock%}
+
+{%block content%}
+    <!-- <script id="wix-first-paint">
+      if (window.ResizeObserver && (!window.PerformanceObserver || !PerformanceObserver.supportedEntryTypes || PerformanceObserver.supportedEntryTypes.indexOf('paint') === -1)) {
+        new ResizeObserver(function(entries, observer) {
+          entries.some(function(entry) {
+            var contentRect = entry.contentRect;
+            if (contentRect.width > 0 && contentRect.height > 0) {
+              requestAnimationFrame(function(now) {
+                window.wixFirstPaint = now;
+                dispatchEvent(new CustomEvent('wixFirstPaint'));
+              });
+              observer.disconnect();
+              return true;
+            }
+          });
+        }).observe(document.body);
+      }
+    </script> -->
+    
+    <div id="SITE_PAGES" data-page-transition="none" class="JshATs SITE_PAGES">
+        <div id="uk6in" class="P0dCOY uk6in">
+        <div class="PJ4KCX wixui-page" data-testid="page-bg"></div>
+        <div>
+            <div class="uk6in-container" data-testid="responsive-container-content">
+            <main id="PAGE_SECTIONSuk6in" class="PAGE_SECTIONSuk6in c1rIl3" data-main-content-parent="true">
+                <section id="comp-kvupzas5" tabindex="-1" class="xuzjBY comp-kvupzas5-container comp-kvupzas5 wixui-section undefined" data-testid="section-container">
+                <div id="comp-kvupzas82" data-testid="imageX" class="z4Uj6S comp-kvupzas82 wixui-image">
+                    <style data-testid="scrollEffectStyle">
+                    #comp-kvupzas82 img {
+                        height: 100%
+                    }
+                    </style>
+                </div>
+                <div id="comp-kvupzasb2" class="BaOVQ8 tz5f0K comp-kvupzasb2 wixui-rich-text" data-testid="richTextElement" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done" style="visibility: inherit;">
+                    <h1 class="font_2 wixui-rich-text__text">
+                    <span class="wixui-rich-text__text">Tổng hợp thông tin khảo sát</span>
+                    </h1>
+                </div>
+                <div id="comp-lksj2rfs" class="comp-lksj2rfs">
+                    <div id="wrapper-comp-lksj2rfs" dir="ltr" class="CollapsibleTextcomponent2568482278__root style-lksj2rfz__root wixui-collapsible-text" data-testid="ellipsis_text_viewer_root" aria-label="" role="group">
+                    <button class="CollapsibleTextcomponent2568482278__expand-control wixui-collapsible-text__button" data-testid="ellipsis_text_viewer_expand_control" aria-pressed="true" aria-describedby="wrapper-comp-lksj2rfs">Thu gọn</button>
+                    <div class="CollapsibleTextcomponent2568482278__text-wrapper">
+                        <p class="CollapsibleTextcomponent2568482278__text CollapsibleTextcomponent2568482278---wrappingStyle-10-multi-line wixui-collapsible-text__text">Chọn các tùy chọn bên dưới để được quan sát các biểu đồ, đồ thị,... trực quan hóa các dữ liệu đã thu thập được. Lưu ý: Dữ liệu của từng cá nhân được đảm bảo bí mật và riêng tư. Chỉ có những khái quát chung về dữ liệu được thể hiện bên dưới.</p>
+                    </div>
+                    </div>
+                </div>
+                <div id="comp-lksji3gt" class="QOX0dS JCRlLH comp-lksji3gt-container-fluid comp-lksji3gt wixui-box">
+                    <div class="AG_P7Z MAs5Tr container-fluid">
+                        <div class="row row-cols-3" style="margin-top: 3%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+                            <script src="../static/chart.js"></script>
+                            <style>
+                                .form-labe1{
+                                    font-size: small;
+                                    font-family: Arial;
+                                    color: white;
+                                }
+                            </style>
+                            <div class="col mb-3">
+                                <label class="form-labe1" style="">Tỉnh/Thành phố</label>
+                                <br>
+                                <div class="container-fluid">
+                                    <div class="row row-cols-2 justify-content-md-center    ">
+                                        <div class="col-sm-3">
+                                            <input type="checkbox" class="btn-check" id="btn-check-4" autocomplete="off">
+                                            <label class="btn" for="btn-check-4">Tổng quát</label>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-select " aria-label="Default select example" id="provinces_stat" name="provinces_stat">
+                                                <option disabled selected>Tỉnh/Thành phố</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col mb-3">
+                                <label class="form-labe1 ">Quận/Huyện/Thị xã</label>
+                                <select class="form-select " aria-label="Default select example" id="districts_stat" name="districts_stat">
+                                    <option disabled selected></option>
+                                </select>
+                            </div>
+                            <div class="col mb-3">
+                                <label class="form-labe1">Phường/Xã/Thị trấn</label>
+                                <select class="form-select " aria-label="Default select example" id="wardses_stat" name="wardses_stat">
+                                    <option disabled selected></option>
+                                </select>
+                            </div>
+                            <div class="col mb-3">
+                                <label class="form-labe1 ">Năm sinh</label>
+                                <select class="form-select " aria-label="Default select example" id="provinces" name="province">
+                                    <option disabled selected></option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div id="comp-lkskprbs" class="QOX0dS JCRlLH comp-lkskprbs-container comp-lkskprbs wixui-box">
+                    <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                </div>
+                <div id="comp-lkskur8c" class="BaOVQ8 tz5f0K comp-lkskur8c wixui-rich-text" data-testid="richTextElement">
+                    <h5 class="font_5 wixui-rich-text__text">
+                    <span class="wixui-rich-text__text">Biểu đồ</span>
+                    </h5>
+                </div>
+                </section>
+            </main>
+            </div>
+        </div>
+        </div>
+    </div>    
+{%endblock%}
