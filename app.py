@@ -1,47 +1,60 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
-from database import get_all_users, add_user
+from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, url_for
+from database import get_all_persons, add_family_person, get_all_families, get_num_persons_of_districts
 
 app = Flask(__name__)
-
-# users = [
-#     {'id': 1,
-#      'name': "Quach Thi Lan",
-#      'age' : 30,
-#      'email': 'thilan@email.com'
-#      },
-#     {'id': 2,
-#      'name': "Quach Thi Lan",
-#      'age' : 30,
-#      'email': 'thilan@email.com'
-#      },    
-#      {'id': 3,
-#      'name': "Quach Thi Lan",
-#      'age' : 30,
-#      'email': 'thilan@email.com'
-#      },    
-#      {'id': 4,
-#      'name': "Quach Thi Lan",
-#      'age' : 30,
-#      'email': 'thilan@email.com'
-#      },
-# ]
 
 @app.route("/")
 def home():
     return render_template('home.html')
 
-@app.route("/users")
-def get_user():
-    users = get_all_users()
+@app.route("/api/person/all")
+def api_get_all_persons():
+    persons = get_all_persons()
     # print(users)
-    return render_template('users.html', users=users)
+    return jsonify(persons)
 
-@app.route("/add-user", methods=['post'])
-def add_user_route():
+# @app.route("/api/family/all")
+# def api_get_all_families():
+#     families = get_all_families()
+#     # print(users)
+#     return jsonify(families)
+
+@app.route("/api/district/num")
+def api_get_all_families():
+    num_persons_of_districts = get_num_persons_of_districts()
+    # print(users)
+    return jsonify(num_persons_of_districts)
+
+
+@app.route("/add-family", methods=['post'])
+def add_family_route():
     data=request.form
+    print(data)
     # print(data['gender'])
-    add_user(data)
-    return redirect(url_for('get_user'))
+    add_family_person(data)
+    return redirect(url_for('api_get_all_persons'))
+
+
+@app.route('/survey', methods = ['GET'])
+def render_survey():
+    if request.method == 'POST':
+        return jsonify({'test': 'pass'})
+    elif request.method == 'GET':
+        return render_template('survey.html')
+    
+
+@app.route('/css/<path:filepath>')
+def sendDirCss(filepath):
+    return send_from_directory('css/', filepath)
+
+@app.route('/images/<path:filepath>')
+def sendDirImgs(filepath):
+    return send_from_directory('images/', filepath)
+
+@app.route('/videos/<path:filepath>')
+def sendDirVideos(filepath):
+    return send_from_directory('videos/', filepath)
+
 
 @app.route("/survey")
 def survey():
