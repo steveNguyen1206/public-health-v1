@@ -42,7 +42,7 @@ def get_all_families():
         print(res)
         return res
     
-def get_all_families(dist):
+def get_dist_person_num(dist):
     with engine.connect() as conn:
         query = text("select addr2, count(*) from family f, person p where f.id = p.family_id and f.addr2 = :dist")
         data = conn.execute(query,
