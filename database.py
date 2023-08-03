@@ -44,7 +44,7 @@ def get_all_families():
     
 def get_num_persons_of_districts():
     with engine.connect() as conn:
-        data = conn.execute(text("select addr2,count(*) from family,person where family.id=person.family_id group by addr2")).all()
+        data = conn.execute(text("select addr1, addr2,count(*) from family,person where family.id=person.family_id group by addr1, addr2")).all()
         res = []
         # print(data[0].__getitem__(0))
         for row in data:
