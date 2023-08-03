@@ -39,7 +39,18 @@ def get_all_families():
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        # print(res)
+        print(res)
+        return res
+    
+def get_all_families(dist):
+    with engine.connect() as conn:
+        query = text("select addr2, count(*) from family f, person p where f.id = p.family_id and f.addr2 = :dist")
+        data = conn.execute(query,
+                            [{"dist": dist}]).all()
+        res = []
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
         return res
 
 def add_family_person(data):
@@ -68,5 +79,7 @@ def add_family_person(data):
                             {"famID": last_id, "birth_year": birth_year, "gender":gender, "occupation": occupation}
                         ])
         conn.commit()
+
+# get_all_families()
 
     
