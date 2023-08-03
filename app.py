@@ -7,6 +7,22 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
+@app.route('/survey', methods = ['GET'])
+def render_survey():
+    if request.method == 'POST':
+        return jsonify({'test': 'pass'})
+    elif request.method == 'GET':
+        return render_template('survey.html')
+    
+@app.route('/review', methods = ['GET'])
+def render_review():
+    if request.method == 'POST':
+        return jsonify({'test': 'pass'})
+    elif request.method == 'GET':
+        return render_template('review.html')
+    
+############## api ###################3
+
 @app.route("/api/person/all")
 def api_get_all_persons():
     persons = get_all_persons()
@@ -27,14 +43,6 @@ def add_family_route():
     # print(data['gender'])
     add_family_person(data)
     return redirect(url_for('api_get_all_persons'))
-
-
-@app.route('/survey', methods = ['GET'])
-def render_survey():
-    if request.method == 'POST':
-        return jsonify({'test': 'pass'})
-    elif request.method == 'GET':
-        return render_template('survey.html')
 
 @app.route('/get-test')
 def api_get_dist_person_num():
