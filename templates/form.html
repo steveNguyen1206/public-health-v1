@@ -64,7 +64,6 @@
       </datalist>
       
       <div id="persons-wrapper">
-
         <div id="person_1" class="form-control mb-3 person-wrapper"> 
           <div class="row person-row">
             <h6>Thành viên 1</h6>
@@ -120,12 +119,12 @@
             <div class="row align-items-center justify-content-between display-none" id="p-addr-wrapper_1">
               <div class="col-sm mb-3">
                 <label class="form-label col-form-label-sm">Tỉnh/ Thành phố</label>
-                <input type="text" list="provinces-list" class="form-select" id="person-provinces_1" name="p-province_1" autocomplete="off" required/>
+                <input type="text" list="provinces-list" class="form-select" id="person-provinces_1" name="p-province_1" autocomplete="off"/>
               </div>
     
               <div class="col-sm mb-3">
                 <label class="form-label col-form-label-sm">Quận/ Huyện</label>
-                <input type="text" list="person-districts-list_1" class="form-select" id="person-districts_1" name="p-district_1" autocomplete="off" required/>
+                <input type="text" list="person-districts-list_1" class="form-select" id="person-districts_1" name="p-district_1" autocomplete="off"/>
                 <datalist id="person-districts-list_1">
                   <option disabled selected></option>
                 </datalist>
@@ -133,7 +132,7 @@
     
               <div class="col-sm mb-3">
                 <label class="form-label col-form-label-sm">Xã/ Phường/ Thị trấn</label>
-                <input type="text" list="person-wardses-list_1" class="form-select" id="person-wardses_1" name="p-wards_1" autocomplete="off" required/>
+                <input type="text" list="person-wardses-list_1" class="form-select" id="person-wardses_1" name="p-wards_1" autocomplete="off"/>
                 <datalist id="person-wardses-list_1">
                   <option disabled selected></option>
                 </datalist>
@@ -157,6 +156,91 @@
         
         </div>
       </div>
+
+      <h5 class="mb-3">Sinh hoạt gia đình</h5>
+      <div class="family-habit-wrapper">
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="private-room">
+          <label class="form-check-label" for="private-room">Có phòng riêng cho các thành viên</label>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="">
+          <label class="form-check-label" for="private-room">Gia đình có tiểu sử bệnh di truyền</label>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="private-room">
+          <label class="form-check-label" for="private-room">Có thành viên có bệnh dị ứng</label>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="private-room">
+          <label class="form-check-label" for="private-room">Có tiếp xúc với người mắc bệnh truyền nhiễm trong 6 tháng qua</label>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="private-room">
+          <label class="form-check-label" for="private-room">Có thói quen ăn uống và dinh dưỡng lành mạnh</label>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="private-room">
+          <label class="form-check-label" for="private-room">Có thói quen dùng cơm chung</label>
+        </div>
+
+        <div id="travel-wrapper">
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch" id="travel-input">
+            <label class="form-check-label" for="travel-input">Có thường xuyên đi du lịch</label>
+          </div>
+
+          <div id="travel-often-wrapper" class="container row display-none">
+            <div class="col form-check">
+              <input class="form-check-input" type="radio" name="travel-often" id="travel-often1">
+              <label class="form-check-label" for="travel-often1">
+                Hàng tuần
+              </label>
+            </div>
+            <div class="col form-check">
+              <input class="form-check-input" type="radio" name="travel-often" id="travel-often2">
+              <label class="form-check-label" for="travel-often2">
+                Hàng tháng
+              </label>
+            </div>
+
+            <div class="col form-check">
+              <input class="form-check-input" type="radio" name="travel-often" id="travel-often2">
+              <label class="form-check-label" for="travel-often2">
+                3 tháng / lần
+              </label>
+            </div>
+          </div>
+
+          <script>
+            const travel_wrapper = document.querySelector('#travel-often-wrapper')
+            const travel_input = document.querySelector('#travel-input')
+
+            travel_input.addEventListener('change', ()=>{
+              let value = travel_input.checked
+              console.log(value)
+              if(value)
+              {
+                travel_wrapper.classList.remove('display-none')
+              }
+              else travel_wrapper.classList.add('display-none')
+            })
+          </script>
+        
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="private-room">
+          <label class="form-check-label" for="private-room">Gia đình sinh sống gần khu công nghiệp</label>
+        </div>
+
+      </div>
+
            
             
 
@@ -186,4 +270,4 @@
 
     </form>
   </div>
-  <script src="{{url_for('static', filename='survey.js')}}" ></script>
+  <script src="{{url_for('static', filename='survey.js')}}" >

@@ -1,5 +1,4 @@
 const person_warpper = document.querySelector('#persons-wrapper')
-const person_addr_wrapper_1 = document.querySelector('#person-addr-wrapper_1')
 const p_addr_wrapper_1 = document.querySelector('#p-addr-wrapper_1')
 const provinces_input = document.querySelector('#provinces')
 const districts_input = document.querySelector('#districts')
@@ -92,22 +91,34 @@ function updateHousholdSize()
 //     updateHousholdSize()
 // })
 
+const p_addr_inputs_1 = p_addr_wrapper_1.querySelectorAll('input')
 person_addr_check_1.addEventListener('change', ()=>{
     person_addr_not_with_family = person_addr_check_1.checked
     console.log(person_addr_not_with_family)
     if(person_addr_not_with_family)
     {
         p_addr_wrapper_1.classList.remove('display-none')
+        p_addr_inputs_1.forEach((elem) => {
+            console.log(elem)
+            elem.setAttribute('required', '')
+        })
     }
-    else p_addr_wrapper_1.classList.add('display-none')
+    else {
+        p_addr_wrapper_1.classList.add('display-none')
+        p_addr_inputs_1.forEach((elem) => {
+            elem.removeAttribute('required')
+        })
+    }
 })
 
 const occupation_list = [
-    'Doctor',
-    'Teacher',
-    'Labor',
-    'Farmer',
-    'Student'
+    'Bác sĩ',
+    'Giáo viên',
+    'Công nhân',
+    'Nông dân',
+    'Học sinh',
+    'Thương nhân',
+    'Công chức'
 ]
 
 occupation_list.forEach( job => {
@@ -431,12 +442,12 @@ function createPerson(person_number)
             <div class="row align-items-center justify-content-between display-none" id="p-addr-wrapper_${person_number}">
               <div class="col-sm mb-3">
                 <label class="form-label col-form-label-sm">Tỉnh/ Thành phố</label>
-                <input type="text" list="provinces-list" class="form-select" id="person-provinces_${person_number}" name="p-province_${person_number}" autocomplete="off" required/>
+                <input type="text" list="provinces-list" class="form-select" id="person-provinces_${person_number}" name="p-province_${person_number}" autocomplete="off"/>
               </div>
     
               <div class="col-sm mb-3">
                 <label class="form-label col-form-label-sm">Quận/ Huyện</label>
-                <input type="text" list="person-districts-list_${person_number}" class="form-select" id="person-districts_${person_number}" name="p-district_${person_number}" autocomplete="off" required/>
+                <input type="text" list="person-districts-list_${person_number}" class="form-select" id="person-districts_${person_number}" name="p-district_${person_number}" autocomplete="off"/>
                 <datalist id="person-districts-list_${person_number}">
                   <option disabled selected></option>
                 </datalist>
@@ -444,7 +455,7 @@ function createPerson(person_number)
     
               <div class="col-sm mb-3">
                 <label class="form-label col-form-label-sm">Xã/ Phường/ Thị trấn</label>
-                <input type="text" list="person-wardses-list_${person_number}" class="form-select" id="person-wardses_${person_number}" name="p-wards_${person_number}" autocomplete="off" required/>
+                <input type="text" list="person-wardses-list_${person_number}" class="form-select" id="person-wardses_${person_number}" name="p-wards_${person_number}" autocomplete="off"/>
                 <datalist id="person-wardses-list_${person_number}">
                   <option disabled selected></option>
                 </datalist>
@@ -455,6 +466,7 @@ function createPerson(person_number)
 
     const person_addr_check = person_addr_wrapper.querySelector(`#person-addr-check_${person_number}`)
     const p_wrapper = person_addr_wrapper.querySelector(`#p-addr-wrapper_${person_number}`)
+    const p_addr_inputs = p_wrapper.querySelectorAll('input')
     person_addr_check.addEventListener('change', ()=> {
 
         person_addr_not_with_family = person_addr_check.checked
@@ -462,8 +474,17 @@ function createPerson(person_number)
         if(person_addr_not_with_family)
         {
             p_wrapper.classList.remove('display-none')
+            p_addr_inputs.forEach((elem) => {
+                console.log(elem)
+                elem.setAttribute('required', '')
+            })
         }
-        else p_wrapper.classList.add('display-none')
+        else {
+            p_wrapper.classList.add('display-none')
+            p_addr_inputs.forEach((elem) => {
+                elem.removeAttribute('required')
+            })
+        }
     })
 
     const p_provinces_input = p_wrapper.querySelector(`#person-provinces_${person_number}`)
