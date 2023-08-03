@@ -1,31 +1,189 @@
-<div class="">
-    <form action="/add-user" method="post" class="form-control">
-      <h3>Collect user information</h3>
-      <div class="mb-3">
-        <label for="age" class="form-label">Age</label>
-        <input type="number" class="form-control" name="age" >
+<link rel="stylesheet" href="{{url_for('static', filename='survey.css')}}">
+<div class="survey-container ms-lg-5 me-lg-5">
+    <form action="/add-family" method="post"  id="form1" class="form-control form-container">
+      <h4 class="mb-5 text-center">Phiếu khảo sát thông tin gia đình</h4>
+
+      <h5 class="mb-3">Thông tin chung</h5>
+      <!-- <button id="a">a</button> -->
+
+      <div class="address-warpper mb-3">
+        <label for="address" class="">Địa chỉ</label>
+
+        <div class=" row align-items-center justify-content-between">
+          <div class="col-sm mb-3">
+            <label class="form-label">Tỉnh/ Thành phố</label>
+            <input type="text" list="provinces-list" class="form-select" id="provinces" name="province" autocomplete="off" required/>
+            <datalist id="provinces-list">
+              <option selected>TP Hồ Chí Minh</option>
+            </datalist>
+          </div>
+
+          <div class="col-sm mb-3">
+            <label class="form-label ">Quận/ Huyện</label>
+            <input type="text" list="districts-list" class="form-select" id="districts" name="district" autocomplete="off" required/>
+            <datalist id="districts-list">
+              <option disabled selected></option>
+            </datalist>
+          </div>
+
+          <div class="col-sm mb-3">
+            <label class="form-label ">Xã/ Phường/ Thị trấn</label>
+            <input type="text" list="wardses-list" class="form-select" id="wardses" name="wards" autocomplete="off" required/>
+            <datalist id="wardses-list">
+              <option disabled selected></option>
+            </datalist>
+          </div>
+        </div>
       </div>
 
-      <p for="" class="form-label">Gender</p>
-      <div class="btn-group mb-3" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="gender" id="male" autocomplete="off" checked value="male">
-        <label class="btn btn-outline-primary" for="male" >Male</label>
+      <h5 class="mb-3">Thông tin thành viên</h5>
+      <div class="row">
+
+        <div class="row mb-3">
+            <label for="household-size" class="col-sm-3 col-form-label">Số lượng thành viên</label>
+            <div class="col">
+              <div class="row">
+                <button class="col btn mybtn-primary size-btn" id="minus-person">
+                  <i class="fa-solid fa-user-minus"></i>
+                </button>
+                <input type="number" class="col form-control size-input" name="household-size" id="household-size" value="1"  min="1">
+                <button class="col btn mybtn-primary size-btn" id="add-person">
+                  <i class="fa-solid fa-user-plus"></i>
+                </button>
+              </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-auto align-self-end">
+          <button class="btn btn-primary mb-3" id="add-person" disabled>Cập nhật</button>
+        </div> -->
+
+      </div>
+
+      <datalist id="occupation-list">
+      </datalist>
       
-        <input type="radio" class="btn-check" name="gender" id="female" autocomplete="off" value="female">
-        <label class="btn btn-outline-primary" for="female">Female</label>
-      
-        <input type="radio" class="btn-check" name="gender" id="others" autocomplete="off" value="others">
-        <label class="btn btn-outline-primary" for="others">Others</label>
-      </div>
+      <div id="persons-wrapper">
+
+        <div id="person_1" class="form-control mb-3 person-wrapper"> 
+          <div class="row person-row">
+            <h6>Thành viên 1</h6>
+
+            <div class="col-sm">
+              <label for="" class="form-label">Giới tính</label>
+              <select class="form-select" id="gender_1" name="gender_1" required>
+                <option selected disabled></option>
+                <option >Nam</option>
+                <option >Nữ</option>
+                <option >Khác</option>
+              </select>
+            </div>
+  
+            <div class="col-sm mb-3">
+              <label class="form-label">Năm sinh</label>
+              <input type="text" class="form-control" id="datepicker_1" name="birth-year_1" required/>     
+                    <script type="text/javascript">
+                      $("#datepicker_1").datepicker({
+                          format: "yyyy",
+                          viewMode: "years", 
+                          minViewMode: "years"
+                      });
+                  </script>
+            </div>
+  
+            <div class="col-sm">
+              <label class="form-label">Nghề nghiệp</label>
+                    <input class="form-select" type="text" id="occupation_1" list="occupation-list" name="occupation_1" required>
+            </div>
+          
+            <div class="person-btn-col">
+                <button id="reset_1" class="btn mybtn-primary mb-1 person-btn" person="1">
+                  <!-- Đặt lại -->
+                  <i class="fa-solid fa-rotate-right"></i>
+                </button>
+                <button id="remove_1" class="btn mybtn-primary person-btn" person="1">
+                  <!-- Xóa thành viên -->
+                  <i class="fa-solid fa-user-xmark"></i>
+                </button>
+            </div>
+          </div>
 
 
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" name="email" >
+          <div class="" id="person-addr-wrapper_1">
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" value="" id="person-addr-check_1">
+              <label class="form-label form-check-label">
+                Không ở chung với gia đình
+              </label>
+            </div>
+  
+            <div class="row align-items-center justify-content-between display-none" id="p-addr-wrapper_1">
+              <div class="col-sm mb-3">
+                <label class="form-label col-form-label-sm">Tỉnh/ Thành phố</label>
+                <input type="text" list="provinces-list" class="form-select" id="person-provinces_1" name="p-province_1" autocomplete="off" required/>
+              </div>
+    
+              <div class="col-sm mb-3">
+                <label class="form-label col-form-label-sm">Quận/ Huyện</label>
+                <input type="text" list="person-districts-list_1" class="form-select" id="person-districts_1" name="p-district_1" autocomplete="off" required/>
+                <datalist id="person-districts-list_1">
+                  <option disabled selected></option>
+                </datalist>
+              </div>
+    
+              <div class="col-sm mb-3">
+                <label class="form-label col-form-label-sm">Xã/ Phường/ Thị trấn</label>
+                <input type="text" list="person-wardses-list_1" class="form-select" id="person-wardses_1" name="p-wards_1" autocomplete="off" required/>
+                <datalist id="person-wardses-list_1">
+                  <option disabled selected></option>
+                </datalist>
+              </div>
+  
+            </div>
+          </div>
+
+            <!-- <script>
+              const checkbox = document.getElementById("flexCheckChecked");
+              const addressInput = document.getElementById("address-warpper mb-3");
+            
+              checkbox.addEventListener("change", function () {
+                if (checkbox.checked) {
+                  addressInput.style.display = "block";
+                } else {
+                  addressInput.style.display = "none";
+                }
+              });
+            </script> -->
+        
+        </div>
       </div>
+           
+            
+
+
+            <!-- <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender_1" id="male_1" value="male" checked="">
+              <label class="form-check-label" for="male1">
+                Nam
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender_1" id="female_1" value="female">
+              <label class="form-check-label" for="female_1">
+                Nữ
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender_1" id="others_1" value="others">
+              <label class="form-check-label" for="others_1">
+                Khác
+              </label>
+            </div> -->
+
       <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        <button type="submit" class="btn btn-primary">Gửi kết quả</button>
       </div>
 
     </form>
   </div>
+  <script src="{{url_for('static', filename='survey.js')}}" ></script>
