@@ -39,7 +39,18 @@ def get_all_families():
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        # print(res)
+        print(res)
+        return res
+    
+def get_dist_person_num(dist):
+    with engine.connect() as conn:
+        query = text("select addr2, count(*) from family f, person p where f.id = p.family_id and f.addr2 = :dist")
+        data = conn.execute(query,
+                            [{"dist": dist}]).all()
+        res = []
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
         return res
     
 def get_num_persons_of_districts():
@@ -79,3 +90,6 @@ def add_family_person(data):
                         ])
         conn.commit()
 
+# get_all_families()
+
+    

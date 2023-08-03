@@ -1,5 +1,5 @@
 from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, url_for
-from database import get_all_persons, add_family_person, get_all_families, get_num_persons_of_districts
+from database import get_all_persons, add_family_person, get_all_families, get_dist_person_num,get_num_persons_of_districts
 
 app = Flask(__name__)
 
@@ -41,6 +41,13 @@ def render_survey():
         return jsonify({'test': 'pass'})
     elif request.method == 'GET':
         return render_template('survey.html')
+
+@app.route('/get-test')
+def api_get_dist_person_num():
+    args = request.args
+    print(args['dist'])
+    data = get_dist_person_num(args['dist'])
+    return jsonify(data)
     
 
 @app.route('/css/<path:filepath>')

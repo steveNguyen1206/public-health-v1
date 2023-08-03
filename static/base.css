@@ -1,0 +1,9 @@
+:root {
+    --primary-color: #1D73DA;
+    --primary-color-light: #1d72da7a;
+    --text-light: #3339;
+  }
+
+.display-none {
+  display: none;
+}
