@@ -1,5 +1,5 @@
 from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, url_for
-from database import get_all_users, add_user
+from database import get_all_persons, add_family_person, get_all_families, get_num_persons_of_districts
 
 app = Flask(__name__)
 
@@ -11,19 +11,49 @@ def home():
 def to_home():
     return render_template('home.html')
 
-@app.route("/api/users")
-def api_get_user():
-    users = get_all_users()
+@app.route("/api/person/all")
+def api_get_all_persons():
+    persons = get_all_persons()
     # print(users)
-    return jsonify(users)
+    return jsonify(persons)
+
+# @app.route("/api/family/all")
+# def api_get_all_families():
+#     families = get_all_families()
+#     # print(users)
+#     return jsonify(families)
+
+@app.route("/api/district/num")
+def api_get_all_families():
+    # print('in funct')
+    num_persons_of_districts = get_num_persons_of_districts()
+    # print(num_persons_of_districts)
+    return jsonify(num_persons_of_districts)
 
 
-@app.route("/add-user", methods=['post'])
-def add_user_route():
+@app.route("/add-family", methods=['post'])
+def add_family_route():
     data=request.form
+    print(data)
     # print(data['gender'])
-    add_user(data)
-    return redirect(url_for('get_user'))
+    add_family_person(data)
+    return redirect(url_for('api_get_all_persons'))
+
+    
+
+# @app.route("/api/users")
+# def api_get_user():
+#     users = get_all_users()
+#     # print(users)
+#     return jsonify(users)
+
+
+# @app.route("/add-user", methods=['post'])
+# def add_user_route():
+#     data=request.form
+#     # print(data['gender'])
+#     add_user(data)
+#     return redirect(url_for('get_user'))
 
 @app.route('/survey', methods = ['POST', 'GET'])
 def render_survey():
@@ -44,7 +74,6 @@ def sendDirImgs(filepath):
 @app.route('/videos/<path:filepath>')
 def sendDirVideos(filepath):
     return send_from_directory('videos/', filepath)
-
 
 
 if __name__ == "__main__":

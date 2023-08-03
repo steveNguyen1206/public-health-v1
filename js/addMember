@@ -1,0 +1,32 @@
+<!-- templates/survey.html -->
+<!-- ... -->
+<script>
+    let memberCount = 1;
+
+    function addMember() {
+        memberCount++;
+        const memberDiv = document.createElement("div");
+        memberDiv.innerHTML = `
+            <h3>Thông tin thành viên trong gia đình:</h3>
+            <div class="member">
+                <label for="name-${memberCount}">Tên:</label>
+                <input type="text" id="name-${memberCount}" name="name_${memberCount}" required>
+                <br>
+                <label for="birth-year-${memberCount}">Năm sinh:</label>
+                <input type="number" id="birth-year-${memberCount}" name="birth_year_${memberCount}" required>
+                <br>
+                <label>Giới tính:</label>
+                <input type="radio" id="male-${memberCount}" name="gender_${memberCount}" value="male" required>
+                <label for="male-${memberCount}">Nam</label>
+                <input type="radio" id="female-${memberCount}" name="gender_${memberCount}" value="female" required>
+                <label for="female-${memberCount}">Nữ</label>
+                <br>
+                <label for="occupation-${memberCount}">Nghề nghiệp:</label>
+                <input type="text" id="occupation-${memberCount}" name="occupation_${memberCount}" required>
+                <br>
+            </div>
+        `;
+        document.getElementById("members").appendChild(memberDiv);
+    }
+</script>
+<!-- ... -->

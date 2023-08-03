@@ -7211,7 +7211,7 @@ box-sizing: border-box;
 row-gap: 0vw;
 column-gap: 0vw;
 display: var(--l_display, var(--container-display));
-grid-template-rows: minmax(230.79700000000003px, max-content) minmax(220.54700000000003px, max-content) minmax(531.922px, max-content) minmax(2.125px, max-content);
+grid-template-rows: minmax(287px, max-content) minmax(247px, max-content) minmax(661px, max-content) minmax(3px, max-content);
 grid-template-columns: 1fr;
 --container-display: grid;
 }
@@ -7472,7 +7472,7 @@ grid-area: 3/1/4/2;
 position: relative;
 --is-sticky: 0;
 --sticky-top: 0px;
---top: 0px;
+--top: 60px;
 }
 
 .comp-lkskprbs-container {
@@ -7522,7 +7522,7 @@ grid-area: 3/1/4/2;
 position: relative;
 --is-sticky: 0;
 --sticky-top: 0px;
---top: 0px;
+--top: 60px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 1000px) {
