@@ -3,7 +3,8 @@ from scipy.stats import lognorm, bernoulli
 import numpy as np
 from itertools import combinations
 import json
-
+import  pandas as pd
+import matplotlib.pyplot as plt
 '''
 How to use MESA to support Agent-Based Modeling
 
@@ -21,58 +22,16 @@ DEAD = 5
 
 # Contact matrix for each age group
 # 0 = Children, 1 = Adolescent, 2 = Adult 
-contact_matrix = np.array([[0.2, 2.0, 1.2], [2.0, 3.6, 1.5], [1.2, 1.5, 5.3]])
-
-# HH_dict and non_house hold dict
-HH_dict = {0: [1,2,3],
-           1: [4,5,6,7],
-           2: [8],
-           3: [9,10],
-           4: [11,12],
-           5: [13,14]
-}
-
-non_HH_dict = {0: {0: [4,7],
-                   1: [5,6],
-                   2: [8,9,13]
-},
-               1: {0: [4],
-                   1: [5, 6],
-                   2: [8,12]
-},
-}
-
-contact_dist = {
-    "household": {
-        "percentage": [0.163, 
-                       0.403, 
-                       0.17, 
-                       0.026, 
-                       0.1, 
-                       0.138],
-        "risk_ratio": [9.7, 
-                       8.3,
-                       5.6,
-                       4.9,
-                       1.3,
-                       1
-                       ]
-    },
-    "non_household": {
-        "percentage": [1],
-        "risk_ratio": [2.45],
-    },  
-}
-
-
-N = 15
-class_type = [random.randint(0,2) for _ in range(N)]
 
 def log_normal(mu, sigma):
     return lognorm.rvs(s=sigma, scale=np.exp(mu))
 
-def bernoulli(p):
-    return bernoulli.rvs(p)
+def get_all_contacts(person):
+    res = []
+    for group in person:
+        res.extend(person[group])
+    return res
+        
 
 
 def edge_sampling(N, class_type, contact_matrix, HH_dict, non_HH_dict):
@@ -121,113 +80,288 @@ def weight_sampling(N, edge, contact_dist):
     return weight 
         
 
-edge = {}   
-contacts = edge[i]
-contacts_of_contacts = {}
-for j in contacts:
-    sub_contacts = edge[j]
-    for k in sub_contacts:
-        contacts_of_contacts[j].append(k)
+def ring_based_vaccination(edge, 
+                           weight, 
+                           agent_status,
+                           agent_vaccine_wait_period, 
+                           i, 
+                           pr_base, 
+                           num_vaccine, 
+                           reach_rate = 1):
+    risk = {}
+    contacts = {}
+    for group in edge[i]:
+        contacts.extend(edge[i][group])
 
-for c in contacts:
-    if agent_status[c] == SUSCEPTIBLE:
-        prob = 
-        
-
-
-
-edge = edge_sampling(N, class_type, contact_matrix, HH_dict, non_HH_dict)
-weight = weight_sampling(N, edge, contact_dist)
-
-print(json.dumps(edge, indent=4))
+    contacts_of_contacts = {}
+    for j in contacts:
+        sub_contacts = {}
+        for group in edge[j]:
+            contacts_of_contacts[j].extend(edge[j][group])
     
+    for c in contacts:
+        # Update risk for contacts if they are SUSCEPTIBLE
+        if agent_status[c] == SUSCEPTIBLE:
+            prob = pr_base  * weight[i][c]
+            risk[c] = prob
 
+        # Update risk for contacts of contacts if they are SUSCEPTIBLE
+        for cc in contacts_of_contacts[c]:
+            if agent_status[cc] == SUSCEPTIBLE:
+                if cc in edge[c]["household"]:
+                    # Household risk
+                    subprob = pr_base * weight[c][cc]
+                else:
+                    # Non household risk
+                    subprob = pr_base * pr_base * weight[i][c] * weight[c][cc]
+                
+                risk[cc] = subprob
+        
+    risk_sorted = dict(sorted(risk.items(), key=lambda item: item[1]))
+    vax_used = 0
+    for i in risk_sorted:
+        if vax_used < num_vaccine:
+            if bernoulli.rvs(reach_rate, 1 - reach_rate) == 1:
+                if agent_status[i] == INCUBATED:
+                    if bernoulli.rvs(0.0002, 1 - 0.0002) != 1:
+                        agent_status[i] = VACCINATED
+                        agent_vaccine_wait_period = 9
+                
+                vax_used = vax_used + 1
             
+        
+        if vax_used >= num_vaccine:
+            break
+    
+    remaining_vaccines = num_vaccine - vax_used
+    
+    if remaining_vaccines > 0:
+        pass
+
+
+def simulation(N, 
+               T, 
+               HH_dict, 
+               non_HH_dict,
+               contact_matrix, 
+               class_type,
+               num_vaccine, 
+               num_seed_case, 
+               pr_base,
+               cfr):
+    # Initializes arrays indicating agents belonging to each status
+    agent_infected = []
+    agent_dead = []
+    agent_susceptible = []
+    agent_removed = []
+    res = pd.DataFrame({"day": [],
+                        "susceptible": [],
+                        "incubated": [],
+                        "infected": [],
+                        "dead": [],
+                        "vaccinated": [],
+                        "removed": []})
+    res.set_index("day", inplace=True)
+    
+    
+    # Initialize status, infectious period, incubation period, vaccine period, risk score arrays
+    agent_status = [0] * N
+    agent_infectious_period = [0] * N
+    agent_incubation_period = [0] * N
+    agent_vaccine_wait_period = [0] * N
+    agent_risk_score = [0] * N
+    
+    # Initizlize seed cases
+    agent_infected = random.sample(list(range(0, N)), num_seed_case)
+    # Update seed cases
+    for index in agent_infected:
+        agent_status[index] = INFECTED
+        agent_infectious_period[index] = log_normal(2.2915, 0.1332)
+        
+    for day in range(T): 
+        edge = edge_sampling(N,
+                             class_type=class_type,
+                             contact_matrix=contact_matrix, 
+                             HH_dict=HH_dict, 
+                             non_HH_dict=non_HH_dict)
+        edge_weight = weight_sampling(N,edge,contact_dist)
+        
+        
+        for i in range(N):
             
-    
-
-
-
-# def simulation(T, N, HH_dict, non_HH_dict, num_vaccine, num_seed_case, cfr):
-#     # Initializes arrays indicating agents belonging to each status
-#     agent_infected = []
-#     agent_dead = []
-#     agent_susceptible = []
-#     agent_removed = []
-    
-#     # Initizlize seed cases
-#     agent_infected = random.sample(list(range(0, N)), num_seed_case)
-#     # Initialize status, infectious period, incubation period, vaccine period, risk score arrays
-#     agent_status = [0] * N
-#     agent_infectious_period = [0] * N
-#     agent_incubation_period = [0] * N
-#     agent_vaccine_wait_period = [0] * N
-#     agent_risk_score = [0] * N
-    
-#     # Update seed cases
-#     for index in agent_infected:
-#         agent_status[index] = INFECTED
-#         agent_infectious_period = log_normal(2.2915, 0.1332)
-#     for day in range(T):
-#         edge = edge_sampling(HH_dict, non_HH_dict)
-#         edge_weight = weight_sampling(edge)
-
-#     for i in range(N):
-        
-#         if agent_status[i] == INFECTED and agent_incubation_period[i] > 0:
-#             # If this agent is infectious, get a list of their contacts
-#             contacts = edge[i]
-#             contacts_of_contacts = []
-#             for j in contacts:
-#                 # For each contact, get a list of their contacts, they are called contacts of contacts
-#                 sub_contacts = edge[j]
-#                 for k in sub_contacts:
-#                     contacts_of_contacts[j].append(k)
-        
-#             for c in contacts:
-#                 # For each contact, if they are susceptible, calculate their risk
-#                 if agent_status[c] == SUSCEPTIBLE:
-#                     prob = pr_base * edge_weight[i][c]
-#                     # If they has contracted the disease, update their status
-#                     if bernoulli(prob) == 1:
-#                         agent_status[c] = INCUBATED
-#                         agent_incubation_period = log_normal(2.446, 0.284)
-                        
-#                 # For each contact of contact, if they is susceptible, calculate their secondary risk
-#                 for cc in contacts_of_contacts:
-#                     if agent_status[c] == SUSCEPTIBLE:
-#                         # If they is a household member of the contact:
-#                         if cc in hh_dict[c]:
-#                             subprob = pr_base * edge_weight[c][cc]
-#                         else:
-#                         # If they is not a household member of the contact:
-#                             subprob = pr_base*pr_base * edge_weight[i][c] * edge_weight[c][cc]
-#                         # If they has contracted the disease, update their status
-#                         if bernoulli(subprob) == 1:
-#                             agent_status[cc] = 1
-#                             agent_incubation_period[cc] = log_normal(2.446, 0.284)
-
-#             agent_infectious_period[i] = agent_infectious_period[i] - 1
-
-
-#         if agent_status[i] == INCUBATED:
-#             if agent_incubation_period[i] == 0:
-#                 agent_status[i] = INFECTED
-#                 agent_infectious_period = log_normal(2.2915, 0.1332)
-#             else:
-#                 agent_incubation_period[i] = agent_incubation_period[i] - 1
-        
-#         if agent_status[i] == VACCINATED:
-#             if agent_vaccine_wait_period[i] == 0:
-#                 agent_status[i] = IMMUNE
-#             else:
-#                 agent_vaccine_wait_period[i] = agent_vaccine_wait_period[i] - 1
-        
-#         if agent_status[i] in (SUSCEPTIBLE, REMOVED, DEAD):
-#             pass
-
-        
+            if agent_status[i] == INFECTED and agent_infectious_period[i] > 0:
+                # If this agent is infectious, get a list of their contacts
+                contacts = get_all_contacts(edge[i])
+                # contacts_of_contacts = {}
+                # for j in contacts:
+                #     # For each contact, get a list of their contacts, they are called contacts of contacts
+                #     sub_contacts = []
+                #     sub_contacts = get_all_contacts(edge[j])
+                #     contacts_of_contacts[j] = sub_contacts
+            
+                for c in contacts:
+                    # For each contact, if they are susceptible, calculate their risk
+                    if agent_status[c] == SUSCEPTIBLE:
+                        prob = pr_base * edge_weight[i][c]
+                        # If they has contracted the disease, update their status
+                        if bernoulli.rvs(prob) == 1:
+                            agent_status[c] = INCUBATED
+                            agent_incubation_period[c] = log_normal(2.446, 0.284)
                             
+                    # For each contact of contact, if they is susceptible, calculate their secondary risk
+                    # for cc in contacts_of_contacts[c]:
+                    #     if agent_status[cc] == SUSCEPTIBLE:
+                    #         # If they is a household member of the contact:
+                    #         if cc in edge[c]["household"]:
+                    #             subprob = pr_base * edge_weight[c][cc]
+                    #         else:
+                    #         # If they is not a household member of the contact:
+                    #             subprob = pr_base*pr_base * edge_weight[i][c] * edge_weight[c][cc]
+                    #         # If they has contracted the disease, update their statusb)
+                    #         if bernoulli.rvs(subprob) == 1:
+                    #             agent_status[cc] = INCUBATED
+                    #             agent_incubation_period[cc] = log_normal(2.446, 0.284)
+
+                agent_infectious_period[i] = agent_infectious_period[i] - 1
+
+            if agent_status[i] == INFECTED and agent_infectious_period[i] <= 0:
+                if bernoulli.rvs(cfr) == 1:
+                    agent_status[i] = DEAD
+                else:
+                    agent_status[i] = SURVIVED
+
+            if agent_status[i] == INCUBATED:
+                if agent_incubation_period[i] <= 0:
+                    agent_status[i] = INFECTED
+                    agent_infectious_period[i] = log_normal(2.2915, 0.1332)
+                else:
+                    agent_incubation_period[i] = agent_incubation_period[i] - 1
             
-              
+            if agent_status[i] == VACCINATED:
+                if agent_vaccine_wait_period[i] <= 0:
+                    agent_status[i] = IMMUNE
+                else:
+                    agent_vaccine_wait_period[i] = agent_vaccine_wait_period[i] - 1
+            
+            if agent_status[i] in (SUSCEPTIBLE, REMOVED, DEAD):
+                pass
+            
+            
+        count_status = [0, 0, 0, 0, 0, 0]
+        
+        for status in agent_status:
+            count_status[status] = count_status[status] + 1
+            
+        
+        today = pd.DataFrame([{"day": day,
+                               "susceptible": count_status[SUSCEPTIBLE],
+                               "incubated": count_status[INCUBATED],
+                               "infected": count_status[INFECTED],
+                                "vaccinated": count_status[VACCINATED],
+                               "removed": count_status[REMOVED],
+                               "dead": count_status[DEAD],
+
+                               }]) 
+        res = pd.concat([res, today],ignore_index=True)
+
+        
+        
+    return res
+                            
+
+
+contact_matrix = np.array([[0.2, 2.0, 1.2], [2.0, 3.6, 1.5], [1.2, 1.5, 5.3]])
+
+               
+
+contact_dist = {
+    "household": {
+        "percentage": [0.163, 
+                       0.403, 
+                       0.17, 
+                       0.026, 
+                       0.1, 
+                       0.138],
+        "risk_ratio": [9.7, 
+                       8.3,
+                       5.6,
+                       4.9,
+                       1.3,
+                       1
+                       ]
+    },
+    "non_household": {
+        "percentage": [1],
+        "risk_ratio": [2.45],
+    },  
+}
+                       
+def population_sample(N,
+                       family_size,
+                       acquaintance_size,
+                       class_distribution):
+    
+    class_type = [0] * N
+    HH_dict = {}
+    non_HH_dict = {}
+    
+    # Classtype
+    class_type = random.choices([0,1,2], class_distribution, k=N)
+    
+    
+    # Household 
+    random_list = list(range(N))
+    np.random.shuffle(random_list)
+    left = 0
+    family_index = 0
+    while left < N:
+        right = left + 1 + np.random.poisson(lam=family_size)
+        if right >= N:
+            right = N
+        HH_dict[family_index] = random_list[left:right]
+        
+        
+        
+        # non house hold
+        for i in HH_dict[family_index]:
+            possible_acquaintances = random_list[:left] + random_list[right:]
+            num_of_acquaintances = np.random.poisson(lam=acquaintance_size)
+            acquaintances = random.sample(possible_acquaintances, num_of_acquaintances)
+            non_HH_dict[i] = {0: [], 1: [], 2: []}
+            for acquaintance in acquaintances:
+                non_HH_dict[i][class_type[acquaintance]].append(acquaintance)
+                
+            
+        left = right + 1
+        family_index = family_index + 1
+        
+    return class_type, HH_dict, non_HH_dict
+    
+        
+N = 1000
+class_type, HH_dict, non_HH_dict = population_sample(N,
+                                                     6,
+                                                     8,
+                                                     [0.3,0.4,0.3])
+
+
+simu = simulation(N=N,
+                  T=100,
+                  HH_dict=HH_dict,
+                  non_HH_dict=non_HH_dict,
+                  contact_matrix=contact_matrix,
+                  class_type=class_type,
+                  num_vaccine = 0,
+                  num_seed_case = 2,
+                  pr_base=0.01962,
+                  cfr=0.7)
+
+print(simu)
+
+
+
+
+    
+    
+    
     
