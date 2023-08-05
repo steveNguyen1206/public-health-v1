@@ -1,38 +1,65 @@
-const person_warpper = document.querySelector('#persons-wrapper')
-const p_addr_wrapper_1 = document.querySelector('#p-addr-wrapper_1')
+const persons_warpper = document.querySelector('#persons-wrapper')
 const provinces_input = document.querySelector('#provinces')
 const districts_input = document.querySelector('#districts')
 const wardses_input = document.querySelector('#wardses')
-
-const person_provinces_input_1 = document.querySelector('#person-provinces_1')
-const person_districts_input_1 = document.querySelector('#person-districts_1')
-const person_wardses_input_1 = document.querySelector('#person-wardses_1')
+const p_addr_wrapper = document.querySelector('#p-addr-wrapper')
+const person_provinces_input = document.querySelector('#person-provinces')
+const person_districts_input = document.querySelector('#person-districts')
+const person_wardses_input = document.querySelector('#person-wardses')
+const gender_input = document.querySelector('#gender-input')
+const birth_year_input = document.querySelector('#birth-year-input')
+const occupation_input = document.querySelector('#occupation-input')
+const family_addr = document.querySelector('#family-addr')
 
 const provinces_options = document.querySelector('#provinces-list')
 const districts_options = document.querySelector('#districts-list')
 const wardses_options = document.querySelector('#wardses-list')
-const person_districts_options_1 = document.querySelector('#person-districts-list_1')
-const person_wardses_options_1 = document.querySelector('#person-wardses-list_1')
+const person_districts_options = document.querySelector('#person-districts-list')
+const person_wardses_options = document.querySelector('#person-wardses-list')
 
 const household_size_input = document.querySelector('#household-size')
 const occupation_datalist = document.querySelector('#occupation-list')
 
-const reset_btn_1 = document.querySelector('#reset_1')
-const remove_1 = document.querySelector('#remove_1')
+const person_edit_1 = document.querySelector('#person-edit_1')
+const person_remove_1 = document.querySelector('#person-remove_1')
 
 const add_person = document.querySelector("#add-person")
 const minus_person = document.querySelector("#minus-person")
 minus_person.setAttribute('disabled', '')
 
+const model_ok = document.querySelector('#model-ok')
 
-const person_addr_check_1 = document.querySelector("#person-addr-check_1")
-let person_addr_not_with_family = false
 
-remove_1.addEventListener('click', removePerson)
-reset_btn_1.addEventListener('click', resetPerson)
+function requireInput()
+{
+    const inputs = document.querySelectorAll('input')
+    inputs.forEach( elem => {
+            elem.oninvalid = function () {
+            console.log('test')
+            elem.setAttribute('placeholder', 'Bắt buộc')
+            elem.classList.add('red-placeholder')  
+        }
+    })
+}
+
+requireInput()
+
+persons_warpper.querySelectorAll('input').forEach(elem => {
+    elem.addEventListener('click', () => {
+        resetPerson()
+    })
+})
+
+
+// const person_addr_check_1 = document.querySelector("#person-addr-check_1")
+// let person_addr_not_with_family = false
+
+person_remove_1.addEventListener('click', removePerson)
+person_edit_1.addEventListener('click', resetPerson)
 
 let household_size = 1
 let current_hhsize = 1
+let active_person = 1
 
 household_size_input.addEventListener('change', ()=> {
     const value = Number(household_size_input.value)
@@ -73,7 +100,7 @@ function updateHousholdSize()
         if(res)
         {
             current_hhsize = 0
-            person_warpper.innerHTML = ''
+            persons_warpper.innerHTML = ''
             household_size = value
         }
         else household_size_input.value = household_size
@@ -81,35 +108,13 @@ function updateHousholdSize()
     else household_size = value
 
     for (let i = current_hhsize + 1; i <= household_size; i++) {     
-            personElements = createPerson(i)
-            person_warpper.appendChild(personElements)
+        createPerson(i)
     } 
     current_hhsize = household_size
 }
 
-// household_size_input.addEventListener("focusout", () =>{
-//     updateHousholdSize()
-// })
 
-const p_addr_inputs_1 = p_addr_wrapper_1.querySelectorAll('input')
-person_addr_check_1.addEventListener('change', ()=>{
-    person_addr_not_with_family = person_addr_check_1.checked
-    console.log(person_addr_not_with_family)
-    if(person_addr_not_with_family)
-    {
-        p_addr_wrapper_1.classList.remove('display-none')
-        p_addr_inputs_1.forEach((elem) => {
-            console.log(elem)
-            elem.setAttribute('required', '')
-        })
-    }
-    else {
-        p_addr_wrapper_1.classList.add('display-none')
-        p_addr_inputs_1.forEach((elem) => {
-            elem.removeAttribute('required')
-        })
-    }
-})
+const p_addr_inputs = p_addr_wrapper.querySelectorAll('input')
 
 const occupation_list = [
     'Bác sĩ',
@@ -124,7 +129,6 @@ const occupation_list = [
 occupation_list.forEach( job => {
     occupation_datalist.appendChild( customCreateElement('option', null,null, job))
 })
-
 
 
 // const url_provinces = "https://vn-public-apis.fpo.vn/provinces/getAll?limit=-1"
@@ -186,10 +190,10 @@ console.log(url_provinces)
 getAndSetAddress(url_provinces, provinces_options, "Province").then( () => {
     let value = 'Thành phố Hồ Chí Minh';
     provinces_input.value = value
-    person_provinces_input_1.value = value
+    person_provinces_input.value = value
     let code = value2Code(value)
     provincesChange(code, wardses_options, districts_options, wardses_input, districts_input)
-    provincesChange(code, person_wardses_options_1, person_districts_options_1, person_wardses_input_1, person_districts_input_1)
+    provincesChange(code, person_wardses_options, person_districts_options, person_wardses_input, person_districts_input)
 })
 
 
@@ -204,20 +208,17 @@ function provincesChange(code, wardses_options, districts_options, wardses_input
     districts_options.innerHTML = ''
     districts_input.value = ''
     wardses_input.value = ''
+    model_ok.setAttribute('disabled', '')
     getAndSetAddress(url_districts, districts_options, "District")
     // console.log(districts_to_code)
 }
 
 function districtsChange(code, wardses_options, wardses_input) {
-    // console.log(event.target.value)
-    // if(unit == "family")
-    //     code = districts_to_code[event.target.value]
-    // else code = p_districts_to_code[event.target.value]
-    console.log(code)
-    // url_wardses = `https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=${code}&limit=-1`
+    // console.log(code)
     url_wardses = api_host + "d/" + code + "?depth=2"
     console.log(url_wardses)
     wardses_input.value = ''
+    model_ok.setAttribute('disabled', '')
     getAndSetAddress(url_wardses, wardses_options, "Wards")
 }
 
@@ -226,14 +227,9 @@ function districtsChange(code, wardses_options, wardses_input) {
 provinces_input.addEventListener('change', ()=> {
     let value = event.target.value
     let code = value2Code(value)
-    provincesChange(code, provinces_input, wardses_options, districts_options, wardses_input, districts_input)
+    provincesChange(event, wardses_options, districts_options, wardses_input, districts_input)
 })
 
-person_provinces_input_1.addEventListener('change', ()=> {
-    let value = event.target.value
-    let code = value2Code(value)
-    provincesChange(code, person_provinces_input_1, person_wardses_options_1, person_districts_options_1, person_wardses_input_1, person_districts_input_1)
-  })
 
 districts_input.addEventListener('change', ()=> {
     let value = event.target.value
@@ -241,14 +237,7 @@ districts_input.addEventListener('change', ()=> {
     districtsChange(code, wardses_options, wardses_input)
 })
 
-person_districts_input_1.addEventListener('change', ()=> {
-    let value = event.target.value
-    let code = value2Code(value)
-    districtsChange(code, person_wardses_options_1, person_wardses_input_1)
-})
 
-
-// let person_number = 1;
 
 function customCreateElement(type, id=null, styles = null , innerHTML= null, attributes = null) {
     const elem = document.createElement(type)
@@ -270,14 +259,8 @@ function customCreateElement(type, id=null, styles = null , innerHTML= null, att
     return elem
 }
 
-// const household_size_input = document.querySelector("#household-size")
 
-// household_size_input.addEventListener('change', () => {
-//     household_size = household_size_input.value
-//     console.log(household_size)
-// }) 
-
-function findAndSetID(old_selector, new_id=null, name=null, html = null, value=null)
+function findAndSetID(old_selector, new_id=null, attr=null, html = null, value=null)
 {
     
     const elem = document.querySelector(old_selector)
@@ -291,26 +274,77 @@ function findAndSetID(old_selector, new_id=null, name=null, html = null, value=n
     if(value != null)
         elem.value =  value
     
-    if(name != null)
-    // name.forEach( (i) => {
-        //     elem.setAttribute(i.name, i.value)
-        // })
-        elem.setAttribute('name', name)
+    if(attr != null)
+        attr.forEach( (i) => {
+            elem.setAttribute(i.name, i.value)
+        })
+}
+
+function getValueById(id)
+{
+    console.log(id)
+    return document.querySelector('#'+id).value
+}
+
+function resetAdderForm(addr, provinces_input, districts_input, districts_options, wardses_input, wardses_options)
+{
+    districts_input.onchange = ""
+    provinces_input.onchange = ""
+
+    const addr_list = addr.split(', ')
+    // console.log(addr_list)
+    provinces_input.value = addr_list[0]
+    if (addr_list[1])
+        districts_input.value = addr_list[1]
+    else
+        districts_input.value = ""
+    if(addr_list[2])   
+        wardses_input.value = addr_list[2]
+    else
+        wardses_input.value = ""
+    districts_input.addEventListener('change', ()=> {
+        let value = event.target.value
+        let code = value2Code(value)
+        districtsChange(code, wardses_options, wardses_input)
+    })
+
+    provinces_input.addEventListener('change', ()=> {
+        let value = event.target.value
+        let code = value2Code(value)
+        provincesChange(code, wardses_options, districts_options, wardses_input, districts_input)
+      })
+
+}
+
+family_addr.onclick = () => {
+    const addr = family_addr.value
+    resetAdderForm(addr, provinces_input, districts_input, districts_options, wardses_input, wardses_options)
 }
 
 function resetPerson()
-{
+{   
     event.preventDefault()
-    let person_number   
     if(event.target.tagName == "I")
-        person_number = event.target.parentNode.getAttribute("person")
+    person_number = event.target.parentNode.getAttribute("person")
     else person_number = event.target.getAttribute("person")
-    console.log(`g ${person_number}`)
-    findAndSetID(`#gender_${person_number}`, null, null, null, "")
-    console.log('d')
-    findAndSetID(`#datepicker_${person_number}`, null, null, null, "")
-    console.log('c')
-    findAndSetID(`#occupation_${person_number}`, null, null, null, "")
+    console.log(person_number)
+    active_person = person_number
+   const gender = getValueById(`gender_${person_number}`)
+   const birth_year = getValueById(`birth-year_${person_number}`)
+   const family_addr_val = family_addr.value
+   const p_addr_val = getValueById(`addr_${person_number}`)
+   const addr = (p_addr_val != '') ? p_addr_val : family_addr_val
+   const occupation = getValueById(`occupation_${person_number}`)
+
+    gender_input.value = gender
+    birth_year_input.value = birth_year
+    occupation_input.value = occupation
+
+    resetAdderForm(addr, person_provinces_input, person_districts_input, person_districts_options, person_wardses_input, person_wardses_options)
+      model_famaddr_warpper.classList.add('display-none')
+      model_persons_warpper.classList.remove('display-none')
+
+      model.classList.add('open');
 }
 
 function removePerson()
@@ -328,37 +362,20 @@ function removePerson()
             if (i == person_number)
             {
                 console.log('remove')
-                const remove_person = document.querySelector(`#person_${person_number}`)
-                person_warpper.removeChild(remove_person)
+                const remove_person = persons_warpper.querySelector(`#person_${person_number}`)
+                persons_warpper.removeChild(remove_person)
             } 
             else if ( i > person_number){
                 findAndSetID(`#person_${i}`, `person_${i-1}`)
                 const person = document.querySelector(`#person_${i-1}`)
-                person.querySelector('h6').innerHTML = `Thành viên ${i-1}`
+                person.querySelector('.p_num').innerHTML = `${i-1}`
 
-                findAndSetID(`#gender_${i}`, `gender_${i-1}`, `gender_${i-1}`)
-                findAndSetID(`#datepicker_${i}`, `datepicker_${i-1}`, `birth-year_${i-1}`)
-                findAndSetID(`#occupation_${i}`, `occupation_${i-1}`, `occupation_${i-1}`)
-                findAndSetID(`#reset_${i}`, `reset_${i-1}`)
-                findAndSetID(`#remove_${i}`, `remove_${i-1}`)
-                findAndSetID(`#person-addr-wrapper_${i}`, `person-addr-wrapper_${i-1}`)
-                findAndSetID(`#person-addr-check_${i}`, `person-addr-check_${i-1}`)
-                findAndSetID(`#p-addr-wrapper_${i}`, `p-addr-wrapper_${i-1}`)
-                findAndSetID(`#person-provinces_${i}`, `person-provinces_${i-1}`, `p-province_${person_number}`)
-                findAndSetID(`#person-districts_${i}`, `person-districts_${i-1}`, `p-district_${person_number}`)
-                findAndSetID(`#person-wardses_${i}`, `person-wardses_${i-1}`, `p-wards_${person_number}`)
-                findAndSetID(`#person-districts-list_${i}`, `person-districts-list_${i-1}`)
-                findAndSetID(`#person-wardses-list_${i}`, `person-wardses-list_${i-1}`)
-                const person_dists_input = person.querySelector(`#person-districts_${i-1}`) 
-                person_dists_input.setAttribute('list', `person-districts-list_${i-1}`)
-                const person_wards_input = person.querySelector(`#person-wardses_${i-1}`)
-                person_wards_input.setAttribute('list', `person-wardses-list_${i-1}`)
-
-                const reset_btn = person.querySelector(`#reset_${i-1}`)
-                reset_btn.setAttribute("person", i-1)
-                
-                const remove_btn = person.querySelector(`#remove_${i-1}`)
-                remove_btn.setAttribute("person", i-1)
+                findAndSetID(`#gender_${i}`, `gender_${i-1}`, [{"name":`gender_${i-1}`}, {"name":"person", "value": i-1}])
+                findAndSetID(`#birth-year_${i}`, `birth-year_${i-1}`, [{"name": "name", "value":`birth-year_${i-1}`}, {"name":"person", "value": i-1}])
+                findAndSetID(`#occupation_${i}`, `occupation_${i-1}`, [{"name": "name", "value": `occupation_${i-1}`}, {"name":"person", "value": i-1}])
+                findAndSetID(`#addr_${i}`, `addr_${i-1}`, [{"name": "name", "value": `addr_${i-1}`}, {"name":"person", "value": i-1}])
+                findAndSetID(`#person-edit_${i}`, `person-edit_${i-1}`, [{"name":"person", "value": i-1}])
+                findAndSetID(`#person-remove_${i}`, `person-remove_${i-1}`, [{"name":"person", "value": i-1}])
             }
         }
 
@@ -376,158 +393,142 @@ function removePerson()
 
 function createPerson(person_number) 
 {
-    const outer_div = customCreateElement('div', `person_${person_number}`, ['form-control', 'mb-3', 'person-wrapper'],null, null)
-    const outer_row = customCreateElement('div', "", ['row'],null, null)
+    const person_new = customCreateElement('tr', `person_${person_number}`, ['person-wrapper'])
+    console.log(person_new)
+    person_new.innerHTML = `
+        <th class="p_num" scope="row">${person_number}</th>
+        <td class="col-1">
+        <input type="text" class="table-input model-btn" autocomplete="off" placeholder="..." person=${person_number} id="gender_${person_number}" name="gender_${person_number}" required>
+        </td>
+        <td class="col-1">
+        <input type="text" class="table-input model-btn" autocomplete="off" placeholder="..." person=${person_number} id="birth-year_${person_number}" name="birth-year_${person_number}" required>
+        </td>
+        <td class="col-6">
+        <input type="text" class="table-input model-btn" autocomplete="off" placeholder="..." person=${person_number} id="addr_${person_number}" name="addr_${person_number}" required>
+        </td>
+        <td class="col-2">
+        <input type="text" class="table-input model-btn" autocomplete="off" placeholder="..." person=${person_number} id="occupation_${person_number}" name="occupation_${person_number}" required>
+        </td>
 
-    const person_title = document.createElement(type = 'h6')
-    person_title.innerHTML = `Thành viên ${person_number}`
-                
-    const gender_title = customCreateElement('label', null, ["form-label"], 'Giới tính')
-    const gender_col =  customCreateElement('div', null, ["col", "mb-3"], null, null)
-    const  gender_input = customCreateElement('select', `gender_${person_number}`, ["form-select"],  null, [{"name": "name", "value": `gender_${person_number}`}, {"name":"required", "value":""}])
-    gender_input.innerHTML = `
-                <option selected disabled></option>
-                <option >Nam</option>
-                <option >Nữ</option>
-                <option >Khác</option>
-    `
-    gender_col.appendChild(gender_title)
-    gender_col.appendChild(gender_input)
+        <td class="col-2">
+        <button id="person-edit_${person_number}" class="btn person-btn model-btn" person="${person_number}" model="person">
+            <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <button id="person-remove_${person_number}" class="btn person-btn ms-3" person="${person_number}">
+            <i class="fa-solid fa-user-xmark"></i>
+        </button>
+        </td>
+        `
+    persons_warpper.appendChild(person_new)
+
+    const edit_person = person_new.querySelector(`#person-edit_${person_number}`)
+    const remove_person = document.querySelector(`#person-remove_${person_number}`)
+    requireInput()
+    const open_model = persons_warpper.querySelectorAll('.model-btn')
+    open_model.forEach(elem => {
+        elem.onclick = () => {
+            resetPerson()
+            model_famaddr_warpper.classList.add('display-none')
+            model_persons_warpper.classList.remove('display-none')
+            model.classList.add('open');
+    }})
+    edit_person.addEventListener('click', resetPerson)
+    remove_person.addEventListener('click', removePerson)
     
-    const year_col = customCreateElement('div', null, ["col", "mb-3"], null, null)
-    const year_label = customCreateElement('label', null, ["form-label"],"Năm sinh", null)
-    const year_input = customCreateElement('input', `datepicker_${person_number}`, ["form-control"], null,[{"name": "type", "value": "text"}, {"name":"name", "value": `birth-year_${person_number}`}, {"name":"required", "value":""}])
-
-    const date_piceker = `#datepicker_${person_number}`
-    console.log($(date_piceker))
-
-    
-    $(document).ready(function(){
-        $(date_piceker).datepicker({
-            format: "yyyy",
-            viewMode: "years", 
-            minViewMode: "years"
-        });
-      });
-
-    year_col.appendChild(year_label)
-    year_col.appendChild(year_input)
-
-    const occupation_col = customCreateElement('div', null, ["col", "mb-3"], null, null)
-    const occupation_label = customCreateElement('label', null, ['form-label'], 'Nghề nghiệp', null)
-    const occupation_input = customCreateElement('input', `occupation_${person_number}`, ['form-select'] ,null, [{"name":"type", "value":"text"},{"name":"name", "value":`occupation_${person_number}`}, {"name":"list", "value":'occupation-list'}, {"name":"required", "value":""}])
-    // occupation_list.forEach( job => {
-    //     occupation_datalist.appendChild( customCreateElement('option', null,null, job))
-    // })
-    occupation_col.appendChild(occupation_label)
-    occupation_col.appendChild(occupation_input)
-
-    const modify_col = customCreateElement('div', null, ["person-btn-col"], null, null)
-    const reset_btn = customCreateElement('button', `reset_${person_number}`, ["btn", "mb-1", "mybtn-primary", "person-btn"], `<i class="fa-solid fa-rotate-right"></i>`, [{"name":"person", "value":person_number}])
-    const remove_btn = customCreateElement('button', `remove_${person_number}`, ["btn",  "mybtn-primary", "person-btn"], `<i class="fa-solid fa-user-xmark"></i>`, [{"name":"person", "value":person_number}])
-    remove_btn.addEventListener('click', removePerson)
-    reset_btn.addEventListener('click', resetPerson)
-    modify_col.appendChild(reset_btn)
-    modify_col.appendChild(remove_btn)
-    
-    const person_addr_wrapper = customCreateElement('div', `person-addr-wrapper_${person_number}`)
-    person_addr_wrapper.innerHTML = `
-            <div class="form-check mb-3">
-              <input class="form-check-input" type="checkbox" value="" id="person-addr-check_${person_number}">
-              <label class="form-label form-check-label">
-                Không ở chung với gia đình
-              </label>
-            </div>
-  
-            <div class="row align-items-center justify-content-between display-none" id="p-addr-wrapper_${person_number}">
-              <div class="col-sm mb-3">
-                <label class="form-label col-form-label-sm">Tỉnh/ Thành phố</label>
-                <input type="text" list="provinces-list" class="form-select" id="person-provinces_${person_number}" name="p-province_${person_number}" autocomplete="off"/>
-              </div>
-    
-              <div class="col-sm mb-3">
-                <label class="form-label col-form-label-sm">Quận/ Huyện</label>
-                <input type="text" list="person-districts-list_${person_number}" class="form-select" id="person-districts_${person_number}" name="p-district_${person_number}" autocomplete="off"/>
-                <datalist id="person-districts-list_${person_number}">
-                  <option disabled selected></option>
-                </datalist>
-              </div>
-    
-              <div class="col-sm mb-3">
-                <label class="form-label col-form-label-sm">Xã/ Phường/ Thị trấn</label>
-                <input type="text" list="person-wardses-list_${person_number}" class="form-select" id="person-wardses_${person_number}" name="p-wards_${person_number}" autocomplete="off"/>
-                <datalist id="person-wardses-list_${person_number}">
-                  <option disabled selected></option>
-                </datalist>
-              </div>
-  
-            </div>`
-    console.log(person_addr_wrapper)
-
-    const person_addr_check = person_addr_wrapper.querySelector(`#person-addr-check_${person_number}`)
-    const p_wrapper = person_addr_wrapper.querySelector(`#p-addr-wrapper_${person_number}`)
-    const p_addr_inputs = p_wrapper.querySelectorAll('input')
-    person_addr_check.addEventListener('change', ()=> {
-
-        person_addr_not_with_family = person_addr_check.checked
-        console.log(person_addr_not_with_family)
-        if(person_addr_not_with_family)
-        {
-            p_wrapper.classList.remove('display-none')
-            p_addr_inputs.forEach((elem) => {
-                console.log(elem)
-                elem.setAttribute('required', '')
-            })
-        }
-        else {
-            p_wrapper.classList.add('display-none')
-            p_addr_inputs.forEach((elem) => {
-                elem.removeAttribute('required')
-            })
-        }
-    })
-
-    const p_provinces_input = p_wrapper.querySelector(`#person-provinces_${person_number}`)
-    const p_districts_options = p_wrapper.querySelector(`#person-districts-list_${person_number}`)
-    const p_wardses_options = p_wrapper.querySelector(`#person-wardses-list_${person_number}`)
-    const p_districts_input = p_wrapper.querySelector(`#person-districts_${person_number}`)
-    const p_wardses_input = p_wrapper.querySelector(`#person-wardses_${person_number}`)
-
-    let value = 'Thành phố Hồ Chí Minh';
-    p_provinces_input.value = value
-    let code = value2Code(value)
-    provincesChange(code, p_wardses_options, p_districts_options, p_wardses_input, p_districts_input)
-
-    p_provinces_input.addEventListener('change', ()=> {
-        let value = event.target.value
-        let code = value2Code(value)
-        provincesChange(code, p_wardses_options, p_districts_options, p_wardses_input, p_districts_input)
-      })
-    
-    p_districts_input.addEventListener('change', ()=> {
-        let value = event.target.value
-        let code = value2Code(value)
-        districtsChange(code, p_wardses_options, p_wardses_input)
-    })
-
-    outer_row.appendChild(person_title)
-    outer_row.appendChild(gender_col)
-    outer_row.appendChild(year_col)
-    outer_row.appendChild(occupation_col)
-    outer_row.appendChild(modify_col)
-    outer_row.appendChild(person_addr_wrapper)
-    
-    outer_div.appendChild(outer_row)
-    return outer_div
 }
 
 
-// add_btn.addEventListener('click', function(even) {
-//     even.preventDefault();
-//     updateHousholdSize()
-//     add_btn.setAttribute('disabled', '')
-// })
 
+const open_model_btn = document.querySelectorAll('.model-btn');
+const model = document.querySelector('.js-model');
+const closeBtn = document.querySelectorAll('.model-close');
+const container = document.querySelector('.js-model-container');
+const model_famaddr_warpper = document.querySelector(".model-family-addr-warpper")
+const model_persons_warpper = document.querySelector(".model-person-wrapper")
+
+
+open_model_btn.forEach(element => {
+    element.onclick = function () {
+        event.preventDefault()
+        
+        let model_type   
+        if(element.tagName == "I")
+            model_type = element.parentNode.getAttribute("model")
+        else model_type = element.getAttribute("model")
+
+        console.log(model_type)
+        if(model_type == "family-addr")
+        {
+            model_famaddr_warpper.classList.remove('display-none')
+            model_persons_warpper.classList.add('display-none')
+        }
+        else {
+            model_famaddr_warpper.classList.add('display-none')
+            model_persons_warpper.classList.remove('display-none')
+        }
+
+        model.classList.add('open');
+    }
+})
+
+function hideModel(){
+    model.classList.remove('open');
+}
+
+closeBtn.forEach(element => {
+    console.log(test)
+    element.addEventListener('click', () => {
+    event.preventDefault()
+    hideModel()
+    })
+})
+
+model.addEventListener('click', hideModel);
+container.addEventListener('click', function (event) {
+    event.preventDefault()
+    event.stopImmediatePropagation()
+    event.stopPropagation();
+})
+
+
+model_ok.addEventListener('click', ()=> {
+    let is_family_addr = !model_famaddr_warpper.classList.contains('display-none')
+    if(is_family_addr)
+    {
+        const province = provinces_input.value
+        const district = districts_input.value
+        const ward =  wardses_input.value   
+        if(province != '' && district != '' && ward != '')
+        {
+            let family_addr_val = province + ", " + district + ", " + ward
+            family_addr.value = family_addr_val
+        }
+    }
+    else
+    {
+        const birth_year = birth_year_input.value
+        const gender = gender_input.value
+        const occupation = occupation_input.value
+
+        const province = person_provinces_input.value
+        const district = person_districts_input.value
+        const ward =  person_wardses_input.value   
+        if(province != '' && district != '' && ward != '')
+        {
+            let family_addr_val = province + ", " + district + ", " + ward
+            document.querySelector(`#addr_${active_person}`).value = family_addr_val
+        }
+
+        if(birth_year && gender && occupation)
+        {
+            findAndSetID(`#gender_${active_person}`, null, null, null, gender)
+            findAndSetID(`#birth-year_${active_person}`, null, null, null, birth_year)
+            findAndSetID(`#occupation_${active_person}`, null, null, null, occupation)
+        }
+    }
+
+    model_ok.setAttribute('disabled', '')
+})
 
 $(document).ready(function() {
     $(window).keydown(function(event){
@@ -536,7 +537,24 @@ $(document).ready(function() {
         return false;
       }
     });
-  });
+
+
+    $('.model-family-addr-warpper input').change(()=>{
+        console.log('test')
+        const empty_input = $('.model-family-addr-warpper input').filter(function() { return this.value == ""; }).length
+        if(empty_input == 0)
+        $('#model-ok').removeAttr('disabled')
+    })
+
+    $('.model-person-wrapper input').change(()=>{
+        console.log('test')
+        const empty_input = $('.model-person-wrapper input').filter(function() { return this.value == ""; }).length
+        if(empty_input == 0)
+            $('#model-ok').removeAttr('disabled')
+        else 
+            $('#model-ok').attr('disabled', '')
+        })
+});
 
 
 

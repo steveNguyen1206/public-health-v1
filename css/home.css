@@ -10981,6 +10981,8 @@ body.ZR3zoU {
           --is-sticky: 0;
           --sticky-top: 0px;
           --top: 0px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          /* z-index: 10000; */
         }
 
         .header_section_r_comp-kbgajy18-container {

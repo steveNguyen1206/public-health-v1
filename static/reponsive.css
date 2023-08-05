@@ -1,0 +1,39 @@
+/* moble */
+@media (max-width: 46.1875em) {
+
+    /* comment class*/
+    
+    .s-col-full {
+        width: 100% !important;
+    }
+
+    .header-wrapper {
+        width: 100% !important;
+        align-items: start;
+    }
+
+    .header-wrapper-right {
+        float: left !important;
+    }
+    
+    .header-addr-wrapper {
+        display: block !important;
+        width: 100% !important;
+
+    }
+
+    .addr-form {
+        width: 100% !important;
+    }
+}
+
+/* tablet and mobile */
+@media (max-width: 63.9375em) {
+        .btn {
+            margin: 0 !important; 
+            width: 100% !important;
+            margin-bottom: 8px  !important;
+            margin-top: 10px !important;
+        }
+
+}
