@@ -60,9 +60,11 @@ def add_family_person(data):
         insert_person_query = text("INSERT INTO person (family_id, birth_year, gender, occupation) VALUES (:famID, :birth_year, :gender, :occupation)")
 
         hhsize = data['household-size']
-        addr1 = data['province']
-        addr2 = data['district']
-        addr3 = data['wards']
+        addr = data['family-addr']
+        addr_list = addr.strip().split(',')
+        addr1 = addr_list[0]
+        addr2 = addr_list[1]
+        addr3 = addr_list[2]
         conn.execute(insert_family_query, 
                      [
                          {"hhsize": hhsize, "addr1": addr1, "addr2": addr2, "addr3": addr3}

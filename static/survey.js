@@ -115,27 +115,6 @@ function updateHousholdSize()
 
 
 const p_addr_inputs = p_addr_wrapper.querySelectorAll('input')
-// person_addr_check_1.addEventListener('change', ()=>{
-//     event.stopImmediatePropagation()
-//     event.stopPropagation()
-//     console.log('test')
-//     person_addr_not_with_family = person_addr_check_1.checked
-//     console.log(person_addr_not_with_family)
-//     if(person_addr_not_with_family)
-//     {
-//         p_addr_wrapper_1.classList.remove('display-none')
-//         p_addr_inputs_1.forEach((elem) => {
-//             console.log(elem)
-//             elem.setAttribute('required', '')
-//         })
-//     }
-//     else {
-//         p_addr_wrapper_1.classList.add('display-none')
-//         p_addr_inputs_1.forEach((elem) => {
-//             elem.removeAttribute('required')
-//         })
-//     }
-// })
 
 const occupation_list = [
     'Bác sĩ',
@@ -229,6 +208,7 @@ function provincesChange(code, wardses_options, districts_options, wardses_input
     districts_options.innerHTML = ''
     districts_input.value = ''
     wardses_input.value = ''
+    model_ok.setAttribute('disabled', '')
     getAndSetAddress(url_districts, districts_options, "District")
     // console.log(districts_to_code)
 }
@@ -238,6 +218,7 @@ function districtsChange(code, wardses_options, wardses_input) {
     url_wardses = api_host + "d/" + code + "?depth=2"
     console.log(url_wardses)
     wardses_input.value = ''
+    model_ok.setAttribute('disabled', '')
     getAndSetAddress(url_wardses, wardses_options, "Wards")
 }
 
@@ -279,7 +260,7 @@ function customCreateElement(type, id=null, styles = null , innerHTML= null, att
 }
 
 
-function findAndSetID(old_selector, new_id=null, name=null, html = null, value=null)
+function findAndSetID(old_selector, new_id=null, attr=null, html = null, value=null)
 {
     
     const elem = document.querySelector(old_selector)
@@ -293,11 +274,10 @@ function findAndSetID(old_selector, new_id=null, name=null, html = null, value=n
     if(value != null)
         elem.value =  value
     
-    if(name != null)
-    // name.forEach( (i) => {
-        //     elem.setAttribute(i.name, i.value)
-        // })
-        elem.setAttribute('name', name)
+    if(attr != null)
+        attr.forEach( (i) => {
+            elem.setAttribute(i.name, i.value)
+        })
 }
 
 function getValueById(id)
@@ -390,18 +370,12 @@ function removePerson()
                 const person = document.querySelector(`#person_${i-1}`)
                 person.querySelector('.p_num').innerHTML = `${i-1}`
 
-                findAndSetID(`#gender_${i}`, `gender_${i-1}`, `gender_${i-1}`)
-                findAndSetID(`#birth-year_${i}`, `birth-year_${i-1}`, `birth-year_${i-1}`)
-                findAndSetID(`#occupation_${i}`, `occupation_${i-1}`, `occupation_${i-1}`)
-                findAndSetID(`#person-edit_${i}`, `person-edit_${i-1}`)
-                findAndSetID(`#person-remove_${i}`, `person-remove_${i-1}`)
-                
-
-                const reset_btn = person.querySelector(`#person-edit_${i-1}`)
-                reset_btn.setAttribute("person", i-1)
-                
-                const remove_btn = person.querySelector(`#person-remove_${i-1}`)
-                remove_btn.setAttribute("person", i-1)
+                findAndSetID(`#gender_${i}`, `gender_${i-1}`, [{"name":`gender_${i-1}`}, {"name":"person", "value": i-1}])
+                findAndSetID(`#birth-year_${i}`, `birth-year_${i-1}`, [{"name": "name", "value":`birth-year_${i-1}`}, {"name":"person", "value": i-1}])
+                findAndSetID(`#occupation_${i}`, `occupation_${i-1}`, [{"name": "name", "value": `occupation_${i-1}`}, {"name":"person", "value": i-1}])
+                findAndSetID(`#addr_${i}`, `addr_${i-1}`, [{"name": "name", "value": `addr_${i-1}`}, {"name":"person", "value": i-1}])
+                findAndSetID(`#person-edit_${i}`, `person-edit_${i-1}`, [{"name":"person", "value": i-1}])
+                findAndSetID(`#person-remove_${i}`, `person-remove_${i-1}`, [{"name":"person", "value": i-1}])
             }
         }
 
@@ -462,6 +436,7 @@ function createPerson(person_number)
     remove_person.addEventListener('click', removePerson)
     
 }
+
 
 
 const open_model_btn = document.querySelectorAll('.model-btn');
@@ -551,6 +526,8 @@ model_ok.addEventListener('click', ()=> {
             findAndSetID(`#occupation_${active_person}`, null, null, null, occupation)
         }
     }
+
+    model_ok.setAttribute('disabled', '')
 })
 
 $(document).ready(function() {
@@ -560,6 +537,23 @@ $(document).ready(function() {
         return false;
       }
     });
+
+
+    $('.model-family-addr-warpper input').change(()=>{
+        console.log('test')
+        const empty_input = $('.model-family-addr-warpper input').filter(function() { return this.value == ""; }).length
+        if(empty_input == 0)
+        $('#model-ok').removeAttr('disabled')
+    })
+
+    $('.model-person-wrapper input').change(()=>{
+        console.log('test')
+        const empty_input = $('.model-person-wrapper input').filter(function() { return this.value == ""; }).length
+        if(empty_input == 0)
+            $('#model-ok').removeAttr('disabled')
+        else 
+            $('#model-ok').attr('disabled', '')
+        })
 });
 
 

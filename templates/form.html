@@ -6,26 +6,28 @@
       <table class="table table-striped table-responsive">
         <thead>
 
-          <div  class="header-infor-container">
-            <div class="header-title">
+          <div  class="header-infor-container mrow">
+
+            <div class="header-wrapper header-title">
               <h5>Thông tin chung</h5>
             </div>
     
-            <div class="header-wrapper">
+            <div class="header-wrapper-right">
               <div class="header-wrapper">
-                <label for="" class="header-label">Địa chỉ gia đình</label>
-                  <input type="text" class="col form-control header-form addr-form model-btn" placeholder="Địa chỉ gia đình" id="family-addr" name="family-addr" model="family-addr" required />
-                  <!-- <button id="edit-addr" class="model-btn col-auto btn mybtn-primary">Sửa</button> -->
+                <div class="header-addr-wrapper">
+                   <label for="" class="header-label">Địa chỉ gia đình</label>
+                  <input type="text" class="form-control header-form addr-form model-btn" placeholder="..." id="family-addr" name="family-addr" model="family-addr" required />
+                </div>
               </div>
       
               <div class="header-wrapper">
                 <!-- <label for="household-size" class="col-sm-3 col-form-label">Số lượng thành viên</label> -->
-                  <div class="row">
-                    <button class="col btn size-btn" id="minus-person">
+                  <div class="header-hhsize-wrapper">
+                    <button class="btn size-btn" id="minus-person">
                       <i class="fa-solid fa-user-minus"></i>
                     </button>
-                    <input type="number" class="col form-control size-form" name="household-size" id="household-size" value="1"  min="1">
-                    <button class="col btn size-btn" id="add-person">
+                    <input type="number" class="form-control size-form" name="household-size" id="household-size" value="1"  min="1">
+                    <button class="mcol btn size-btn" id="add-person">
                       <i class="fa-solid fa-user-plus"></i>
                     </button>
                   </div>
@@ -169,88 +171,97 @@
 
     </form>
 
-    
-    <!-- <form onsubmit="return false">  
-      <input type="text" placeholder="abc" required>
-      <input type="submit" name="" id="" value="ABC">
-    </form> -->
+  
     
     <div class="model js-model">
-      <form onsubmit="return false">
         <div class="model-container js-model-container">
-          <div class="model-family-addr-warpper mb-3 display-none">
-            <h5 for="address" class="">Địa chỉ</h5>
-      
-            <div class=" row align-items-center justify-content-between">
-              <div class="col-sm mb-3">
-                <label class="form-label">Tỉnh/ Thành phố</label>
-                <input type="text" list="provinces-list" class="form-select" id="provinces" name="province" autocomplete="off" required/>
-                <datalist id="provinces-list">
-                  <option selected>TP Hồ Chí Minh</option>
-                </datalist>
-              </div>
-      
-              <div class="col-sm mb-3">
-                <label class="form-label ">Quận/ Huyện</label>
-                <input type="text" list="districts-list" class="form-select" id="districts" name="district" autocomplete="off" required/>
-                <datalist id="districts-list">
-                  <option disabled selected></option>
-                </datalist>
-              </div>
-      
-              <div class="col-sm mb-3">
-                <label class="form-label ">Xã/ Phường/ Thị trấn</label>
-                <input type="text" list="wardses-list" class="form-select" id="wardses" name="wards" autocomplete="off" required/>
-                <datalist id="wardses-list">
-                  <option disabled selected></option>
-                </datalist>
-              </div>
-            </div>
-  
-  
-          </div>
-  
-          <div class="mb-3 model-person-wrapper display-none"> 
-            <h5 class="mb-3">Thông tin thành viên</h5>
-            <div class="row person-row">
-  
-              <div class="col-sm">
-                <label for="" class="form-label">Giới tính</label>
-                <select class="form-select" id="gender-input" name="gender">
-                  <option selected disabled></option>
-                  <option >Nam</option>
-                  <option >Nữ</option>
-                  <option >Khác</option>
-                </select>
+          <div class="mdoel-scroll-container">
+            <div class="model-family-addr-warpper mb-3 display-none ">
+              <h5 for="address" class="">Địa chỉ</h5>
+        
+              <div class="mrow">
+                <div class="mb-3 mcol mcol-3 s-col-full">
+                  <label class="form-label">Tỉnh/ Thành phố</label>
+                  <input type="text" list="provinces-list" class="form-select" id="provinces" name="province" autocomplete="off" required/>
+                  <datalist id="provinces-list">
+                    <option selected>TP Hồ Chí Minh</option>
+                  </datalist>
+                </div>
+        
+                <div class="mb-3 mcol mcol-3 s-col-full">
+                  <label class="form-label ">Quận/ Huyện</label>
+                  <input type="text" list="districts-list" class="form-select" id="districts" name="district" autocomplete="off" required/>
+                  <datalist id="districts-list">
+                    <option disabled selected></option>
+                  </datalist>
+                </div>
+        
+                <div class="mb-3 mcol mcol-3 s-col-full">
+                  <label class="form-label ">Xã/ Phường/ Thị trấn</label>
+                  <input type="text" list="wardses-list" class="form-select" id="wardses" name="wards" autocomplete="off" required/>
+                  <datalist id="wardses-list">
+                    <option disabled selected></option>
+                  </datalist>
+                </div>
               </div>
     
-              <div class="col-sm mb-3">
-                <label class="form-label">Năm sinh</label>
-                <input type="text" class="form-control" id="birth-year-input" name="birth-year"/>     
-                      <script type="text/javascript">
-                        $("#birth-year-input").datepicker({
-                            format: "yyyy",
-                            viewMode: "years", 
-                            minViewMode: "years"
-                        });
-                    </script>
-              </div>
     
-              <div class="col-sm">
-                <label class="form-label">Nghề nghiệp</label>
-                      <input class="form-select" type="text" id="occupation-input" list="occupation-list" name="occupation">
-              </div>
             </div>
+    
+            <div class="mb-3 model-person-wrapper display-none"> 
+              <h5 class="mb-3">Thông tin thành viên</h5>
+              <div class="model-person-wrapper mrow">
+    
+                <div class="mcol mcol-3 s-col-full">
+                  <label for="" class="form-label">Giới tính</label>
+                  <select class="form-select" id="gender-input" name="gender">
+                    <option selected disabled></option>
+                    <option >Nam</option>
+                    <option >Nữ</option>
+                    <option >Khác</option>
+                  </select>
+                </div>
+      
+                <div class="mcol mcol-3 s-col-full">
+                  <label class="form-label">Năm sinh</label>
+                  <input type="text" class="form-control" id="birth-year-input" name="birth-year"/>     
+                        <script type="text/javascript">
+                          $( document ).ready(function() {
+                              $("#birth-year-input").datepicker({
+                                  format: "yyyy",
+                                  viewMode: "years", 
+                                  minViewMode: "years"
+                              });
+      
+                              $("#birth-year-input").change(()=>{
+                                const elem = $("#birth-year-input")
+                                const y = elem.val()
+                                const cur_y = new Date().getFullYear() 
+                                if(y > cur_y)
+                                {
+                                  elem.val('')
+                                  elem.addClass('red-placeholder')
+                                  elem.attr('placeholder', `Không quá ${cur_y}`)
+                                }
+                              })
+                          });
+                      </script>
+                </div>
+      
+                <div class="mcol mcol-3 s-col-full">
+                  <label class="form-label">Nghề nghiệp</label>
+                        <input class="form-select" type="text" id="occupation-input" list="occupation-list" name="occupation">
+                </div>
+              </div>
   
-  
-            <div class="" id="p-addr-wrapper">
-              <div class="row align-items-center justify-content-between">
-                <div class="col-sm mb-3">
-                  <label class="form-label col-form-label-sm">Tỉnh/ Thành phố</label>
+              <div id="p-addr-wrapper" class="mrow">
+                
+                <div class="mcol mcol-3 s-col-full">
+                  <label class="form-label form-label">Tỉnh/ Thành phố</label>
                   <input type="text" list="provinces-list" class="form-select" id="person-provinces" name="p-province" autocomplete="off"/>
                 </div>
       
-                <div class="col-sm mb-3">
+                <div class="mcol mcol-3 s-col-full">
                   <label class="form-label col-form-label-sm">Quận/ Huyện</label>
                   <input type="text" list="person-districts-list" class="form-select" id="person-districts" name="p-district" autocomplete="off"/>
                   <datalist id="person-districts-list">
@@ -258,7 +269,7 @@
                   </datalist>
                 </div>
       
-                <div class="col-sm mb-3">
+                <div class="mcol mcol-3 s-col-full">
                   <label class="form-label col-form-label-sm">Xã/ Phường/ Thị trấn</label>
                   <input type="text" list="person-wardses-list" class="form-select" id="person-wardses" name="p-wards" autocomplete="off"/>
                   <datalist id="person-wardses-list">
@@ -267,30 +278,30 @@
                 </div>
     
               </div>
+    
+                <!-- <script>
+                  const checkbox = document.getElementById("flexCheckChecked");
+                  const addressInput = document.getElementById("address-warpper mb-3");
+                
+                  checkbox.addEventListener("change", function () {
+                    if (checkbox.checked) {
+                      addressInput.style.display = "block";
+                    } else {
+                      addressInput.style.display = "none";
+                    }
+                  });
+                </script> -->
+            
             </div>
-  
-              <!-- <script>
-                const checkbox = document.getElementById("flexCheckChecked");
-                const addressInput = document.getElementById("address-warpper mb-3");
-              
-                checkbox.addEventListener("change", function () {
-                  if (checkbox.checked) {
-                    addressInput.style.display = "block";
-                  } else {
-                    addressInput.style.display = "none";
-                  }
-                });
-              </script> -->
-          
+            <div class="button-wrapper">
+              <button id="model-cancel" class="btn model-close">Hủy</button>
+              <button type="submit" id="model-ok" class="btn model-close" disabled>OK</button>
+            </div>
+            
           </div>
-  
-          <div class="button-wrapper">
-            <button id="model-cancel" class="btn model-close">Hủy</button>
-            <button type="submit" id="model-ok" class="btn model-close">OK</button>
-          </div>
-        </div>
-        
-      </form>    
+
+
+        </div>   
       
     </div>
   </div>
