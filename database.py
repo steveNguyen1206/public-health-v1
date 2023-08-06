@@ -63,6 +63,16 @@ def get_num_persons_of_districts():
         print(res)
         return res
 
+def get_age_groups():
+    with engine.connect() as conn:
+        data = conn.execute(text("select case when (YEAR(NOW()) - birth_year) >= 0 and (YEAR(NOW()) - birth_year) <= 1 then '0-1 tuổi' when (YEAR(NOW()) - birth_year) > 1 and (YEAR(NOW()) - birth_year) <= 12 then '1-12 tuổi' when (YEAR(NOW()) - birth_year) > 12 and (YEAR(NOW()) - birth_year) <= 17 then '12-17 tuổi' when (YEAR(NOW()) - birth_year) > 17 and (YEAR(NOW()) - birth_year) <= 65 then '17-65 tuổi' else 'trên 65 tuổi' end as age_group, count(*) as count from family,person where family.id=person.family_id group by age_group; ")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
+        return res
+
 def add_family_person(data):
     with engine.connect() as conn:
         insert_family_query = text("insert into family(hhsize, addr1,addr2,addr3) values (:hhsize, :addr1, :addr2, :addr3)")
@@ -91,5 +101,5 @@ def add_family_person(data):
         conn.commit()
 
 # get_all_families()
-
+# get_all_persons()
     
