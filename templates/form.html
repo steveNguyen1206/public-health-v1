@@ -179,29 +179,29 @@
             <div class="model-family-addr-warpper mb-3 display-none ">
               <h5 for="address" class="">Địa chỉ</h5>
         
-              <div class="mrow">
-                <div class="mb-3 mcol mcol-3 s-col-full">
+              <div class="mrow model-addr-wrapper">
+                <div class="mb-3 mcol mcol-3 s-col-full select-addr-wrapper">
                   <label class="form-label">Tỉnh/ Thành phố</label>
                   <input type="text" list="provinces-list" class="form-select" id="provinces" name="province" autocomplete="off" required/>
-                  <datalist id="provinces-list">
+                  <div id="provinces-list" class="option-list display-none">
                     <option selected>TP Hồ Chí Minh</option>
-                  </datalist>
+                  </div>
                 </div>
         
-                <div class="mb-3 mcol mcol-3 s-col-full">
+                <div class="mb-3 mcol mcol-3 s-col-full select-addr-wrapper">
                   <label class="form-label ">Quận/ Huyện</label>
                   <input type="text" list="districts-list" class="form-select" id="districts" name="district" autocomplete="off" required/>
-                  <datalist id="districts-list">
+                  <div id="districts-list" class="option-list display-none">
                     <option disabled selected></option>
-                  </datalist>
+                  </div>
                 </div>
         
-                <div class="mb-3 mcol mcol-3 s-col-full">
+                <div class="mb-3 mcol mcol-3 s-col-full select-addr-wrapper">
                   <label class="form-label ">Xã/ Phường/ Thị trấn</label>
                   <input type="text" list="wardses-list" class="form-select" id="wardses" name="wards" autocomplete="off" required/>
-                  <datalist id="wardses-list">
+                  <div id="wardses-list"  class="option-list display-none">
                     <option disabled selected></option>
-                  </datalist>
+                  </div>
                 </div>
               </div>
     
@@ -257,24 +257,27 @@
               <div id="p-addr-wrapper" class="mrow">
                 
                 <div class="mcol mcol-3 s-col-full">
-                  <label class="form-label form-label">Tỉnh/ Thành phố</label>
-                  <input type="text" list="provinces-list" class="form-select" id="person-provinces" name="p-province" autocomplete="off"/>
+                  <label class="form-label">Tỉnh/ Thành phố</label>
+                  <input type="text" list="person-provinces-list" class="form-select" id="person-provinces" name="p-province" autocomplete="off"/>
+                  <div id="person-provinces-list" class="option-list display-none">
+                    <option disabled selected></option>
+                  </div>
                 </div>
       
                 <div class="mcol mcol-3 s-col-full">
-                  <label class="form-label col-form-label-sm">Quận/ Huyện</label>
+                  <label class="form-label">Quận/ Huyện</label>
                   <input type="text" list="person-districts-list" class="form-select" id="person-districts" name="p-district" autocomplete="off"/>
-                  <datalist id="person-districts-list">
+                  <div id="person-districts-list" class="option-list display-none">
                     <option disabled selected></option>
-                  </datalist>
+                  </div>
                 </div>
       
                 <div class="mcol mcol-3 s-col-full">
-                  <label class="form-label col-form-label-sm">Xã/ Phường/ Thị trấn</label>
+                  <label class="form-label">Xã/ Phường/ Thị trấn</label>
                   <input type="text" list="person-wardses-list" class="form-select" id="person-wardses" name="p-wards" autocomplete="off"/>
-                  <datalist id="person-wardses-list">
+                  <div id="person-wardses-list" class="option-list display-none">
                     <option disabled selected></option>
-                  </datalist>
+                  </div>
                 </div>
     
               </div>

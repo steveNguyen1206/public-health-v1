@@ -179,6 +179,42 @@ h5 {
     align-items: center;
 }
 
+/* pop up */
+
+.model-addr-wrapper {
+    /* position: absolute; */
+}
+
+.select-addr-wrapper {
+    /* position: relative; */
+}
+
+.option-list {
+    max-height: 200px;
+    min-width: 250px;
+    overflow-y: scroll;
+    position: absolute;
+    /* top: 70px; */
+     /* left: 8px;
+    right: 8px;  */
+    z-index: 200;
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+}
+
+.option-list option {
+    cursor: pointer;
+    padding: 8px 16px;
+    /* min-width: 230px; */
+}
+
+.option-list option:hover {
+    background-color: #f1f1f1;
+    color: #000;
+}
+
+
+
 /* model */
 .model {
     position: fixed;
@@ -190,25 +226,26 @@ h5 {
     align-items: center;
     justify-content: center;
     display: none;
+    z-index: 1000;
 }
 
 .model-container {
     background: #fff;
     width: 970px;
     max-height: 500px;
-    max-width: calc(100% - 32px);
+    max-width: calc(100% - 32px); 
+    width: 100%;
     position: relative;
+    /* transform: translateY(-50%); */
     animation: ModelFadin ease .3s;
+    /* overflow-y: hidden; */
+    /* padding: 10px 0 20px 0; */
     border-radius: 14px;
-    overflow-y: hidden;
-    padding: 10px 0 20px 0;
 }
 
 .mdoel-scroll-container {
     padding: 60px 35px 45px 35px;
-    max-height: 500px;
     overflow-y: auto;
-
 }
 
 .model.open {
