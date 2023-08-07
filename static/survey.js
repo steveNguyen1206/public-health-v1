@@ -14,6 +14,7 @@ const family_addr = document.querySelector('#family-addr')
 const provinces_options = document.querySelector('#provinces-list')
 const districts_options = document.querySelector('#districts-list')
 const wardses_options = document.querySelector('#wardses-list')
+const person_provinces_options = document.querySelector('#person-provinces-list')
 const person_districts_options = document.querySelector('#person-districts-list')
 const person_wardses_options = document.querySelector('#person-wardses-list')
 
@@ -134,19 +135,14 @@ occupation_list.forEach( job => {
 // const url_provinces = "https://vn-public-apis.fpo.vn/provinces/getAll?limit=-1"
 const api_host = "https://provinces.open-api.vn/api/"
 
-let provinces_to_code = []
-let districts_to_code = []
-let p_districts_to_code = []
-let wardses_to_code = []
-let p_wardses_to_code = []
 
 
-async function getAndSetAddress(url, selector, type) {
+async function getAndSetAddress(url, select_input, select_option, type) {
     let res = await fetch(url);
     data = []
     res = await res.json();
     // data = res.data
-    selector.innerHTML=''
+    select_option.innerHTML=''
     if(type == 'Province')
     {
         data = res
@@ -158,7 +154,7 @@ async function getAndSetAddress(url, selector, type) {
     else data = res.wards
     console.log(type)
 
-    setAddress(data, selector)
+    setAddress(data, select_input, select_option)
 }
 
 async function test(url)
@@ -168,13 +164,19 @@ async function test(url)
     return res;
 }
 
-function setAddress(data, selector)
+function setAddress(data, select_input, select_option)
 {
     data.forEach(item => {
         const name = item.name
         const id = item.code
         option = customCreateElement('option', null, null,name,[{"name":"value", "value":name}, {"name":"data_id", "value": id}])
-        selector.appendChild(option)
+        option.addEventListener('click', ()=> {
+            select_input.value = name
+            var event = new Event('change');
+            select_input.dispatchEvent(event);
+            select_option.classList.add('display-none')
+        })
+        select_option.appendChild(option)
     })
 
 }
@@ -185,17 +187,7 @@ function value2Code(value) {
     return code
 }
 
-let url_provinces = api_host + "?depth=1"
-console.log(url_provinces)
-getAndSetAddress(url_provinces, provinces_options, "Province").then( () => {
-    let value = 'Thành phố Hồ Chí Minh';
-    provinces_input.value = value
-    person_provinces_input.value = value
-    let code = value2Code(value)
-    provincesChange(code, wardses_options, districts_options, wardses_input, districts_input)
-    provincesChange(code, person_wardses_options, person_districts_options, person_wardses_input, person_districts_input)
-})
-
+// console.log(url_provinces)
 
 
 function provincesChange(code, wardses_options, districts_options, wardses_input, districts_input) {
@@ -209,7 +201,7 @@ function provincesChange(code, wardses_options, districts_options, wardses_input
     districts_input.value = ''
     wardses_input.value = ''
     model_ok.setAttribute('disabled', '')
-    getAndSetAddress(url_districts, districts_options, "District")
+    getAndSetAddress(url_districts, districts_input, districts_options, "District")
     // console.log(districts_to_code)
 }
 
@@ -219,23 +211,103 @@ function districtsChange(code, wardses_options, wardses_input) {
     console.log(url_wardses)
     wardses_input.value = ''
     model_ok.setAttribute('disabled', '')
-    getAndSetAddress(url_wardses, wardses_options, "Wards")
+    getAndSetAddress(url_wardses, wardses_input, wardses_options, "Wards")
+}
+
+var filterFunction = function (input, datalist) {
+    filter = input.value.toUpperCase();
+    options = datalist.getElementsByTagName("option");
+    // console.log(options)
+    for (i = 0; i < options.length; i++) {
+      txtValue = options[i].textContent || options[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        options[i].style.display = "";
+
+      } else {
+        options[i].style.display = "none";
+      }
+    }
+  }
+
+let check = false
+const option_lists = document.querySelectorAll('.option-list')
+
+option_lists.forEach((elem) => {
+    elem.addEventListener("mouseover", () => {
+        check = true
+    })
+
+    elem.addEventListener("mouseleave", () => {
+        check = false
+    })
+})
+
+
+function prepareAddr(province_input, district_input, wards_input,
+    province_options, district_options, wards_options,)
+{
+    let url_provinces = api_host + "?depth=1"
+    getAndSetAddress(url_provinces, province_input, province_options, "Province").then( () => {
+        let value = 'Thành phố Hồ Chí Minh';
+        province_input.value = value
+        let code = value2Code(value)
+        provincesChange(code, wards_options, district_options, wards_input, district_input)
+    })
+
+    province_input.addEventListener('focusout', ()=> { 
+        if(!check)
+            province_options.classList.add('display-none')
+    })
+    
+    district_input.addEventListener('focusout', ()=> {
+        if(!check)
+            district_options.classList.add('display-none')
+    })
+    
+    wards_input.addEventListener('focusout', ()=> {
+        if(!check)
+            wards_options.classList.add('display-none')
+    })
+
+    province_input.addEventListener('change', ()=> {
+        let value = event.target.value
+        let code = value2Code(value)
+        provincesChange(code, wards_options, district_options, 
+            wards_input, district_input)
+    })
+    
+    district_input.addEventListener('change', ()=> {
+        let value = event.target.value
+        let code = value2Code(value)
+        districtsChange(code, wards_options, wards_input)
+    })
+    
+    province_input.addEventListener('focus', ()=> {
+        province_options.classList.remove('display-none')
+    })
+    
+    district_input.addEventListener('focus', ()=> {
+        district_options.classList.remove('display-none')
+    })
+    
+    wards_input.addEventListener('focus', ()=> {
+        wards_options.classList.remove('display-none')
+    })
+    
+    province_input.addEventListener("keyup", filterFunction.bind(this.event, input=province_input, datalist=province_options))
+    district_input.addEventListener("keyup", filterFunction.bind(this.event, input=district_input, datalist=district_options))
+    wards_input.addEventListener("keyup", filterFunction.bind(this.event, input=wards_input, datalist=wards_options))
+
 }
 
 
-
-provinces_input.addEventListener('change', ()=> {
-    let value = event.target.value
-    let code = value2Code(value)
-    provincesChange(event, wardses_options, districts_options, wardses_input, districts_input)
-})
+prepareAddr(provinces_input, districts_input, wardses_input,
+        provinces_options, districts_options, wardses_options)
 
 
-districts_input.addEventListener('change', ()=> {
-    let value = event.target.value
-    let code = value2Code(value)
-    districtsChange(code, wardses_options, wardses_input)
-})
+prepareAddr(person_provinces_input, person_districts_input, person_wardses_input,
+    person_provinces_options, person_districts_options, person_wardses_options)
+
 
 
 
@@ -543,10 +615,22 @@ $(document).ready(function() {
         console.log('test')
         const empty_input = $('.model-family-addr-warpper input').filter(function() { return this.value == ""; }).length
         if(empty_input == 0)
-        $('#model-ok').removeAttr('disabled')
+            $('#model-ok').removeAttr('disabled')
+        else
+            $('#model-ok').attr('disabled', '')
+
     })
 
     $('.model-person-wrapper input').change(()=>{
+        console.log('test')
+        const empty_input = $('.model-person-wrapper input').filter(function() { return this.value == ""; }).length
+        if(empty_input == 0)
+            $('#model-ok').removeAttr('disabled')
+        else 
+            $('#model-ok').attr('disabled', '')
+        })
+
+    $('.model-person-wrapper input').keyup(()=>{
         console.log('test')
         const empty_input = $('.model-person-wrapper input').filter(function() { return this.value == ""; }).length
         if(empty_input == 0)
