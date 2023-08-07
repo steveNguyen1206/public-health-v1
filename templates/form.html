@@ -8,7 +8,7 @@
 
           <div  class="header-infor-container mrow">
 
-            <div class="header-wrapper header-title">
+            <div class="header-title">
               <h5>Thông tin chung</h5>
             </div>
     
@@ -26,8 +26,8 @@
                     <button class="btn size-btn" id="minus-person">
                       <i class="fa-solid fa-user-minus"></i>
                     </button>
-                    <input type="number" class="form-control size-form" name="household-size" id="household-size" value="1"  min="1">
-                    <button class="mcol btn size-btn" id="add-person">
+                    <input type="number" class="form-control header-form size-form" name="household-size" id="household-size" value="1"  min="1">
+                    <button class="btn size-btn" id="add-person">
                       <i class="fa-solid fa-user-plus"></i>
                     </button>
                   </div>
@@ -66,7 +66,7 @@
               <button id="person-edit_1" class="btn person-btn model-btn" person="1" model="person">
                 <i class="fa-solid fa-rotate-right"></i>
               </button>
-              <button id="person-remove_1" class="btn person-btn ms-3" person="1">
+              <button id="person-remove_1" class="btn person-btn" person="1">
                 <i class="fa-solid fa-user-xmark"></i>
               </button>
             </td>
@@ -165,9 +165,7 @@
 
       </div>
 
-      <div class="col-auto">
-        <button type="submit" class="btn mybtn-primary">Gửi kết quả</button>
-      </div>
+      <button type="submit" class="btn mybtn --primary">Gửi kết quả</button>
 
     </form>
 
@@ -230,7 +228,8 @@
                               $("#birth-year-input").datepicker({
                                   format: "yyyy",
                                   viewMode: "years", 
-                                  minViewMode: "years"
+                                  minViewMode: "years",
+                                  autoclose: true
                               });
       
                               $("#birth-year-input").change(()=>{
@@ -254,9 +253,9 @@
                 </div>
               </div>
   
-              <div id="p-addr-wrapper" class="mrow">
+              <div id="p-addr-wrapper" class="mrow model-addr-wrapper">
                 
-                <div class="mcol mcol-3 s-col-full">
+                <div class="mcol mcol-3 s-col-full select-addr-wrapper">
                   <label class="form-label">Tỉnh/ Thành phố</label>
                   <input type="text" list="person-provinces-list" class="form-select" id="person-provinces" name="p-province" autocomplete="off"/>
                   <div id="person-provinces-list" class="option-list display-none">
@@ -264,7 +263,7 @@
                   </div>
                 </div>
       
-                <div class="mcol mcol-3 s-col-full">
+                <div class="mcol mcol-3 s-col-full select-addr-wrapper">
                   <label class="form-label">Quận/ Huyện</label>
                   <input type="text" list="person-districts-list" class="form-select" id="person-districts" name="p-district" autocomplete="off"/>
                   <div id="person-districts-list" class="option-list display-none">
@@ -272,7 +271,7 @@
                   </div>
                 </div>
       
-                <div class="mcol mcol-3 s-col-full">
+                <div class="mcol mcol-3 s-col-full select-addr-wrapper">
                   <label class="form-label">Xã/ Phường/ Thị trấn</label>
                   <input type="text" list="person-wardses-list" class="form-select" id="person-wardses" name="p-wards" autocomplete="off"/>
                   <div id="person-wardses-list" class="option-list display-none">
@@ -297,8 +296,8 @@
             
             </div>
             <div class="button-wrapper">
-              <button id="model-cancel" class="btn model-close">Hủy</button>
-              <button type="submit" id="model-ok" class="btn model-close" disabled>OK</button>
+              <button id="model-cancel" class="btn mybtn --cancled model-close">Hủy</button>
+              <button type="submit" id="model-ok" class="btn mybtn --primary model-close" disabled>OK</button>
             </div>
             
           </div>

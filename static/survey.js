@@ -296,6 +296,7 @@ function prepareAddr(province_input, district_input, wards_input,
     
     province_input.addEventListener("keyup", filterFunction.bind(this.event, input=province_input, datalist=province_options))
     district_input.addEventListener("keyup", filterFunction.bind(this.event, input=district_input, datalist=district_options))
+    wards_input.addEventListener("keyup", filterFunction.bind(this.event, input=wards_input, datalist=wards_options))
 
 }
 
@@ -621,6 +622,15 @@ $(document).ready(function() {
     })
 
     $('.model-person-wrapper input').change(()=>{
+        console.log('test')
+        const empty_input = $('.model-person-wrapper input').filter(function() { return this.value == ""; }).length
+        if(empty_input == 0)
+            $('#model-ok').removeAttr('disabled')
+        else 
+            $('#model-ok').attr('disabled', '')
+        })
+
+    $('.model-person-wrapper input').keyup(()=>{
         console.log('test')
         const empty_input = $('.model-person-wrapper input').filter(function() { return this.value == ""; }).length
         if(empty_input == 0)
