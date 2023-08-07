@@ -1,10 +1,11 @@
 import random 
-from scipy.stats import lognorm, bernoulli
 import numpy as np
-from itertools import combinations
 import json
 import  pandas as pd
 import matplotlib.pyplot as plt
+from scipy.stats import lognorm, bernoulli
+from itertools import combinations
+
 '''
 How to use MESA to support Agent-Based Modeling
 
@@ -37,7 +38,7 @@ def get_all_contacts(person):
 def edge_sampling(N, class_type, contact_matrix, HH_dict, non_HH_dict):
     edge = {}
     
-    #Initializatioon
+    #Initialization
     for i in range(N):
         edge[i] = {"household": [], "non_household": []}
     
@@ -55,8 +56,9 @@ def edge_sampling(N, class_type, contact_matrix, HH_dict, non_HH_dict):
                 num_of_contacts = len(non_HH_dict[i][j_class_type])
             
             edge[i]["non_household"].extend(random.sample(non_HH_dict[i][j_class_type], num_of_contacts))
-
     return edge
+
+
 def weight_sampling(N, edge, contact_dist):
     '''
     if in household:
@@ -76,7 +78,6 @@ def weight_sampling(N, edge, contact_dist):
             for j in edge[i][group]:
                 weight[i][j] = random.choices(contact_dist[group]["risk_ratio"], 
                                               contact_dist[group]["percentage"])[0]
-        
     return weight 
         
 
@@ -154,6 +155,8 @@ def simulation(N,
     agent_dead = []
     agent_susceptible = []
     agent_removed = []
+    
+    # Final result
     res = pd.DataFrame({"day": [],
                         "susceptible": [],
                         "incubated": [],
@@ -176,9 +179,10 @@ def simulation(N,
     # Update seed cases
     for index in agent_infected:
         agent_status[index] = INFECTED
-        agent_infectious_period[index] = log_normal(2.2915, 0.1332)
+        agent_infectious_period[index] = lognorm.rvs(s=0.1332, scale=np.exp(2.2915))
         
-    for day in range(T): 
+    for day in range(T):
+        # Sampling contact and risk ratio for each day
         edge = edge_sampling(N,
                              class_type=class_type,
                              contact_matrix=contact_matrix, 
@@ -186,11 +190,11 @@ def simulation(N,
                              non_HH_dict=non_HH_dict)
         edge_weight = weight_sampling(N,edge,contact_dist)
         
-        
+        # For every agents in the network:
         for i in range(N):
-            
+            # If they are infected and still infectious,
             if agent_status[i] == INFECTED and agent_infectious_period[i] > 0:
-                # If this agent is infectious, get a list of their contacts
+                # get a list of their contacts
                 contacts = get_all_contacts(edge[i])
                 # contacts_of_contacts = {}
                 # for j in contacts:
@@ -199,14 +203,15 @@ def simulation(N,
                 #     sub_contacts = get_all_contacts(edge[j])
                 #     contacts_of_contacts[j] = sub_contacts
             
+                # For every contacts of them,
                 for c in contacts:
-                    # For each contact, if they are susceptible, calculate their risk
+                    # if that contact is susceptible, calculate their risk.
                     if agent_status[c] == SUSCEPTIBLE:
                         prob = pr_base * edge_weight[i][c]
-                        # If they has contracted the disease, update their status
+                        # If they has contracted the disease, update their status and incubation time.
                         if bernoulli.rvs(prob) == 1:
                             agent_status[c] = INCUBATED
-                            agent_incubation_period[c] = log_normal(2.446, 0.284)
+                            agent_incubation_period[c] = lognorm.rvs(s=0.284, scale=np.exp(2.446)) 
                             
                     # For each contact of contact, if they is susceptible, calculate their secondary risk
                     # for cc in contacts_of_contacts[c]:
@@ -222,25 +227,36 @@ def simulation(N,
                     #             agent_status[cc] = INCUBATED
                     #             agent_incubation_period[cc] = log_normal(2.446, 0.284)
 
+                # Substract infetious period by 1
                 agent_infectious_period[i] = agent_infectious_period[i] - 1
 
+            # If they are infected and their infectious period has finished,
             if agent_status[i] == INFECTED and agent_infectious_period[i] <= 0:
                 if bernoulli.rvs(cfr) == 1:
+                    # they can die from the disease,
                     agent_status[i] = DEAD
                 else:
+                #   or recover.
                     agent_status[i] = SURVIVED
 
+            # If they are incubated:
             if agent_status[i] == INCUBATED:
+                # If the incubation has ended,
                 if agent_incubation_period[i] <= 0:
+                    # they becomes infectious, initialize their infectious time.  
                     agent_status[i] = INFECTED
-                    agent_infectious_period[i] = log_normal(2.2915, 0.1332)
+                    agent_infectious_period[i] = lognorm.rvs(s=0.1332, scale=np.exp(2.2915))
                 else:
+                # If not, substract incubation time by 1.
                     agent_incubation_period[i] = agent_incubation_period[i] - 1
             
+            # If they has been vaccinated:
             if agent_status[i] == VACCINATED:
+                # If the waiting time has ended, they is now immune 
                 if agent_vaccine_wait_period[i] <= 0:
                     agent_status[i] = IMMUNE
                 else:
+                    # Else, substract waiting time by 1.
                     agent_vaccine_wait_period[i] = agent_vaccine_wait_period[i] - 1
             
             if agent_status[i] in (SUSCEPTIBLE, REMOVED, DEAD):
@@ -249,6 +265,7 @@ def simulation(N,
             
         count_status = [0, 0, 0, 0, 0, 0]
         
+        # Count the number of agents having the same status.
         for status in agent_status:
             count_status[status] = count_status[status] + 1
             
@@ -263,9 +280,7 @@ def simulation(N,
 
                                }]) 
         res = pd.concat([res, today],ignore_index=True)
-
-        
-        
+    
     return res
                             
 
@@ -338,25 +353,34 @@ def population_sample(N,
     return class_type, HH_dict, non_HH_dict
     
         
-N = 1000
+N = 2000
 class_type, HH_dict, non_HH_dict = population_sample(N,
                                                      6,
-                                                     8,
-                                                     [0.3,0.4,0.3])
+                                                     12,
+                                                     [0.4,0.3,0.3])
 
 
 simu = simulation(N=N,
-                  T=100,
+                  T=200,
                   HH_dict=HH_dict,
                   non_HH_dict=non_HH_dict,
                   contact_matrix=contact_matrix,
                   class_type=class_type,
                   num_vaccine = 0,
-                  num_seed_case = 2,
+                  num_seed_case = 5,
                   pr_base=0.01962,
                   cfr=0.7)
 
-print(simu)
+simu.to_csv("result.csv", sep=";")
+
+plot = simu[['susceptible', 'incubated', 'infected', 'dead', 'removed']] \
+    .div(N) \
+    .plot()
+plot.set_xlabel("Day")
+plot.set_ylabel("Ratio of population")
+plot.set_title('Simulation')
+plot.set_xticks(range(0, len(simu), 20))
+plt.show()
 
 
 
