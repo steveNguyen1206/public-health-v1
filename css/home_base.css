@@ -4,6 +4,12 @@ body.device-mobile-optimized {
   overflow-y: scroll
 }
 
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 body.device-mobile-optimized:not(.responsive) #SITE_CONTAINER {
   margin-left: auto;
   margin-right: auto;
@@ -11084,7 +11090,7 @@ body.ZR3zoU {
 
         #nav_box {
           height: 45px;
-          width: 45%;
+          width: 55%;
           --l_display: unset;
           top: calc(var(--top) + var(--sticky-top) + var(--wix-ads-top-height) * var(--is-sticky));
           display: var(--l_display, var(--display));

@@ -4,7 +4,11 @@ from database import get_all_persons, add_family_person, get_all_families, get_n
 app = Flask(__name__)
 
 @app.route("/")
-def home():
+def default():
+    return render_template('stat.html')
+
+@app.route("/stat")
+def to_stat():
     return render_template('stat.html')
 
 @app.route("/home")

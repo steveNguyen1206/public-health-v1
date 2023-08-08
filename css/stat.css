@@ -24,6 +24,11 @@ body.device-mobile-optimized {
   margin-bottom: 5%;
 }
 
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 
 .option_buttons-2823{
   /* width: 100% !important; */
@@ -39,7 +44,9 @@ body.device-mobile-optimized {
   padding-right: 4%; */
 }
 
-
+.form-select:disabled{
+  background-color: #d0d2d5;
+}
 
 .form-labe1{
   font-size: small;
@@ -7455,6 +7462,29 @@ grid-template-columns: 1fr;
 --alpha-bg: 0;
 --boxShadowToggleOn-shd: none;
 }
+
+#chart_container-8823 {
+  height: 500.54918049986395px;
+  min-height: 500.54918049986395px;
+  width: 80.79050136675085%;
+  border-radius: 10px; /* Adjust the value for the desired curve */
+  border: 2px solid white;
+  background-color: transparent;
+  display: inline-block; /* This will make the div auto-adjust its size to the content */
+  padding: 10px; /* Add padding to create space around the content if needed */
+
+  grid-area: 3/1/4/2;
+  position: relative;
+  top: calc(var(--top) + var(--sticky-top) + var(--wix-ads-top-height) * var(--is-sticky));
+  align-self: start;
+  justify-self: center;
+  margin-top: 52.43724999999995px;
+
+  --is-sticky: 0;
+  --sticky-top: 0px;
+  --top: 60px;
+}
+
 
 #comp-lkskprbs {
 min-height: 449.54918049986395px;
