@@ -75,11 +75,7 @@
 
 
         </tbody>
-      </table>
-
-
-      <datalist id="occupation-list">
-      </datalist>      
+      </table>   
 
       <h5 class="mb-3">Sinh hoạt gia đình</h5>
       <div class="family-habit-wrapper">
@@ -182,7 +178,7 @@
                   <label class="form-label">Tỉnh/ Thành phố</label>
                   <input type="text" list="provinces-list" class="form-select" id="provinces" name="province" autocomplete="off" required/>
                   <div id="provinces-list" class="option-list display-none">
-                    <option disabled selected>TP Hồ Chí Minh</option>
+                    <a disabled selected>TP Hồ Chí Minh</a>
                   </div>
                 </div>
         
@@ -190,7 +186,7 @@
                   <label class="form-label ">Quận/ Huyện</label>
                   <input type="text" list="districts-list" class="form-select" id="districts" name="district" autocomplete="off" required/>
                   <div id="districts-list" class="option-list display-none">
-                    <option disabled selected></option>
+                    <a disabled selected></a>
                   </div>
                 </div>
         
@@ -198,7 +194,7 @@
                   <label class="form-label ">Xã/ Phường/ Thị trấn</label>
                   <input type="text" list="wardses-list" class="form-select" id="wardses" name="wards" autocomplete="off" required/>
                   <div id="wardses-list"  class="option-list display-none">
-                    <option disabled selected></option>
+                    <a disabled selected></a>
                   </div>
                 </div>
               </div>
@@ -213,7 +209,7 @@
                 <div class="mcol mcol-3 s-col-full">
                   <label for="" class="form-label">Giới tính</label>
                   <select class="form-select" id="gender-input" name="gender">
-                    <option selected disabled></option>
+                    <!-- <option selected disabled></option> -->
                     <option >Nam</option>
                     <option >Nữ</option>
                     <option >Khác</option>
@@ -222,7 +218,7 @@
       
                 <div class="mcol mcol-3 s-col-full">
                   <label class="form-label">Năm sinh</label>
-                  <input type="text" class="form-control" id="birth-year-input" name="birth-year"/>     
+                  <input type="text" class="form-control" id="birth-year-input" name="birth-year" autocomplete="off"/>     
                         <script type="text/javascript">
                           $( document ).ready(function() {
                               $("#birth-year-input").datepicker({
@@ -247,9 +243,11 @@
                       </script>
                 </div>
       
-                <div class="mcol mcol-3 s-col-full">
+                <div class="mcol mcol-3 s-col-full select-occupation-wrapper">
                   <label class="form-label">Nghề nghiệp</label>
-                        <input class="form-select" type="text" id="occupation-input" list="occupation-list" name="occupation">
+                  <input class="form-select" type="text" id="occupation-input" name="occupation" autocomplete="off">
+                  <div id="occupation-list" class="option-list display-none">
+                  </div>   
                 </div>
               </div>
   

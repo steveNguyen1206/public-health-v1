@@ -39,6 +39,10 @@
         margin-top: 8px !important;
         margin-bottom: 8px !important;
     }
+
+    .mdoel-scroll-container  {
+        padding: 35px 20px 20px 20px !important;
+    }
 }
 
 /* tablet and mobile */

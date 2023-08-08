@@ -218,7 +218,7 @@ h5 {
     /* position: absolute; */
 }
 
-.select-addr-wrapper {
+.select-occupation-wrapper, .select-addr-wrapper {
     position: relative;
 }
 
@@ -264,7 +264,7 @@ h5 {
 .model-container {
     background: #fff;
     width: 970px;
-    max-height: 500px;
+    max-height: 540px;
     max-width: calc(100% - 32px); 
     width: 100%;
     position: relative;
@@ -278,7 +278,7 @@ h5 {
 }
 
 .mdoel-scroll-container {
-    max-height: 480px;
+    max-height: 520px;
     padding: 60px 35px 45px 35px;
     overflow-y: auto;
 }
