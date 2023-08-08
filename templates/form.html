@@ -12,7 +12,7 @@
               <h5>Thông tin chung</h5>
             </div>
     
-            <div class="header-wrapper-right">
+            <!-- <div class="header-wrapper-right"> -->
               <div class="header-wrapper">
                 <div class="header-addr-wrapper">
                    <label for="" class="header-label">Địa chỉ gia đình</label>
@@ -21,19 +21,19 @@
               </div>
       
               <div class="header-wrapper">
-                <!-- <label for="household-size" class="col-sm-3 col-form-label">Số lượng thành viên</label> -->
-                  <div class="header-hhsize-wrapper">
-                    <button class="btn size-btn" id="minus-person">
-                      <i class="fa-solid fa-user-minus"></i>
-                    </button>
-                    <input type="number" class="form-control header-form size-form" name="household-size" id="household-size" value="1"  min="1">
-                    <button class="btn size-btn" id="add-person">
-                      <i class="fa-solid fa-user-plus"></i>
-                    </button>
-                  </div>
+                    <label for="" class="header-label">Số lượng thành viên</label>
+                    <div class="header-hhsize-wrapper">
+                      <button class="btn size-btn" id="minus-person">
+                        <i class="fa-solid fa-user-minus"></i>
+                      </button>
+                      <input type="number" class="form-control header-form size-form" name="household-size" id="household-size" value="1"  min="1">
+                      <button class="btn size-btn" id="add-person">
+                        <i class="fa-solid fa-user-plus"></i>
+                      </button>
+                    </div>
               </div>
       
-            </div>
+            <!-- </div> -->
           </div>
 
           <tr>
@@ -182,7 +182,7 @@
                   <label class="form-label">Tỉnh/ Thành phố</label>
                   <input type="text" list="provinces-list" class="form-select" id="provinces" name="province" autocomplete="off" required/>
                   <div id="provinces-list" class="option-list display-none">
-                    <option selected>TP Hồ Chí Minh</option>
+                    <option disabled selected>TP Hồ Chí Minh</option>
                   </div>
                 </div>
         
@@ -259,7 +259,7 @@
                   <label class="form-label">Tỉnh/ Thành phố</label>
                   <input type="text" list="person-provinces-list" class="form-select" id="person-provinces" name="p-province" autocomplete="off"/>
                   <div id="person-provinces-list" class="option-list display-none">
-                    <option disabled selected></option>
+                    <a disabled selected></a>
                   </div>
                 </div>
       
@@ -267,7 +267,7 @@
                   <label class="form-label">Quận/ Huyện</label>
                   <input type="text" list="person-districts-list" class="form-select" id="person-districts" name="p-district" autocomplete="off"/>
                   <div id="person-districts-list" class="option-list display-none">
-                    <option disabled selected></option>
+                    <a disabled selected></a>
                   </div>
                 </div>
       
@@ -275,7 +275,7 @@
                   <label class="form-label">Xã/ Phường/ Thị trấn</label>
                   <input type="text" list="person-wardses-list" class="form-select" id="person-wardses" name="p-wards" autocomplete="off"/>
                   <div id="person-wardses-list" class="option-list display-none">
-                    <option disabled selected></option>
+                    <a disabled selected></a>
                   </div>
                 </div>
     

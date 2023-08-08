@@ -127,13 +127,15 @@ h5 {
     /* text-align: center; */
     justify-content: space-between !important;
     padding: 16px 0;
+    margin-bottom: 8px;
 }
 
 .header-label {
     line-height: 2.3em;
-    text-align: center;
+    text-align: left;
     margin-right: 8px;
     display: inline-block;
+    width: 200px;
 }
 
 .header-title {
@@ -141,6 +143,7 @@ h5 {
     height: 2.3;
     line-height: 2.3;
     text-align: center;
+    margin-bottom: 16px;
 }
 
 .header-title h5 {
@@ -156,12 +159,13 @@ h5 {
 }
 
 .header-wrapper {
-    display: inline-block;
-    margin-bottom: 8px;
+    display: block;
+    margin: 8px 0;
+
 }
 
-.header-addr-wrapper, .header-hhsize-wrapper {
-    /* display: flex; */
+.header-hhsize-wrapper {
+    display: inline-block;
 }
 
 .header-form {
@@ -170,8 +174,8 @@ h5 {
 }
 
 .addr-form {
-    width: fit-content;
-    max-width: 420px;
+    /* width: fit-content ; */
+    width: 400px;
 }
 
 .size-form {
@@ -228,13 +232,15 @@ h5 {
     border: 1px solid #ddd;
 }
 
-.option-list option {
+.option-list a {
+    display: block;
+    text-decoration: none;
     cursor: pointer;
     padding: 8px 16px;
     /* min-width: 230px; */
 }
 
-.option-list option:hover {
+.option-list a:hover {
     background-color: #f1f1f1;
     color: #000;
 }

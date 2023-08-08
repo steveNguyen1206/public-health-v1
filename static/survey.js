@@ -169,7 +169,7 @@ function setAddress(data, select_input, select_option)
     data.forEach(item => {
         const name = item.name
         const id = item.code
-        option = customCreateElement('option', null, null,name,[{"name":"value", "value":name}, {"name":"data_id", "value": id}])
+        option = customCreateElement('a', null, null,name,[{"name":"value", "value":name}, {"name":"data_id", "value": id}])
         option.addEventListener('click', ()=> {
             select_input.value = name
             var event = new Event('change');
@@ -182,7 +182,7 @@ function setAddress(data, select_input, select_option)
 }
 
 function value2Code(value) {
-    let selected_option = document.querySelector('option[value="'+value+'"]')
+    let selected_option = document.querySelector('a[value="'+value+'"]')
     let code = selected_option.getAttribute('data_id')
     return code
 }
