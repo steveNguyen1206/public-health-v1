@@ -22,6 +22,10 @@
 
     }
 
+    .header-hhsize-wrapper {
+        display: block !important;
+    }
+
     .addr-form {
         width: 100% !important;
     }
