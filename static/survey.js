@@ -9,6 +9,7 @@ const person_wardses_input = document.querySelector('#person-wardses')
 const gender_input = document.querySelector('#gender-input')
 const birth_year_input = document.querySelector('#birth-year-input')
 const occupation_input = document.querySelector('#occupation-input')
+const occupation_option = document.querySelector('#occupation-list')
 const family_addr = document.querySelector('#family-addr')
 
 const provinces_options = document.querySelector('#provinces-list')
@@ -19,7 +20,6 @@ const person_districts_options = document.querySelector('#person-districts-list'
 const person_wardses_options = document.querySelector('#person-wardses-list')
 
 const household_size_input = document.querySelector('#household-size')
-const occupation_datalist = document.querySelector('#occupation-list')
 
 const person_edit_1 = document.querySelector('#person-edit_1')
 const person_remove_1 = document.querySelector('#person-remove_1')
@@ -128,7 +128,7 @@ const occupation_list = [
 ]
 
 occupation_list.forEach( job => {
-    occupation_datalist.appendChild( customCreateElement('option', null,null, job))
+    occupation_option.appendChild( customCreateElement('a', null,null, job))
 })
 
 
@@ -157,12 +157,12 @@ async function getAndSetAddress(url, select_input, select_option, type) {
     setAddress(data, select_input, select_option)
 }
 
-async function test(url)
-{
-    const data = await fetch(url);
-    const res = await data.json();
-    return res;
-}
+// async function test(url)
+// {
+//     const data = await fetch(url);
+//     const res = await data.json();
+//     return res;
+// }
 
 function setAddress(data, select_input, select_option)
 {
@@ -216,7 +216,7 @@ function districtsChange(code, wardses_options, wardses_input) {
 
 var filterFunction = function (input, datalist) {
     filter = input.value.toUpperCase();
-    options = datalist.getElementsByTagName("option");
+    options = datalist.getElementsByTagName("a");
     // console.log(options)
     for (i = 0; i < options.length; i++) {
       txtValue = options[i].textContent || options[i].innerText;
@@ -242,6 +242,28 @@ option_lists.forEach((elem) => {
     })
 })
 
+occupation_input.addEventListener('focusout', ()=> { 
+    console.log('ocupation out')
+    if(!check)
+        occupation_option.classList.add('display-none')
+})
+
+occupation_input.addEventListener('focus', ()=> {
+    occupation_option.classList.remove('display-none')
+})
+
+occupation_input.addEventListener("keyup", filterFunction.bind(this.event, input=occupation_input, datalist=occupation_option))
+
+
+const occupation_option_a = occupation_option.querySelectorAll('a')
+occupation_option_a.forEach(elem => {
+    elem.addEventListener('click', ()=> {
+        occupation_input.value = elem.innerHTML
+        var event = new Event('change');
+        occupation_input.dispatchEvent(event);
+        occupation_option.classList.add('display-none')
+    })
+})
 
 function prepareAddr(province_input, district_input, wards_input,
     province_options, district_options, wards_options,)
@@ -486,7 +508,7 @@ function createPerson(person_number)
         <button id="person-edit_${person_number}" class="btn person-btn model-btn" person="${person_number}" model="person">
             <i class="fa-solid fa-rotate-right"></i>
         </button>
-        <button id="person-remove_${person_number}" class="btn person-btn ms-3" person="${person_number}">
+        <button id="person-remove_${person_number}" class="btn person-btn" person="${person_number}">
             <i class="fa-solid fa-user-xmark"></i>
         </button>
         </td>
@@ -548,7 +570,7 @@ function hideModel(){
 }
 
 closeBtn.forEach(element => {
-    console.log(test)
+    // console.log(test)
     element.addEventListener('click', () => {
     event.preventDefault()
     hideModel()
@@ -622,7 +644,7 @@ $(document).ready(function() {
     })
 
     $('.model-person-wrapper input').change(()=>{
-        console.log('test')
+        console.log('input change ok')
         const empty_input = $('.model-person-wrapper input').filter(function() { return this.value == ""; }).length
         if(empty_input == 0)
             $('#model-ok').removeAttr('disabled')
@@ -631,7 +653,7 @@ $(document).ready(function() {
         })
 
     $('.model-person-wrapper input').keyup(()=>{
-        console.log('test')
+        console.log('keyup change ok')
         const empty_input = $('.model-person-wrapper input').filter(function() { return this.value == ""; }).length
         if(empty_input == 0)
             $('#model-ok').removeAttr('disabled')
