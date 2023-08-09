@@ -24,9 +24,6 @@ DEAD = 5
 # Contact matrix for each age group
 # 0 = Children, 1 = Adolescent, 2 = Adult 
 
-def log_normal(mu, sigma):
-    return lognorm.rvs(s=sigma, scale=np.exp(mu))
-
 def get_all_contacts(person):
     res = []
     for group in person:
@@ -35,9 +32,16 @@ def get_all_contacts(person):
         
 
 
-def edge_sampling(N, class_type, contact_matrix, HH_dict, non_HH_dict):
-    edge = {}
+def edge_sampling(N, class_type: list, contact_matrix, HH_dict, non_HH_dict):
+    """
+    N: Total population.
+    class_type: An array that represents the class type of all agents in the system (age, age group, sex)...
+    contact_matrix: Contact matrix of different class types.
+    HH_dict: Dictionary representation of each household.
+    non_HH_dict: Dictionary representation of non-household acquaintances of each persons in the system.
+    """
     
+    edge = {}    
     #Initialization
     for i in range(N):
         edge[i] = {"household": [], "non_household": []}
@@ -60,13 +64,6 @@ def edge_sampling(N, class_type, contact_matrix, HH_dict, non_HH_dict):
 
 
 def weight_sampling(N, edge, contact_dist):
-    '''
-    if in household:
-        contact type distribution:
-    if not in household:
-        default: 2.45
-    '''
-    
     contact = {}
     for group in contact_dist:
         contact[group] = {}
@@ -282,12 +279,10 @@ def simulation(N,
         res = pd.concat([res, today],ignore_index=True)
     
     return res
-                            
 
 
 contact_matrix = np.array([[0.2, 2.0, 1.2], [2.0, 3.6, 1.5], [1.2, 1.5, 5.3]])
 
-               
 
 contact_dist = {
     "household": {
@@ -352,12 +347,11 @@ def population_sample(N,
         
     return class_type, HH_dict, non_HH_dict
     
-        
-N = 2000
+N = 1000
 class_type, HH_dict, non_HH_dict = population_sample(N,
-                                                     6,
-                                                     12,
-                                                     [0.4,0.3,0.3])
+                                                     4,
+                                                     10,
+                                                     [1/3.0, 1/3.0, 1/3.0])
 
 
 simu = simulation(N=N,
