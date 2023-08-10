@@ -73,6 +73,36 @@ def get_age_groups():
         print(res)
         return res
 
+# def get_gender_():
+#     with engine.connect() as conn:
+#         data = conn.execute(text("select * from person")).all()
+#         res = []
+#         # print(data[0].__getitem__(0))
+#         for row in data:
+#             res.append(row2dict(row))
+#         # print(users)
+#         return res
+
+def get_population():
+    with engine.connect() as conn:
+        data = conn.execute(text("select id,family_id,gender,(YEAR(NOW()) - birth_year) as age from person")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(users)
+        return res
+    
+def get_household():
+    with engine.connect() as conn:
+        data = conn.execute(text("select family_id, id from person")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(users)
+        return res
+
 def add_family_person(data):
     with engine.connect() as conn:
         insert_family_query = text("insert into family(hhsize, addr1,addr2,addr3) values (:hhsize, :addr1, :addr2, :addr3)")
