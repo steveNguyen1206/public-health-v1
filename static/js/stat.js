@@ -158,20 +158,37 @@ checkboxes.forEach(checkbox => {
 
 //Disable form select
 
-
 form_inputs.forEach(form_inpt => {
   form_inpt.addEventListener('change', function() {
-    if (this.checked) {
-      // Disable other checkboxes
+    if (this.value !== 'None') {
+      // Disable other form inputs
       form_inputs.forEach(other_form_input => {
-        if (other_form_input !== this) {
-          other_form_input.disabled = true;
+        if (this !== other_form_input) {
+          if (
+            this.classList.contains("addr_attribute") &&
+            !other_form_input.classList.contains("addr_attribute")
+          ) {
+            other_form_input.disabled = true;
+          } else if (
+            !this.classList.contains("addr_attribute")
+          ) {
+            other_form_input.disabled = true;
+          }
         }
       });
+
+      // Disable checkboxes
+      checkboxes.forEach(otherCheckbox => {
+        otherCheckbox.disabled = true;
+      });
     } else {
-      // Enable all checkboxes
+      // Re-enable all form inputs and checkboxes
       form_inputs.forEach(other_form_input => {
         other_form_input.disabled = false;
+      });
+
+      checkboxes.forEach(otherCheckbox => {
+        otherCheckbox.disabled = false;
       });
     }
   });

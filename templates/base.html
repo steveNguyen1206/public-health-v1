@@ -2,11 +2,13 @@
 <!-- saved from url=(0040)https://hdkhang6803.editorx.io/my-site-1 -->
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="../css/home_base.css">
+    <!-- <link rel="stylesheet" href="../css/home_base.css"> -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home_base.css')}}">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1" id="wixDesktopViewport">     -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
   
     <meta name="wix-dynamic-custom-elements" content="DropDownMenu">
    
@@ -27,7 +29,79 @@
 
   </head>
   <body class="responsive" data-new-gr-c-s-check-loaded="14.1033.0" data-gr-ext-installed="">   
-    <div id="SITE_CONTAINER" style = "position: relative; top: -55px; ">
+    <div id="header-10823"">
+      <div class="row" style="background-color: white; height: 100%; width: 100%; --bs-gutter-x:0">
+        <div id="logo_img_container-10823" class="col-3 justify-content-center text-center" style="margin-left: 5%; max-height: 100%; max-width: 100%; display: flex;">
+          <picture >
+            <img id="logo-10823" src="../images/logo.png" alt="logo" fetchpriority="high">
+          </picture>
+        </div>
+        <div id="nav_box-10823" class="col justify-content-center text-center" style="max-width: 100%; max-height: 100%;">
+          <style>
+            .nav_list-13823 {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              text-align: center;
+              align-items: center;
+            }
+            li {
+              display: inline;
+              margin-top: 9%;
+              margin-left: 20%;
+              margin-right: 20%;
+            }
+            a {
+              display: inline;
+              color: black;
+              font-family: Tahoma, "Trebuchet MS", sans-serif;
+              font-size: 18px;
+              font-weight: 900;
+              text-decoration:none;
+              width: fit-content;
+              
+            }
+            
+            a:hover{
+              color: rgb(0, 255, 229);
+            }
+          </style>
+          <div id="nav_container-13823" class="d-flex justify-content-center text-center">
+            <ul class="d-flex justify-content-center text-center" id="nav_list-13823" style="padding: 0;">
+              <li><a href="/home" target="_parent">Home</a></li>
+              <li><a href="/survey" target="_parent">Survey</a></li>
+              <li><a href="/stat" target="_parent">Statistics</a></li>
+              <li><a href="/team" target="_parent">Team</a></li>
+            </ul>
+          </div>
+        </div>        
+        <div id="mobile_nav-13823" class="col justify-content-center text-center" style="max-width: 100%; max-height: 100%;">
+          <script>
+            function change_menu_state(x) {
+              x.classList.toggle("change");
+              document.getElementById("myDropdown").classList.toggle("show");
+              // document.getElementById("dropdownWrapper").classList.toggle("show-wrapper");
+            }
+          </script>
+          
+          <div id="menu_icon_container-13823" class="container" onclick="change_menu_state(this)" style="margin-top: 3%;">
+            <div id="menu_icon-13823" style="display: inline-block;">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </div>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="/home">Home</a>
+              <a href="/team">About</a>
+              <a href="/stat">Statistics</a>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+    <div id="SITE_CONTAINER" style = "position: relative; top: 0px; ">
         <!-- <div id="SCROLL_TO_TOP" class="Vd6aQZ ignore-focus SCROLL_TO_TOP" tabindex="-1" role="region" aria-label="top of page">
           <span class="mHZSwn">top of page</span>
         </div> -->
@@ -40,132 +114,63 @@
                 <div>
                   <div class="jni3t-container" data-testid="responsive-container-content">
                     <!-- header section  -->
-                    <header id="header_section" class="header_section S6Dcte header_section-container">
-                      <section id="header_section_r_comp-kbgajy18" tabindex="-1" class="xuzjBY header_section_r_comp-kbgajy18-container header_section_r_comp-kbgajy18 xuzjBY wixui-header undefined" data-testid="section-container">
-                        <wix-dropdown-menu id="nav_box" class="BSjLjI R7lArd header_section_r_comp-kd5peeyu wixui-dropdown-menu hidden-during-prewarmup" tabindex="-1" dir="ltr" data-stretch-buttons-to-menu-width="true" data-same-width-buttons="false" data-num-items="3" data-menuborder-y="0" data-menubtn-border="0" data-ribbon-els="0" data-label-pad="0" data-ribbon-extra="0" data-dropalign="center" style="visibility: inherit; overflow-x: visible;" data-dropmode="dropDown" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done">
-                          <nav class="l9EQj1" id="header_section_r_comp-kd5peeyunavContainer" aria-label="Site">
-                            <ul class="DN7syf" id="header_section_r_comp-kd5peeyuitemsContainer" style="text-align:center" data-marginallchildren="true">
-                              <li id="header_section_r_comp-kd5peeyu0" data-direction="ltr" data-listposition="left" data-data-id="dataItem-kuy6k9pa" data-state="menu false  link" data-index="0" class="rqt3qI wixui-dropdown-menu__item vDnwi4" data-original-gap-between-text-and-btn="0" aria-hidden="false" style="height: 45px; overflow: visible; position: relative; visibility: inherit; width: 214px; box-sizing: border-box;">
-                                <a data-testid="linkElement" href="/home" target="_self" class="lY3Nwh" aria-haspopup="false">
-                                  <div class="rBTT56">
-                                    <div class="" style="text-align:center">
-                                      <p class="foFAdY" style="text-align: center; line-height: 45px;" id="header_section_r_comp-kd5peeyu0label" tabindex="-1">Home</p>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                              <li id="header_section_r_comp-kd5peeyu1" data-direction="ltr" data-listposition="center" data-data-id="dataItem-kuy6k9pa1" data-state="menu false  link" data-index="1" class="rqt3qI wixui-dropdown-menu__item vDnwi4" data-original-gap-between-text-and-btn="0" aria-hidden="false" style="height: 45px; overflow: visible; position: relative; visibility: inherit; width: 210px; box-sizing: border-box;">
-                                <a data-testid="linkElement" target="_self" class="lY3Nwh" aria-haspopup="false">
-                                  <div class="rBTT56">
-                                    <div class="" style="text-align:center">
-                                      <p class="foFAdY" style="text-align: center; line-height: 45px;" id="header_section_r_comp-kd5peeyu1label" tabindex="-1">Team</p>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                              <li id="header_section_r_comp-kd5peeyu2" data-direction="ltr" data-listposition="right" data-data-id="dataItem-kvqhm2t3" data-state="menu false  link" data-index="2" class="rqt3qI wixui-dropdown-menu__item vDnwi4" data-original-gap-between-text-and-btn="0" aria-hidden="false" style="height: 45px; overflow: visible; position: relative; visibility: inherit; width: 199px; box-sizing: border-box;">
-                                <a data-testid="linkElement" target="_self" class="lY3Nwh" aria-haspopup="false">
-                                  <div class="rBTT56">
-                                    <div class="" style="text-align:center">
-                                      <p class="foFAdY" style="text-align: center; line-height: 45px;" id="header_section_r_comp-kd5peeyu2label" tabindex="-1">Blog</p>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                              <li id="header_section_r_comp-kd5peeyu0" data-direction="ltr" data-listposition="left" data-data-id="dataItem-kuy6k9pa" data-state="menu false  link" data-index="0" class="rqt3qI wixui-dropdown-menu__item vDnwi4" data-original-gap-between-text-and-btn="0" aria-hidden="false" style="height: 45px; overflow: visible; position: relative; visibility: inherit; width: 214px; box-sizing: border-box;">
-                                <a data-testid="linkElement" href="/stat" target="_self" class="lY3Nwh" aria-haspopup="false">
-                                  <div class="rBTT56">
-                                    <div class="" style="text-align:center">
-                                      <p class="foFAdY" style="text-align: center; line-height: 45px;" id="header_section_r_comp-kd5peeyu0label" tabindex="-1">Statistic</p>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                              <!-- <li id="header_section_r_comp-kd5peeyu__more__" data-direction="ltr" data-listposition="right" data-state="menu false  header" data-index="__more__" data-dropdown="false" class="iryznZ vDnwi4" data-original-gap-between-text-and-btn="0" aria-hidden="true" style="height: 0px; overflow: hidden; position: absolute; visibility: hidden; opacity: 0;">
-                                <div data-testid="linkElement" class="lY3Nwh" tabindex="0" aria-haspopup="false">
-                                  <div class="rBTT56">
-                                    <div class="" style="text-align:center">
-                                      <p class="foFAdY" style="text-align: center; opacity: 0;" id="header_section_r_comp-kd5peeyu__more__label" tabindex="-1">More...</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li> -->
-                            </ul>
-                            <div class="JdScD2" id="header_section_r_comp-kd5peeyudropWrapper" data-dropalign="center" data-dropdown-shown="false" style="inset: 45px 0px auto auto;">
-                              <ul class="k8K0Wj wixui-dropdown-menu__submenu" id="header_section_r_comp-kd5peeyumoreContainer" style="left: auto; right: 0px;"></ul>
-                            </div>
-                            <div style="display:none" id="header_section_r_comp-kd5peeyunavContainer-hiddenA11ySubMenuIndication">Use tab to navigate through the menu items.</div>
-                          </nav>
-                        </wix-dropdown-menu>
-                        <div id="logo_img_container" data-testid="imageX" class="z4Uj6S header_section_r_comp-lkbapn2u wixui-image">
-                          <style data-testid="scrollEffectStyle">
-                            #header_section_r_comp-lkbapn2u img {
-                              height: 100%
-                            }
-                          </style>
-                          <wix-image id="logo_img" data-image-info="{&quot;containerId&quot;:&quot;header_section_r_comp-lkbapn2u&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;parallaxSpeed&quot;:1.5,&quot;sourceSets&quot;:[],&quot;imageData&quot;:{&quot;uri&quot;:&quot;99756b_7ec601b62fb44e349e8525cc80ccb47e~mv2.png&quot;,&quot;width&quot;:476,&quot;height&quot;:163,&quot;alt&quot;:&quot;&quot;,&quot;name&quot;:&quot;logo (1).png&quot;,&quot;crop&quot;:{&quot;x&quot;:4,&quot;y&quot;:6,&quot;width&quot;:470,&quot;height&quot;:152,&quot;svgId&quot;:&quot;&quot;,&quot;flip&quot;:&quot;none&quot;},&quot;displayMode&quot;:&quot;fill&quot;,&quot;focalPoint&quot;:{&quot;x&quot;:50,&quot;y&quot;:50},&quot;scrollEffect&quot;:&quot;none&quot;}}" data-has-ssr-src="" data-src="../images/logo.png">
-                            <picture>
-                              <img src="../images/logo.png" alt="" style="object-fit: cover; object-position: 50% 50%; width: 100%;" fetchpriority="high">
-                            </picture>
-                          </wix-image>
-                        </div>
-                      </section>
-                    </header>
+                    
                     <!-- main page section  -->
                     <main id="PAGE_SECTIONSjni3t" class="PAGE_SECTIONSjni3t c1rIl3" data-main-content-parent="true">
                       {% block content %}{% endblock %}
                     </main>
 
                     <!-- footer section  -->
-                    <footer>
-                      <section id="footer_sect-25723" tabindex="-1" class="xuzjBY footer_sect-25723-container footer_sect-25723 wixui-section undefined" data-testid="section-container">
-                        <div id="bgLayers_footer_sect-25723" data-hook="bgLayers" class="MW5IWV">
-                          <div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div>
-                          <div id="bgMedia_footer_sect-25723" class="VgO9Yg"></div>
-                        </div>
-                        <div id="comp-lkbc6kfu1" class="comp-lkbc6kfu1 oeWIOw" style="text-align: center;">
-                          <ul class="Ebr6AI" aria-label="Social Bar">
-                            <li id="dataItem-lkbc6kfu3-comp-lkbc6kfu1" class="Rhimou">
-                              <a data-testid="linkElement" target="_blank" rel="noreferrer noopener" class="Q8t1PH">
-                                <wow-image id="img_0_comp-lkbc6kfu1" class="HlRz5e qFhtwZ" data-image-info="{&quot;containerId&quot;:&quot;dataItem-lkbc6kfu3-comp-lkbc6kfu1&quot;,&quot;displayMode&quot;:&quot;fill&quot;,&quot;imageData&quot;:{&quot;width&quot;:201,&quot;height&quot;:200,&quot;uri&quot;:&quot;11062b_ef6a6ac194704911951645990055c2ce~mv2.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fill&quot;}}" data-bg-effect-name="" data-has-ssr-src="" style="--wix-img-max-width:max(201px, 100%)" data-src="https://static.wixstatic.com/media/11062b_ef6a6ac194704911951645990055c2ce~mv2.png/v1/fill/w_34,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_ef6a6ac194704911951645990055c2ce~mv2.png">
-                                  <img alt="Facebook" style="width: 27px; height: 27px; object-fit: cover;" fetchpriority="high" src="../images/facebook.png">
-                                </wow-image>
-                              </a>
-                            </li>
-                            <li id="dataItem-lkbc6kfu7-comp-lkbc6kfu1" class="Rhimou">
-                              <a data-testid="linkElement" target="_blank" rel="noreferrer noopener" class="Q8t1PH">
-                                <wow-image id="img_1_comp-lkbc6kfu1" class="HlRz5e qFhtwZ" data-image-info="{&quot;containerId&quot;:&quot;dataItem-lkbc6kfu7-comp-lkbc6kfu1&quot;,&quot;displayMode&quot;:&quot;fill&quot;,&quot;imageData&quot;:{&quot;width&quot;:154,&quot;height&quot;:151,&quot;uri&quot;:&quot;11062b_e21d0fca83fc408a8c53c53b6b565184~mv2.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fill&quot;}}" data-bg-effect-name="" data-has-ssr-src="" style="--wix-img-max-width:max(154px, 100%)" data-src="https://static.wixstatic.com/media/11062b_e21d0fca83fc408a8c53c53b6b565184~mv2.png/v1/fill/w_34,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_e21d0fca83fc408a8c53c53b6b565184~mv2.png">
-                                  <img alt="GitHub       " style="width: 27px; height: 27px; object-fit: cover;" fetchpriority="high" src="../images/github.png">
-                                </wow-image>
-                              </a>
-                            </li>
-                            <li id="dataItem-lkbc6kfv-comp-lkbc6kfu1" class="Rhimou">
-                              <a data-testid="linkElement" target="_blank" rel="noreferrer noopener" class="Q8t1PH">
-                                <wow-image id="img_2_comp-lkbc6kfu1" class="HlRz5e qFhtwZ" data-image-info="{&quot;containerId&quot;:&quot;dataItem-lkbc6kfv-comp-lkbc6kfu1&quot;,&quot;displayMode&quot;:&quot;fill&quot;,&quot;imageData&quot;:{&quot;width&quot;:201,&quot;height&quot;:201,&quot;uri&quot;:&quot;11062b_fe985b889c144b348eefc7bbc67018b4~mv2.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fill&quot;}}" data-bg-effect-name="" data-has-ssr-src="" style="--wix-img-max-width:max(201px, 100%)" data-src="https://static.wixstatic.com/media/11062b_fe985b889c144b348eefc7bbc67018b4~mv2.png/v1/fill/w_34,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_fe985b889c144b348eefc7bbc67018b4~mv2.png">
-                                  <img alt="Youtube" style="width: 27px; height: 27px; object-fit: cover;" fetchpriority="high" src="../images/youtube.png">
-                                </wow-image>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div id="PageName_Footer-25723" class="BaOVQ8 tz5f0K PageName_Footer-25723 wixui-rich-text">
-                          <h2 class="font_2 wixui-rich-text__text" style="text-align:center;">Diseases Simulation</h2>
-                        </div>
-                        <div id="DepartName_Footer-25723" class="BaOVQ8 tz5f0K DepartName_Footer-25723 wixui-rich-text">
-                          <h2 class="font_2 wixui-rich-text__text" style="text-align:center;">
-                            <span class="wixui-rich-text__text">fit@hcmus</span>
-                          </h2>
-                        </div>
-                      </section>
-                    </footer>
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
+        <footer>
+          <section id="footer_sect-25723" class="xuzjBY footer_sect-25723-container footer_sect-25723 wixui-section undefined" data-testid="section-container">
+            <div id="bgLayers_footer_sect-25723" data-hook="bgLayers" class="MW5IWV">
+              <div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div>
+              <div id="bgMedia_footer_sect-25723" class="VgO9Yg"></div>
+            </div>
+            <div id="comp-lkbc6kfu1" class="comp-lkbc6kfu1 oeWIOw" style="text-align: center;">
+              <ul class="Ebr6AI" aria-label="Social Bar">
+                <li id="dataItem-lkbc6kfu3-comp-lkbc6kfu1" class="Rhimou">
+                  <a data-testid="linkElement" target="_blank" rel="noreferrer noopener" class="Q8t1PH">
+                    <wow-image id="img_0_comp-lkbc6kfu1" class="HlRz5e qFhtwZ" data-image-info="{&quot;containerId&quot;:&quot;dataItem-lkbc6kfu3-comp-lkbc6kfu1&quot;,&quot;displayMode&quot;:&quot;fill&quot;,&quot;imageData&quot;:{&quot;width&quot;:201,&quot;height&quot;:200,&quot;uri&quot;:&quot;11062b_ef6a6ac194704911951645990055c2ce~mv2.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fill&quot;}}" data-bg-effect-name="" data-has-ssr-src="" style="--wix-img-max-width:max(201px, 100%)" data-src="https://static.wixstatic.com/media/11062b_ef6a6ac194704911951645990055c2ce~mv2.png/v1/fill/w_34,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_ef6a6ac194704911951645990055c2ce~mv2.png">
+                      <img alt="Facebook" style="width: 27px; height: 27px; object-fit: cover;" fetchpriority="high" src="../images/facebook.png">
+                    </wow-image>
+                  </a>
+                </li>
+                <li id="dataItem-lkbc6kfu7-comp-lkbc6kfu1" class="Rhimou">
+                  <a data-testid="linkElement" target="_blank" rel="noreferrer noopener" class="Q8t1PH">
+                    <wow-image id="img_1_comp-lkbc6kfu1" class="HlRz5e qFhtwZ" data-image-info="{&quot;containerId&quot;:&quot;dataItem-lkbc6kfu7-comp-lkbc6kfu1&quot;,&quot;displayMode&quot;:&quot;fill&quot;,&quot;imageData&quot;:{&quot;width&quot;:154,&quot;height&quot;:151,&quot;uri&quot;:&quot;11062b_e21d0fca83fc408a8c53c53b6b565184~mv2.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fill&quot;}}" data-bg-effect-name="" data-has-ssr-src="" style="--wix-img-max-width:max(154px, 100%)" data-src="https://static.wixstatic.com/media/11062b_e21d0fca83fc408a8c53c53b6b565184~mv2.png/v1/fill/w_34,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_e21d0fca83fc408a8c53c53b6b565184~mv2.png">
+                      <img alt="GitHub       " style="width: 27px; height: 27px; object-fit: cover;" fetchpriority="high" src="../images/github.png">
+                    </wow-image>
+                  </a>
+                </li>
+                <li id="dataItem-lkbc6kfv-comp-lkbc6kfu1" class="Rhimou">
+                  <a data-testid="linkElement" target="_blank" rel="noreferrer noopener" class="Q8t1PH">
+                    <wow-image id="img_2_comp-lkbc6kfu1" class="HlRz5e qFhtwZ" data-image-info="{&quot;containerId&quot;:&quot;dataItem-lkbc6kfv-comp-lkbc6kfu1&quot;,&quot;displayMode&quot;:&quot;fill&quot;,&quot;imageData&quot;:{&quot;width&quot;:201,&quot;height&quot;:201,&quot;uri&quot;:&quot;11062b_fe985b889c144b348eefc7bbc67018b4~mv2.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fill&quot;}}" data-bg-effect-name="" data-has-ssr-src="" style="--wix-img-max-width:max(201px, 100%)" data-src="https://static.wixstatic.com/media/11062b_fe985b889c144b348eefc7bbc67018b4~mv2.png/v1/fill/w_34,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_fe985b889c144b348eefc7bbc67018b4~mv2.png">
+                      <img alt="Youtube" style="width: 27px; height: 27px; object-fit: cover;" fetchpriority="high" src="../images/youtube.png">
+                    </wow-image>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div id="PageName_Footer-25723" class="BaOVQ8 tz5f0K PageName_Footer-25723 wixui-rich-text">
+              <h2 class="font_2 wixui-rich-text__text" style="text-align:center;">Diseases Simulation</h2>
+            </div>
+            <div id="DepartName_Footer-25723" class="BaOVQ8 tz5f0K DepartName_Footer-25723 wixui-rich-text">
+              <h2 class="font_2 wixui-rich-text__text" style="text-align:center;">
+                <span class="wixui-rich-text__text">fit@hcmus</span>
+              </h2>
+            </div>
+          </section>
+        </footer>
     </div>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
+
 </html>

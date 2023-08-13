@@ -2,6 +2,10 @@
 
 {%block title %}Survey | Diseases Simulation{%endblock%}
 
+{%block head%}
+  <link rel="stylesheet" href="{{url_for('static', filename='css/survey.css')}}">
+{%endblock%}
+
 {%block content%}
   <section id="survey_header-26723" class="pt-4  container-lg" >
     <div class="container-fluid py-lg-5 px-lg-5" id="survey_header_container-26723" style="color: white;text-align: center;" >
@@ -19,4 +23,5 @@
         {%include 'form.html'%}
     </div>
   </section>
+  <script src="{{url_for('static', filename='js/survey.js')}}" ></script>
 {%endblock%}

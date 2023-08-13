@@ -1,14 +1,14 @@
 #comp-kvupzas82{
   /* The image used */
-background-image: url("../images/stat_bg.jpg");
+  background-image: url("../images/stat_bg.jpg");
 
-/* Full height */
-height: 100%;
+  /* Full height */
+  height: 100%;
 
-/* Center and scale the image nicely */
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;                                     
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;                                     
 }
 body.device-mobile-optimized {
   overflow-x: hidden;
@@ -5995,7 +5995,7 @@ z-index: 1;
 --font_9: normal normal bold 16px/1.4em barlow-extralight, barlow, sans-serif;
 --font_10: normal normal normal 12px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
 --wix-ads-height: 50px;
---wix-ads-top-height: 50px;
+--wix-ads-top-height: 0px;
 --site-width: 980px;
 --above-all-z-index: 100000;
 --portals-z-index: 100001;

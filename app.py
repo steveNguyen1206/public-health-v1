@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def default():
-    return render_template('stat.html')
+    return render_template('home.html')
 
 @app.route("/stat")
 def to_stat():
@@ -65,15 +65,10 @@ def render_survey():
         return jsonify({'test': 'pass'})
     elif request.method == 'GET':
         return render_template('survey.html')
-    
-
-@app.route('/css/<path:filepath>')
-def sendDirCss(filepath):
-    return send_from_directory('css/', filepath)
 
 @app.route('/images/<path:filepath>')
 def sendDirImgs(filepath):
-    return send_from_directory('images/', filepath)
+    return send_from_directory('static/images/', filepath)
 
 @app.route('/videos/<path:filepath>')
 def sendDirVideos(filepath):
