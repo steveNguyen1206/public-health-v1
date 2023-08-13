@@ -62,6 +62,26 @@ def get_num_persons_of_districts():
             res.append(row2dict(row))
         print(res)
         return res
+    
+def get_num_persons_of_provinces():
+    with engine.connect() as conn:
+        data = conn.execute(text("select addr1,count(*) from family,person where family.id=person.family_id group by addr1")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
+        return res
+
+def get_num_persons_of_family():
+    with engine.connect() as conn:
+        data = conn.execute(text("select hhsize,count(*) from family group by hhsize")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
+        return res
 
 def get_age_groups():
     with engine.connect() as conn:
@@ -73,15 +93,25 @@ def get_age_groups():
         print(res)
         return res
 
-# def get_gender_():
-#     with engine.connect() as conn:
-#         data = conn.execute(text("select * from person")).all()
-#         res = []
-#         # print(data[0].__getitem__(0))
-#         for row in data:
-#             res.append(row2dict(row))
-#         # print(users)
-#         return res
+def get_gender():
+    with engine.connect() as conn:
+        data = conn.execute(text("select gender,count(*) from person group by gender")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(users)
+        return res
+
+def get_occupation():
+    with engine.connect() as conn:
+        data = conn.execute(text("select occupation,count(*) from person group by occupation")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(users)
+        return res
 
 def get_population():
     with engine.connect() as conn:
