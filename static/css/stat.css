@@ -7362,22 +7362,22 @@ opacity: 0;
 }
 
 #comp-lksj2rfs {
-width: 60.608552631578945%;
-height: auto;
---l_display: unset;
-top: calc(var(--top) + var(--sticky-top) + var(--wix-ads-top-height) * var(--is-sticky));
-display: var(--l_display, var(--display));
-align-self: start;
-justify-self: center;
-margin-left: 0%;
-margin-right: 0.0011582653817642698%;
-margin-top: 151.59375px;
-margin-bottom: 0px;
-grid-area: 1/1/2/2;
-position: relative;
---is-sticky: 0;
---sticky-top: 0px;
---top: 0px;
+  width: 60.608552631578945%;
+  height: auto;
+  --l_display: unset;
+  top: calc(var(--top) + var(--sticky-top) + var(--wix-ads-top-height) * var(--is-sticky));
+  display: var(--l_display, var(--display));
+  align-self: start;
+  justify-self: center;
+  margin-left: 10%;
+  margin-right: 0.0011582653817642698%;
+  margin-top: 221.59375px;
+  margin-bottom: 0px;
+  grid-area: 1/1/2/2;
+  position: relative;
+  --is-sticky: 0;
+  --sticky-top: 0px;
+  --top: 0px;
 }
 
 /* END STYLABLE DIRECTIVE RULES */

@@ -10,7 +10,7 @@ body.device-mobile-optimized {
   height: 80px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
   #header-10823{
     height: 40px;
   }
@@ -84,25 +84,25 @@ body.device-mobile-optimized {
 
 .show {display:block;}
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 500px) {
   #nav_box-10823 {
     display: block;
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
   #nav_box-10823 {
     display: none;
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 500px) {
   #mobile_nav-13823{
     display:none;
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 500px) {
   #mobile_nav-13823{
     display:block;
   }
@@ -6497,10 +6497,10 @@ body.ZR3zoU {
 /* </style> */
 #comp-kvl0anpi{  
     background: url('../images/Large_Card.jpg') no-repeat;
-    /* background-size: 100%; */
-    /* min-width: 100%; */
-    min-height: 100%;
+    background-size: 100% 100%;
 }
+
+
 /* <pages-css id="pages-css">
       <style id="css_masterPage"> */
         #SITE_CONTAINER.focus-ring-active :not(.has-custom-focus):not(.ignore-focus):not([tabindex=\"-1\"]):focus,
@@ -7934,6 +7934,7 @@ body.ZR3zoU {
           --is-sticky: 0;
           --sticky-top: 0px;
           --top: 0px;
+          overflow: hidden;
         }
 
         @media screen and (max-width: 500px) {
@@ -8026,7 +8027,7 @@ body.ZR3zoU {
         }
 
         #comp-kvl0an7c {
-          height: auto;
+          /* height: 534px; */
           width: 18.99949730842765%;
           --l_display: unset;
           top: calc(var(--top) + var(--sticky-top) + var(--wix-ads-top-height) * var(--is-sticky));
@@ -8034,7 +8035,7 @@ body.ZR3zoU {
           align-self: start;
           justify-self: center;
           position: absolute;
-          --sticky-top: 0%;
+          --sticky-top: 7%;
           margin-left: 0px;
           margin-right: 0.037548825889871296px;
           margin-top: 263.59685707092285px;
@@ -8042,19 +8043,19 @@ body.ZR3zoU {
           grid-area: 1/1/2/2;
           --is-sticky: 0;
           --top: 0px;
-          z-index: 5;
+          /* z-index: 5; */
         }
 
         #comp-kvl0an7c~* {
           will-change: opacity;
         }
 
-        #comp-kvl0an7c::before {
+        /* #comp-kvl0an7c::before {
           --aspect-ratio: 1.5359951603145796;
           content: attr(x);
           display: block;
           padding-top: calc(var(--aspect-ratio) * 100%);
-        }
+        } */
 
         @media screen and (min-width: 320px) and (max-width: 1000px) {
           #comp-kvl0an7c {
@@ -8372,8 +8373,8 @@ body.ZR3zoU {
           justify-self: end;
           margin-left: 0%;
           margin-right: 11.301994267014782%;
-          margin-top: 30.567961149190175%;
-          margin-bottom: 5%;
+          margin-top: 28.567961149190175%;
+          margin-bottom: 7%;
           grid-area: 1/1/2/2;
           position: relative;
           --is-sticky: 0;
@@ -8419,7 +8420,7 @@ body.ZR3zoU {
             width: auto;
             align-self: center;
             justify-self: stretch;
-            margin-top: 110%;
+            margin-top: 100%;
             margin-bottom: 10%;
             margin-left: 30%;
             margin-right: 30%;
@@ -9257,7 +9258,7 @@ body.ZR3zoU {
           --sticky-top: 15%;
           margin-left: 0px;
           margin-right: 0px;
-          margin-top: 378.98001831054694px;
+          margin-top: 498.98001831054694px;
           margin-bottom: 8.002487792968623px;
           grid-area: 2/1/4/2;
           --is-sticky: 1;
@@ -10069,7 +10070,7 @@ body.ZR3zoU {
           row-gap: 0vw;
           column-gap: 4vw;
           display: var(--l_display, var(--container-display));
-          grid-template-rows: minmax(50px, max-content) minmax(50px, max-content) minmax(50px, max-content) minmax(50px, max-content) minmax(50px, max-content);
+          grid-template-rows: minmax(50px, max-content) minmax(50px, max-content) minmax(50px, max-content) minmax(50px, max-content);
           grid-template-columns: 7% 1fr 1fr 1fr 7%;
           --container-display: grid;
         }
