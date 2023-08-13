@@ -347,7 +347,7 @@ def population_sample(N,
         
     return class_type, HH_dict, non_HH_dict
     
-N = 1000
+N = 200
 class_type, HH_dict, non_HH_dict = population_sample(N,
                                                      4,
                                                      10,

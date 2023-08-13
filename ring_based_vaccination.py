@@ -379,13 +379,13 @@ class_type, HH_dict, non_HH_dict = population_sample(N,
 
 
 simu = simulation(N=N,
-                  T=200,
+                  T=150,
                   HH_dict=HH_dict,
                   non_HH_dict=non_HH_dict,
                   contact_matrix=contact_matrix,
                   class_type=class_type,
-                  num_vaccine = 20,
-                  num_seed_case = 20,
+                  num_vaccine = 10,
+                  num_seed_case = 5,
                   pr_base=0.01962,
                   cfr=0.7)
 
