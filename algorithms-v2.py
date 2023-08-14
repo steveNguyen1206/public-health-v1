@@ -245,11 +245,11 @@ class Population:
     def __init__(self,
                  N,
                  family_size,
-                 acquantaince_size,
+                 acquaintance_size,
                  scalar_factors_distribution):
         self.n_population = N
         self.family_size = family_size
-        self.acquaintance_size = acquantaince_size
+        self.acquaintance_size = acquaintance_size
         self.scalar_factors_distribution = scalar_factors_distribution
         
     
@@ -269,31 +269,28 @@ class Population:
                 )        
         
         # Household 
-        hh_dict = {}
         random_list = list(range(self.n_population))
         np.random.shuffle(random_list)
         left = 0
         family_index = 0
+        count = 0
         while left < self.n_population:
+            
             right = left + 1 + np.random.poisson(lam=self.family_size)
             if right >= self.n_population:
                 right = self.n_population
             family_member_indices = random_list[left:right]
-            
-            
             for family_member_index in family_member_indices:
                 # Attribute: family_members
-                agents[family_member_index].family_members = family_member_indices
+                agents[family_member_index].family_members = family_member_indices.copy()
                 agents[family_member_index].family_members.remove(family_member_index)
-
                 
                 possible_acquaintances = random_list[:left] + random_list[right:]
                 num_of_acquaintances = np.random.poisson(lam=self.acquaintance_size)
                 acquaintances = random.sample(possible_acquaintances, num_of_acquaintances)
-                agents[family_member_index].acquaintances = acquaintances
+                agents[family_member_index].acquaintances = acquaintances.copy()
                 
             left = right + 1
-            family_index = family_index + 1
         
         return agents
 
@@ -307,7 +304,12 @@ scalar_factors_distribution = {
 }
 
 
-pop = Population(100, 4, 10,scalar_factors_distribution=scalar_factors_distribution)
+pop = Population(N=100, 
+                 family_size=4, 
+                 acquaintance_size=10,
+                 scalar_factors_distribution=scalar_factors_distribution)
 agents = pop.population_sample()
-for agent in agents:
-    print(
+# for agent in agents:
+#     print("id: ", agent.id)
+#     print("\tfamily: ", agent.family_members)
+#     print("\tacquaintances: ", agent.acquaintances)
