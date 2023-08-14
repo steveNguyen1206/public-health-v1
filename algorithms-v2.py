@@ -23,6 +23,7 @@ class Agent:
         self.status = SUSCEPTIBLE
         self.incubation_days_left = 0 
         self.infection_days_left = 0
+        self.vaccination_wait_days_left = 0
         if scalar_factors is None:
             self.scalar_factors = {}
         self.scalar_factors = scalar_factors
@@ -70,6 +71,13 @@ class Agent:
             self.incubation_days_left -= 1
             if self.incubation_days_left <= 0:
                 self.start_infection(infection_period_generator)
+                
+                
+        if self.status == VACCINATED:
+            if self.vaccination_wait_days_left <= 0:
+                self.status = IMMUNE
+            else:
+                self.vaccination_wait_days_left -= 1
 
 
 class EdgeSampler:
@@ -138,6 +146,7 @@ class DiseaseSimulation:
                  incubation_period_generator,
                  infection_period_generator,
                  fatality_rate_generator,
+                 pr_base
                  ):
         self.result_df = None
         self.agents = agents
@@ -145,21 +154,75 @@ class DiseaseSimulation:
         self.incubation_period_generator = incubation_period_generator
         self.infection_period_generator = infection_period_generator
         self.fatality_rate_generator = fatality_rate_generator
+        self.pr_base = pr_base
     
     
     def run_simulation(self):
-        daily_result = []
+        res = pd.DataFrame({"day": [],
+                        "susceptible": [],
+                        "incubated": [],
+                        "infected": [],
+                        "dead": [],
+                        "vaccinated": [],
+                        "removed": []})
+        res.set_index("day", inplace=True)
+    
         for day in self.n_days:
+            # Establish edges and weights
             edge = EdgeSampler.sample_edges()
             weight = WeightSampler.sample_weights(edge=edge)
             
+            # Iterate through all agents in the system
+            for agent_index, agent in enumerate(self.agents):
+                if agent.status == INFECTED and agent.infection_days_left > 0:
+                    for contact_type in edge[agent_index]:
+                        for contact_index in edge[agent_index][contact_type]:
+                            contact = agent[contact_index]
+                            prob = self.pr_base * weight[agent_index][contact_index]
+                            if bernoulli.rvs(prob) == 1:
+                                agent.start_incubation(self.incubation_period_generator)
+                
+                agent.update_status(self.infection_period_generator,
+                                    self.fatalilty_rate_generator)
+            
         
+            status_count = [0, 0, 0, 0, 0, 0]
+            # Count the number of agents having the same status.
+            for agent in self.agents:
+                status_count[agent.status] += 1
+                
         
-        return daily_result[]
-        
-        
-        
+            today = pd.DataFrame([{"day": day,
+                                "susceptible": status_count[SUSCEPTIBLE],
+                                "incubated": status_count[INCUBATED],
+                                "infected": status_count[INFECTED],
+                                    "vaccinated": status_count[VACCINATED],
+                                "removed": status_count[REMOVED],
+                                "deceased": status_count[DECEASED],
 
-        
-        
+                                }]) 
+            res = pd.concat([res, today],ignore_index=True)
+            
+
+        return res
+
+
+class Ebola:
+    def __init__(self):
+        pass
+    
+    
+    def generate_incubation_period():
+        return lognorm.rvs(s=0.284, scale=np.exp(2.446))
+    
+    
+    def generate_infection_period():
+        return lognorm.rvs(s=0.1332, scale=np.exp(2.2915))
+    
+    
+    def generate_fatality_rate():
+        return bernoulli(0.85)
+    
+    
+    
 
