@@ -46,7 +46,7 @@ class Agent:
         The period generator function wraps around a random function that generates a scalar value.
         '''
         self.status = INFECTED
-        self.infection_days_left = infection_period_generator()
+        self.infection_days_left = infection_period_generator
     
         
     def update_status(self, 
@@ -117,24 +117,23 @@ class EdgeSampler:
             self.non_hh_dict[index] = {}
             for acquaintance_index in agent.acquaintances:
                 acquaintance_factor = self.factor_array[acquaintance_index]
+                if acquaintance_factor not in self.non_hh_dict[index].keys():
+                    self.non_hh_dict[index][acquaintance_factor] = list()
                 self.non_hh_dict[index][acquaintance_factor].append(acquaintance_index)
 
 
     def sample_edges(self):
         edge = {}
         for index in self.hh_dict:
+            edge[index] = {}
             edge[index]["family_members"] = self.hh_dict[index]
         for index in self.non_hh_dict:
             for target_factor_value in self.non_hh_dict[index]:
-                n_of_contacts = np.random.poisson(self.contact_matrix["values"]
-                                                [self.scalar_factor[index]]
-                                                [target_factor_value]
-                                                )
+                n_of_contacts = np.random.poisson(self.contact_matrix["values"][self.factor_array[index]][target_factor_value])
                 if n_of_contacts > len(self.non_hh_dict[index][target_factor_value]):
                     n_of_contacts = len(self.non_hh_dict[index][target_factor_value])
                     
-            edge[index]["acquaintances"].extend(random.sample(self.non_hh_dict[index][target_factor_value],
-                                                              n_of_contacts))
+            edge[index]["acquaintances"] = random.sample(self.non_hh_dict[index][target_factor_value], n_of_contacts)
         return edge
 
 
@@ -149,8 +148,8 @@ class WeightSampler:
             weight[index] = {}
             for connection_type in edge[index]:
                 for target in edge[index][connection_type]:
-                    weight[index][target] = random.choices(self.weight_dist[connection_type]["risk_ratio"],
-                                                           self.weight_dist[connection_type]["weight"])[0]
+                    weight[index][target] = random.choices(self.weight_dist[connection_type]["values"],
+                                                           self.weight_dist[connection_type]["weights"])[0]
         return weight
 
 
@@ -160,18 +159,22 @@ class DiseaseSimulation:
                  n_days: int,
                  edge_sampler: EdgeSampler,
                  weight_sampler: WeightSampler,
-                 incubation_period_generator,
-                 infection_period_generator,
-                 fatality_rate_generator,
-                 pr_base
+                 disease
                  ):
         self.result_df = None
         self.agents = agents
         self.n_days = n_days
-        self.incubation_period_generator = incubation_period_generator
-        self.infection_period_generator = infection_period_generator
-        self.fatality_rate_generator = fatality_rate_generator
+        self.disease = disease
+        self.edge_sampler = edge_sampler
+        self.weight_sampler = weight_sampler
         self.pr_base = pr_base
+    
+    
+    def initialize_seed_cases(self, n_seed_cases):
+        seed_indices  = random.sample(list(range(0, len(self.agents))), n_seed_cases)
+        # Update seed cases
+        for seed_index in seed_indices:
+            self.agents[seed_index].start_infection(self.infection_period_generator())
     
     
     def run_simulation(self):
@@ -179,28 +182,28 @@ class DiseaseSimulation:
                         "susceptible": [],
                         "incubated": [],
                         "infected": [],
-                        "dead": [],
+                        "deceased": [],
                         "vaccinated": [],
                         "removed": []})
         res.set_index("day", inplace=True)
     
-        for day in self.n_days:
+        for day in range(self.n_days):
             # Establish edges and weights
-            edge = EdgeSampler.sample_edges()
-            weight = WeightSampler.sample_weights(edge=edge)
+            edge = self.edge_sampler.sample_edges()
+            weight = self.weight_sampler.sample_weights(edge=edge)
             
             # Iterate through all agents in the system
             for agent_index, agent in enumerate(self.agents):
                 if agent.status == INFECTED and agent.infection_days_left > 0:
                     for contact_type in edge[agent_index]:
                         for contact_index in edge[agent_index][contact_type]:
-                            contact = agent[contact_index]
+                            contact = agents[contact_index]
                             prob = self.pr_base * weight[agent_index][contact_index]
                             if bernoulli.rvs(prob) == 1:
                                 agent.start_incubation(self.incubation_period_generator)
                 
                 agent.update_status(self.infection_period_generator,
-                                    self.fatalilty_rate_generator)
+                                    self.fatality_rate_generator)
             
         
             status_count = [0, 0, 0, 0, 0, 0]
@@ -266,7 +269,7 @@ class Population:
                 agent.scalar_factors[scalar_factor] = random.choices(
                     self.scalar_factors_distribution[scalar_factor]["values"],
                     self.scalar_factors_distribution[scalar_factor]["weights"]
-                )        
+                )[0]
         
         # Household 
         random_list = list(range(self.n_population))
@@ -290,7 +293,7 @@ class Population:
                 acquaintances = random.sample(possible_acquaintances, num_of_acquaintances)
                 agents[family_member_index].acquaintances = acquaintances.copy()
                 
-            left = right + 1
+            left = right
         
         return agents
 
@@ -309,7 +312,54 @@ pop = Population(N=100,
                  acquaintance_size=10,
                  scalar_factors_distribution=scalar_factors_distribution)
 agents = pop.population_sample()
-# for agent in agents:
-#     print("id: ", agent.id)
-#     print("\tfamily: ", agent.family_members)
-#     print("\tacquaintances: ", agent.acquaintances)
+contact_matrix = {
+            "scalar_factor": "age_group",
+            "values": {
+                "children": {"children": 0.2, 
+                             "adolescent": 2.0, 
+                             "adult": 1.2},
+                "adolescent": {"children": 2.0,
+                               "adolescent": 3.6,
+                               "adult": 1.5},
+                "adult": {"children": 1.2,
+                          "adolescent": 1.5,
+                          "adult": 5.3}
+            }
+        }
+weight_dist = {
+    "family_members": {
+        "weights": [0.163, 
+                       0.403, 
+                       0.17, 
+                       0.026, 
+                       0.1, 
+                       0.138],
+        "values": [9.7, 
+                       8.3,
+                       5.6,
+                       4.9,
+                       1.3,
+                       1
+                       ]
+    },
+    "acquaintances": {
+        "weights": [1],
+        "values": [2.45],
+    },  
+}
+
+edge_sampler = EdgeSampler(agents,non_hh_contact_matrix=contact_matrix)
+weight_sampler = WeightSampler(weight_dist)
+
+simulation = DiseaseSimulation(agents,
+                               100,
+                               edge_sampler,
+                               weight_sampler,
+                               Ebola.generate_incubation_period,
+                               Ebola.generate_infection_period,
+                               Ebola.generate_fatality_rate,
+                               0.01962)
+
+simulation.initialize_seed_cases(5)
+res = simulation.run_simulation()
+print(res)
