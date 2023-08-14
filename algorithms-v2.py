@@ -85,6 +85,25 @@ class EdgeSampler:
                  agents: list[Agent],
                  non_hh_contact_matrix,
                  ):
+        contact_matrix = {
+            "scalar_factor": "age_group",
+            "values": {
+                "children": {"children": 0.2, 
+                             "adolescent": 0.6, 
+                             "adult": 0.4},
+                "adolescent": {"children": 0.6,
+                               "adolescent": 0.5,
+                               "adult": 0.1},
+                "adult": {"children": 0.4,
+                          "adolescent": 0.1,
+                          "adult": 0.3}
+                
+            }
+            
+            
+        }
+        
+        
         self.contact_matrix = non_hh_contact_matrix
         self.hh_dict = {}
         self.non_hh_dict = {}
@@ -223,6 +242,53 @@ class Ebola:
     def generate_fatality_rate():
         return bernoulli(0.85)
     
+
+class Population:
+    def __init__(self):
+        agents = []
+        n_population = 0
+        pass
     
     
+    def population_sample(N,
+                       family_size,
+                       acquaintance_size,
+                       scalar_features_distribution):
+    
+        class_type = [0] * N
+        HH_dict = {}
+        non_HH_dict = {}
+        
+        # Classtype
+        class_type = random.choices([0,1,2], class_distribution, k=N)
+        
+        
+        # Household 
+        random_list = list(range(N))
+        np.random.shuffle(random_list)
+        left = 0
+        family_index = 0
+        while left < N:
+            right = left + 1 + np.random.poisson(lam=family_size)
+            if right >= N:
+                right = N
+            HH_dict[family_index] = random_list[left:right]
+            
+            
+            
+            # non house hold
+            for i in HH_dict[family_index]:
+                possible_acquaintances = random_list[:left] + random_list[right:]
+                num_of_acquaintances = np.random.poisson(lam=acquaintance_size)
+                acquaintances = random.sample(possible_acquaintances, num_of_acquaintances)
+                non_HH_dict[i] = {0: [], 1: [], 2: []}
+                for acquaintance in acquaintances:
+                    non_HH_dict[i][class_type[acquaintance]].append(acquaintance)
+                    
+                
+            left = right + 1
+            family_index = family_index + 1
+            
+        return class_type, HH_dict, non_HH_dict
+`
 
