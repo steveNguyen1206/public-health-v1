@@ -26,7 +26,8 @@ class Agent:
         self.vaccination_wait_days_left = 0
         if scalar_factors is None:
             self.scalar_factors = {}
-        self.scalar_factors = scalar_factors
+        else:
+            self.scalar_factors = scalar_factors
         
     
     def start_incubation(self, incubation_period_generator):
@@ -256,11 +257,12 @@ class Population:
     def population_sample(self):
         agents = []
         for index in range(self.n_population):
-            agents.append(Agent())
+            agents.append(Agent(index))
             
         # scalar_factors sampling
         for scalar_factor in self.scalar_factors_distribution:
-            for agent_index, agent in enumerate(agents):
+            for agent in agents:
+                agent.scalar_factors[scalar_factor] = None
                 agent.scalar_factors[scalar_factor] = random.choices(
                     self.scalar_factors_distribution[scalar_factor]["values"],
                     self.scalar_factors_distribution[scalar_factor]["weights"]
@@ -276,23 +278,36 @@ class Population:
             right = left + 1 + np.random.poisson(lam=self.family_size)
             if right >= self.n_population:
                 right = self.n_population
-            hh_dict[family_index] = random_list[left:right]
+            family_member_indices = random_list[left:right]
             
             
-            
-            # non house hold
-            for i in HH_dict[family_index]:
+            for family_member_index in family_member_indices:
+                # Attribute: family_members
+                agents[family_member_index].family_members = family_member_indices
+                agents[family_member_index].family_members.remove(family_member_index)
+
+                
                 possible_acquaintances = random_list[:left] + random_list[right:]
-                num_of_acquaintances = np.random.poisson(lam=acquaintance_size)
+                num_of_acquaintances = np.random.poisson(lam=self.acquaintance_size)
                 acquaintances = random.sample(possible_acquaintances, num_of_acquaintances)
-                non_HH_dict[i] = {0: [], 1: [], 2: []}
-                for acquaintance in acquaintances:
-                    non_HH_dict[i][class_type[acquaintance]].append(acquaintance)
-                    
+                agents[family_member_index].acquaintances = acquaintances
                 
             left = right + 1
             family_index = family_index + 1
-            
-        return class_type, HH_dict, non_HH_dict
-`
+        
+        return agents
 
+
+
+scalar_factors_distribution = {
+    "age_group": {
+        "values": ["children", "adolescent", "adult"],
+        "weights": [0.33,0.33,0.33]
+    }
+}
+
+
+pop = Population(100, 4, 10,scalar_factors_distribution=scalar_factors_distribution)
+agents = pop.population_sample()
+for agent in agents:
+    print(
