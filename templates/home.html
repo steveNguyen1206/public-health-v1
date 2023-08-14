@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Home | Diseases Simulation{% endblock %}
-
+{%block head%}
+  <link rel="stylesheet" href="/static/css/flickity.css" media="screen">
+{%endblock%}
 {% block content %}
     <section id="video_bckgrnd_sct-26723" tabindex="-1" class="xuzjBY video_bckgrnd_sct-26723-container video_bckgrnd_sct-26723 wixui-section undefined" data-testid="section-container">
     <div id="bgLayers_video_bckgrnd_sct-26723" data-hook="bgLayers" class="MW5IWV">
@@ -318,8 +320,8 @@
       <div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div>
       <div id="bgMedia_flash_crd_sect-26723" class="VgO9Yg"></div>
       </div>
-      <div class="flash_crd_sect-26723-container clearfix" data-testid="responsive-container-content">
-        <div id="comp-kvozye2f" class="QOX0dS JCRlLH comp-kvozye2f-container  wixui-box">
+      <div class="flash_crd_sect-26723-container clearfix" data-testid="responsive-container-content" >
+        <div id="mainFea_title_card-14823" class="QOX0dS JCRlLH mainFea_title_card-14823-container  wixui-box">
           <div class="AG_P7Z MAs5Tr wixui-box"></div>
           <div id="comp-kvl2xcyn" class="BaOVQ8 tz5f0K comp-kvl2xcyn wixui-rich-text" data-testid="richTextElement" style="visibility: inherit;" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done">
           <h2 class="font_4 wixui-rich-text__text">
@@ -327,9 +329,10 @@
           </h2>
           </div>
         </div>
-        <div id="comp-lkbdyauz" class="QOX0dS JCRlLH comp-lkbdyauz wixui-box">
+        <div id="flsh_crd_desktop_ui-14823" >
+          <div id="survey_flshcard-14823" class="QOX0dS JCRlLH survey_flshcard-14823 wixui-box">
             <div class="AG_P7Z MAs5Tr wixui-box"></div>
-            <div class="comp-lkbdyauz-container" data-testid="responsive-container-content">
+            <div class="survey_flshcard-14823-container" data-testid="responsive-container-content">
             <div id="comp-lkbdyaxq5" class="QOX0dS JCRlLH comp-lkbdyaxq5-container comp-lkbdyaxq5 wixui-box">
                 <div class="AG_P7Z MAs5Tr wixui-box"></div>
                 <div id="comp-lkbdyay2" class="QOX0dS JCRlLH comp-lkbdyay2 wixui-box">
@@ -424,105 +427,365 @@
                 </div>
             </div>
             </div>
+          </div>
+          
+          <div id="simul_flshcard-14823" class="QOX0dS JCRlLH simul_flshcard-14823 wixui-box">
+              <div class="AG_P7Z MAs5Tr wixui-box"></div>
+              <div class="simul_flshcard-14823-container" data-testid="responsive-container-content">
+              <div id="comp-kvtomb0f" class="QOX0dS JCRlLH comp-kvtomb0f-container comp-kvtomb0f wixui-box">
+                  <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                  <div id="comp-kvtomb0j2" class="QOX0dS JCRlLH comp-kvtomb0j2 wixui-box">
+                  <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                  <div class="comp-kvtomb0j2-container" data-testid="responsive-container-content">
+                      <div id="comp-kvtomb0m1" class="QOX0dS JCRlLH comp-kvtomb0m1-container comp-kvtomb0m1 wixui-box" style="visibility: inherit;" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done">
+                      <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                      <div id="comp-kvtomb0w3" class="oYv3_8 comp-kvtomb0w3-container comp-kvtomb0w3 wixui-video-box" data-audio="off" data-no-audio="" data-playing="" data-animate-poster="none" data-has-alpha="true" data-can-play="" data-show-canvas="">
+                          <div class="F9nckB Iiblgf" tabindex="0" role="button" aria-label=" Play video" aria-pressed="true">
+                          <div id="bgLayers_comp-kvtomb0w3" data-hook="bgLayers" class="MW5IWV wmoHxw">
+                              <div id="bgMedia_comp-kvtomb0w3" class="VgO9Yg">
+                              <wix-video id="videoContainer_comp-kvtomb0w3" data-video-info="{&quot;fittingType&quot;:&quot;fit&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;hasBgScrollEffect&quot;:&quot;&quot;,&quot;bgEffectName&quot;:&quot;&quot;,&quot;videoId&quot;:&quot;c837a6_6ac2fcd12e134d429d7b917644e8ddb0&quot;,&quot;videoWidth&quot;:864,&quot;videoHeight&quot;:1080,&quot;qualities&quot;:[{&quot;quality&quot;:&quot;480p&quot;,&quot;size&quot;:184320,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/480p/mp4/file.mp4&quot;},{&quot;quality&quot;:&quot;720p&quot;,&quot;size&quot;:414720,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/720p/mp4/file.mp4&quot;},{&quot;quality&quot;:&quot;1080p&quot;,&quot;size&quot;:933120,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/1080p/mp4/file.mp4&quot;}],&quot;isVideoDataExists&quot;:&quot;1&quot;,&quot;videoFormat&quot;:&quot;mp4&quot;,&quot;playbackRate&quot;:1,&quot;autoPlay&quot;:true,&quot;containerId&quot;:&quot;comp-kvtomb0w3&quot;,&quot;animatePoster&quot;:&quot;none&quot;}" class="bX9O_S bgVideo yK6aSC">
+                                  <video id="comp-kvtomb0w3_video" class="K8MSra" role="presentation" crossorigin="anonymous" playsinline="" preload="auto" muted="" loop="" tabindex="-1" src="../videos/pocket.mp4"></video>
+                                  <wow-image id="comp-kvtomb0w3_img" class="HlRz5e Z_wCwr Jxk_UL bgVideoposter yK6aSC" data-image-info="{&quot;containerId&quot;:&quot;comp-kvtomb0w3&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;displayMode&quot;:&quot;fit&quot;,&quot;targetWidth&quot;:160,&quot;targetHeight&quot;:90,&quot;isLQIP&quot;:true,&quot;imageData&quot;:{&quot;width&quot;:1400,&quot;height&quot;:1750,&quot;uri&quot;:&quot;c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fit&quot;,&quot;quality&quot;:{&quot;unsharpMask&quot;:{&quot;radius&quot;:0.33,&quot;amount&quot;:1,&quot;threshold&quot;:0}},&quot;devicePixelRatio&quot;:1}}" data-bg-effect-name="" data-has-ssr-src="" data-src="https://static.wixstatic.com/media/c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png/v1/fill/w_164,h_205,al_c,q_85,usm_0.33_1.00_0.00,enc_auto/c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png">
+                                  <img src="./images/pocket.png" alt="" style="width: 205px; height: 205px; object-fit: contain; object-position: center center;" width="160" height="90" fetchpriority="high">
+                                  </wow-image>
+                              </wix-video>
+                              <canvas id="comp-kvtomb0w3webglcanvas" class="K_YxMd webglcanvas" aria-label="" role="presentation" data-testid="canvas" style="height: 100%; width: 100%; object-fit: contain; object-position: center center;" width="384" height="480"></canvas>
+                              </div>
+                          </div>
+                          </div>
+                          <div id="comp-kvtomb1u"></div>
+                          <div id="comp-kvtomb22" class="JtS1Rf" tabindex="0" role="button" aria-label="Mute" aria-pressed="true" data-testid="vb-audio" data-audio-mute="">
+                          <div id="audioOn-comp-kvtomb22" class="V9rZ5Z TtArsF wixui-vector-image">
+                              <div data-testid="svgRoot-audioOn-comp-kvtomb22" class="aizuI7 TcoJIb TtArsF">
+                              <!--?xml version="1.0" encoding="UTF-8"?-->
+                              <svg preserveAspectRatio="xMidYMid meet" data-bbox="7 5.999 16 18.001" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="presentation" aria-hidden="true" aria-labelledby="comp-kvtomb22-svgtitle_audioOn-comp-kvtomb22">
+                                  <title id="comp-kvtomb22-svgtitle_audioOn-comp-kvtomb22"></title>
+                                  <g>
+                                  <defs>
+                                      <filter id="4e358e3c-c4cc-411c-8da6-747bbbb99bfa_audioOn-comp-kvtomb22" height="200%" width="200%" y="-50%" x="-50%">
+                                      <feoffset result="out-offset" in="SourceAlpha"></feoffset>
+                                      <fegaussianblur result="out-blur" in="out-offset" stdDeviation="2"></fegaussianblur>
+                                      <fecolormatrix result="out-matrix" in="out-blur" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"></fecolormatrix>
+                                      <femerge>
+                                          <femergenode in="out-matrix"></femergenode>
+                                          <femergenode in="SourceGraphic"></femergenode>
+                                      </femerge>
+                                      </filter>
+                                  </defs>
+                                  <path filter="url(#4e358e3c-c4cc-411c-8da6-747bbbb99bfa_audioOn-comp-kvtomb22)" d="M23 6.616a.625.625 0 0 0-.727-.609l-10.241 1.54a.62.62 0 0 0-.535.609l-.006 10.016c0 .892-.276 1.319-1.971 1.319C7.646 19.49 7 20.631 7 21.748 7 22.655 7.507 24 9.516 24c2.249 0 3.236-1.44 3.236-2.713l.006-9.719 8.98-1.454v6.87c-.045.763-.401 1.13-1.973 1.13-1.874 0-2.52 1.141-2.52 2.258 0 .907.507 2.252 2.516 2.252 2.249 0 3.236-1.44 3.236-2.713L23 6.616z"></path>
+                                  </g>
+                              </svg>
+                              </div>
+                          </div>
+                          <div id="audioOff-comp-kvtomb22" class="V9rZ5Z ngHaxP wixui-vector-image">
+                              <div data-testid="svgRoot-audioOff-comp-kvtomb22" class="aizuI7 TcoJIb ngHaxP">
+                              <!--?xml version="1.0" encoding="UTF-8"?-->
+                              <svg preserveAspectRatio="xMidYMid meet" data-bbox="5.726 5.999 21.997 18.001" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="presentation" aria-hidden="true" aria-labelledby="comp-kvtomb22-svgtitle_audioOff-comp-kvtomb22">
+                                  <title id="comp-kvtomb22-svgtitle_audioOff-comp-kvtomb22"></title>
+                                  <g>
+                                  <defs>
+                                      <filter id="b0f9f707-af61-4336-bcea-c2fee482e562_audioOff-comp-kvtomb22" height="200%" width="200%" y="-50%" x="-50%">
+                                      <feoffset result="out-offset" in="SourceAlpha"></feoffset>
+                                      <fegaussianblur result="out-blur" in="out-offset" stdDeviation="2"></fegaussianblur>
+                                      <fecolormatrix result="out-matrix" in="out-blur" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.40 0"></fecolormatrix>
+                                      <femerge>
+                                          <femergenode in="out-matrix"></femergenode>
+                                          <femergenode in="SourceGraphic"></femergenode>
+                                      </femerge>
+                                      </filter>
+                                  </defs>
+                                  <path filter="url(#b0f9f707-af61-4336-bcea-c2fee482e562_audioOff-comp-kvtomb22)" d="M27.39 17.535a.478.478 0 0 1 .306.615v.001a.51.51 0 0 1-.641.292L6.074 12.471a.478.478 0 0 1-.325-.605.505.505 0 0 1 .661-.302l20.98 5.971zm-6.211.375c1.911-.377 1.812 2.001 1.813 2.001 0 1.273-.986 2.713-3.235 2.713-2.009 0-2.515-1.345-2.515-2.252 0-1.117.646-2.258 2.519-2.258.671-.001 1.095-.141 1.418-.204zm-8.427-1.643v.013h.001l-.005 5.007c0 1.273-.985 2.713-3.233 2.713C7.506 24 7 22.655 7 21.748c0-1.117.646-2.258 2.519-2.258 1.696 0 1.972-.427 1.972-1.319l.001-1.934a.513.513 0 0 1 .512-.477h.23c.285 0 .518.228.518.507zm-.537-4.642a.666.666 0 0 1-.506-.141.61.61 0 0 1-.22-.468l.006-2.86c0-.304.227-.562.535-.609l10.238-1.54a.629.629 0 0 1 .726.609L23 13.591c0 .013-.006.024-.007.036a.49.49 0 0 1-.094.248.516.516 0 0 1-.416.222h-.229a.51.51 0 0 1-.517-.505l-.004-3.479-9.518 1.512z"></path>
+                                  </g>
+                              </svg>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                      <div id="comp-kvtomb26" class="BaOVQ8 tz5f0K comp-kvtomb26 wixui-rich-text" data-testid="richTextElement">
+                          <h3 class="font_3 wixui-rich-text__text">
+                          <span class="wixui-rich-text__text">Mô phỏng</span>
+                          </h3>
+                      </div>
+                      </div>
+                  </div>
+                  </div>
+                  <div id="comp-kvtomb2a3" class="QOX0dS JCRlLH comp-kvtomb2a3 wixui-box">
+                  <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                  <div class="comp-kvtomb2a3-container" data-testid="responsive-container-content">
+                      <div id="comp-kvtomb2g" class="BaOVQ8 tz5f0K comp-kvtomb2g wixui-rich-text" data-testid="richTextElement">
+                      <p class="font_8 wixui-rich-text__text">Thay đổi các tham số về dịch bệnh để có được đồ thị mô phỏng tiến triển dịch bệnh bằng cách bấm vào nút "Mô phỏng" bên dưới.</p>
+                      </div>
+                      <div class="comp-lkbd2vak gydiew" id="comp-lkbd2vak" role="button" tabindex="0" aria-disabled="false">
+                      <div data-testid="linkElement" class="TFOeq0 wixui-button zKbzSQ" aria-disabled="false">
+                          <span class="kclxHl wixui-button__label">Mô phỏng</span>
+                      </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+              </div>
+          </div>
         </div>
-        
-        <div id="comp-kvtomaxx" class="QOX0dS JCRlLH comp-kvtomaxx wixui-box">
-            <div class="AG_P7Z MAs5Tr wixui-box"></div>
-            <div class="comp-kvtomaxx-container" data-testid="responsive-container-content">
-            <div id="comp-kvtomb0f" class="QOX0dS JCRlLH comp-kvtomb0f-container comp-kvtomb0f wixui-box">
+        <!-- mobil ui flash card  -->
+        <div id="flsh_crd_mobile_ui-14823" >
+          <style>
+                          
+            .carousel {
+              margin: 0 60px; /* space for prev/next buttons */
+            }
+
+            .carousel-cell {
+              width: 100%;
+              height: auto;
+              margin-right: 10px;
+              /* background: #8C8; */
+              border-radius: 5px;
+              /* counter-increment: gallery-cell; */
+            }
+
+            /* cell number */
+            .carousel-cell:before {
+              display: block;
+              text-align: center;
+              /* content: counter(gallery-cell); */
+              line-height: 200px;
+              font-size: 80px;
+              /* color: white; */
+            }
+
+            /* smaller, dark, rounded square */
+            .flickity-prev-next-button {
+              width: 30px;
+              height: 30px;
+              border-radius: 5px;
+              background: #333;
+            }
+            .flickity-prev-next-button:hover {
+              background: aqua;
+            }
+            /* arrow color */
+            .flickity-prev-next-button .arrow {
+              fill: white;
+            }
+            .flickity-prev-next-button.no-svg {
+              color: white;
+            }
+            /* position outside */
+            .flickity-prev-next-button.previous {
+              left: -40px;
+            }
+            .flickity-prev-next-button.next {
+              right: -40px;
+            }
+
+          </style>
+          <div class="carousel" data-flickity>
+            <div class="carousel-cell">
+              <div id="survey_flshcard-14823" class="QOX0dS JCRlLH survey_flshcard-14823 wixui-box">
                 <div class="AG_P7Z MAs5Tr wixui-box"></div>
-                <div id="comp-kvtomb0j2" class="QOX0dS JCRlLH comp-kvtomb0j2 wixui-box">
-                <div class="AG_P7Z MAs5Tr wixui-box"></div>
-                <div class="comp-kvtomb0j2-container" data-testid="responsive-container-content">
-                    <div id="comp-kvtomb0m1" class="QOX0dS JCRlLH comp-kvtomb0m1-container comp-kvtomb0m1 wixui-box" style="visibility: inherit;" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done">
+                <div class="survey_flshcard-14823-container" data-testid="responsive-container-content">
+                <div id="comp-lkbdyaxq5" class="QOX0dS JCRlLH comp-lkbdyaxq5-container comp-lkbdyaxq5 wixui-box">
                     <div class="AG_P7Z MAs5Tr wixui-box"></div>
-                    <div id="comp-kvtomb0w3" class="oYv3_8 comp-kvtomb0w3-container comp-kvtomb0w3 wixui-video-box" data-audio="off" data-no-audio="" data-playing="" data-animate-poster="none" data-has-alpha="true" data-can-play="" data-show-canvas="">
-                        <div class="F9nckB Iiblgf" tabindex="0" role="button" aria-label=" Play video" aria-pressed="true">
-                        <div id="bgLayers_comp-kvtomb0w3" data-hook="bgLayers" class="MW5IWV wmoHxw">
-                            <div id="bgMedia_comp-kvtomb0w3" class="VgO9Yg">
-                            <wix-video id="videoContainer_comp-kvtomb0w3" data-video-info="{&quot;fittingType&quot;:&quot;fit&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;hasBgScrollEffect&quot;:&quot;&quot;,&quot;bgEffectName&quot;:&quot;&quot;,&quot;videoId&quot;:&quot;c837a6_6ac2fcd12e134d429d7b917644e8ddb0&quot;,&quot;videoWidth&quot;:864,&quot;videoHeight&quot;:1080,&quot;qualities&quot;:[{&quot;quality&quot;:&quot;480p&quot;,&quot;size&quot;:184320,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/480p/mp4/file.mp4&quot;},{&quot;quality&quot;:&quot;720p&quot;,&quot;size&quot;:414720,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/720p/mp4/file.mp4&quot;},{&quot;quality&quot;:&quot;1080p&quot;,&quot;size&quot;:933120,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/1080p/mp4/file.mp4&quot;}],&quot;isVideoDataExists&quot;:&quot;1&quot;,&quot;videoFormat&quot;:&quot;mp4&quot;,&quot;playbackRate&quot;:1,&quot;autoPlay&quot;:true,&quot;containerId&quot;:&quot;comp-kvtomb0w3&quot;,&quot;animatePoster&quot;:&quot;none&quot;}" class="bX9O_S bgVideo yK6aSC">
-                                <video id="comp-kvtomb0w3_video" class="K8MSra" role="presentation" crossorigin="anonymous" playsinline="" preload="auto" muted="" loop="" tabindex="-1" src="../videos/pocket.mp4"></video>
-                                <wow-image id="comp-kvtomb0w3_img" class="HlRz5e Z_wCwr Jxk_UL bgVideoposter yK6aSC" data-image-info="{&quot;containerId&quot;:&quot;comp-kvtomb0w3&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;displayMode&quot;:&quot;fit&quot;,&quot;targetWidth&quot;:160,&quot;targetHeight&quot;:90,&quot;isLQIP&quot;:true,&quot;imageData&quot;:{&quot;width&quot;:1400,&quot;height&quot;:1750,&quot;uri&quot;:&quot;c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fit&quot;,&quot;quality&quot;:{&quot;unsharpMask&quot;:{&quot;radius&quot;:0.33,&quot;amount&quot;:1,&quot;threshold&quot;:0}},&quot;devicePixelRatio&quot;:1}}" data-bg-effect-name="" data-has-ssr-src="" data-src="https://static.wixstatic.com/media/c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png/v1/fill/w_164,h_205,al_c,q_85,usm_0.33_1.00_0.00,enc_auto/c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png">
-                                <img src="./images/pocket.png" alt="" style="width: 205px; height: 205px; object-fit: contain; object-position: center center;" width="160" height="90" fetchpriority="high">
-                                </wow-image>
-                            </wix-video>
-                            <canvas id="comp-kvtomb0w3webglcanvas" class="K_YxMd webglcanvas" aria-label="" role="presentation" data-testid="canvas" style="height: 100%; width: 100%; object-fit: contain; object-position: center center;" width="384" height="480"></canvas>
-                            </div>
+                    <div id="comp-lkbdyay2" class="QOX0dS JCRlLH comp-lkbdyay2 wixui-box">
+                    <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                    <div class="comp-lkbdyay2-container" data-testid="responsive-container-content">
+                        <div id="comp-lkbdz08z" class="BaOVQ8 tz5f0K comp-lkbdz08z wixui-rich-text" data-testid="richTextElement">
+                        <p class="font_8 wixui-rich-text__text">Tham gia khai báo, cập nhật thông tin tiếp xúc của các thành viên trong gia đình bằng cách bấm nút khai báo bên dưới.</p>
                         </div>
-                        </div>
-                        <div id="comp-kvtomb1u"></div>
-                        <div id="comp-kvtomb22" class="JtS1Rf" tabindex="0" role="button" aria-label="Mute" aria-pressed="true" data-testid="vb-audio" data-audio-mute="">
-                        <div id="audioOn-comp-kvtomb22" class="V9rZ5Z TtArsF wixui-vector-image">
-                            <div data-testid="svgRoot-audioOn-comp-kvtomb22" class="aizuI7 TcoJIb TtArsF">
-                            <!--?xml version="1.0" encoding="UTF-8"?-->
-                            <svg preserveAspectRatio="xMidYMid meet" data-bbox="7 5.999 16 18.001" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="presentation" aria-hidden="true" aria-labelledby="comp-kvtomb22-svgtitle_audioOn-comp-kvtomb22">
-                                <title id="comp-kvtomb22-svgtitle_audioOn-comp-kvtomb22"></title>
-                                <g>
-                                <defs>
-                                    <filter id="4e358e3c-c4cc-411c-8da6-747bbbb99bfa_audioOn-comp-kvtomb22" height="200%" width="200%" y="-50%" x="-50%">
-                                    <feoffset result="out-offset" in="SourceAlpha"></feoffset>
-                                    <fegaussianblur result="out-blur" in="out-offset" stdDeviation="2"></fegaussianblur>
-                                    <fecolormatrix result="out-matrix" in="out-blur" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"></fecolormatrix>
-                                    <femerge>
-                                        <femergenode in="out-matrix"></femergenode>
-                                        <femergenode in="SourceGraphic"></femergenode>
-                                    </femerge>
-                                    </filter>
-                                </defs>
-                                <path filter="url(#4e358e3c-c4cc-411c-8da6-747bbbb99bfa_audioOn-comp-kvtomb22)" d="M23 6.616a.625.625 0 0 0-.727-.609l-10.241 1.54a.62.62 0 0 0-.535.609l-.006 10.016c0 .892-.276 1.319-1.971 1.319C7.646 19.49 7 20.631 7 21.748 7 22.655 7.507 24 9.516 24c2.249 0 3.236-1.44 3.236-2.713l.006-9.719 8.98-1.454v6.87c-.045.763-.401 1.13-1.973 1.13-1.874 0-2.52 1.141-2.52 2.258 0 .907.507 2.252 2.516 2.252 2.249 0 3.236-1.44 3.236-2.713L23 6.616z"></path>
-                                </g>
-                            </svg>
-                            </div>
-                        </div>
-                        <div id="audioOff-comp-kvtomb22" class="V9rZ5Z ngHaxP wixui-vector-image">
-                            <div data-testid="svgRoot-audioOff-comp-kvtomb22" class="aizuI7 TcoJIb ngHaxP">
-                            <!--?xml version="1.0" encoding="UTF-8"?-->
-                            <svg preserveAspectRatio="xMidYMid meet" data-bbox="5.726 5.999 21.997 18.001" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="presentation" aria-hidden="true" aria-labelledby="comp-kvtomb22-svgtitle_audioOff-comp-kvtomb22">
-                                <title id="comp-kvtomb22-svgtitle_audioOff-comp-kvtomb22"></title>
-                                <g>
-                                <defs>
-                                    <filter id="b0f9f707-af61-4336-bcea-c2fee482e562_audioOff-comp-kvtomb22" height="200%" width="200%" y="-50%" x="-50%">
-                                    <feoffset result="out-offset" in="SourceAlpha"></feoffset>
-                                    <fegaussianblur result="out-blur" in="out-offset" stdDeviation="2"></fegaussianblur>
-                                    <fecolormatrix result="out-matrix" in="out-blur" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.40 0"></fecolormatrix>
-                                    <femerge>
-                                        <femergenode in="out-matrix"></femergenode>
-                                        <femergenode in="SourceGraphic"></femergenode>
-                                    </femerge>
-                                    </filter>
-                                </defs>
-                                <path filter="url(#b0f9f707-af61-4336-bcea-c2fee482e562_audioOff-comp-kvtomb22)" d="M27.39 17.535a.478.478 0 0 1 .306.615v.001a.51.51 0 0 1-.641.292L6.074 12.471a.478.478 0 0 1-.325-.605.505.505 0 0 1 .661-.302l20.98 5.971zm-6.211.375c1.911-.377 1.812 2.001 1.813 2.001 0 1.273-.986 2.713-3.235 2.713-2.009 0-2.515-1.345-2.515-2.252 0-1.117.646-2.258 2.519-2.258.671-.001 1.095-.141 1.418-.204zm-8.427-1.643v.013h.001l-.005 5.007c0 1.273-.985 2.713-3.233 2.713C7.506 24 7 22.655 7 21.748c0-1.117.646-2.258 2.519-2.258 1.696 0 1.972-.427 1.972-1.319l.001-1.934a.513.513 0 0 1 .512-.477h.23c.285 0 .518.228.518.507zm-.537-4.642a.666.666 0 0 1-.506-.141.61.61 0 0 1-.22-.468l.006-2.86c0-.304.227-.562.535-.609l10.238-1.54a.629.629 0 0 1 .726.609L23 13.591c0 .013-.006.024-.007.036a.49.49 0 0 1-.094.248.516.516 0 0 1-.416.222h-.229a.51.51 0 0 1-.517-.505l-.004-3.479-9.518 1.512z"></path>
-                                </g>
-                            </svg>
-                            </div>
+                        <div class="comp-lkbdyztx gydiew" id="comp-lkbdyztx" role="button" tabindex="0" aria-disabled="false">
+                        <div data-testid="linkElement" class="TFOeq0 wixui-button zKbzSQ" aria-disabled="false">
+                          <button onclick = "window.location.href='/survey';">
+                            <span class="kclxHl wixui-button__label">Khai báo</span>
+                          </button>
                         </div>
                         </div>
                     </div>
-                    <div id="comp-kvtomb26" class="BaOVQ8 tz5f0K comp-kvtomb26 wixui-rich-text" data-testid="richTextElement">
-                        <h3 class="font_3 wixui-rich-text__text">
-                        <span class="wixui-rich-text__text">Mô phỏng</span>
-                        </h3>
+                    </div>
+                    <div id="comp-lkbdyzgg" class="QOX0dS JCRlLH comp-lkbdyzgg wixui-box">
+                    <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                    <div class="comp-lkbdyzgg-container" data-testid="responsive-container-content">
+                        <div id="comp-lkbe4ihh" class="QOX0dS JCRlLH comp-lkbe4ihh-container comp-lkbe4ihh wixui-box">
+                        <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                        <div id="comp-lkbdyzgm" class="oYv3_8 comp-lkbdyzgm-container comp-lkbdyzgm wixui-video-box" data-audio="off" data-no-audio="" data-playing="" data-animate-poster="none" data-has-alpha="true" data-can-play="" data-show-canvas="">
+                            <div class="F9nckB Iiblgf" tabindex="0" role="button" aria-label=" Play video" aria-pressed="true">
+                            <div id="bgLayers_comp-lkbdyzgm" data-hook="bgLayers" class="MW5IWV wmoHxw">
+                                <div id="bgMedia_comp-lkbdyzgm" class="VgO9Yg">
+                                <wix-video id="videoContainer_comp-lkbdyzgm" data-video-info="{&quot;fittingType&quot;:&quot;fit&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;hasBgScrollEffect&quot;:&quot;&quot;,&quot;bgEffectName&quot;:&quot;&quot;,&quot;videoId&quot;:&quot;c837a6_4cf6781e384a4a459cfa998be065985c&quot;,&quot;videoWidth&quot;:878,&quot;videoHeight&quot;:1080,&quot;qualities&quot;:[{&quot;quality&quot;:&quot;480p&quot;,&quot;size&quot;:187200,&quot;url&quot;:&quot;video/c837a6_4cf6781e384a4a459cfa998be065985c/480p/mp4/file.mp4&quot;},{&quot;quality&quot;:&quot;720p&quot;,&quot;size&quot;:421920,&quot;url&quot;:&quot;video/c837a6_4cf6781e384a4a459cfa998be065985c/720p/mp4/file.mp4&quot;},{&quot;quality&quot;:&quot;1080p&quot;,&quot;size&quot;:948240,&quot;url&quot;:&quot;video/c837a6_4cf6781e384a4a459cfa998be065985c/1080p/mp4/file.mp4&quot;}],&quot;isVideoDataExists&quot;:&quot;1&quot;,&quot;videoFormat&quot;:&quot;mp4&quot;,&quot;playbackRate&quot;:1,&quot;autoPlay&quot;:true,&quot;containerId&quot;:&quot;comp-lkbdyzgm&quot;,&quot;animatePoster&quot;:&quot;none&quot;}" class="bX9O_S bgVideo yK6aSC">
+                                    <video id="comp-lkbdyzgm_video" class="K8MSra" role="presentation" crossorigin="anonymous" playsinline="" preload="auto" muted="" loop="" tabindex="-1" src="../videos/hand.mp4"></video>
+                                    <wow-image id="comp-lkbdyzgm_img" class="HlRz5e Z_wCwr Jxk_UL bgVideoposter yK6aSC" data-image-info="{&quot;containerId&quot;:&quot;comp-lkbdyzgm&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;displayMode&quot;:&quot;fit&quot;,&quot;targetWidth&quot;:160,&quot;targetHeight&quot;:90,&quot;isLQIP&quot;:true,&quot;imageData&quot;:{&quot;width&quot;:1600,&quot;height&quot;:1970,&quot;uri&quot;:&quot;c837a6_4cf6781e384a4a459cfa998be065985cf000.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fit&quot;,&quot;quality&quot;:{&quot;unsharpMask&quot;:{&quot;radius&quot;:0.33,&quot;amount&quot;:1,&quot;threshold&quot;:0}},&quot;devicePixelRatio&quot;:1}}" data-bg-effect-name="" data-has-ssr-src="" data-src="https://static.wixstatic.com/media/c837a6_4cf6781e384a4a459cfa998be065985cf000.png/v1/fill/w_145,h_179,al_c,q_85,usm_0.33_1.00_0.00,enc_auto/c837a6_4cf6781e384a4a459cfa998be065985cf000.png">
+                                    <img src="./images/hand.png" alt="" style="width: 179px; height: 179px; object-fit: contain; object-position: center center;" width="160" height="90" fetchpriority="high">
+                                    </wow-image>
+                                </wix-video>
+                                <canvas id="comp-lkbdyzgmwebglcanvas" class="K_YxMd webglcanvas" aria-label="" role="presentation" data-testid="canvas" style="height: 100%; width: 100%; object-fit: contain; object-position: center center;" width="390" height="480"></canvas>
+                                </div>
+                            </div>
+                            </div>
+                            <div id="comp-lkbdyzgn5"></div>
+                            <div id="comp-lkbdyzgp" class="JtS1Rf" tabindex="0" role="button" aria-label="Mute" aria-pressed="true" data-testid="vb-audio" data-audio-mute="">
+                            <div id="audioOn-comp-lkbdyzgp" class="V9rZ5Z TtArsF wixui-vector-image">
+                                <div data-testid="svgRoot-audioOn-comp-lkbdyzgp" class="aizuI7 TcoJIb TtArsF">
+                                <!--?xml version="1.0" encoding="UTF-8"?-->
+                                <svg preserveAspectRatio="xMidYMid meet" data-bbox="7 5.999 16 18.001" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="presentation" aria-hidden="true" aria-labelledby="comp-lkbdyzgp-svgtitle_audioOn-comp-lkbdyzgp">
+                                    <title id="comp-lkbdyzgp-svgtitle_audioOn-comp-lkbdyzgp"></title>
+                                    <g>
+                                    <defs>
+                                        <filter id="4e358e3c-c4cc-411c-8da6-747bbbb99bfa_audioOn-comp-lkbdyzgp" height="200%" width="200%" y="-50%" x="-50%">
+                                        <feoffset result="out-offset" in="SourceAlpha"></feoffset>
+                                        <fegaussianblur result="out-blur" in="out-offset" stdDeviation="2"></fegaussianblur>
+                                        <fecolormatrix result="out-matrix" in="out-blur" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"></fecolormatrix>
+                                        <femerge>
+                                            <femergenode in="out-matrix"></femergenode>
+                                            <femergenode in="SourceGraphic"></femergenode>
+                                        </femerge>
+                                        </filter>
+                                    </defs>
+                                    <path filter="url(#4e358e3c-c4cc-411c-8da6-747bbbb99bfa_audioOn-comp-lkbdyzgp)" d="M23 6.616a.625.625 0 0 0-.727-.609l-10.241 1.54a.62.62 0 0 0-.535.609l-.006 10.016c0 .892-.276 1.319-1.971 1.319C7.646 19.49 7 20.631 7 21.748 7 22.655 7.507 24 9.516 24c2.249 0 3.236-1.44 3.236-2.713l.006-9.719 8.98-1.454v6.87c-.045.763-.401 1.13-1.973 1.13-1.874 0-2.52 1.141-2.52 2.258 0 .907.507 2.252 2.516 2.252 2.249 0 3.236-1.44 3.236-2.713L23 6.616z"></path>
+                                    </g>
+                                </svg>
+                                </div>
+                            </div>
+                            <div id="audioOff-comp-lkbdyzgp" class="V9rZ5Z ngHaxP wixui-vector-image">
+                                <div data-testid="svgRoot-audioOff-comp-lkbdyzgp" class="aizuI7 TcoJIb ngHaxP">
+                                <!--?xml version="1.0" encoding="UTF-8"?-->
+                                <svg preserveAspectRatio="xMidYMid meet" data-bbox="5.726 5.999 21.997 18.001" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="presentation" aria-hidden="true" aria-labelledby="comp-lkbdyzgp-svgtitle_audioOff-comp-lkbdyzgp">
+                                    <title id="comp-lkbdyzgp-svgtitle_audioOff-comp-lkbdyzgp"></title>
+                                    <g>
+                                    <defs>
+                                        <filter id="b0f9f707-af61-4336-bcea-c2fee482e562_audioOff-comp-lkbdyzgp" height="200%" width="200%" y="-50%" x="-50%">
+                                        <feoffset result="out-offset" in="SourceAlpha"></feoffset>
+                                        <fegaussianblur result="out-blur" in="out-offset" stdDeviation="2"></fegaussianblur>
+                                        <fecolormatrix result="out-matrix" in="out-blur" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.40 0"></fecolormatrix>
+                                        <femerge>
+                                            <femergenode in="out-matrix"></femergenode>
+                                            <femergenode in="SourceGraphic"></femergenode>
+                                        </femerge>
+                                        </filter>
+                                    </defs>
+                                    <path filter="url(#b0f9f707-af61-4336-bcea-c2fee482e562_audioOff-comp-lkbdyzgp)" d="M27.39 17.535a.478.478 0 0 1 .306.615v.001a.51.51 0 0 1-.641.292L6.074 12.471a.478.478 0 0 1-.325-.605.505.505 0 0 1 .661-.302l20.98 5.971zm-6.211.375c1.911-.377 1.812 2.001 1.813 2.001 0 1.273-.986 2.713-3.235 2.713-2.009 0-2.515-1.345-2.515-2.252 0-1.117.646-2.258 2.519-2.258.671-.001 1.095-.141 1.418-.204zm-8.427-1.643v.013h.001l-.005 5.007c0 1.273-.985 2.713-3.233 2.713C7.506 24 7 22.655 7 21.748c0-1.117.646-2.258 2.519-2.258 1.696 0 1.972-.427 1.972-1.319l.001-1.934a.513.513 0 0 1 .512-.477h.23c.285 0 .518.228.518.507zm-.537-4.642a.666.666 0 0 1-.506-.141.61.61 0 0 1-.22-.468l.006-2.86c0-.304.227-.562.535-.609l10.238-1.54a.629.629 0 0 1 .726.609L23 13.591c0 .013-.006.024-.007.036a.49.49 0 0 1-.094.248.516.516 0 0 1-.416.222h-.229a.51.51 0 0 1-.517-.505l-.004-3.479-9.518 1.512z"></path>
+                                    </g>
+                                </svg>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div id="comp-lkbdyzgq2" class="BaOVQ8 tz5f0K comp-lkbdyzgq2 wixui-rich-text" data-testid="richTextElement">
+                            <h3 class="font_3 wixui-rich-text__text">
+                            <span class="wixui-rich-text__text">Khai báo</span>
+                            </h3>
+                        </div>
+                        </div>
                     </div>
                     </div>
                 </div>
                 </div>
-                <div id="comp-kvtomb2a3" class="QOX0dS JCRlLH comp-kvtomb2a3 wixui-box">
+              </div>
+            </div>
+            <div class="carousel-cell">
+              <div id="simul_flshcard-14823" class="QOX0dS JCRlLH simul_flshcard-14823 wixui-box">
                 <div class="AG_P7Z MAs5Tr wixui-box"></div>
-                <div class="comp-kvtomb2a3-container" data-testid="responsive-container-content">
-                    <div id="comp-kvtomb2g" class="BaOVQ8 tz5f0K comp-kvtomb2g wixui-rich-text" data-testid="richTextElement">
-                    <p class="font_8 wixui-rich-text__text">Thay đổi các tham số về dịch bệnh để có được đồ thị mô phỏng tiến triển dịch bệnh bằng cách bấm vào nút "Mô phỏng" bên dưới.</p>
+                <div class="simul_flshcard-14823-container" data-testid="responsive-container-content">
+                <div id="comp-kvtomb0f" class="QOX0dS JCRlLH comp-kvtomb0f-container comp-kvtomb0f wixui-box">
+                    <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                    <div id="comp-kvtomb0j2" class="QOX0dS JCRlLH comp-kvtomb0j2 wixui-box">
+                    <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                    <div class="comp-kvtomb0j2-container" data-testid="responsive-container-content">
+                        <div id="comp-kvtomb0m1" class="QOX0dS JCRlLH comp-kvtomb0m1-container comp-kvtomb0m1 wixui-box" style="visibility: inherit;" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done">
+                        <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                        <div id="comp-kvtomb0w3" class="oYv3_8 comp-kvtomb0w3-container comp-kvtomb0w3 wixui-video-box" data-audio="off" data-no-audio="" data-playing="" data-animate-poster="none" data-has-alpha="true" data-can-play="" data-show-canvas="">
+                            <div class="F9nckB Iiblgf" tabindex="0" role="button" aria-label=" Play video" aria-pressed="true">
+                            <div id="bgLayers_comp-kvtomb0w3" data-hook="bgLayers" class="MW5IWV wmoHxw">
+                                <div id="bgMedia_comp-kvtomb0w3" class="VgO9Yg">
+                                <wix-video id="videoContainer_comp-kvtomb0w3" data-video-info="{&quot;fittingType&quot;:&quot;fit&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;hasBgScrollEffect&quot;:&quot;&quot;,&quot;bgEffectName&quot;:&quot;&quot;,&quot;videoId&quot;:&quot;c837a6_6ac2fcd12e134d429d7b917644e8ddb0&quot;,&quot;videoWidth&quot;:864,&quot;videoHeight&quot;:1080,&quot;qualities&quot;:[{&quot;quality&quot;:&quot;480p&quot;,&quot;size&quot;:184320,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/480p/mp4/file.mp4&quot;},{&quot;quality&quot;:&quot;720p&quot;,&quot;size&quot;:414720,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/720p/mp4/file.mp4&quot;},{&quot;quality&quot;:&quot;1080p&quot;,&quot;size&quot;:933120,&quot;url&quot;:&quot;video/c837a6_6ac2fcd12e134d429d7b917644e8ddb0/1080p/mp4/file.mp4&quot;}],&quot;isVideoDataExists&quot;:&quot;1&quot;,&quot;videoFormat&quot;:&quot;mp4&quot;,&quot;playbackRate&quot;:1,&quot;autoPlay&quot;:true,&quot;containerId&quot;:&quot;comp-kvtomb0w3&quot;,&quot;animatePoster&quot;:&quot;none&quot;}" class="bX9O_S bgVideo yK6aSC">
+                                    <video id="comp-kvtomb0w3_video" class="K8MSra" role="presentation" crossorigin="anonymous" playsinline="" preload="auto" muted="" loop="" tabindex="-1" src="../videos/pocket.mp4"></video>
+                                    <wow-image id="comp-kvtomb0w3_img" class="HlRz5e Z_wCwr Jxk_UL bgVideoposter yK6aSC" data-image-info="{&quot;containerId&quot;:&quot;comp-kvtomb0w3&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;displayMode&quot;:&quot;fit&quot;,&quot;targetWidth&quot;:160,&quot;targetHeight&quot;:90,&quot;isLQIP&quot;:true,&quot;imageData&quot;:{&quot;width&quot;:1400,&quot;height&quot;:1750,&quot;uri&quot;:&quot;c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png&quot;,&quot;name&quot;:&quot;&quot;,&quot;displayMode&quot;:&quot;fit&quot;,&quot;quality&quot;:{&quot;unsharpMask&quot;:{&quot;radius&quot;:0.33,&quot;amount&quot;:1,&quot;threshold&quot;:0}},&quot;devicePixelRatio&quot;:1}}" data-bg-effect-name="" data-has-ssr-src="" data-src="https://static.wixstatic.com/media/c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png/v1/fill/w_164,h_205,al_c,q_85,usm_0.33_1.00_0.00,enc_auto/c837a6_6ac2fcd12e134d429d7b917644e8ddb0f000.png">
+                                    <img src="./images/pocket.png" alt="" style="width: 205px; height: 205px; object-fit: contain; object-position: center center;" width="160" height="90" fetchpriority="high">
+                                    </wow-image>
+                                </wix-video>
+                                <canvas id="comp-kvtomb0w3webglcanvas" class="K_YxMd webglcanvas" aria-label="" role="presentation" data-testid="canvas" style="height: 100%; width: 100%; object-fit: contain; object-position: center center;" width="384" height="480"></canvas>
+                                </div>
+                            </div>
+                            </div>
+                            <div id="comp-kvtomb1u"></div>
+                            <div id="comp-kvtomb22" class="JtS1Rf" tabindex="0" role="button" aria-label="Mute" aria-pressed="true" data-testid="vb-audio" data-audio-mute="">
+                            <div id="audioOn-comp-kvtomb22" class="V9rZ5Z TtArsF wixui-vector-image">
+                                <div data-testid="svgRoot-audioOn-comp-kvtomb22" class="aizuI7 TcoJIb TtArsF">
+                                <!--?xml version="1.0" encoding="UTF-8"?-->
+                                <svg preserveAspectRatio="xMidYMid meet" data-bbox="7 5.999 16 18.001" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="presentation" aria-hidden="true" aria-labelledby="comp-kvtomb22-svgtitle_audioOn-comp-kvtomb22">
+                                    <title id="comp-kvtomb22-svgtitle_audioOn-comp-kvtomb22"></title>
+                                    <g>
+                                    <defs>
+                                        <filter id="4e358e3c-c4cc-411c-8da6-747bbbb99bfa_audioOn-comp-kvtomb22" height="200%" width="200%" y="-50%" x="-50%">
+                                        <feoffset result="out-offset" in="SourceAlpha"></feoffset>
+                                        <fegaussianblur result="out-blur" in="out-offset" stdDeviation="2"></fegaussianblur>
+                                        <fecolormatrix result="out-matrix" in="out-blur" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"></fecolormatrix>
+                                        <femerge>
+                                            <femergenode in="out-matrix"></femergenode>
+                                            <femergenode in="SourceGraphic"></femergenode>
+                                        </femerge>
+                                        </filter>
+                                    </defs>
+                                    <path filter="url(#4e358e3c-c4cc-411c-8da6-747bbbb99bfa_audioOn-comp-kvtomb22)" d="M23 6.616a.625.625 0 0 0-.727-.609l-10.241 1.54a.62.62 0 0 0-.535.609l-.006 10.016c0 .892-.276 1.319-1.971 1.319C7.646 19.49 7 20.631 7 21.748 7 22.655 7.507 24 9.516 24c2.249 0 3.236-1.44 3.236-2.713l.006-9.719 8.98-1.454v6.87c-.045.763-.401 1.13-1.973 1.13-1.874 0-2.52 1.141-2.52 2.258 0 .907.507 2.252 2.516 2.252 2.249 0 3.236-1.44 3.236-2.713L23 6.616z"></path>
+                                    </g>
+                                </svg>
+                                </div>
+                            </div>
+                            <div id="audioOff-comp-kvtomb22" class="V9rZ5Z ngHaxP wixui-vector-image">
+                                <div data-testid="svgRoot-audioOff-comp-kvtomb22" class="aizuI7 TcoJIb ngHaxP">
+                                <!--?xml version="1.0" encoding="UTF-8"?-->
+                                <svg preserveAspectRatio="xMidYMid meet" data-bbox="5.726 5.999 21.997 18.001" data-type="shape" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="presentation" aria-hidden="true" aria-labelledby="comp-kvtomb22-svgtitle_audioOff-comp-kvtomb22">
+                                    <title id="comp-kvtomb22-svgtitle_audioOff-comp-kvtomb22"></title>
+                                    <g>
+                                    <defs>
+                                        <filter id="b0f9f707-af61-4336-bcea-c2fee482e562_audioOff-comp-kvtomb22" height="200%" width="200%" y="-50%" x="-50%">
+                                        <feoffset result="out-offset" in="SourceAlpha"></feoffset>
+                                        <fegaussianblur result="out-blur" in="out-offset" stdDeviation="2"></fegaussianblur>
+                                        <fecolormatrix result="out-matrix" in="out-blur" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.40 0"></fecolormatrix>
+                                        <femerge>
+                                            <femergenode in="out-matrix"></femergenode>
+                                            <femergenode in="SourceGraphic"></femergenode>
+                                        </femerge>
+                                        </filter>
+                                    </defs>
+                                    <path filter="url(#b0f9f707-af61-4336-bcea-c2fee482e562_audioOff-comp-kvtomb22)" d="M27.39 17.535a.478.478 0 0 1 .306.615v.001a.51.51 0 0 1-.641.292L6.074 12.471a.478.478 0 0 1-.325-.605.505.505 0 0 1 .661-.302l20.98 5.971zm-6.211.375c1.911-.377 1.812 2.001 1.813 2.001 0 1.273-.986 2.713-3.235 2.713-2.009 0-2.515-1.345-2.515-2.252 0-1.117.646-2.258 2.519-2.258.671-.001 1.095-.141 1.418-.204zm-8.427-1.643v.013h.001l-.005 5.007c0 1.273-.985 2.713-3.233 2.713C7.506 24 7 22.655 7 21.748c0-1.117.646-2.258 2.519-2.258 1.696 0 1.972-.427 1.972-1.319l.001-1.934a.513.513 0 0 1 .512-.477h.23c.285 0 .518.228.518.507zm-.537-4.642a.666.666 0 0 1-.506-.141.61.61 0 0 1-.22-.468l.006-2.86c0-.304.227-.562.535-.609l10.238-1.54a.629.629 0 0 1 .726.609L23 13.591c0 .013-.006.024-.007.036a.49.49 0 0 1-.094.248.516.516 0 0 1-.416.222h-.229a.51.51 0 0 1-.517-.505l-.004-3.479-9.518 1.512z"></path>
+                                    </g>
+                                </svg>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div id="comp-kvtomb26" class="BaOVQ8 tz5f0K comp-kvtomb26 wixui-rich-text" data-testid="richTextElement">
+                            <h3 class="font_3 wixui-rich-text__text">
+                            <span class="wixui-rich-text__text">Mô phỏng</span>
+                            </h3>
+                        </div>
+                        </div>
                     </div>
-                    <div class="comp-lkbd2vak gydiew" id="comp-lkbd2vak" role="button" tabindex="0" aria-disabled="false">
-                    <div data-testid="linkElement" class="TFOeq0 wixui-button zKbzSQ" aria-disabled="false">
-                        <span class="kclxHl wixui-button__label">Mô phỏng</span>
+                    </div>
+                    <div id="comp-kvtomb2a3" class="QOX0dS JCRlLH comp-kvtomb2a3 wixui-box">
+                    <div class="AG_P7Z MAs5Tr wixui-box"></div>
+                    <div class="comp-kvtomb2a3-container" data-testid="responsive-container-content">
+                        <div id="comp-kvtomb2g" class="BaOVQ8 tz5f0K comp-kvtomb2g wixui-rich-text" data-testid="richTextElement">
+                        <p class="font_8 wixui-rich-text__text">Thay đổi các tham số về dịch bệnh để có được đồ thị mô phỏng tiến triển dịch bệnh bằng cách bấm vào nút "Mô phỏng" bên dưới.</p>
+                        </div>
+                        <div class="comp-lkbd2vak gydiew" id="comp-lkbd2vak" role="button" tabindex="0" aria-disabled="false">
+                        <div data-testid="linkElement" class="TFOeq0 wixui-button zKbzSQ" aria-disabled="false">
+                            <span class="kclxHl wixui-button__label">Mô phỏng</span>
+                        </div>
+                        </div>
                     </div>
                     </div>
                 </div>
                 </div>
+              </div>
             </div>
-            </div>
+            <!-- <div class="carousel-cell"></div>
+            <div class="carousel-cell"></div>
+            <div class="carousel-cell"></div> -->
+          </div>
         </div>
-      
+       
       </div>
+      
   </section>
+  <script src="/static/js/flickity.pkgd.min.js"></script>
 {% endblock %}

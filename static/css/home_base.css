@@ -121,6 +121,29 @@ body.device-mobile-optimized {
   clear: both;
   display: table;
 }
+@media screen and (max-width:500px){
+  #flsh_crd_desktop_ui-14823{
+    display: none;
+  }
+}
+@media screen and (max-width:500px){
+  #flsh_crd_mobile_ui-14823{
+    display: block;
+  }
+}
+
+@media screen and (min-width:500px){
+  #flsh_crd_desktop_ui-14823{
+    display: block;
+  }
+}
+
+@media screen and (min-width:500px){
+  #flsh_crd_mobile_ui-14823{
+    display: none;
+  }
+}
+
 
 body.device-mobile-optimized:not(.responsive) #SITE_CONTAINER {
   margin-left: auto;
@@ -8651,6 +8674,7 @@ body.ZR3zoU {
         @media screen and (min-width: 320px) and (max-width: 750px) {
           #flash_crd_sect-26723 {
             --l_display: unset;
+            margin-top: 30px;
           }
 
           #flash_crd_sect-26723 .flash_crd_sect-26723-container {
@@ -8668,7 +8692,7 @@ body.ZR3zoU {
           --static-spx: 1px;
         }
 
-        #comp-lkbdyauz {
+        #survey_flshcard-14823 {
           min-height: 0px;
           --l_display: unset;
           height: auto;
@@ -8687,8 +8711,9 @@ body.ZR3zoU {
           --is-sticky: 1;
           --top: 0px;
         }
+        
 
-        #comp-lkbdyauz .comp-lkbdyauz-container {
+        #survey_flshcard-14823 .survey_flshcard-14823-container {
           position: relative;
           box-sizing: border-box;
           padding-bottom: 3%;
@@ -8701,34 +8726,34 @@ body.ZR3zoU {
           --container-display: grid;
         }
 
-        #comp-lkbdyauz:not(.comp-lkbdyauz-container) {
+        #survey_flshcard-14823:not(.survey_flshcard-14823-container) {
           display: var(--l_display, var(--container-display));
           grid-template-rows: 1fr;
           grid-template-columns: minmax(0, 1fr);
           --container-display: grid;
         }
 
-        #comp-lkbdyauz~* {
+        #survey_flshcard-14823~* {
           will-change: opacity;
         }
 
-        @media screen and (min-width: 320px) and (max-width: 1000px) {
-          #comp-lkbdyauz .comp-lkbdyauz-container {
+        /* @media screen and (min-width: 320px) and (max-width: 1000px) {
+          #survey_flshcard-14823 .survey_flshcard-14823-container {
             padding-bottom: 3%;
             padding-top: 3%;
             padding-left: 40px;
           }
-        }
+        } */
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
-          #comp-lkbdyauz {
+          #survey_flshcard-14823 {
             position: relative;
-            grid-area: 3/1/4/2;
+            grid-area: 2/1/3/2;
             --is-sticky: 0;
             --sticky-top: 0px;
           }
 
-          #comp-lkbdyauz .comp-lkbdyauz-container {
+          #survey_flshcard-14823 .survey_flshcard-14823-container {
             padding-top: 10%;
             padding-bottom: 10%;
             padding-left: 10%;
@@ -8737,7 +8762,7 @@ body.ZR3zoU {
           }
         }
 
-        #comp-lkbdyauz {
+        #survey_flshcard-14823 {
           --brw: 0px;
           --brd: var(--color_16);
           --bg: var(--color_20);
@@ -8750,13 +8775,13 @@ body.ZR3zoU {
         }
 
         @media screen and (min-width: 320px) and (max-width: 1000px) {
-          #comp-lkbdyauz {
+          #survey_flshcard-14823 {
             --rd: 0px 15px 15px 0px;
           }
         }
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
-          #comp-lkbdyauz {
+          #survey_flshcard-14823 {
             --rd: 15px 15px 15px 15px;
           }
         }
@@ -8867,6 +8892,7 @@ body.ZR3zoU {
             padding-left: 10%;
             padding-top: 10%;
             padding-right: 10%;
+            height: 200px;
           }
 
           #comp-lkbdyay2 {
@@ -9035,6 +9061,7 @@ body.ZR3zoU {
             padding-top: 10%;
             padding-bottom: 10%;
             padding-right: 10%;
+            height: 170px;
           }
         }
 
@@ -9050,11 +9077,11 @@ body.ZR3zoU {
           --static-spx: 1px;
         }
 
-        @media screen and (min-width: 320px) and (max-width: 1000px) {
+        /* @media screen and (min-width: 320px) and (max-width: 1000px) {
           #comp-lkbdyzgg {
             --rd: 15px 15px 15px 15px;
           }
-        }
+        } */
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
           #comp-lkbdyzgg {
@@ -9227,25 +9254,26 @@ body.ZR3zoU {
           --static-spx: 1px;
         }
 
-        @media screen and (min-width: 320px) and (max-width: 1000px) {
+        /* @media screen and (min-width: 320px) and (max-width: 1000px) {
           #comp-lkbdyzgq2 {
             --minViewportSize: 320;
             --maxViewportSize: 1000;
             --textScale__minFontSize: 18;
             --textScale__maxFontSize: 30;
           }
-        }
+        } */
 
-        @media screen and (min-width: 320px) and (max-width: 750px) {
+        @media screen and (min-width: 320px) and (max-width: 500px) {
           #comp-lkbdyzgq2 {
             --minViewportSize: 320;
             --maxViewportSize: 750;
             --textScale__minFontSize: 24;
             --textScale__maxFontSize: 38;
+            display: none;
           }
         }
 
-        #comp-kvtomaxx {
+        #simul_flshcard-14823 {
           min-height: 0px;
           --l_display: unset;
           height: auto;
@@ -9258,14 +9286,14 @@ body.ZR3zoU {
           --sticky-top: 15%;
           margin-left: 0px;
           margin-right: 0px;
-          margin-top: 498.98001831054694px;
-          margin-bottom: 8.002487792968623px;
+          margin-top: 58.98001831054694px;
+          /* margin-bottom: 0.002487792968623px; */
           grid-area: 2/1/4/2;
           --is-sticky: 1;
           --top: 0px;
         }
 
-        #comp-kvtomaxx .comp-kvtomaxx-container {
+        #simul_flshcard-14823 .simul_flshcard-14823-container {
           position: relative;
           box-sizing: border-box;
           padding-bottom: 3%;
@@ -9278,19 +9306,19 @@ body.ZR3zoU {
           --container-display: grid;
         }
 
-        #comp-kvtomaxx:not(.comp-kvtomaxx-container) {
+        #simul_flshcard-14823:not(.simul_flshcard-14823-container) {
           display: var(--l_display, var(--container-display));
           grid-template-rows: 1fr;
           grid-template-columns: minmax(0, 1fr);
           --container-display: grid;
         }
 
-        #comp-kvtomaxx~* {
+        #simul_flshcard-14823~* {
           will-change: opacity;
         }
 
         @media screen and (min-width: 320px) and (max-width: 1000px) {
-          #comp-kvtomaxx .comp-kvtomaxx-container {
+          #simul_flshcard-14823 .simul_flshcard-14823-container {
             padding-bottom: 3%;
             padding-top: 3%;
             padding-left: 40px;
@@ -9298,16 +9326,16 @@ body.ZR3zoU {
         }
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
-          #comp-kvtomaxx {
+          #simul_flshcard-14823 {
             position: relative;
             margin-top: 0px;
             margin-bottom: 0px;
-            grid-area: 3/1/4/2;
+            grid-area: 2/1/3/2;
             --is-sticky: 0;
             --sticky-top: 0px;
           }
 
-          #comp-kvtomaxx .comp-kvtomaxx-container {
+          #simul_flshcard-14823 .simul_flshcard-14823-container {
             padding-top: 10%;
             padding-bottom: 10%;
             padding-left: 10%;
@@ -9316,7 +9344,7 @@ body.ZR3zoU {
           }
         }
 
-        #comp-kvtomaxx {
+        #simul_flshcard-14823 {
           --brw: 0px;
           --brd: var(--color_16);
           --bg: var(--color_20);
@@ -9329,13 +9357,13 @@ body.ZR3zoU {
         }
 
         @media screen and (min-width: 320px) and (max-width: 1000px) {
-          #comp-kvtomaxx {
+          #simul_flshcard-14823 {
             --rd: 0px 15px 15px 0px;
           }
         }
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
-          #comp-kvtomaxx {
+          #simul_flshcard-14823 {
             --rd: 15px 15px 15px 15px;
           }
         }
@@ -9447,6 +9475,7 @@ body.ZR3zoU {
             padding-top: 10%;
             padding-bottom: 10%;
             padding-right: 10%;
+            height: 170px;
           }
         }
 
@@ -9670,21 +9699,22 @@ body.ZR3zoU {
           --static-spx: 1px;
         }
 
-        @media screen and (min-width: 320px) and (max-width: 1000px) {
+        /* @media screen and (min-width: 320px) and (max-width: 1000px) {
           #comp-kvtomb26 {
             --minViewportSize: 320;
             --maxViewportSize: 1000;
             --textScale__minFontSize: 18;
             --textScale__maxFontSize: 30;
           }
-        }
+        } */
 
-        @media screen and (min-width: 320px) and (max-width: 750px) {
+        @media screen and (min-width: 320px) and (max-width: 500px) {
           #comp-kvtomb26 {
             --minViewportSize: 320;
             --maxViewportSize: 750;
             --textScale__minFontSize: 24;
             --textScale__maxFontSize: 38;
+            display:none;
           }
         }
 
@@ -9724,11 +9754,12 @@ body.ZR3zoU {
           --container-display: grid;
         }
 
-        @media screen and (min-width: 320px) and (max-width: 750px) {
+        @media screen and (min-width: 320px) and (max-width: 500px) {
           #comp-kvtomb2a3 .comp-kvtomb2a3-container {
             padding-left: 10%;
             padding-top: 10%;
             padding-right: 10%;
+            height: 200px;
           }
 
           #comp-kvtomb2a3 {
@@ -9779,12 +9810,13 @@ body.ZR3zoU {
           --top: 0px;
         }
 
-        @media screen and (min-width: 320px) and (max-width: 750px) {
-          #comp-kvtomb2g {
+        @media screen and (min-width: 320px) and (max-width: 500px) {
+          #comp-kvtomb2g, #comp-lkbdz08z {
             margin-left: 0.005600201607257861%;
             margin-right: 0px;
             margin-top: 0px;
-            align-self: center;
+            /* align-self:center; */
+            font-size: 12px;
           }
         }
 
@@ -9797,21 +9829,23 @@ body.ZR3zoU {
           --static-spx: 1px;
         }
 
-        @media screen and (min-width: 320px) and (max-width: 1000px) {
+        /* @media screen and (min-width: 320px) and (max-width: 1000px) {
           #comp-kvtomb2g {
             --minViewportSize: 320;
             --maxViewportSize: 1000;
             --textScale__minFontSize: 12;
             --textScale__maxFontSize: 16;
           }
-        }
+        } */
 
-        @media screen and (min-width: 320px) and (max-width: 750px) {
-          #comp-kvtomb2g {
+        @media screen and (min-width: 320px) and (max-width: 500px) {
+          #comp-kvtomb2g, #comp-lkbdz08z {
             --minViewportSize: 320;
-            --maxViewportSize: 750;
+            --maxViewportSize: 1000;
             --textScale__minFontSize: 14;
             --textScale__maxFontSize: 18;
+            width: 100%;
+
           }
         }
 
@@ -9833,6 +9867,16 @@ body.ZR3zoU {
           --is-sticky: 0;
           --sticky-top: 0px;
           --top: 0px;
+        }
+        @media screen and (max-width: 500px){
+          #comp-lkbd2vak, #comp-lkbdyztx{
+            /* align-self: center; */
+            /* margin-left: 18.31819622761135%; */
+            /* margin-bottom: 8%; */
+            margin-top: -65%;
+            margin-left: -0.5%;
+            z-index: 1;
+          }
         }
 
         #comp-lkbd2vak {
@@ -9864,7 +9908,7 @@ body.ZR3zoU {
           --static-spx: 1px;
         }
 
-        #comp-kvozye2f {
+        #mainFea_title_card-14823 {
           min-height: 0px;
           --l_display: unset;
           height: auto;
@@ -9884,7 +9928,13 @@ body.ZR3zoU {
           --top: 0px;
         }
 
-        .comp-kvozye2f-container {
+        /* @media screen and (max-width: 500px){
+          .mainFea_title_card-14823{
+            margin-top: 0;
+          }
+        } */
+
+        .mainFea_title_card-14823-container {
           box-sizing: border-box;
           display: var(--l_display, var(--container-display));
           grid-template-rows: 1fr;
@@ -9892,18 +9942,18 @@ body.ZR3zoU {
           --container-display: grid;
         }
 
-        #comp-kvozye2f:not(.comp-kvozye2f-container) {
+        #mainFea_title_card-14823:not(.mainFea_title_card-14823-container) {
           display: var(--l_display, var(--container-display));
           grid-template-rows: 1fr;
           grid-template-columns: minmax(0, 1fr);
           --container-display: grid;
         }
 
-        #comp-kvozye2f~* {
+        #mainFea_title_card-14823~* {
           will-change: opacity;
         }
 
-        #comp-kvozye2f {
+        #mainFea_title_card-14823 {
           --brw: 0px;
           --brd: var(--color_15);
           --bg: var(--color_16);
@@ -9938,16 +9988,16 @@ body.ZR3zoU {
           will-change: opacity;
         }
 
-        @media screen and (min-width: 320px) and (max-width: 1000px) {
+        /* @media screen and (min-width: 320px) and (max-width: 1000px) {
           #comp-kvl2xcyn {
             margin-left: 40px;
           }
-        }
+        } */
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
           #comp-kvl2xcyn {
             width: 100%;
-            margin-left: 0px;
+            margin-left: 25%;
           }
         }
 
@@ -12547,15 +12597,15 @@ body.ZR3zoU {
           --shc-mutated-brightness: 10, 14, 22
         }
 
-        #comp-lkbdyauz {
+        #survey_flshcard-14823 {
           --shc-mutated-brightness: 101, 108, 128
         }
 
-        #comp-kvtomaxx {
+        #simul_flshcard-14823 {
           --shc-mutated-brightness: 101, 108, 128
         }
 
-        #comp-kvozye2f {
+        #mainFea_title_card-14823 {
           --shc-mutated-brightness: 10, 14, 22
         }
 
@@ -12818,11 +12868,11 @@ body.ZR3zoU {
             --shc-mutated-brightness: 10, 14, 22
           }
 
-          #comp-lkbdyauz {
+          #survey_flshcard-14823 {
             --shc-mutated-brightness: 101, 108, 128
           }
 
-          #comp-kvtomaxx {
+          #simul_flshcard-14823 {
             --shc-mutated-brightness: 101, 108, 128
           }
 
@@ -12921,11 +12971,11 @@ body.ZR3zoU {
         }
 
         @media (min-width: 320px) and (max-width: 750px) {
-          #comp-lkbdyauz {
+          #survey_flshcard-14823 {
             --shc-mutated-brightness: 101, 108, 128
           }
 
-          #comp-kvtomaxx {
+          #simul_flshcard-14823 {
             --shc-mutated-brightness: 101, 108, 128
           }
 
