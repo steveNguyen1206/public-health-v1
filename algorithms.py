@@ -342,7 +342,7 @@ def population_sample(N,
                 non_HH_dict[i][class_type[acquaintance]].append(acquaintance)
                 
             
-        left = right + 1
+        left = right
         family_index = family_index + 1
         
     return class_type, HH_dict, non_HH_dict
@@ -363,7 +363,7 @@ simu = simulation(N=N,
                   num_vaccine = 0,
                   num_seed_case = 5,
                   pr_base=0.01962,
-                  cfr=0.7)
+                  cfr=0.854)
 
 simu.to_csv("result.csv", sep=";")
 

@@ -30,28 +30,28 @@ class Agent:
             self.scalar_factors = scalar_factors
         
     
-    def start_incubation(self, incubation_period_generator):
+    def start_incubation(self, incubation_period):
         '''
         Start an agent's incubation period, with the period time given by a generator function.
         The period generator function wraps around a random function that generates a scalar value.
         
         '''
         self.status = INCUBATED
-        self.incubation_days_left = incubation_period_generator()
+        self.incubation_days_left = incubation_period
 
     
-    def start_infection(self, infection_period_generator):
+    def start_infection(self, infection_period):
         '''
         Start an agent's infection period, with the period time given by a generator function.
         The period generator function wraps around a random function that generates a scalar value.
         '''
         self.status = INFECTED
-        self.infection_days_left = infection_period_generator
+        self.infection_days_left = infection_period
     
         
     def update_status(self, 
-                      infection_period_generator,
-                      fatality_rate_generator
+                      infection_period,
+                      fatality
     ): 
         '''
         If agent is still in infection period, decrease their infection time by 1 unit. If agent has finished their infection period, use a fatality rate generator to determine if they will die or not.
@@ -62,7 +62,7 @@ class Agent:
             self.infection_days_left -= 1
         
         if self.status == INFECTED and self.infection_days_left <= 0:
-            if fatality_rate_generator() == True:
+            if fatality == True:
                 self.status = DECEASED
             else:
                 self.status = RECOVERED
@@ -71,7 +71,7 @@ class Agent:
         if self.status == INCUBATED:
             self.incubation_days_left -= 1
             if self.incubation_days_left <= 0:
-                self.start_infection(infection_period_generator)
+                self.start_infection(infection_period)
                 
                 
         if self.status == VACCINATED:
@@ -167,14 +167,13 @@ class DiseaseSimulation:
         self.disease = disease
         self.edge_sampler = edge_sampler
         self.weight_sampler = weight_sampler
-        self.pr_base = pr_base
     
     
     def initialize_seed_cases(self, n_seed_cases):
         seed_indices  = random.sample(list(range(0, len(self.agents))), n_seed_cases)
         # Update seed cases
         for seed_index in seed_indices:
-            self.agents[seed_index].start_infection(self.infection_period_generator())
+            self.agents[seed_index].start_infection(self.disease.generate_infection_period())
     
     
     def run_simulation(self):
@@ -182,9 +181,9 @@ class DiseaseSimulation:
                         "susceptible": [],
                         "incubated": [],
                         "infected": [],
-                        "deceased": [],
                         "vaccinated": [],
-                        "removed": []})
+                        "removed": [],
+                        "deceased": [],})
         res.set_index("day", inplace=True)
     
         for day in range(self.n_days):
@@ -194,16 +193,19 @@ class DiseaseSimulation:
             
             # Iterate through all agents in the system
             for agent_index, agent in enumerate(self.agents):
+                # If this agent is still infectious
                 if agent.status == INFECTED and agent.infection_days_left > 0:
+                    # iterate through their contacts
                     for contact_type in edge[agent_index]:
                         for contact_index in edge[agent_index][contact_type]:
                             contact = agents[contact_index]
-                            prob = self.pr_base * weight[agent_index][contact_index]
-                            if bernoulli.rvs(prob) == 1:
-                                agent.start_incubation(self.incubation_period_generator)
+                            if contact.status == SUSCEPTIBLE:
+                                prob = self.disease.pr_base * weight[agent_index][contact_index]
+                                if bernoulli.rvs(prob) == 1:
+                                    contact.start_incubation(self.disease.generate_incubation_period())
                 
-                agent.update_status(self.infection_period_generator,
-                                    self.fatality_rate_generator)
+                agent.update_status(self.disease.generate_infection_period(),
+                                    self.disease.generate_fatality())
             
         
             status_count = [0, 0, 0, 0, 0, 0]
@@ -216,7 +218,7 @@ class DiseaseSimulation:
                                 "susceptible": status_count[SUSCEPTIBLE],
                                 "incubated": status_count[INCUBATED],
                                 "infected": status_count[INFECTED],
-                                    "vaccinated": status_count[VACCINATED],
+                                "vaccinated": status_count[VACCINATED],
                                 "removed": status_count[REMOVED],
                                 "deceased": status_count[DECEASED],
 
@@ -229,19 +231,19 @@ class DiseaseSimulation:
 
 class Ebola:
     def __init__(self):
-        pass
+        self.pr_base = 0.01962 
     
     
-    def generate_incubation_period():
+    def generate_incubation_period(self):
         return lognorm.rvs(s=0.284, scale=np.exp(2.446))
     
     
-    def generate_infection_period():
+    def generate_infection_period(self):
         return lognorm.rvs(s=0.1332, scale=np.exp(2.2915))
     
     
-    def generate_fatality_rate():
-        return bernoulli(0.85)
+    def generate_fatality(self):
+        return bernoulli.rvs(0.85)
     
 
 class Population:
@@ -307,7 +309,7 @@ scalar_factors_distribution = {
 }
 
 
-pop = Population(N=100, 
+pop = Population(N=200, 
                  family_size=4, 
                  acquaintance_size=10,
                  scalar_factors_distribution=scalar_factors_distribution)
@@ -350,16 +352,20 @@ weight_dist = {
 
 edge_sampler = EdgeSampler(agents,non_hh_contact_matrix=contact_matrix)
 weight_sampler = WeightSampler(weight_dist)
-
+ebola = Ebola()
 simulation = DiseaseSimulation(agents,
-                               100,
+                               200,
                                edge_sampler,
                                weight_sampler,
-                               Ebola.generate_incubation_period,
-                               Ebola.generate_infection_period,
-                               Ebola.generate_fatality_rate,
-                               0.01962)
-
+                               ebola)
 simulation.initialize_seed_cases(5)
 res = simulation.run_simulation()
-print(res)
+res.to_csv("result.csv", sep=";")
+
+plot = res[['susceptible', 'incubated', 'infected', 'deceased', 'removed']].div(200).plot()
+plot.set_xlabel("Day")
+plot.set_ylabel("Ratio of population")
+plot.set_title('Simulation')
+plot.set_xticks(range(0, len(res), 20))
+plt.show()
+
