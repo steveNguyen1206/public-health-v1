@@ -12,7 +12,7 @@ body.device-mobile-optimized {
 
 @media screen and (max-width: 500px) {
   #header-10823{
-    height: 40px;
+    height: 30px;
   }
 }
 
@@ -9874,7 +9874,7 @@ body.ZR3zoU {
             /* margin-left: 18.31819622761135%; */
             /* margin-bottom: 8%; */
             margin-top: -65%;
-            margin-left: -0.5%;
+            margin-left: 0;
             z-index: 1;
           }
         }
@@ -9996,7 +9996,7 @@ body.ZR3zoU {
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
           #comp-kvl2xcyn {
-            width: 100%;
+            width: 50%;
             margin-left: 25%;
           }
         }
@@ -11403,7 +11403,7 @@ body.ZR3zoU {
           --static-spx: 1px;
         }
 
-        #comp-lkbc6kfu1 {
+        #MediaLogo_Footer-14823 {
           height: auto;
           width: auto;
           --l_display: unset;
@@ -11422,8 +11422,18 @@ body.ZR3zoU {
           --top: 0px;
         }
 
-        #comp-lkbc6kfu1 {
+        #MediaLogo_Footer-14823 {
           --static-spx: 1px;
+        }
+        @media screen and (max-width: 500px){
+          #MediaLogo_Footer-14823{
+            --top:50px;
+            /* margin-left: ; */
+          }
+          
+        }
+        .Ebr6AI{
+          padding-left: 0;
         }
 
         #PageName_Footer-25723 {
@@ -11457,6 +11467,13 @@ body.ZR3zoU {
           --static-spx: 1px;
         }
 
+        @media screen and (max-width:500px){
+          #PageName_Footer-25723{
+            /* --fontSize: 13px; */
+            width: 50%;
+          }
+        }
+
         #DepartName_Footer-25723 {
           width: 20.291970802919707%;
           height: auto;
@@ -11485,6 +11502,12 @@ body.ZR3zoU {
           --fontSize: 18px;
           --fontWeight: normal;
           --static-spx: 1px;
+        }
+        @media screen and (max-width:500px){
+          #DepartName_Footer-25723{
+            width: 50%;
+            --top: 45px;
+          }
         }
 
         #comp-kvl0ang7 {
@@ -12424,7 +12447,7 @@ body.ZR3zoU {
           font-display: block;
         }
 
-        #comp-lkbc6kfu1 {
+        #MediaLogo_Footer-14823 {
           --item-size: 27px;
           --item-margin: 0px 21px 0px 0px;
           --item-display: inline-block;

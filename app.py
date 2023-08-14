@@ -15,6 +15,10 @@ def to_stat():
 def to_home():
     return render_template('home.html')
 
+@app.route("/simu")
+def to_simu():
+    return render_template('simu.html')
+
 @app.route("/api/person/all")
 def api_get_all_persons():
     persons = get_all_persons()
@@ -72,7 +76,7 @@ def sendDirImgs(filepath):
 
 @app.route('/videos/<path:filepath>')
 def sendDirVideos(filepath):
-    return send_from_directory('videos/', filepath)
+    return send_from_directory('static/videos/', filepath)
 
 
 if __name__ == "__main__":
