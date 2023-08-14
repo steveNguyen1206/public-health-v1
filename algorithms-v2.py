@@ -85,23 +85,20 @@ class EdgeSampler:
                  agents: list[Agent],
                  non_hh_contact_matrix,
                  ):
-        contact_matrix = {
-            "scalar_factor": "age_group",
-            "values": {
-                "children": {"children": 0.2, 
-                             "adolescent": 0.6, 
-                             "adult": 0.4},
-                "adolescent": {"children": 0.6,
-                               "adolescent": 0.5,
-                               "adult": 0.1},
-                "adult": {"children": 0.4,
-                          "adolescent": 0.1,
-                          "adult": 0.3}
-                
-            }
-            
-            
-        }
+        # contact_matrix = {
+        #     "scalar_factor": "age_group",
+        #     "values": {
+        #         "children": {"children": 0.2, 
+        #                      "adolescent": 0.6, 
+        #                      "adult": 0.4},
+        #         "adolescent": {"children": 0.6,
+        #                        "adolescent": 0.5,
+        #                        "adult": 0.1},
+        #         "adult": {"children": 0.4,
+        #                   "adolescent": 0.1,
+        #                   "adult": 0.3}
+        #     }
+        # }
         
         
         self.contact_matrix = non_hh_contact_matrix
@@ -244,35 +241,42 @@ class Ebola:
     
 
 class Population:
-    def __init__(self):
+    def __init__(self,
+                 N,
+                 family_size,
+                 acquantaince_size,
+                 scalar_factors_distribution):
+        self.n_population = N
+        self.family_size = family_size
+        self.acquaintance_size = acquantaince_size
+        self.scalar_factors_distribution = scalar_factors_distribution
+        
+    
+    
+    def population_sample(self):
         agents = []
-        n_population = 0
-        pass
-    
-    
-    def population_sample(N,
-                       family_size,
-                       acquaintance_size,
-                       scalar_features_distribution):
-    
-        class_type = [0] * N
-        HH_dict = {}
-        non_HH_dict = {}
-        
-        # Classtype
-        class_type = random.choices([0,1,2], class_distribution, k=N)
-        
+        for index in range(self.n_population):
+            agents.append(Agent())
+            
+        # scalar_factors sampling
+        for scalar_factor in self.scalar_factors_distribution:
+            for agent_index, agent in enumerate(agents):
+                agent.scalar_factors[scalar_factor] = random.choices(
+                    self.scalar_factors_distribution[scalar_factor]["values"],
+                    self.scalar_factors_distribution[scalar_factor]["weights"]
+                )        
         
         # Household 
-        random_list = list(range(N))
+        hh_dict = {}
+        random_list = list(range(self.n_population))
         np.random.shuffle(random_list)
         left = 0
         family_index = 0
-        while left < N:
-            right = left + 1 + np.random.poisson(lam=family_size)
-            if right >= N:
-                right = N
-            HH_dict[family_index] = random_list[left:right]
+        while left < self.n_population:
+            right = left + 1 + np.random.poisson(lam=self.family_size)
+            if right >= self.n_population:
+                right = self.n_population
+            hh_dict[family_index] = random_list[left:right]
             
             
             
