@@ -186,6 +186,7 @@ def simulation(N,
                              HH_dict=HH_dict, 
                              non_HH_dict=non_HH_dict)
         edge_weight = weight_sampling(N,edge,contact_dist)
+        print(edge)
         
         # For every agents in the network:
         for i in range(N):
@@ -228,7 +229,7 @@ def simulation(N,
                 agent_infectious_period[i] = agent_infectious_period[i] - 1
 
             # If they are infected and their infectious period has finished,
-            if agent_status[i] == INFECTED and agent_infectious_period[i] <= 0:
+            elif agent_status[i] == INFECTED and agent_infectious_period[i] <= 0:
                 if bernoulli.rvs(cfr) == 1:
                     # they can die from the disease,
                     agent_status[i] = DEAD
@@ -237,7 +238,7 @@ def simulation(N,
                     agent_status[i] = SURVIVED
 
             # If they are incubated:
-            if agent_status[i] == INCUBATED:
+            elif agent_status[i] == INCUBATED:
                 # If the incubation has ended,
                 if agent_incubation_period[i] <= 0:
                     # they becomes infectious, initialize their infectious time.  
@@ -248,7 +249,7 @@ def simulation(N,
                     agent_incubation_period[i] = agent_incubation_period[i] - 1
             
             # If they has been vaccinated:
-            if agent_status[i] == VACCINATED:
+            elif agent_status[i] == VACCINATED:
                 # If the waiting time has ended, they is now immune 
                 if agent_vaccine_wait_period[i] <= 0:
                     agent_status[i] = IMMUNE
@@ -256,7 +257,7 @@ def simulation(N,
                     # Else, substract waiting time by 1.
                     agent_vaccine_wait_period[i] = agent_vaccine_wait_period[i] - 1
             
-            if agent_status[i] in (SUSCEPTIBLE, REMOVED, DEAD):
+            elif agent_status[i] in (SUSCEPTIBLE, REMOVED, DEAD):
                 pass
             
             
