@@ -4,7 +4,7 @@ const general_province = document.querySelector('#btn-check-outlined-1')
 const province = document.querySelector('#provinces_stat')
 const general_ward = document.querySelector('#btn-check-outlined-3')
 const ward = document.querySelector('#wards_stat')
-const view_stat_btn = document.querySelector('#view_stat_btn-3823')
+const view_stat_btn = document.querySelector('#see_simul_btn-15823')
 
 //Draw pie chart
 // function updateChart(jdata) {

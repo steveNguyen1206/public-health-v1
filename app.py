@@ -19,6 +19,10 @@ def to_home():
 def to_simu():
     return render_template('simu.html')
 
+@app.route("/team")
+def to_team():
+    return render_template('team.html')
+
 @app.route("/api/person/all")
 def api_get_all_persons():
     persons = get_all_persons()
