@@ -1505,11 +1505,11 @@ ul.wix-list-text-align p {
   flex-direction: column-reverse
 }
 
-.CollapsibleTextcomponent2568482278__text-wrapper {
+.InstructText-15823-wrapper {
   width: 100%
 }
 
-.CollapsibleTextcomponent2568482278__text {
+.InstructText-15823 {
   -archetype: text;
   font-size: 16px;
   letter-spacing: 0;
@@ -1517,19 +1517,19 @@ ul.wix-list-text-align p {
   width: 100%
 }
 
-.CollapsibleTextcomponent2568482278__text ul {
+.InstructText-15823 ul {
   list-style: disc;
   margin-left: .5em;
   padding-left: 1.3em
 }
 
-.CollapsibleTextcomponent2568482278__text ol {
+.InstructText-15823 ol {
   list-style: decimal;
   margin-left: .5em;
   padding-left: 1.3em
 }
 
-.CollapsibleTextcomponent2568482278__text.CollapsibleTextcomponent2568482278---wrappingStyle-10-multi-line.CollapsibleTextcomponent2568482278--collapse {
+.InstructText-15823.CollapsibleTextcomponent2568482278---wrappingStyle-10-multi-line.CollapsibleTextcomponent2568482278--collapse {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: var(--max-lines, 1);
   display: -webkit-box;
@@ -1537,15 +1537,15 @@ ul.wix-list-text-align p {
   overflow-y: clip
 }
 
-.CollapsibleTextcomponent2568482278__text.CollapsibleTextcomponent2568482278---wrappingStyle-11-single-line {
+.InstructText-15823.CollapsibleTextcomponent2568482278---wrappingStyle-11-single-line {
   white-space: nowrap
 }
 
-.CollapsibleTextcomponent2568482278__text.CollapsibleTextcomponent2568482278---wrappingStyle-11-single-line.CollapsibleTextcomponent2568482278--collapse {
+.InstructText-15823.CollapsibleTextcomponent2568482278---wrappingStyle-11-single-line.CollapsibleTextcomponent2568482278--collapse {
   text-overflow: ellipsis
 }
 
-.CollapsibleTextcomponent2568482278__text.CollapsibleTextcomponent2568482278--collapse {
+.InstructText-15823.CollapsibleTextcomponent2568482278--collapse {
   overflow: hidden
 }
 
@@ -7361,7 +7361,7 @@ position: relative;
 opacity: 0;
 }
 
-#comp-lksj2rfs {
+#InstructPosition_container-15823 {
   width: 60.608552631578945%;
   height: auto;
   --l_display: unset;
@@ -7381,30 +7381,30 @@ opacity: 0;
 }
 
 /* END STYLABLE DIRECTIVE RULES */
-#comp-lksj2rfs .style-lksj2rfz__root .CollapsibleTextcomponent2568482278__expand-control {
+#InstructPosition_container-15823 .InstructText_Formater-15823 .CollapsibleTextcomponent2568482278__expand-control {
 color: #ffffff;
 font-family: arial, "ｍｓ ｐゴシック", "ms pgothic", "돋움", dotum, helvetica, sans-serif;
 font-weight: 700;
 }
 
 /* START STYLABLE DIRECTIVE RULES */
-#comp-lksj2rfs .style-lksj2rfz__root .CollapsibleTextcomponent2568482278__expand-control:hover {
+#InstructPosition_container-15823 .InstructText_Formater-15823 .CollapsibleTextcomponent2568482278__expand-control:hover {
 font-family: arial, "ｍｓ ｐゴシック", "ms pgothic", "돋움", dotum, helvetica, sans-serif;
 color: rgba(155, 255, 255, 0.7);
 font-weight: 700;
 }
 
-#comp-lksj2rfs .style-lksj2rfz__root .CollapsibleTextcomponent2568482278__expand-control:disabled {
+#InstructPosition_container-15823 .InstructText_Formater-15823 .CollapsibleTextcomponent2568482278__expand-control:disabled {
 color: #AAAAAA;
 }
 
-#comp-lksj2rfs .style-lksj2rfz__root {
+#InstructPosition_container-15823 .InstructText_Formater-15823 {
 -st-extends: CollapsibleText;
 color: #dfe6e9;
 font-size: 16px;
 }
 
-#comp-lksj2rfs .style-lksj2rfz__root .CollapsibleTextcomponent2568482278__text {
+#InstructPosition_container-15823 .InstructText_Formater-15823 .InstructText-15823 {
 font-size: 16px;
 font-weight: normal;
 font-style: normal;
@@ -8270,7 +8270,7 @@ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+
 font-display: block;
 }
 
-#comp-lksj2rfs {
+#InstructPosition_container-15823 {
 height: auto;
 --max-lines: 2;
 --expand-control-spacing: 10px;

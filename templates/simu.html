@@ -11,25 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 {%endblock%}
 
-{%block content%}
-    <!-- <script id="wix-first-paint">
-      if (window.ResizeObserver && (!window.PerformanceObserver || !PerformanceObserver.supportedEntryTypes || PerformanceObserver.supportedEntryTypes.indexOf('paint') === -1)) {
-        new ResizeObserver(function(entries, observer) {
-          entries.some(function(entry) {
-            var contentRect = entry.contentRect;
-            if (contentRect.width > 0 && contentRect.height > 0) {
-              requestAnimationFrame(function(now) {
-                window.wixFirstPaint = now;
-                dispatchEvent(new CustomEvent('wixFirstPaint'));
-              });
-              observer.disconnect();
-              return true;
-            }
-          });
-        }).observe(document.body);
-      }
-    </script> -->
-    
+{%block content%}    
     <main id="PAGE_SECTIONSuk6in" class="PAGE_SECTIONSuk6in c1rIl3" data-main-content-parent="true">
         <section id="comp-kvupzas5" tabindex="-1" class="xuzjBY comp-kvupzas5-container comp-kvupzas5 wixui-section undefined" data-testid="section-container">
         <div id="comp-kvupzas82" data-testid="imageX" class="z4Uj6S comp-kvupzas82 wixui-image clearfix">
@@ -41,15 +23,14 @@
         </div>
         <div id="comp-kvupzasb2" class="BaOVQ8 tz5f0K comp-kvupzasb2 wixui-rich-text" data-testid="richTextElement" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done" style="visibility: inherit;">
             <h1 class="font_2 wixui-rich-text__text">
-            <span class="wixui-rich-text__text">Tổng hợp thông tin khảo sát</span>
+            <span class="wixui-rich-text__text">Mô phỏng tiến triển dịch bệnh</span>
             </h1>
         </div>
-        <div id="comp-lksj2rfs" class="comp-lksj2rfs">
-            <div id="wrapper-comp-lksj2rfs" dir="ltr" class="CollapsibleTextcomponent2568482278__root style-lksj2rfz__root wixui-collapsible-text" data-testid="ellipsis_text_viewer_root" aria-label="" role="group">
-            <!-- <button class="CollapsibleTextcomponent2568482278__expand-control wixui-collapsible-text__button" data-testid="ellipsis_text_viewer_expand_control" aria-pressed="true" aria-describedby="wrapper-comp-lksj2rfs">Thu gọn</button> -->
-            <div class="CollapsibleTextcomponent2568482278__text-wrapper">
-                <p class="CollapsibleTextcomponent2568482278__text CollapsibleTextcomponent2568482278---wrappingStyle-10-multi-line wixui-collapsible-text__text">Chọn các tùy chọn bên dưới để được quan sát các biểu đồ, đồ thị,... trực quan hóa các dữ liệu đã thu thập được.</p>
-                <p class="CollapsibleTextcomponent2568482278__text CollapsibleTextcomponent2568482278---wrappingStyle-10-multi-line wixui-collapsible-text__text">Lưu ý: Dữ liệu của từng cá nhân được đảm bảo bí mật và riêng tư. Chỉ có những khái quát chung về dữ liệu được thể hiện bên dưới.</p>
+        <div id="InstructPosition_container-15823" class="InstructPosition_container-15823">
+            <div id="wrapper-InstructPosition_container-15823" dir="ltr" class="InstructText_Formater-15823">
+            <div class="InstructText_Wrapper-15823">
+                <p class="InstructText-15823">Thay đổi các thông số bên dưới để mô phỏng tiến triển của dịch bệnh qua các ngày.</p>
+                <p class="InstructText-15823">Đối với trường "Giá trị thực", hãy thay thế dấu '...' bằng số liệu mong muốn. VD: Giá trị = "5.6"</p>
             </div>
             </div>
         </div>
@@ -61,120 +42,235 @@
                 }
             </style>
             <div id="options_container-2823"class="container-fluid">
-                <div class="row row-cols-3" style="margin-top: 3%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-                    <div class="col mb-3">
-                        <label class="form-labe1">Tỉnh/Thành phố</label>
-                        <br>
-                        <!-- <div class="container-fluid text-center"> -->
-                            <div class="row align-items-center">
-                                <div class="col-sm-4">
-                                    <!-- <div class="option_buttons-2823"> Tổng quát</div> -->
-                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-1" autocomplete="off">
-                                    <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-1">Tổng quát</label>
-                                </div>
-                                <div class="col">
-                                    <select class="form-select addr_attribute" aria-label="Default select example" id="provinces_stat" name="provinces_stat">
-                                        <option selected>None</option>
-                                        <option >test</option>
-                                    </select>
-                                </div>
+                <div class="row" style="margin-top: 3%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+                    <label class="form-labe1">Thời gian ủ bệnh:</label>
+                    <div class="row align-items-center" style="justify-content: center;">
+                        <div class="col-3">
+                            <select class="form-select" aria-label="" id="1_initial_form-15823" name="">
+                                <option selected>Tùy chọn</option>
+                                <option>Giá trị cụ thể</option>
+                                <option>Ngẫu nhiên</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <div class="did-floating-label-content">
+                                <select id="1_distri_select-15823" class="did-floating-select" onclick="this.setAttribute('value', this.value);" onchange="this.setAttribute('value', this.value);" value="" disabled>
+                                    <option></option>
+                                    <option>Normal</option>
+                                    <option>LogNormal</option>
+                                    <option>Bernoulli</option>
+                                    <option>Gamma</option>
+                                    <option>Binomial</option>
+                                    <option>Negative Binomial</option>
+                                    <option>Poisson</option>
+                                </select>
+                                <label class="did-floating-label">Phân phối</label>
                             </div>
-                        <!-- </div> -->
-                        
-                    </div>
-                    <div class="col mb-3">
-                        <label class="form-labe1 ">Quận/Huyện/Thị xã</label>
-                        <br>
-                        <!-- <div class="container-fluid text-center"> -->
-                            <div class="row align-items-center">
-                                <!-- <div class="col-sm-4">
-                                    <div class="option_buttons-2823"> Tổng quát</div>
-                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-2" autocomplete="off">
-                                    <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-2">Tổng quát</label>
-                                </div> -->
-                                <div class="col">
-                                    <select class="form-select addr_attribute" aria-label="Default select example" id="districts_stat" name="districts_stat">
-                                        <option disabled selected>None</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="did-floating-label-content">
+                                <input id="1_value_inpt-15823" class="did-floating-input" type="text" placeholder=" " disabled>
+                                <span class="did-floating-label">Giá trị thực</span>
                             </div>
-                        <!-- </div> -->
+                        </div>
                     </div>
-                    <div class="col mb-3">
-                        <label class="form-labe1">Phường/Xã/Thị trấn</label>
-                        <br>
-                        <!-- <div class="container-fluid text-center"> -->
-                            <div class="row align-items-center">
-                                <!-- <div class="col-sm-4">
-                                    <div class="option_buttons-2823"> Tổng quát</div>
-                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-3" autocomplete="off">
-                                    <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-3">Tổng quát</label>
-                                </div> -->
-                                <div class="col">
-                                    <select class="form-select addr_attribute" aria-label="Default select example" id="wards_stat" name="wards_stat">
-                                        <option disabled selected>None</option>
-                                    </select>
-                                </div>
-                            </div>
-                        <!-- </div> -->
-                    </div>
-                    <div class="col mb-3">
-                        <label class="form-labe1 ">Nhóm tuổi</label>
-                        <br>
-                        <!-- <div class="container-fluid text-center"> -->
-                            <div class="row align-items-center">
-                                <div class="col-sm-4">
-                                    <!-- <div class="option_buttons-2823"> Tổng quát</div> -->
-                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-4" autocomplete="off">
-                                    <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-4">Tổng quát</label>
-                                </div>
-                                <div class="col">
-                                    <select class="form-select" aria-label="Default select example" id="provinces_stat" name="provinces_stat">
-                                        <option selected>0-14</option>
-                                        <option selected>15-64</option>
-                                        <option selected>64+</option>
-                                        <option selected>None</option>
-                                    </select>
-                                </div>
-                            </div>
-                        <!-- </div> -->
-                    </div>
-                    <div class="col mb-3">
-                        <label class="form-labe1 ">Nghề nghiệp</label>
-                        <br>
-                        <!-- <div class="container-fluid text-center"> -->
-                            <div class="row align-items-center">
-                                <div class="col-sm-4">
-                                    <!-- <div class="option_buttons-2823"> Tổng quát</div> -->
-                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-5" autocomplete="off">
-                                    <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-5">Tổng quát</label>
-                                </div>
-                                <div class="col">
-                                    <select class="form-select" aria-label="Default select example" id="provinces_stat" name="provinces_stat">
-                                        <option disabled selected>None</option>
-                                    </select>
-                                </div>
-                            </div>
-                        <!-- </div> -->
-                    </div>
+                </div>
 
+                <div class="row" style="margin-top: 3%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+                    <label class="form-labe1">Thời gian nhiễm bệnh:</label>
+                    <div class="row align-items-center" style="justify-content: center;">
+                        <div class="col-3">
+                            <select class="form-select" aria-label="" id="2_initial_form-15823" name="">
+                                <option selected>Tùy chọn</option>
+                                <option>Giá trị cụ thể</option>
+                                <option>Ngẫu nhiên</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <div class="did-floating-label-content">
+                                <select id="2_distri_select-15823" class="did-floating-select" onclick="this.setAttribute('value', this.value);" onchange="this.setAttribute('value', this.value);" value="" disabled>
+                                    <option></option>
+                                    <option>Normal</option>
+                                    <option>LogNormal</option>
+                                    <option>Bernoulli</option>
+                                    <option>Gamma</option>
+                                    <option>Binomial</option>
+                                    <option>Negative Binomial</option>
+                                    <option>Poisson</option>
+                                </select>
+                                <label class="did-floating-label">Phân phối</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="did-floating-label-content">
+                                <input id="2_value_inpt-15823" class="did-floating-input" type="text" placeholder=" " disabled>
+                                <span class="did-floating-label">Giá trị thực</span>
+                            </div>
+                        </div>
+
+                    </div>                
+                </div>
+
+                <div class="row" style="margin-top: 3%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+                    <label class="form-labe1">Tỉ lệ tử vong:</label>
+                    <div class="row align-items-center" style="justify-content: center;">
+                        <div class="col-3">
+                            <select class="form-select" aria-label="" id="3_initial_form-15823" name="">
+                                <option selected>Tùy chọn</option>
+                                <option>Giá trị cụ thể</option>
+                                <option>Ngẫu nhiên</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <div class="did-floating-label-content">
+                                <select id="3_distri_select-15823" class="did-floating-select" onclick="this.setAttribute('value', this.value);" onchange="this.setAttribute('value', this.value);" value="" disabled>
+                                    <option></option>
+                                    <option>Normal</option>
+                                    <option>LogNormal</option>
+                                    <option>Bernoulli</option>
+                                    <option>Gamma</option>
+                                    <option>Binomial</option>
+                                    <option>Negative Binomial</option>
+                                    <option>Poisson</option>
+                                </select>
+                                <label class="did-floating-label">Phân phối</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="did-floating-label-content">
+                                <input id="3_value_inpt-15823" class="did-floating-input" type="text" placeholder=" " disabled>
+                                <span class="did-floating-label">Giá trị thực</span>
+                            </div>
+                        </div>
+
+                    </div>                
+                </div>
+
+                <div class="row" style="margin-top: 3%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+                    <label class="form-labe1">Thời gian tác dụng của vaccine:</label>
+                    <div class="row align-items-center" style="justify-content: center;">
+                        <div class="col-3">
+                            <select class="form-select" aria-label="" id="4_initial_form-15823" name="">
+                                <option selected>Tùy chọn</option>
+                                <option>Giá trị cụ thể</option>
+                                <option>Ngẫu nhiên</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <div class="did-floating-label-content">
+                                <select id="4_distri_select-15823" class="did-floating-select" onclick="this.setAttribute('value', this.value);" onchange="this.setAttribute('value', this.value);" value="" disabled>
+                                    <option></option>
+                                    <option>Normal</option>
+                                    <option>LogNormal</option>
+                                    <option>Bernoulli</option>
+                                    <option>Gamma</option>
+                                    <option>Binomial</option>
+                                    <option>Negative Binomial</option>
+                                    <option>Poisson</option>
+                                </select>
+                                <label class="did-floating-label">Phân phối</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="did-floating-label-content">
+                                <input id="4_value_inpt-15823" class="did-floating-input" type="text" placeholder=" " disabled>
+                                <span class="did-floating-label">Giá trị thực</span>
+                            </div>
+                        </div>
+
+                    </div>                
                 </div>
                 
-                <div style="margin-top: 1%; margin-bottom: 1%; margin-left: 3%; margin-right: 2%;height: 50px;  width: 200px; ">
-                    <label class="form-labe1 ">Giới tính</label>
-                    <!-- <div class="col-sm-4"> -->
-                        <input type="checkbox" class="btn-check" id="btn-check-outlined-6" autocomplete="off">
-                        <label class="btn btn-outline-primary option_buttons-2823" for="btn-check-outlined-6" style="margin-left: 10px;">Chọn</label>
-                    <!-- </div> -->
+                <div class="row" style="margin-top: 3%; margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
+                    <label class="form-labe1">Thông tin mô phỏng:</label>
+                    <div class="row align-items-center" style="justify-content: center;">
+                        <div class="col-4">
+                            <div class="did-floating-label-content">
+                                <input id="5_value_inpt-15823" class="did-floating-input" type="number" placeholder=" " min="0" step="1">
+                                <span class="did-floating-label">Số ngày mô phỏng</span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="did-floating-label-content">
+                                <input id="6_value_inpt-15823" class="did-floating-input" type="number" placeholder=" " min="0" step="1">
+                                <span class="did-floating-label">Số người nhiễm tiền phát</span>
+                            </div>
+                        </div>
+
+                    </div>                
                 </div>
+                <script>
+                    function attachEventHandlers(elementIndex) {
+                        console.log(`${elementIndex}_initial_form-15823`);
+                        const initialSelect = document.getElementById(`${elementIndex}_initial_form-15823`);
+                        const selectChoice = document.getElementById(`${elementIndex}_distri_select-15823`);
+                        const inputContent = document.getElementById(`${elementIndex}_value_inpt-15823`);
+
+                        // console.log(selectChoice);
+                        // console.log(initialSelect);
+                        // console.log(inputContent);
+
+                        initialSelect.addEventListener('change', function() {
+                            if (initialSelect.value === 'Giá trị cụ thể') {
+                                inputContent.disabled = false;
+                                inputContent.value = 'Giá trị = \"...\"';
+                                selectChoice.disabled = true;
+                                selectChoice.value ='';
+                            } else if (initialSelect.value === 'Tùy chọn'){
+                                inputContent.value ='';
+                                selectChoice.value ='';
+                                selectChoice.disabled = true;
+                                inputContent.disabled = true;
+                            }else{
+                                inputContent.value ='';
+                                selectChoice.disabled = false;
+                                inputContent.disabled = false;
+                            }
+                        });
+
+                        selectChoice.addEventListener('change', function() {
+                            if (selectChoice.value != ''){
+                                initialSelect.value = 'Ngẫu nhiên';
+                            }
+                            updateInputContent();
+                        });
+
+                        function updateInputContent() {
+                            const selectedValue = selectChoice.value;
+                            if (selectedValue === 'Normal' || selectedValue === 'LogNormal') {
+                            inputContent.value = 'μ = \"...\"; σ = \"...\"';
+                            } else if (selectedValue === 'Poisson') {
+                            inputContent.value = 'λ = \"...\"';
+                            } else if (selectedValue === 'Gamma') {
+                            inputContent.value = 'α  = \"...\"; β = \"...\"';
+                            }else if (selectedValue === 'Bernoulli') {
+                            inputContent.value = 'ρ = \"...\"';
+                            }else if (selectedValue === 'Binomial') {
+                            inputContent.value = 'n = \"...\"; ρ = \"...\"';
+                            }else if (selectedValue === 'Negative Binomial') {
+                            inputContent.value = 'r = \"...\"; ρ = \"...\"';
+                            }else {
+                            inputContent.value = ''; // Clear input if no option is selected
+                            }
+                        }
+
+                        }
+
+                        // Loop through the different elements and attach event handlers
+                        for (let i = 1; i <= 4; i++) {
+                            attachEventHandlers(i);
+                        }
+
+                </script>
+            
             </div>
         </div>
         <style>
-            #see_stat_button-3823{
+            #simul_button-15823{
                 text-align: center;
 
             }
-            #see_stat_button-3823 {
+            #simul_button-15823 {
                 width: 38.591085989621945%;
                 height: auto;
                 /* --l_display: unset; */
@@ -195,8 +291,8 @@
             }
             
         </style>
-        <div id="see_stat_button-3823" class="BaOVQ8 tz5f0K comp-lkskur8c wixui-rich-text" data-testid="richTextElement">
-            <button type="button" class="btn btn-primary" id="view_stat_btn-3823" >Xem thống kê</button>
+        <div id="simul_button-15823" class="BaOVQ8 tz5f0K comp-lkskur8c wixui-rich-text" data-testid="richTextElement">
+            <button type="button" class="btn btn-primary" id="view_stat_btn-3823" >Mô phỏng</button>
         </div>
         
         <div id="comp-lkskur8c" class="BaOVQ8 tz5f0K comp-lkskur8c wixui-rich-text" data-testid="richTextElement">
