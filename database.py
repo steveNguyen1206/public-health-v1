@@ -3,9 +3,7 @@ from dotenv.main import load_dotenv
 import os
 
 load_dotenv()
-db_connection_string = os.getenv('DB_CONNECTION_STRING')
-# print(db_connection_string)
-# db_connection_string = os.environ['DB_CONNECTION_STRING']
+db_connection_string = os.environ['DB_CONNECTION_STRING']
 
 engine = create_engine(
     db_connection_string,
@@ -41,17 +39,98 @@ def get_all_families():
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        # print(res)
+        print(res)
+        return res
+    
+def get_dist_person_num(dist):
+    with engine.connect() as conn:
+        query = text("select addr2, count(*) from family f, person p where f.id = p.family_id and f.addr2 = :dist")
+        data = conn.execute(query,
+                            [{"dist": dist}]).all()
+        res = []
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
         return res
     
 def get_num_persons_of_districts():
     with engine.connect() as conn:
-        data = conn.execute(text("select addr2 as label,count(*) as y from family,person where family.id=person.family_id group by addr2")).all()
+        data = conn.execute(text("select addr1, addr2,count(*) from family,person where family.id=person.family_id group by addr1, addr2")).all()
         res = []
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
         print(res)
+        return res
+    
+def get_num_persons_of_provinces():
+    with engine.connect() as conn:
+        data = conn.execute(text("select addr1,count(*) from family,person where family.id=person.family_id group by addr1")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
+        return res
+
+def get_num_persons_of_family():
+    with engine.connect() as conn:
+        data = conn.execute(text("select hhsize,count(*) from family group by hhsize")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
+        return res
+
+def get_age_groups():
+    with engine.connect() as conn:
+        data = conn.execute(text("select case when (YEAR(NOW()) - birth_year) >= 0 and (YEAR(NOW()) - birth_year) <= 1 then '0-1 tuổi' when (YEAR(NOW()) - birth_year) > 1 and (YEAR(NOW()) - birth_year) <= 12 then '1-12 tuổi' when (YEAR(NOW()) - birth_year) > 12 and (YEAR(NOW()) - birth_year) <= 17 then '12-17 tuổi' when (YEAR(NOW()) - birth_year) > 17 and (YEAR(NOW()) - birth_year) <= 65 then '17-65 tuổi' else 'trên 65 tuổi' end as age_group, count(*) as count from family,person where family.id=person.family_id group by age_group; ")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
+        return res
+
+def get_gender():
+    with engine.connect() as conn:
+        data = conn.execute(text("select gender,count(*) from person group by gender")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(users)
+        return res
+
+def get_occupation():
+    with engine.connect() as conn:
+        data = conn.execute(text("select occupation,count(*) from person group by occupation")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(users)
+        return res
+
+def get_population():
+    with engine.connect() as conn:
+        data = conn.execute(text("select id,family_id,gender,(YEAR(NOW()) - birth_year) as age from person")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(users)
+        return res
+    
+def get_household():
+    with engine.connect() as conn:
+        data = conn.execute(text("select family_id, id from person")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        # print(users)
         return res
 
 def add_family_person(data):
@@ -81,3 +160,6 @@ def add_family_person(data):
                         ])
         conn.commit()
 
+# get_all_families()
+# get_all_persons()
+    

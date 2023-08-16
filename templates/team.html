@@ -1,164 +1,124 @@
-{%extends 'base.html'%}
-{%block title%}Team | Diseases Simulation{%endblock%}
+{% extends 'base.html' %}
 
-{%block head%}
+{% block title %}Team | Diseases Simulation{% endblock %}
+
+{% block head %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap">
-    <link rel="stylesheet" href="../static/css/team.css">
-{%endblock%}
-{%block content%}
-    
-    <div id="SITE_PAGES" data-page-transition="none" class="JshATs SITE_PAGES">
-      <div id="uk6in" class="P0dCOY uk6in">
-      <div class="PJ4KCX wixui-page" data-testid="page-bg"></div>
-      <div>
-        <div class="uk6in-container" data-testid="responsive-container-content">
-          <main id="PAGE_SECTIONSuk6in" class="PAGE_SECTIONSuk6in c1rIl3" data-main-content-parent="true">
-            <section id="comp-kvupzas5" tabindex="-1" class="xuzjBY comp-kvupzas5-container comp-kvupzas5 wixui-section undefined" data-testid="section-container">
-              <div id="backgrndImage_container-15823" data-testid="imageX" class="z4Uj6S backgrndImage_container-15823 wixui-image clearfix">
-                <style data-testid="scrollEffectStyle">
-                #backgrndImage_container-15823 img {
-                    height: 100%
-                }
-                </style>
-                <div id="pageTitle_container-15823" class="BaOVQ8 tz5f0K pageTitle_container-15823 wixui-rich-text" data-testid="richTextElement" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done" style="visibility: inherit;">
-                  <h1 class="font_2 wixui-rich-text__text">
-                  <span class="wixui-rich-text__text">Thành Viên Nhóm</span>
-                  </h1>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/team.css')}}">
+{% endblock %} 
+{% block content %}
+        <section id="comp-kvupzas5" tabindex="-1" class="xuzjBY comp-kvupzas5-container comp-kvupzas5 wixui-section undefined" data-testid="section-container">
+            <div class="div" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <div id="comp-kvupzas82" data-testid="imageX" class="z4Uj6S comp-kvupzas82 wixui-image clearfix">
+                    <style data-testid="scrollEffectStyle">
+                        #comp-kvupzas82 img {
+                            height: 100%;
+                        }
+                    </style>
+                    <div id="comp-kvupzasb2" class="BaOVQ8 tz5f0K comp-kvupzasb2 wixui-rich-text" data-testid="richTextElement" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done" style="visibility: inherit;">
+                        <h1 class="font_2 wixui-rich-text__text">
+                            <span class="wixui-rich-text__text">Thành Viên Nhóm</span>
+                        </h1>
+                    </div>
+                    <div class="row">
+                        <!-- Leader 1 Introduction -->
+                        <div class="leader-intro">
+                            <div class="leader">
+                                <div class="leader-info">
+                                    <img src="../static/images/ava.png" alt="Leader 1 Avatar">
+                                    <div class="leader-details">
+                                        <h3>Leader Name 1</h3>
+                                        <p>Co-Founder & CEO</p>
+                                        <div class="icons">
+                                            <a href="#"><i class="fab fa-twitter"></i></a>
+                                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                                            <a href="#"><i class="fab fa-github"></i></a>
+                                            <a href="#"><i class="fas fa-envelope"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="leader-description">
+                                    <p>Short description about Leader 1...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Leader 2 Introduction -->
+                        <div class="leader-intro">
+                            <div class="leader">
+                                <div class="leader-info">
+                                    <img src="../static/images/ava.png" alt="Leader 2 Avatar">
+                                    <div class="leader-details">
+                                        <h3>Leader Name 2</h3>
+                                        <p>Co-Founder & CTO</p>
+                                        <div class="icons">
+                                            <a href="#"><i class="fab fa-twitter"></i></a>
+                                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                                            <a href="#"><i class="fab fa-github"></i></a>
+                                            <a href="#"><i class="fas fa-envelope"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="leader-description">
+                                    <p>Short description about Leader 2...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2>Members</h2>
+                        <!-- Column 1-->
+                        <div class="column">
+                            <div class="card">
+                                <div class="img-container">
+                                    <img src="../static/images/ava.png" alt="Member 1 Avatar">
+                                </div>
+                                <h3>Ho Duy Khang</h3>
+                                <p>Participant</p>
+                                <div class="icons">
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-github"></i></a>
+                                    <a href="#"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 2-->
+                        <div class="column">
+                            <div class="card">
+                                <div class="img-container">
+                                    <img src="../static/images/ava.png" alt="Member 2 Avatar">
+                                </div>
+                                <h3>Nguyen Quoc Trung</h3>
+                                <p>Participant</p>
+                                <div class="icons">
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-github"></i></a>
+                                    <a href="#"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 3-->
+                        <div class="column">
+                            <div class="card">
+                                <div class="img-container">
+                                    <img src="../static/images/ava.png" alt="Member 3 Avatar">
+                                </div>
+                                <h3>Nguyen Hai Chan</h3>
+                                <p>Participant</p>
+                                <div class="icons">
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-github"></i></a>
+                                    <a href="#"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                  <div class="leader-intro">
-                      <div class="leader">
-                          <img src="../images/ava_Khang.png" />
-                          <div class="leader-details">
-                              <h3>Leader Name 1</h3>
-                              <p>Co-Founder & CEO</p>
-                              <p>Short description about Leader 1...</p>
-                              <div class="icons">
-                                <a href="#">
-                                  <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#">
-                                  <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#">
-                                  <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#">
-                                  <i class="fas fa-envelope"></i>
-                                </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- Leader 2 Introduction -->
-                  <div class="leader-intro">
-                      <div class="leader">
-                          <img src="../images/ava_Khang.png" />
-                          <div class="leader-details">
-                              <h3>Leader Name 2</h3>
-                              <p>Co-Founder & CTO</p>
-                              <p>Short description about Leader 2...</p>
-                              <div class="icons">
-                                <a href="#">
-                                  <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#">
-                                  <i class="fab fa-linkedin"></i>
-                                </a>
-                                <a href="#">
-                                  <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#">
-                                  <i class="fas fa-envelope"></i>
-                                </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              <div class="row">
-                <h2>Members</h2>
-                <!-- Column 1-->
-                <div class="column">
-                  <div class="card">
-                    <div class="img-container">
-                      <img src="../images/ava_Khang.png" />
-                    </div>
-                    <h3>Ho Duy Khang</h3>
-                    <p>Participant</p>
-                    <div class="icons">
-                      <a href="#">
-                        <i class="fab fa-twitter"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fab fa-linkedin"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fab fa-github"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fas fa-envelope"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Column 2-->
-                <div class="column">
-                  <div class="card">
-                    <div class="img-container">
-                      <img src="../images/ava_Trung.png" />
-                    </div>
-                    <h3>Nguyen Quoc Trung</h3>
-                    <p>Participant</p>
-                    <div class="icons">
-                      <a href="#">
-                        <i class="fab fa-twitter"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fab fa-linkedin"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fab fa-github"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fas fa-envelope"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Column 3-->
-                <div class="column">
-                  <div class="card">
-                    <div class="img-container">
-                      <img src="../images/ava_Chan.png" />
-                    </div>
-                    <h3>Nguyen Hai Chan</h3>
-                    <p>Participant</p>
-                    <div class="icons">
-                      <a href="#">
-                        <i class="fab fa-twitter"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fab fa-linkedin"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fab fa-github"></i>
-                      </a>
-                      <a href="#">
-                        <i class="fas fa-envelope"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
-              </div>
-              
-            </section>
-          </main>
-        </div>
-      </div>
-      </div>
-    </div>
+            </div>
+        </section>
+{% endblock %}
 
-{%endblock%}
+

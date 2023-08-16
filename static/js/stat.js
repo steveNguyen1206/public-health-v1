@@ -1,3 +1,4 @@
+
 const general_district = document.querySelector('#btn-check-outlined-2')
 const district = document.querySelector('#districts_stat')
 const general_province = document.querySelector('#btn-check-outlined-1')
@@ -5,127 +6,367 @@ const province = document.querySelector('#provinces_stat')
 const general_ward = document.querySelector('#btn-check-outlined-3')
 const ward = document.querySelector('#wards_stat')
 const view_stat_btn = document.querySelector('#view_stat_btn-3823')
-
-//Draw pie chart
+var title = "all"
+var selected_province = ""
+var province_existed = false 
+var district_existed = false 
+document.addEventListener("DOMContentLoaded", function(){
+  const event_title = document.getElementById("province_name")
+  event_title.addEventListener("change", function(e){
+    selected_province = e.target.value
+    //console.log(selected_province)
+    title = "province"
+    if(selected_province == "") {
+      province_existed = false
+    }
+    else {
+      province_existed = true 
+    }
+  })
+})
+document.addEventListener("DOMContentLoaded", function(){
+  const event_title = document.getElementById("btn-check-outlined-1")
+  event_title.addEventListener("focus", function(e){
+    title = "province"
+  })
+})
+document.addEventListener("DOMContentLoaded", function(){
+  const event_title = document.getElementById("btn-check-outlined-4")
+  event_title.addEventListener("focus", function(e){
+    title = "ages"
+  })
+})
+document.addEventListener("DOMContentLoaded", function(){
+  const event_title = document.getElementById("btn-check-outlined-5")
+  event_title.addEventListener("focus", function(e){
+    title = "jobs"
+  })
+})
+document.addEventListener("DOMContentLoaded", function(){
+  const event_title = document.getElementById("btn-check-outlined-6")
+  event_title.addEventListener("focus", function(e){
+    title = "genders"
+  })
+})
+function getChart(bar_Colors, border_Colors, dataPoints, labels, ctx) {
+  var title_chart = "Dân Số Theo Tất Cả Quận"
+  var set = false
+  switch(title) {
+    case "province" : {
+      set = true
+      if(province_existed === true) {
+        if(district_existed === true) {
+        }
+        else {
+          title_chart = "Dân Số Theo " + selected_province
+        }
+      }
+      else {
+        title_chart = "Dân Số Theo Các Tỉnh, Thành Phố"
+      }
+    }
+    case "jobs": {
+      if(set === false) {
+        title_chart = "Dân Số Theo Nghề Nghiệp"
+      }
+    }
+    case "all": {
+      return chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              backgroundColor: bar_Colors,
+              data: dataPoints,
+              borderColor: border_Colors,
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            datalabels: {
+              anchor: 'center',
+              formatter: (value, ctx) => {
+                let dataset = ctx.dataset.data;
+                let sum = dataset.reduce((total, data) => total + data, 0);
+                let percentage = ((value / sum) * 100).toFixed(2) + "%";
+                return percentage;
+              },
+              fontSize: 12,
+              color: '#fff',
+            },
+          },
+          legend: {
+            position: 'top', // Adjust the legend position
+            align: 'start',  // Align the legend with the start of the chart
+            labels: {
+              fontColor: '#fff',
+              generateLabels: (chart) => {
+                return chart.data.labels.map((label, index) => ({
+                  text: label,
+                  fillStyle: chart.data.datasets[0].backgroundColor[index],
+                }));
+              },
+            },
+          },
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            xAxes: [
+               {
+                   stacked: true,
+                   gridLines: {
+                    color: "transparent",
+                    display: true,
+                    drawBorder: false,
+                    zeroLineColor: "#fff",
+                    zeroLineWidth: 1
+    
+    
+                  },
+                   ticks: {
+                    fontColor: '#fff', // Change to the desired color
+                  },
+               }
+             ],
+            yAxes: [
+               {
+                   stacked: true,
+                   gridLines: {
+                    color: "transparent",
+                    display: true,
+                    drawBorder: false,
+                    zeroLineColor: "#fff",
+                    zeroLineWidth: 1
+    
+    
+                  },
+                   ticks: {
+                    fontColor: '#fff', // Change to the desired color
+                  },
+               }
+             ]
+           },
+          animation: {
+            animateRotate: true,
+            duration: 2000,
+            animateScale: true
+          },
+          title: {
+            display: true,
+            text: title_chart,
+            fontColor: '#ffffff',
+            fontSize: 20,
+            position: 'right',
+          },
+          // tooltips: {
+          //   callbacks: {
+          //     label: function (tooltipItem, data) {
+          //       var dataset = data.datasets[tooltipItem.datasetIndex];
+          //       var currentValue = dataset.data[tooltipItem.index];
+          //       return data.labels[tooltipItem.index] + ": " + currentValue + " người";
+          //     },
+          //   },
+          // },
+          layout:{
+            padding:{
+              top: 10,
+              bottom:5
+            }
+          }      
+        },
+      });
+      break;
+    }
+    case "genders": {
+      set = true
+      title_chart = "Dân Số Theo Giới Tính"
+    }
+    case "ages": {
+      if(set === false) {
+       title_chart = "Dân Số Theo Độ Tuổi"
+      }
+      return chart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              backgroundColor: bar_Colors,
+              data: dataPoints,
+              borderColor: bar_Colors,
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            datalabels: {
+              formatter: (value, ctx) => {
+                let dataset = ctx.dataset.data;
+                let sum = dataset.reduce((total, data) => total + data, 0);
+                let percentage = ((value / sum) * 100).toFixed(2) + "%";
+                return percentage;
+              },
+              fontSize: 12,
+              color: '#fff',
+            }    
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+          title: {
+            display: true,
+            text: title_chart,
+            fontColor: '#ffffff',
+            fontSize: 20,
+            position: 'right',
+          },
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+              fontColor: '#ffffff',
+              fontSize: 13,
+            },     
+    
+          },
+          layout:{
+            padding:{
+              top: 10,
+              bottom:5
+            }
+          }      
+        },
+      });
+      break;
+    }
+  }
+}
 function updateChart(jdata) {
   let labels = [];
   let dataPoints = [];
-
+  //console.log(jdata)
   jdata.forEach(item => {
-    labels.push(item.label);
-    dataPoints.push(parseInt(item.y));
+    if(province_existed === true) {
+      if(district_existed === true) {
+      }
+      else {
+        if(item.addr1 === selected_province) {
+          labels.push(item.addr2)
+        }
+      }
+    }
+    else if(title === "all") {
+      labels.push(item.addr2);
+    }
+    else if(title === "province") {
+      labels.push(item.addr1);
+    }
+    else if(title === "ages") {
+      labels.push(item.age_group);
+      dataPoints.push(parseInt(item['count']));
+      return;
+    }
+    else if(title === "genders") {
+      labels.push(item.gender);
+    }
+    else if(title === "jobs") {
+      labels.push(item.occupation);
+    }
+    dataPoints.push(parseInt(item['count(*)']));
+    
   });
+  
   var canvas = document.getElementById("chart-3823");
-  var ctx = canvas.getContext("2d");
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  var barColors = [
-    "#b91d47",
-    "#00aba9",
-    "#2b5797",
-    "#e8c3b9",
-    "#1e7145",
-    "#9a5ca5",
-    "#ff7f50",
-    "#ffd700",
-    "#ffa500",
-    "#32cd32",
-    "#ff69b4",
-    "#cd5c5c",
-    "#4169e1",
-    "#8a2be2",
-    "#ff1493",
-    "#20b2aa",
-    "#008080",
-    "#f08080",
-    "#00ced1",
-    "#800080",
-    "#8b4513",
-    "#00ff7f",
-    "#d2691e",
-    "#8b008b",
-    "#4682b4",
+  canvas.remove()
+  const oldChart = document.getElementsByClassName("chartjs-size-monitor")
+  if (oldChart.length) {
+    for (let chart of oldChart) {
+      chart.remove()
+    }
+  }
+  const newCanvas = document.createElement("canvas")
+  newCanvas.id = "chart-3823"
+  var canvas_container = document.getElementById("chart_container-8823");
+  canvas_container.append(newCanvas)
+  var ctx = newCanvas.getContext("2d")
+  newCanvas.style.width = "100%";
+  newCanvas.style.height = "100%";
+  var bar_Colors = [
+    'rgba(255, 99, 132, 0.5)',
+    'rgba(54, 162, 235, 0.5)',
+    'rgba(255, 206, 86, 0.5)',
+    'rgba(75, 192, 192, 0.5)',
+    'rgba(153, 102, 255, 0.5)',
+    'rgba(255, 159, 64, 0.5)',
+    'rgba(201, 203, 207, 0.5)',
+    'rgba(255, 0, 0, 0.5)',
+    'rgba(0, 255, 0, 0.5)',
+    'rgba(0, 0, 255, 0.5)',
+    'rgba(128, 128, 128, 0.5)',
+    'rgba(0, 128, 128, 0.5)',
+    'rgba(128, 0, 128, 0.5)',
+    'rgba(255, 255, 0, 0.5)',
+    'rgba(0, 255, 255, 0.5)'
   ];
   
-  var chart = new Chart(ctx, {
-    type: "pie",
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          backgroundColor: barColors,
-          data: dataPoints,
-          borderColor: barColors,
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      
-      plugins: {
-        // Change options for ALL labels of THIS CHART
-        datalabels: {
-          formatter: (value, ctx) => {
-            let sum = ctx.dataset._meta[0].total;
-            let percentage = (value * 100 / sum).toFixed(2) + "%";
-            return percentage;
-          },
-          fontSize: 12,
-          color: '#fff',
-        }    
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-      title: {
-        display: true,
-        text: "Dân số theo mỗi quận",
-        fontColor: '#ffffff',
-        fontSize: 20,
-        position: 'right',
-      },
-      legend: {
-        display: true,
-        position: 'right',
-        labels: {
-          fontColor: '#ffffff',
-          fontSize: 13,
-        },     
-
-      },
-      // tooltips: {
-      //   callbacks: {
-      //     label: function (tooltipItem, data) {
-      //       var dataset = data.datasets[tooltipItem.datasetIndex];
-      //       var currentValue = dataset.data[tooltipItem.index];
-      //       return data.labels[tooltipItem.index] + ": " + currentValue + " người";
-      //     },
-      //   },
-      // },
-      layout:{
-        padding:{
-          top: 10,
-          bottom:5
-        }
-      }      
-    },
-  });
+  var border_Colors = [
+    'rgba(255, 99, 132, 1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)',
+    'rgba(201, 203, 207, 1)',
+    'rgba(255, 0, 0, 1)',
+    'rgba(0, 255, 0, 1)',
+    'rgba(0, 0, 255, 1)',
+    'rgba(128, 128, 128, 1)',
+    'rgba(0, 128, 128, 1)',
+    'rgba(128, 0, 128, 1)',
+    'rgba(255, 255, 0, 1)',
+    'rgba(0, 255, 255, 1)'
+  ];
+  var chart =  getChart(bar_Colors, border_Colors, dataPoints, labels, ctx)
 }
 
 view_stat_btn.addEventListener('click', function() {
-  fetch("/api/district/num")
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("NETWORK RESPONSE ERROR");
-      }
-    })
-    .then(data => {
-      updateChart(data);
-    })
-    .catch(error => console.error("FETCH ERROR:", error));
+  link = "/api/district/num"
+  if(province_existed === true) {
+    if(district_existed === true) {
+       
+    } 
+    else {
+      link = "/api/district/num"
+    }
+  }
+  else if(title === "province") {
+    link = "/api/province/num"
+  }
+   else if(title === "jobs") {
+     link = "/api/occupation"
+   }
+   else if(title === "ages") {
+     link = "/api/age_groups"
+   }
+   else if(title === "genders") {
+     link = "/api/gender"
+   }
+  fetch(link)
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error("NETWORK RESPONSE ERROR");
+    }
+  })
+  .then(data => {
+    updateChart(data);
+  })
+  .catch(error => console.error("FETCH ERROR:", error));
 });
-
 
 // Disable checkbox functionality
 const checkboxes = document.querySelectorAll('.btn-check');

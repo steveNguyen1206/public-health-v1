@@ -42,7 +42,7 @@
                                 </select>
                             </div>
                             <div class="col-3">
-                                <div class="did-floating-label-content">
+                                <div class="did-floating-label-content" id="1_selectBox-16823">
                                     <select id="1_distri_select-15823" class="did-floating-select" onclick="this.setAttribute('value', this.value);" onchange="this.setAttribute('value', this.value);" value="" disabled>
                                         <option></option>
                                         <option>Normal</option>
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <div class="did-floating-label-content">
+                                <div class="did-floating-label-content" id="1_inputBox-16823">
                                     <input id="1_value_inpt-15823" class="did-floating-input" type="text" placeholder=" " disabled>
                                     <span class="did-floating-label">Giá trị thực</span>
                                 </div>
@@ -76,7 +76,7 @@
                                 </select>
                             </div>
                             <div class="col-3">
-                                <div class="did-floating-label-content">
+                                <div class="did-floating-label-content" id="2_selectBox-16823">
                                     <select id="2_distri_select-15823" class="did-floating-select" onclick="this.setAttribute('value', this.value);" onchange="this.setAttribute('value', this.value);" value="" disabled>
                                         <option></option>
                                         <option>Normal</option>
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <div class="did-floating-label-content">
+                                <div class="did-floating-label-content" id="2_inputBox-16823">
                                     <input id="2_value_inpt-15823" class="did-floating-input" type="text" placeholder=" " disabled>
                                     <span class="did-floating-label">Giá trị thực</span>
                                 </div>
@@ -111,7 +111,7 @@
                                 </select>
                             </div>
                             <div class="col-3">
-                                <div class="did-floating-label-content">
+                                <div class="did-floating-label-content" id="3_selectBox-16823">
                                     <select id="3_distri_select-15823" class="did-floating-select" onclick="this.setAttribute('value', this.value);" onchange="this.setAttribute('value', this.value);" value="" disabled>
                                         <option></option>
                                         <option>Normal</option>
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <div class="did-floating-label-content">
+                                <div class="did-floating-label-content" id="3_inputBox-16823">
                                     <input id="3_value_inpt-15823" class="did-floating-input" type="text" placeholder=" " disabled>
                                     <span class="did-floating-label">Giá trị thực</span>
                                 </div>
@@ -146,7 +146,7 @@
                                 </select>
                             </div>
                             <div class="col-3">
-                                <div class="did-floating-label-content">
+                                <div class="did-floating-label-content" id="4_selectBox-16823">
                                     <select id="4_distri_select-15823" class="did-floating-select" onclick="this.setAttribute('value', this.value);" onchange="this.setAttribute('value', this.value);" value="" disabled>
                                         <option></option>
                                         <option>Normal</option>
@@ -161,7 +161,7 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <div class="did-floating-label-content">
+                                <div class="did-floating-label-content" id="4_inputBox-16823">
                                     <input id="4_value_inpt-15823" class="did-floating-input" type="text" placeholder=" " disabled>
                                     <span class="did-floating-label">Giá trị thực</span>
                                 </div>
@@ -174,14 +174,15 @@
                         <label class="form-labe1">Thông tin mô phỏng:</label>
                         <div class="row align-items-center" style="justify-content: center;">
                             <div class="col-4">
-                                <div class="did-floating-label-content">
-                                    <input id="5_value_inpt-15823" class="did-floating-input" type="number" placeholder=" " min="0" onkeypress="return event.charCode >= 48">
+                                <div class="did-floating-label-content" id="5_inputBox-16823">
+                                    <input id="5_value_inpt-15823" class="did-floating-input" placeholder=" " type="number" min="0" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+
                                     <span class="did-floating-label">Số ngày mô phỏng</span>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="did-floating-label-content">
-                                    <input id="6_value_inpt-15823" class="did-floating-input" type="number" placeholder=" " min="0" step="1" onkeypress="return event.charCode >= 48">
+                                <div class="did-floating-label-content" id="6_inputBox-16823">
+                                    <input id="6_value_inpt-15823" class="did-floating-input" placeholder=" " type="number" min="0" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     <span class="did-floating-label">Số người nhiễm tiền phát</span>
                                 </div>
                             </div>
@@ -200,6 +201,7 @@
                             // console.log(inputContent);
 
                             initialSelect.addEventListener('change', function() {
+                                removeErrorStyle();
                                 if (initialSelect.value === 'Giá trị cụ thể') {
                                     inputContent.disabled = false;
                                     inputContent.value = 'Giá trị = \"...\"';
@@ -246,12 +248,12 @@
                         }
 
                         const UIOptionBox_desk = document.querySelector("#options_container-2823.desktop-ui");
-                        if(window.getComputedStyle(UIOptionBox_desk).display === "block"){
-                            // Loop through the different elements and attach event handlers
-                            for (let i = 1; i <= 4; i++) {
-                                attachEventHandlers(i);
-                            }
-                        } 
+                        
+                        // Loop through the different elements and attach event handlers
+                        for (let i = 1; i <= 4; i++) {
+                            attachEventHandlers(i);
+                        }
+                         
                     </script>
                 
                 </div>
@@ -483,12 +485,12 @@
                     }
 
                     const UIOptionBox = document.querySelector("#options_container-2823.mobile-ui");
-                    if(window.getComputedStyle(UIOptionBox).display === "block"){
-                        // Loop through the different elements and attach event handlers
-                        for (let i = 1; i <= 4; i++) {
-                            attachEventHandlers(i);
-                        }
-                    }                  
+                    
+                    // Loop through the different elements and attach event handlers
+                    for (let i = 1; i <= 4; i++) {
+                        attachEventHandlers(i);
+                    }
+                                 
 
                 </script>
             </div>
