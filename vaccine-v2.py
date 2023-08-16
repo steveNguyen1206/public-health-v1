@@ -227,7 +227,7 @@ class DiseaseSimulation:
 
                                 }]) 
             res = pd.concat([res, today],ignore_index=True)
-            # print(res)
+            print(res)
         return res
     
     def ring_based_vaccination(self,edge,weight,daily_infected):
@@ -367,7 +367,7 @@ scalar_factors_distribution = {
 }
 
 
-pop = Population(N=2000, 
+pop = Population(N=1000, 
                  family_size=4, 
                  acquaintance_size=10,
                  scalar_factors_distribution=scalar_factors_distribution)
@@ -412,14 +412,14 @@ edge_sampler = EdgeSampler(agents,non_hh_contact_matrix=contact_matrix)
 weight_sampler = WeightSampler(weight_dist)
 
 ebola = Ebola()
-vaccine = Vaccine(num_vaccine=10, effciency=0.998, reach_rate=0.7, immune_period=9)
+vaccine = Vaccine(num_vaccine=5, effciency=0.998, reach_rate=0.7, immune_period=9)
 simulation = DiseaseSimulation(agents,
                                200,
                                edge_sampler,
                                weight_sampler,
                                ebola,
                                vaccine)
-simulation.initialize_seed_cases(25)
+simulation.initialize_seed_cases(5)
 res = simulation.run_simulation()
 res.to_csv("result.csv", sep=";")
 
