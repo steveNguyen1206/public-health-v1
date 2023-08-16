@@ -1,0 +1,55 @@
+/* moble */
+@media (max-width: 46.1875em) {
+
+    /* comment class*/
+    
+    .s-col-full {
+        width: 100% !important;
+    }
+
+    .header-wrapper {
+        width: 100% !important;
+        align-items: start;
+    }
+
+    .header-wrapper-right {
+        float: left !important;
+    }
+    
+    .header-addr-wrapper {
+        display: block !important;
+        width: 100% !important;
+
+    }
+
+    .header-hhsize-wrapper {
+        display: block !important;
+    }
+
+    .addr-form {
+        width: 100% !important;
+    }
+
+    .person-btn {
+        padding: 4px 4px !important;
+    }
+
+    .btn {
+        width: 100% !important;
+        margin-top: 8px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .mdoel-scroll-container  {
+        padding: 35px 20px 20px 20px !important;
+    }
+}
+
+/* tablet and mobile */
+@media (max-width: 63.9375em) {
+        .btn {
+            height: 48px;
+            font-size: 16px;
+        }
+
+}

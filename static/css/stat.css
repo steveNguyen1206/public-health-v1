@@ -1506,7 +1506,7 @@ ul.wix-list-text-align p {
 }
 
 .InstructText-15823-wrapper {
-  width: 100%
+  width: 100%;
 }
 
 .InstructText-15823 {
@@ -7367,10 +7367,10 @@ opacity: 0;
   --l_display: unset;
   top: calc(var(--top) + var(--sticky-top) + var(--wix-ads-top-height) * var(--is-sticky));
   display: var(--l_display, var(--display));
-  align-self: start;
+  align-self: center;
   justify-self: center;
-  margin-left: 10%;
-  margin-right: 0.0011582653817642698%;
+  margin-left: 30%;
+  margin-right: 30%;
   margin-top: 221.59375px;
   margin-bottom: 0px;
   grid-area: 1/1/2/2;

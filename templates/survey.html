@@ -4,24 +4,39 @@
 
 {%block head%}
   <link rel="stylesheet" href="{{url_for('static', filename='css/survey.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/simu.css')}}">
 {%endblock%}
 
 {%block content%}
-  <section id="survey_header-26723" class="pt-4  container-lg" >
-    <div class="container-fluid py-lg-5 px-lg-5" id="survey_header_container-26723" style="color: white;text-align: center;" >
-      <h2>
-        Khảo sát hộ gia đình
-      </h2>
-      <div>
-        Nhập các trường thông tin bên dưới để thực hiện khảo sát. Các thông tin khảo sát được đảm bảo riêng tư và chỉ được dùng cho mục đích nghiên cứu.
+  <div id="survey_container-17823">
+    <style>
+      #survey_container-17823{  
+        background: url('../images/Large_Card.jpg') no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <section id="survey_header-26723" class="pt-4  container-lg" >
+      <div id="pageTitle_container-15823" class="BaOVQ8 tz5f0K pageTitle_container-15823 wixui-rich-text" data-testid="richTextElement" data-angle="0" data-angle-style-location="style" data-screen-in-hide="done" style="visibility: inherit;">
+        <h1 class="font_2 wixui-rich-text__text">
+        <span class="wixui-rich-text__text">Khảo sát hộ gia đình</span>
+        </h1>
+    </div>
+    <div id="InstructPosition_container-15823" class="InstructPosition_container-15823">
+        <div id="wrapper-InstructPosition_container-15823" dir="ltr" class="InstructText_Formater-15823">
+        <div class="InstructText_Wrapper-15823">
+            <p class="InstructText-15823">Nhập các trường thông tin bên dưới để thực hiện khảo sát. Các thông tin khảo sát được đảm bảo riêng tư và chỉ được dùng cho mục đích nghiên cứu.</p>
+        </div>
+        </div>
+    </div>
+    </section>
+    <section id="survey_cndct-26723">
+      <div class="pt-3 pb-lg-5 px-lg-5 container-fluid" id="survey_cndct_container-26723">
+          {%include 'form.html'%}
       </div>
-      
-    </div>
-  </section>
-  <section id="survey_cndct-26723">
-    <div class="pt-3 pb-lg-5 px-lg-5 container-fluid" id="survey_cndct_container-26723">
-        {%include 'form.html'%}
-    </div>
-  </section>
+    </section>
+  </div>
+  
   <script src="{{url_for('static', filename='js/survey.js')}}" ></script>
 {%endblock%}
