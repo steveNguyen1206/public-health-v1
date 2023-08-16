@@ -227,29 +227,29 @@ class DiseaseSimulation:
 
                                 }]) 
             res = pd.concat([res, today],ignore_index=True)
-            print(res)
+            # print(res)
         return res
     
     def ring_based_vaccination(self,edge,weight,daily_infected):
         contacts=[]
         contacts_of_contacts=[]
         risk={}
-        for agent_index, agent in enumerate(daily_infected):
-            for contact_type in edge[agent_index]:
-                for contact_index in edge[daily_infected[agent_index].id][contact_type]:
+        for  agent in daily_infected:
+            for contact_type in edge[agent.id]:
+                for contact_index in edge[agent.id][contact_type]:
                     contact = agents[contact_index]
                     if contact.status == SUSCEPTIBLE:
-                        prob = self.disease.pr_base * weight[daily_infected[agent_index].id][contact_index]
+                        prob = self.disease.pr_base * weight[agent.id][contact_index]
                         risk[contact_index]=prob
                         contacts.append(contact)
 
-        for c_index, c in enumerate(contacts):
-            for cc_type in edge[c_index]:
-                for cc_index in edge[contacts[c_index].id][cc_type]:
+        for  c in contacts:
+            for cc_type in edge[c.id]:
+                for cc_index in edge[c.id][cc_type]:
                     cc = agents[cc_index]
                     contacts_of_contacts.append(cc)
                     if cc.status == SUSCEPTIBLE:
-                        prob = self.disease.pr_base * weight[contacts[c_index].id][cc_index] * risk[contacts[c_index].id]
+                        prob = self.disease.pr_base * weight[c.id][cc_index] * risk[c.id]
                         risk[cc_index]=prob
         risk_sorted = dict(sorted(risk.items(), key=lambda item: item[1]))
         vax_used = 0
