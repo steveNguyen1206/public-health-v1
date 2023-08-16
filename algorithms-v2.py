@@ -124,12 +124,14 @@ class EdgeSampler:
             edge[index] = {}
             edge[index]["family_members"] = self.hh_dict[index]
         for index in self.non_hh_dict:
+            edge[index]["acquaintances"] = list()
+            
             for target_factor_value in self.non_hh_dict[index]:
                 n_of_contacts = np.random.poisson(self.contact_matrix["values"][self.factor_array[index]][target_factor_value])
                 if n_of_contacts > len(self.non_hh_dict[index][target_factor_value]):
                     n_of_contacts = len(self.non_hh_dict[index][target_factor_value])
                     
-                edge[index]["acquaintances"] = random.sample(self.non_hh_dict[index][target_factor_value], n_of_contacts)
+                edge[index]["acquaintances"].extend(random.sample(self.non_hh_dict[index][target_factor_value], n_of_contacts))
         return edge
 
 
@@ -186,7 +188,7 @@ class DiseaseSimulation:
             # Establish edges and weights
             edge = self.edge_sampler.sample_edges()
             weight = self.weight_sampler.sample_weights(edge=edge)
-            print(edge)
+            
             # Iterate through all agents in the system
             for agent_index, agent in enumerate(self.agents):
                 # If this agent is still infectious
@@ -199,6 +201,21 @@ class DiseaseSimulation:
                                 prob = self.disease.pr_base * weight[agent_index][contact_index]
                                 if bernoulli.rvs(prob) == 1:
                                     contact.start_incubation(self.disease.generate_incubation_period())
+                        
+                            for sub_contact_type in edge[contact_index]:
+                                for sub_contact_index in edge[contact_index][sub_contact_type]:
+                                    sub_prob = self.disease.pr_base * self.disease.pr_base * weight[agent_index][contact_index] * weight[contact_index][sub_contact_index]
+                                    if agents[sub_contact_index].status in [SUSCEPTIBLE]:
+                                        if agents[contact_index].status == INFECTED:
+                                            sub_prob = weight[contact_index][sub_contact_index] * self.disease.pr_base
+                                        else:
+                                            sub_prob = self.disease.pr_base * self.disease.pr_base * weight[agent_index][contact_index] * weight[contact_index][sub_contact_index]
+                                        if sub_prob > 1:
+                                            sub_prob = 1
+                                        if (bernoulli.rvs(sub_prob) == 1):
+                                            agents[sub_contact_index].start_incubation(self.disease.generate_incubation_period())    
+                    
+                    
                     agent.infection_days_left -= 1
                 else:
                     agent.update_status(self.disease.generate_infection_period(),
@@ -301,16 +318,12 @@ class Population:
 scalar_factors_distribution = {
     "age_group": {
         "values": ["children", "adolescent", "adult"],
-        "weights": [0.33,0.33,0.33]
+        "weights": [0.25,0.25,0.5]
     }
 }
 
 
-pop = Population(N=200, 
-                 family_size=4, 
-                 acquaintance_size=10,
-                 scalar_factors_distribution=scalar_factors_distribution)
-agents = pop.population_sample()
+
 contact_matrix = {
             "scalar_factor": "age_group",
             "values": {
@@ -347,6 +360,15 @@ weight_dist = {
     },  
 }
 
+n_pop = 2000
+
+pop = Population(N=n_pop, 
+                 family_size=4, 
+                 acquaintance_size=10,
+                 scalar_factors_distribution=scalar_factors_distribution)
+agents = pop.population_sample()
+
+
 edge_sampler = EdgeSampler(agents,non_hh_contact_matrix=contact_matrix)
 weight_sampler = WeightSampler(weight_dist)
 
@@ -356,13 +378,22 @@ simulation = DiseaseSimulation(agents,
                                edge_sampler,
                                weight_sampler,
                                ebola)
-simulation.initialize_seed_cases(5)
-res = simulation.run_simulation()
+simulation.initialize_seed_cases(10)
+
+import time
+
+start_time = time.time() #------------------------
+res = simulation.run_simulation() 
+end_time = time.time() #--------------------------
+
+elapsed_time = end_time - start_time
+
+print(f"Elapsed time: {elapsed_time} seconds")
+
 res.to_csv("result.csv", sep=";")
 
-print(edge_sampler.non_hh_dict)
 
-plot = res[['susceptible', 'incubated', 'infected', 'deceased', 'removed']].div(200).plot()
+plot = res[['susceptible', 'incubated', 'infected', 'deceased', 'removed']].div(n_pop).plot()
 plot.set_xlabel("Day")
 plot.set_ylabel("Ratio of population")
 plot.set_title('Simulation')

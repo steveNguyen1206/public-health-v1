@@ -186,7 +186,7 @@ def simulation(N,
                              HH_dict=HH_dict, 
                              non_HH_dict=non_HH_dict)
         edge_weight = weight_sampling(N,edge,contact_dist)
-        print(edge)
+
         
         # For every agents in the network:
         for i in range(N):
@@ -348,13 +348,15 @@ def population_sample(N,
         
     return class_type, HH_dict, non_HH_dict
     
-N = 200
+N = 1500
 class_type, HH_dict, non_HH_dict = population_sample(N,
                                                      4,
                                                      10,
-                                                     [1/3.0, 1/3.0, 1/3.0])
+                                                     [4.5, 3.5, 2])
 
+import time
 
+start_time = time.time() #------------------------
 simu = simulation(N=N,
                   T=200,
                   HH_dict=HH_dict,
@@ -365,6 +367,12 @@ simu = simulation(N=N,
                   num_seed_case = 5,
                   pr_base=0.01962,
                   cfr=0.854)
+end_time = time.time() #--------------------------
+
+elapsed_time = end_time - start_time
+
+print(f"Elapsed time: {elapsed_time} seconds")
+
 
 simu.to_csv("result.csv", sep=";")
 
