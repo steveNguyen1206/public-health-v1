@@ -364,7 +364,7 @@ class Population:
                 num_of_acquaintances = np.random.poisson(lam=self.acquaintance_size)
                 acquaintances = random.sample(possible_acquaintances, num_of_acquaintances)
                 agents[family_member_index].acquaintances = acquaintances
-                
+                    
             left = right
         
         return agents

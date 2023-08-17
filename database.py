@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, text, insert
 from dotenv.main import load_dotenv
+from itertools import groupby
 import os
 
 load_dotenv()
@@ -60,7 +61,7 @@ def get_num_persons_of_districts():
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        print(res)
+        # print(res)
         return res
     
 def get_num_persons_of_provinces():
@@ -115,23 +116,31 @@ def get_occupation():
 
 def get_population():
     with engine.connect() as conn:
-        data = conn.execute(text("select id,family_id,gender,(YEAR(NOW()) - birth_year) as age from person")).all()
+        data = conn.execute(text("select id,family_id,gender,(YEAR(NOW()) - birth_year) as age from person order by id")).all()
         res = []
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        # print(users)
+        print(res)
         return res
     
+def key_func(k):
+    return k['family_id']
+
 def get_household():
     with engine.connect() as conn:
-        data = conn.execute(text("select p.family_id, p.id from person p where p.in_house = 1")).all()
+        data = conn.execute(text("select p.family_id, p.id from person p where p.in_house = 1 order by family_id")).all()
         res = []
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        # print(users)
-        return res
+
+        hh_dict = {}
+        for key, value in groupby(res, key_func):
+            hh_dict[key - 1] =  [item['id'] - 1 for item in list(value)]
+
+        print(hh_dict)
+        return hh_dict
 
 def add_family_person(data):
     with engine.connect() as conn:
@@ -183,5 +192,6 @@ def add_family_person(data):
 # get_all_families()
 # get_all_persons()
 # get_all_families()
+# get_population()
 
     
