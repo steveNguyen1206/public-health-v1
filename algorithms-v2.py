@@ -360,7 +360,7 @@ weight_dist = {
     },  
 }
 
-n_pop = 2000
+n_pop = 350
 
 pop = Population(N=n_pop, 
                  family_size=4, 

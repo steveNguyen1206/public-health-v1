@@ -1,0 +1,73 @@
+[33mcommit 302c5bcd13a39274d1e557b030ea2f5d95debe11[m[33m ([m[1;36mHEAD -> [m[1;32mmodel[m[33m, [m[1;31morigin/model[m[33m)[m
+Author: quoc-trung-nguyen-hcmus <121560414+quoc-trung-nguyen-hcmus@users.noreply.github.com>
+Date:   Wed Aug 2 08:52:54 2023 +0700
+
+    Added algorithms.py
+
+[33mcommit 5f0ae126af4ea7f4b5ea094392ade333fcfac0dd[m
+Merge: 81d670e d5fd64d
+Author: setveNguyen1206 <thepdatoipm@gmail.com>
+Date:   Sat Jul 22 09:25:48 2023 +0700
+
+    Merge branch 'home_ui' of https://github.com/steveNguyen1206/public-health-v1
+
+[33mcommit 81d670ede1409774cb339644a3ecd4565abdf6f5[m
+Author: setveNguyen1206 <thepdatoipm@gmail.com>
+Date:   Sat Jul 22 09:25:32 2023 +0700
+
+    commit
+
+[33mcommit d5fd64dbd49421514ee6784183e0a6c9637115f3[m
+Author: Khang0608 <hoduykhanghocmai@gmail.com>
+Date:   Fri Jul 21 13:23:43 2023 +0700
+
+    Web UI initial look
+
+[33mcommit 91b8871efb01adc0450c50d80cb39286a514e429[m[33m ([m[1;31morigin/thuy[m[33m, [m[1;31morigin/form-survey[m[33m, [m[1;31morigin/chan[m[33m)[m
+Merge: d8419af ad65666
+Author: glucose20 <21120146@student.hcmus.edu.vn>
+Date:   Thu Jul 20 12:46:12 2023 +0700
+
+    Merge branch 'main' of https://github.com/steveNguyen1206/public-health-v1
+
+[33mcommit d8419af32735d4f11c2c12c84ca3257dc1b4b8d3[m
+Author: glucose20 <21120146@student.hcmus.edu.vn>
+Date:   Thu Jul 20 12:45:41 2023 +0700
+
+    1st
+
+[33mcommit ad656663356d1196bb894622d4666559f95535fc[m
+Author: setveNguyen1206 <thepdatoipm@gmail.com>
+Date:   Thu Jul 20 12:35:19 2023 +0700
+
+    add gender
+
+[33mcommit 79cc8921714ecd1c434e5b07be22d01ae0b688f5[m
+Author: setveNguyen1206 <thepdatoipm@gmail.com>
+Date:   Thu Jul 20 01:22:52 2023 +0700
+
+    fix database
+
+[33mcommit 1e89580da946323a2c1f886c0207992586225ad2[m
+Author: setveNguyen1206 <thepdatoipm@gmail.com>
+Date:   Thu Jul 20 01:11:07 2023 +0700
+
+    second4
+
+[33mcommit c216680008584c3fbb4744677604f1997e546e74[m
+Author: setveNguyen1206 <thepdatoipm@gmail.com>
+Date:   Thu Jul 20 01:01:36 2023 +0700
+
+    second3
+
+[33mcommit 9c933bbb2b90b657e953798f7be633f65abbd35f[m
+Author: setveNguyen1206 <thepdatoipm@gmail.com>
+Date:   Thu Jul 20 00:59:43 2023 +0700
+
+    second2
+
+[33mcommit fa3348a4d5073782cfced916867f3cbb19cacb8f[m
+Author: setveNguyen1206 <thepdatoipm@gmail.com>
+Date:   Thu Jul 20 00:50:44 2023 +0700
+
+    first
