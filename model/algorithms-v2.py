@@ -5,6 +5,8 @@ import  pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import lognorm, bernoulli
 from itertools import combinations
+import time
+
 
 SUSCEPTIBLE = 0
 INCUBATED = 1
@@ -303,7 +305,6 @@ class Ebola:
     def __init__(self):
         self.pr_base = 0.01962 
     
-    
     def generate_incubation_period(self):
         return lognorm.rvs(s=0.284, scale=np.exp(2.446))
     
@@ -321,13 +322,52 @@ class Population:
                  N,
                  family_size,
                  acquaintance_size,
-                 scalar_factors_distribution):
+                 scalar_factors_distribution,
+                 population=None,
+                 HH_dict=None):
         self.n_population = N
         self.family_size = family_size
         self.acquaintance_size = acquaintance_size
         self.scalar_factors_distribution = scalar_factors_distribution
-        
+        self.population = population
+        self.HH_dict = HH_dict
     
+    def population_data(self):
+        agents = []
+        id_list = []
+        for item in self.population:
+            id_list.append(item['id'])
+            agent = Agent(item['id'])
+            agent.family_members = []
+            agents.append(agent)
+
+        # scalar_factors sampling
+        for scalar_factor in self.scalar_factors_distribution:
+            for agent in agents:
+                agent.scalar_factors[scalar_factor] = None
+                agent.scalar_factors[scalar_factor] = random.choices(
+                    self.scalar_factors_distribution[scalar_factor]["values"],
+                    self.scalar_factors_distribution[scalar_factor]["weights"]
+                )[0]
+
+        # household
+        for fam_id, fam_member in self.HH_dict.items():
+            for i in fam_member:
+                agents[i].family_members = fam_member.copy()
+                agents[i].family_members.remove(i)
+
+        id_list = set(id_list)
+        for agent in agents:
+                possible_acquaintances = list(id_list - 
+                                              set(agent.family_members) - set(agent.id))
+                
+                num_of_acquaintances = np.random.poisson(lam=self.acquaintance_size)
+                acquaintances = random.sample(possible_acquaintances, num_of_acquaintances)
+                agent.acquaintances = acquaintances
+
+        return agents
+
+                
     
     def population_sample(self):
         agents = []
@@ -416,43 +456,114 @@ weight_dist = {
     },  
 }
 
-n_pop = 2000
 
-pop = Population(N=n_pop, 
+
+class SimulationRunner():
+    def __init__(self,
+                 init_type, 
+                 n_pop=2000, 
                  family_size=4, 
-                 acquaintance_size=10,
-                 scalar_factors_distribution=scalar_factors_distribution)
-agents = pop.population_sample()
+                 acquaintance_size=10, 
+                 num_vaccine=30, 
+                 vaccine_enfficiency=0.98, 
+                 reach_rate=0.7,
+                 immue_period=9,
+                 total_time=200,
+                 population = None,
+                 HH_dict=None):
+        
+        self.family_size = family_size
+        self.acquaintance_size = acquaintance_size
+        self.int_type = init_type
+        self.population = population
+        self.HH_dict = HH_dict
+        self.n_pop = n_pop if init_type == "sample" else len(population)
+        self.pop = Population(N=self.n_pop, 
+                family_size=self.family_size, 
+                acquaintance_size=self.acquaintance_size,
+                scalar_factors_distribution=scalar_factors_distribution,
+                population=self.population,
+                HH_dict=self.HH_dict)
+
+        if init_type == "sample":
+            self.agents = self.pop.population_sample()
+        elif init_type == "data":
+            self.agents = self.pop.population_data()
+        
+        self.edge_sampler = EdgeSampler(self.agents,non_hh_contact_matrix=contact_matrix)
+        self.weight_sampler = WeightSampler(weight_dist)
+        self.vaccine = Vaccine(num_vaccine=num_vaccine, effciency=vaccine_enfficiency, reach_rate=reach_rate, immune_period=immue_period)
+        self.ebola = Ebola()
+        self.simulation = DiseaseSimulation(self.agents,
+                                    total_time,
+                                    self.edge_sampler,
+                                    self.weight_sampler,
+                                    self.ebola,
+                                    self.vaccine)
+        self.simulation.initialize_seed_cases(10)
+
+    def run_and_draw(self,drawmode):
+        start_time = time.time() #------------------------
+        res = self.simulation.run_simulation() 
+        end_time = time.time() #--------------------------
+
+        elapsed_time = end_time - start_time
+
+        print(f"Elapsed time: {elapsed_time} seconds")
+
+        csv = res.copy()
+        csv.to_csv("result.csv", sep=";")
+
+        plot = res[['susceptible', 'incubated', 'infected', 'deceased', 'removed']].div(n_pop).plot()
+        plot.set_xlabel("Day")
+        plot.set_ylabel("Ratio of population")
+        plot.set_title('Simulation')
+        plot.set_xticks(range(0, len(res), 20))
+        if drawmode == "show":
+            plt.show()
+        else:
+            plt.savefig('./model/result.jpg')
+
+        return res
+            
+
+if __name__ == '__main__':
+    n_pop = 2000
+
+    pop = Population(N=n_pop, 
+                    family_size=4, 
+                    acquaintance_size=10,
+                    scalar_factors_distribution=scalar_factors_distribution)
+    agents = pop.population_sample()
 
 
-edge_sampler = EdgeSampler(agents,non_hh_contact_matrix=contact_matrix)
-weight_sampler = WeightSampler(weight_dist)
-vaccine = Vaccine(num_vaccine=30, effciency=0.998, reach_rate=0.7, immune_period=9)
-ebola = Ebola()
-simulation = DiseaseSimulation(agents,
-                               200,
-                               edge_sampler,
-                               weight_sampler,
-                               ebola,
-                               vaccine)
-simulation.initialize_seed_cases(10)
+    edge_sampler = EdgeSampler(agents,non_hh_contact_matrix=contact_matrix)
+    weight_sampler = WeightSampler(weight_dist)
+    vaccine = Vaccine(num_vaccine=30, effciency=0.998, reach_rate=0.7, immune_period=9)
+    ebola = Ebola()
+    simulation = DiseaseSimulation(agents,
+                                200,
+                                edge_sampler,
+                                weight_sampler,
+                                ebola,
+                                vaccine)
+    simulation.initialize_seed_cases(10)
 
-import time
 
-start_time = time.time() #------------------------
-res = simulation.run_simulation() 
-end_time = time.time() #--------------------------
+    start_time = time.time() #------------------------
+    res = simulation.run_simulation() 
+    end_time = time.time() #--------------------------
 
-elapsed_time = end_time - start_time
+    elapsed_time = end_time - start_time
 
-print(f"Elapsed time: {elapsed_time} seconds")
+    print(f"Elapsed time: {elapsed_time} seconds")
 
-res.to_csv("result.csv", sep=";")
+    res.to_csv("result.csv", sep=";")
 
-plot = res[['susceptible', 'incubated', 'infected', 'deceased', 'removed']].div(n_pop).plot()
-plot.set_xlabel("Day")
-plot.set_ylabel("Ratio of population")
-plot.set_title('Simulation')
-plot.set_xticks(range(0, len(res), 20))
-plt.show()
+    plot = res[['susceptible', 'incubated', 'infected', 'deceased', 'removed']].div(n_pop).plot()
+    plot.set_xlabel("Day")
+    plot.set_ylabel("Ratio of population")
+    plot.set_title('Simulation')
+    plot.set_xticks(range(0, len(res), 20))
+    plt.show()
 
