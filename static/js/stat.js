@@ -99,8 +99,8 @@ function getChart(bar_Colors, border_Colors, dataPoints, labels, ctx) {
             },
           },
           legend: {
-            position: 'top', // Adjust the legend position
-            align: 'start',  // Align the legend with the start of the chart
+            position: 'bottom', // Adjust the legend position
+            align: 'center',  // Align the legend with the start of the chart
             labels: {
               fontColor: '#fff',
               generateLabels: (chart) => {

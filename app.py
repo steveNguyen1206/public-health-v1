@@ -1,5 +1,6 @@
 from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, url_for
 from database import get_all_persons, add_family_person, get_all_families, get_dist_person_num,get_num_persons_of_districts,get_age_groups,get_population,get_household,get_gender,get_occupation,get_num_persons_of_provinces,get_num_persons_of_family
+from algorithms import simulation
 
 app = Flask(__name__)
 
@@ -22,12 +23,6 @@ def to_simu():
 @app.route("/team")
 def to_team():
     return render_template('team.html')
-
-@app.route('/simu_user_para', methods=['post'])
-def send_user_para():
-    data=request.json
-    # Goi ham simulation tu data
-
 
 @app.route("/api/person/all")
 def api_get_all_persons():
@@ -92,6 +87,25 @@ def api_get_occupation():
     occupation = get_occupation()
     return jsonify(occupation)
 
+@app.route("/api/simul")
+def return_image():
+    data = simulation()
+    json_data = {
+        "days": data["day"].tolist(),
+        "susceptible": data["susceptible"].tolist(),
+        "incubated": data["incubated"].tolist(),
+        "infected": data["infected"].tolist(),
+        "vaccinated": data["vaccinated"].tolist(),
+        "removed": data["removed"].tolist(),
+        "deceased": data["deceased"].tolist(),
+    }
+
+    return json_data
+
+@app.route('/simu_user_para', methods=['post'])
+def send_user_para():
+    data=request.json
+    # Goi ham simulation tu data
 
 # @app.route("/api/users")
 # def api_get_user():

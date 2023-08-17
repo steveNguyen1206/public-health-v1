@@ -183,6 +183,123 @@ function sendJsonData(data) {
     });
 }
 
+function createLineChart(jsonData, element_id) {
+    var ctx = document.getElementById(element_id).getContext('2d');
+    console.log(jsonData)
+    // json_data = {
+    //     "days": data["day"].tolist(),
+    //     "susceptible": data["susceptible"].tolist(),
+    //     "incubated": data["incubated"].tolist(),
+    //     "infected": data["infected"].tolist(),
+    //     "vaccinated": data["vaccinated"].tolist(),
+    //     "removed": data["removed"].tolist(),
+    //     "deceased": data["deceased"].tolist(),
+    // }
+
+    var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: jsonData.days,
+            datasets: [
+                {
+                    label: 'Susceptible',
+                    data: jsonData.susceptible,
+                    borderColor: 'red',
+                    fill: false
+                },
+                {
+                    label: 'Incubated',
+                    data: jsonData.incubated,
+                    borderColor: 'blue',
+                    fill: false
+                },
+                {
+                    label: 'Infected',
+                    data: jsonData.infected,
+                    borderColor: 'green',
+                    fill: false
+                },
+                {
+                    label: 'Vaccinated',
+                    data: jsonData.vaccinated,
+                    borderColor: 'orange',
+                    fill: false
+                },
+                {
+                    label: 'Removed',
+                    data: jsonData.removed,
+                    borderColor: 'purple',
+                    fill: false
+                },
+                {
+                    label: 'Deceased',
+                    data: jsonData.deceased,
+                    borderColor: 'yellow',
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            title: {
+                display: true,
+                text: "title_chart",
+                fontColor: '#ffffff',
+                fontSize: 20,
+                position: 'right',
+            },
+            scales: {
+                xAxes: [
+                   {
+                       gridLines: {
+                        color: "transparent",
+                        display: true,
+                        drawBorder: false,
+                        zeroLineColor: "#fff",
+                        zeroLineWidth: 1
+                      },
+                       ticks: {
+                        fontColor: '#fff', // Change to the desired color
+                      },
+                   }
+                 ],
+                yAxes: [
+                   {
+                       gridLines: {
+                        color: "transparent",
+                        display: true,
+                        drawBorder: false,
+                        zeroLineColor: "#fff",
+                        zeroLineWidth: 1
+                      },
+                       ticks: {
+                        fontColor: '#fff', // Change to the desired color
+                      },
+                   }
+                ]
+            },
+            legend: {
+                position: 'top', // Adjust the legend position
+                align: 'center',  
+                labels: {
+                    fontColor: '#fff',
+                    // generateLabels: (chart) => {
+                    // return chart.data.labels.map((label, index) => ({
+                    //     text: label,
+                    //     fillStyle: chart.data.datasets[0].backgroundColor[index],
+                    // }));
+                    // },
+                },
+            },
+            tooltip:{
+                enabled: false,
+            },
+        }
+    });
+    
+}
+
 const submitSimul = document.querySelector('#see_simul_btn-15823');
 
 // console.log(submitSimul);
@@ -192,7 +309,22 @@ submitSimul.addEventListener('click', function(){
 
     if(checkAllConstrains()===true){
         const jsonData = fetchData();
-        sendJsonData(jsonData); // Send the JSON data to the server
+        // sendJsonData(jsonData); // Send the JSON data to the server
+
+        fetch('/api/simul')
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("NETWORK RESPONSE ERROR");
+          }
+        })
+        .then(data => {
+            createLineChart(data, 'linechart-3823');
+        })
+        .catch(error => console.error("FETCH ERROR:", error));
+
+        
     }else{
         alert("Điều kiện trong các trường không thỏa, vui lòng kiểm tra lại:\n1. Chỉ cần thay thế dấu '...' trong trường 'Giá trị thực'.\n2. Trường số ngày nhiễm và số người tiền phát phải là số nguyên không âm.")
     }
