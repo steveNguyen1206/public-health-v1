@@ -53,6 +53,16 @@ def get_dist_person_num(dist):
         print(res)
         return res
     
+def get_num_persons_of_wards():
+    with engine.connect() as conn:
+        data = conn.execute(text("select addr1, addr2,addr3,count(*) from family,person where family.id=person.family_id group by addr1, addr2,addr3")).all()
+        res = []
+        # print(data[0].__getitem__(0))
+        for row in data:
+            res.append(row2dict(row))
+        print(res)
+        return res  
+    
 def get_num_persons_of_districts():
     with engine.connect() as conn:
         data = conn.execute(text("select addr1, addr2,count(*) from family,person where family.id=person.family_id group by addr1, addr2")).all()

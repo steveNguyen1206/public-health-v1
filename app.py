@@ -1,5 +1,5 @@
 from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, url_for
-from database import get_all_persons, add_family_person, get_all_families, get_dist_person_num,get_num_persons_of_districts,get_age_groups,get_population,get_household,get_gender,get_occupation,get_num_persons_of_provinces,get_num_persons_of_family
+from database import get_all_persons, add_family_person, get_all_families, get_dist_person_num,get_num_persons_of_districts,get_age_groups,get_population,get_household,get_gender,get_occupation,get_num_persons_of_provinces,get_num_persons_of_family,get_num_persons_of_wards
 
 app = Flask(__name__)
 
@@ -18,6 +18,13 @@ def api_get_all_persons():
 #     families = get_all_families()
 #     # print(users)
 #     return jsonify(families)
+
+@app.route("/api/ward/num")
+def api_get_num_persons_of_wards():
+    num_persons_of_wards = get_num_persons_of_wards()
+    # print(users)
+    return jsonify(num_persons_of_wards)
+
 
 @app.route("/api/district/num")
 def api_get_num_persons_of_districts():
