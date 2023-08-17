@@ -245,6 +245,10 @@ h5 {
     color: #000;
 }
 
+/* sinh hoat gia dinh */
+#travel-often-wrapper{
+    padding: 0 16px;
+}
 
 
 /* model */
@@ -286,6 +290,8 @@ h5 {
 .model.open {
     display: flex;
 }
+
+
 
 
 /* modifier */
