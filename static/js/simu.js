@@ -309,7 +309,8 @@ submitSimul.addEventListener('click', function(){
 
     if(checkAllConstrains()===true){
         const jsonData = fetchData();
-        // sendJsonData(jsonData); // Send the JSON data to the server
+        // console.log(jsonData)
+        sendJsonData(jsonData); // Send the JSON data to the server
 
         fetch('/api/simul')
         .then(response => {

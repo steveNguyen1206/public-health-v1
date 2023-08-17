@@ -105,6 +105,9 @@ def return_image():
 @app.route('/simu_user_para', methods=['post'])
 def send_user_para():
     data=request.json
+    print(data)
+    
+    # return None
     # Goi ham simulation tu data
 
 # @app.route("/api/users")
