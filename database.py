@@ -125,7 +125,7 @@ def get_population():
     
 def get_household():
     with engine.connect() as conn:
-        data = conn.execute(text("select family_id, id from person")).all()
+        data = conn.execute(text("select p.family_id, p.id from person p where p.in_house = 1")).all()
         res = []
         # print(data[0].__getitem__(0))
         for row in data:
@@ -137,7 +137,7 @@ def add_family_person(data):
     with engine.connect() as conn:
         insert_family_query = text("insert into family(hhsize, addr1,addr2,addr3) values (:hhsize, :addr1, :addr2, :addr3)")
         get_last_id_query = text("SELECT LAST_INSERT_ID()")
-        insert_person_query = text("INSERT INTO person (family_id, birth_year, gender, occupation) VALUES (:famID, :birth_year, :gender, :occupation)")
+        insert_person_query = text("INSERT INTO person (family_id, birth_year, gender, occupation, p_addr1, p_addr2, p_addr3, in_house) VALUES (:famID, :birth_year, :gender, :occupation, :p_addr1, :p_addr2, :p_addr3, :in_house)")
 
         hhsize = data['household-size']
         addr = data['family-addr']
@@ -153,12 +153,30 @@ def add_family_person(data):
         last_id = conn.execute(get_last_id_query).all()[0].__getitem__(0)
         print(last_id)
         for i in range (1, int(hhsize)+1):
+
             gender = data[f"gender_{i}"]
             birth_year = data[f"birth-year_{i}"]
             occupation = data[f"occupation_{i}"]
+
+            p_addr = data[f"addr_{i}"]
+            p_addr_list = p_addr.strip().split(',')
+            p_addr1 = p_addr_list[0]
+            p_addr2 = p_addr_list[1]
+            p_addr3 = p_addr_list[2]
+            if p_addr1 == addr1 and p_addr2 == addr2 and p_addr3 == addr3:
+                in_house = 1
+            else:
+                in_house = 0
             conn.execute(insert_person_query,
                         [
-                            {"famID": last_id, "birth_year": birth_year, "gender":gender, "occupation": occupation}
+                            {"famID": last_id, 
+                             "birth_year": birth_year, 
+                             "gender":gender, 
+                             "occupation": occupation,
+                             "p_addr1": p_addr1,
+                             "p_addr2": p_addr2,
+                             "p_addr3": p_addr3,
+                             "in_house": in_house}
                         ])
         conn.commit()
 
