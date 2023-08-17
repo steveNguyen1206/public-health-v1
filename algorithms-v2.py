@@ -157,7 +157,8 @@ class DiseaseSimulation:
                  n_days: int,
                  edge_sampler: EdgeSampler,
                  weight_sampler: WeightSampler,
-                 disease
+                 disease,
+                 vaccine
                  ):
         self.result_df = None
         self.agents = agents
@@ -165,6 +166,7 @@ class DiseaseSimulation:
         self.disease = disease
         self.edge_sampler = edge_sampler
         self.weight_sampler = weight_sampler
+        self.vaccine = vaccine
     
     
     def initialize_seed_cases(self, n_seed_cases):
@@ -183,12 +185,12 @@ class DiseaseSimulation:
                         "removed": [],
                         "deceased": [],})
         res.set_index("day", inplace=True)
-    
+
         for day in range(self.n_days):
             # Establish edges and weights
             edge = self.edge_sampler.sample_edges()
             weight = self.weight_sampler.sample_weights(edge=edge)
-            
+            daily_infected=[]
             # Iterate through all agents in the system
             for agent_index, agent in enumerate(self.agents):
                 # If this agent is still infectious
@@ -217,17 +219,17 @@ class DiseaseSimulation:
                     
                     
                     agent.infection_days_left -= 1
+                    daily_infected.append(agent)
                 else:
                     agent.update_status(self.disease.generate_infection_period(),
                                         self.disease.generate_fatality())
             
-        
+            self.ring_based_vaccination(edge,weight,daily_infected)
             status_count = [0, 0, 0, 0, 0, 0]
             # Count the number of agents having the same status.
             for agent in self.agents:
                 status_count[agent.status] += 1
                 
-        
             today = pd.DataFrame([{"day": day,
                                 "susceptible": status_count[SUSCEPTIBLE],
                                 "incubated": status_count[INCUBATED],
@@ -238,10 +240,64 @@ class DiseaseSimulation:
 
                                 }]) 
             res = pd.concat([res, today],ignore_index=True)
-            
-
         return res
+    
+    def ring_based_vaccination(self,edge,weight,daily_infected):
+        contacts=[]
+        contacts_of_contacts=[]
+        risk={}
+        for  agent in daily_infected:
+            for contact_type in edge[agent.id]:
+                for contact_index in edge[agent.id][contact_type]:
+                    contact = agents[contact_index]
+                    if contact.status == SUSCEPTIBLE:
+                        prob = self.disease.pr_base * weight[agent.id][contact_index]
+                        risk[contact_index]=prob
+                        contacts.append(contact)
 
+        for  c in contacts:
+            for cc_type in edge[c.id]:
+                for cc_index in edge[c.id][cc_type]:
+                    cc = agents[cc_index]
+                    contacts_of_contacts.append(cc)
+                    if cc.status == SUSCEPTIBLE:
+                        prob = self.disease.pr_base * weight[c.id][cc_index] * risk[c.id]
+                        risk[cc_index]=prob
+        risk_sorted = dict(sorted(risk.items(), key=lambda item: item[1]))
+        vax_used = 0
+        for i in risk_sorted:
+            if vax_used < self.vaccine.num_vaccine:
+                if bernoulli.rvs(self.vaccine.reach_rate, 1 - self.vaccine.reach_rate) == 1:
+                    # print(self.agents[i].id)
+                    if self.agents[i].status == INCUBATED:
+                        if bernoulli.rvs(self.effciency, 1 - self.vaccine.effciency) == 1:
+                            self.agents[i].status = VACCINATED
+                            self.agents[i].vaccination_wait_days_left= self.vaccine.immune_period
+                    elif self.agents[i].status == SUSCEPTIBLE:
+                        self.agents[i].status = VACCINATED
+                        self.agents[i].vaccination_wait_days_left= self.vaccine.immune_period
+                    vax_used = vax_used + 1
+
+            if vax_used >= self.vaccine.num_vaccine:
+                break
+        
+        remaining_vaccines = self.vaccine.num_vaccine - vax_used
+        #randomly vaccinate the rest of the population
+        if remaining_vaccines > 0:
+            for i in range(len(agents)):
+                if self.agents[i].status == SUSCEPTIBLE:
+                    self.agents[i].status = VACCINATED
+                    self.agents[i].vaccination_wait_days_left= self.vaccine.immune_period
+                    remaining_vaccines = remaining_vaccines - 1
+                if remaining_vaccines == 0:
+                    break
+
+class Vaccine:
+    def __init__(self, num_vaccine, effciency, reach_rate, immune_period):
+        self.num_vaccine = num_vaccine
+        self.effciency = effciency
+        self.reach_rate = reach_rate
+        self.immune_period = immune_period
 
 class Ebola:
     def __init__(self):
@@ -371,13 +427,14 @@ agents = pop.population_sample()
 
 edge_sampler = EdgeSampler(agents,non_hh_contact_matrix=contact_matrix)
 weight_sampler = WeightSampler(weight_dist)
-
+vaccine = Vaccine(num_vaccine=30, effciency=0.998, reach_rate=0.7, immune_period=9)
 ebola = Ebola()
 simulation = DiseaseSimulation(agents,
                                200,
                                edge_sampler,
                                weight_sampler,
-                               ebola)
+                               ebola,
+                               vaccine)
 simulation.initialize_seed_cases(10)
 
 import time
@@ -391,7 +448,6 @@ elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time} seconds")
 
 res.to_csv("result.csv", sep=";")
-
 
 plot = res[['susceptible', 'incubated', 'infected', 'deceased', 'removed']].div(n_pop).plot()
 plot.set_xlabel("Day")
