@@ -221,7 +221,7 @@ h2 {
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
   .comp-kvupzas5-container {
       row-gap: 5vw;
       column-gap: 10vw;
@@ -229,7 +229,7 @@ h2 {
   }
   }
   
-  @media screen and (min-width: 320px) and (max-width: 750px) {
+  @media screen  and (max-width: 750px) {
   #comp-kvupzas5 {
       --l_display: unset;
   }

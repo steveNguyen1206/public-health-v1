@@ -8,6 +8,7 @@ const ward = document.querySelector('#wards_stat')
 const view_stat_btn = document.querySelector('#view_stat_btn-3823')
 var title = "all"
 var selected_province = ""
+var selected_district = ""
 var province_existed = false 
 var district_existed = false 
 document.addEventListener("DOMContentLoaded", function(){
@@ -21,6 +22,20 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     else {
       province_existed = true 
+    }
+  })
+})
+document.addEventListener("DOMContentLoaded", function(){
+  const event_title = document.getElementById("districts_stat")
+  event_title.addEventListener("change", function(e){
+    selected_district = e.target.value
+    //console.log(selected_province, selected_district)
+    title = "province"
+    if(selected_district == "") {
+      district_existed = false
+    }
+    else {
+      district_existed = true 
     }
   })
 })
@@ -56,6 +71,8 @@ function getChart(bar_Colors, border_Colors, dataPoints, labels, ctx) {
       set = true
       if(province_existed === true) {
         if(district_existed === true) {
+          title_chart = "Dân Số Theo" + selected_district
+          console.log(labels)
         }
         else {
           title_chart = "Dân Số Theo " + selected_province
@@ -99,8 +116,8 @@ function getChart(bar_Colors, border_Colors, dataPoints, labels, ctx) {
             },
           },
           legend: {
-            position: 'bottom', // Adjust the legend position
-            align: 'center',  // Align the legend with the start of the chart
+            position: 'top', // Adjust the legend position
+            align: 'start',  // Align the legend with the start of the chart
             labels: {
               fontColor: '#fff',
               generateLabels: (chart) => {
@@ -251,6 +268,10 @@ function updateChart(jdata) {
   jdata.forEach(item => {
     if(province_existed === true) {
       if(district_existed === true) {
+        if(item.addr1 === selected_province && item.addr2 === selected_district) {
+          console.log(item.addr3)
+          labels.push(item.addr3)
+        }
       }
       else {
         if(item.addr1 === selected_province) {
@@ -336,7 +357,7 @@ view_stat_btn.addEventListener('click', function() {
   link = "/api/district/num"
   if(province_existed === true) {
     if(district_existed === true) {
-       
+       link = "/api/ward/num"
     } 
     else {
       link = "/api/district/num"
@@ -344,7 +365,7 @@ view_stat_btn.addEventListener('click', function() {
   }
   else if(title === "province") {
     link = "/api/province/num"
-  }
+  } 
    else if(title === "jobs") {
      link = "/api/occupation"
    }
@@ -352,7 +373,8 @@ view_stat_btn.addEventListener('click', function() {
      link = "/api/age_groups"
    }
    else if(title === "genders") {
-     link = "/api/gender"
+    console.log("GENDER")
+    link = "/api/gender"
    }
   fetch(link)
   .then(response => {

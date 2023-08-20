@@ -7183,13 +7183,13 @@ z-index: 54;
 --above-all-in-container: 10000;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #PAGE_SECTIONSuk6in {
     --above-all-in-container: 49;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #PAGE_SECTIONSuk6in {
     --above-all-in-container: 49;
 }
@@ -7230,7 +7230,7 @@ z-index: 54;
   --container-display: grid;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 .comp-kvupzas5-container {
     row-gap: 5vw;
     column-gap: 10vw;
@@ -7238,7 +7238,7 @@ z-index: 54;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
   #comp-kvupzas5 {
       --l_display: unset;
   }
@@ -7279,7 +7279,7 @@ position: relative;
 }
 
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #backgrndImage_container-15823 {
     /* margin-bottom: 10px; */
     grid-area: 1/1/4/2;
@@ -7317,7 +7317,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #pageTitle_container-15823 {
     margin-left: 20px;
     margin-right: 20px;
@@ -7333,7 +7333,7 @@ position: relative;
 --textAlign: center;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #pageTitle_container-15823 {
     --minViewportSize: 320;
     --maxViewportSize: 1000;
@@ -7342,7 +7342,7 @@ position: relative;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #pageTitle_container-15823 {
     --minViewportSize: 320;
     --maxViewportSize: 750;
@@ -7438,13 +7438,13 @@ grid-template-columns: 1fr;
 --container-display: grid;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #optionBox_container-15823 {
     grid-area: 1/1/3/2;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #optionBox_container-15823 {
     grid-area: 1/1/3/2;
 }
@@ -7511,13 +7511,13 @@ grid-template-columns: 1fr;
 --container-display: grid;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #comp-lkskprbs {
     grid-area: 1/1/3/2;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-lkskprbs {
     grid-area: 1/1/3/2;
 }
@@ -7553,7 +7553,7 @@ position: relative;
 --top: 60px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #chartSectTitle_container-15823 {
     grid-area: 2/1/3/2;
 }
@@ -7594,7 +7594,7 @@ grid-template-columns: 1fr;
 --top-offset: 0px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzat84 {
     --l_display: unset;
 }
@@ -7641,7 +7641,7 @@ grid-template-columns: 1fr;
 --container-display: grid;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzat84_r_comp-kbgajy18 {
     height: 140px;
 }
@@ -7658,13 +7658,13 @@ grid-template-columns: 1fr;
 --alpha-bg: 1;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #comp-kvupzat84_r_comp-kbgajy18 {
     --alpha-bg: 0;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzat84_r_comp-kbgajy18 {
     --alpha-bg: 0;
 }
@@ -7689,7 +7689,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #comp-kvupzat84_r_comp-kkmqi5lg {
     --l_display: unset;
     height: 35px;
@@ -7701,7 +7701,7 @@ position: relative;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzat84_r_comp-kkmqi5lg {
     width: 30px;
     height: 30px;
@@ -7735,7 +7735,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #comp-kvupzat84_r_comp-kd5peeyu {
     --l_display: none;
     align-self: center;
@@ -7745,7 +7745,7 @@ position: relative;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzat84_r_comp-kd5peeyu {
     height: 0px;
     width: 0%;
@@ -7903,7 +7903,7 @@ width: 0;
 height: 0;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #comp-kvupzatf_r_comp-kd5px9hr {
     height: 107.42857142857143vh;
     width: 100vw;
@@ -7915,7 +7915,7 @@ height: 0;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzatf_r_comp-kd5px9hr {
     height: 100vh;
     width: 100vw;
@@ -7953,7 +7953,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #comp-kvupzatf_r_comp-kkmqi5tc {
     height: 30px;
     width: 30px;
@@ -7964,7 +7964,7 @@ position: relative;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzatf_r_comp-kkmqi5tc {
     height: 25px;
     width: 25px;
@@ -7990,7 +7990,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #comp-kvupzatf_r_comp-kd5px9kk {
     width: 80%;
     margin-left: 0px;
@@ -8001,7 +8001,7 @@ position: relative;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzatf_r_comp-kd5px9kk {
     width: 80%;
     margin-left: 0px;
@@ -8063,7 +8063,7 @@ sans-serif;
 --alpha-bgs:0;
 }
 
-@media screen and (min-width: 320px) and (max-width: 1000px) {
+@media screen  and (max-width: 1000px) {
 #comp-kvupzatf_r_comp-kd5px9kk {
     --bgexpanded: var(--color_11);
     --fntSubMenu: var(--font_8);
@@ -8071,7 +8071,7 @@ sans-serif;
 }
 }
 
-@media screen and (min-width: 320px) and (max-width: 1015px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzatf_r_comp-kd5px9kk {
     --bgexpanded: var(--color_16);
     --fntSubMenu: var(--font_8);
