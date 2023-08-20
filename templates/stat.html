@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
 {%endblock%}
 
 {%block content%}
@@ -61,7 +62,38 @@
                 }
             </style>
             <div id="options_container-2823"class="container-fluid">
-                <div class="row justify-content-center" style="margin-top: 3%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+                <style>
+                    @media screen and (max-width: 1015px){
+                        #desktop_option_box-21823{display: none;}
+                        #mobile_option_box-21823{display: block;}
+                    }
+                    @media screen and (min-width: 1015px){
+                        #desktop_option_box-21823{display: flex;}
+                        #mobile_option_box-21823{display: none;}
+                    }
+                    #mobile_option_box-21823 .carousel-control-next, .carousel-control-prev{
+                        height: 20px;
+                        width: 20px;
+                    }
+                    #mobile_option_box-21823 .carousel-indicators{
+                        margin-bottom: -40px;
+                        /* margin-top: 100px; */
+                        /* padding-top: 100px; */
+                    }
+                    #mobile_option_box-21823 .carousel-item{
+                        margin-top: 30px;
+                    }
+                    #mobile_option_box-21823 .row{
+                        display: flex;
+                        width: 100%;
+                        align-self: center;
+                        justify-self: center;
+                        padding-top: 5px;
+                        margin: 0 0;
+                    }
+                    
+                </style>
+                <div id="desktop_option_box-21823" class="row justify-content-center" style="margin-top: 3%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
                     <div class="col mb-3" style="max-width: 400px;">
                         <label class="form-labe1">Tỉnh/Thành phố</label>
                         <br>
@@ -142,7 +174,104 @@
                         </div>
                     </div>
                 </div>
-                
+                <div id="mobile_option_box-21823" class="carousel slide">
+
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#mobile_option_box-21823" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#mobile_option_box-21823" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <label class="form-labe1">Tỉnh/Thành phố</label>
+                                <br>
+                                <!-- <div class="container-fluid text-center"> -->
+                                    <div class="row align-items-center">
+                                        <div class="col" style="max-width: 125px;">
+                                            <!-- <div class="option_buttons"> Tổng quát</div> -->
+                                            <input type="checkbox" class="btn-check" id="btn-check-outlined-1" autocomplete="off">
+                                            <label class="btn btn-outline-primary option_buttons" for="btn-check-outlined-1">Tổng quát</label>
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-select addr_attribute" aria-label="Default select example" id="province_name" name="provinces_stat">
+                                                <option selected>None</option>
+                                                <option >test</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                <!-- </div> -->
+                                
+                            </div>
+                            <div class="row">
+                                <label class="form-labe1 ">Quận/Huyện/Thị xã</label>
+                                <br>
+                                <!-- <div class="container-fluid text-center"> -->
+                                    <div class="row align-items-center">
+                                        <!-- <div class="col-sm-4">
+                                            <div class="option_buttons"> Tổng quát</div>
+                                            <input type="checkbox" class="btn-check" id="btn-check-outlined-2" autocomplete="off">
+                                            <label class="btn btn-outline-primary option_buttons" for="btn-check-outlined-2">Tổng quát</label>
+                                        </div> -->
+                                        <div class="col">
+                                            <select class="form-select addr_attribute" aria-label="Default select example" id="districts_stat" name="districts_stat">
+                                                <option disabled selected>None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                <!-- </div> -->
+                            </div>
+                            <div class="row">
+                                <label class="form-labe1">Phường/Xã/Thị trấn</label>
+                                <br>
+                                <!-- <div class="container-fluid text-center"> -->
+                                    <div class="row align-items-center">
+                                        <!-- <div class="col-sm-4">
+                                            <div class="option_buttons"> Tổng quát</div>
+                                            <input type="checkbox" class="btn-check" id="btn-check-outlined-3" autocomplete="off">
+                                            <label class="btn btn-outline-primary option_buttons" for="btn-check-outlined-3">Tổng quát</label>
+                                        </div> -->
+                                        <div class="col">
+                                            <select class="form-select addr_attribute" aria-label="Default select example" id="wards_stat" name="wards_stat">
+                                                <option disabled selected>None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <label class="form-labe1 ">Nhóm tuổi</label>
+                                <!-- <div class="col-sm-4"> -->
+                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-4" autocomplete="off">
+                                    <label class="btn btn-outline-primary option_buttons" for="btn-check-outlined-4">Chọn</label>
+                                <!-- </div> -->
+                            </div>
+                            <div class="row" >
+                                <label class="form-labe1 ">Nghề nghiệp</label>
+                                <!-- <div class="col-sm-4"> -->
+                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-5" autocomplete="off">
+                                    <label class="btn btn-outline-primary option_buttons" for="btn-check-outlined-5">Chọn</label>
+                                <!-- </div> -->
+                            </div>
+                            <div class="row" >
+                                <label class="form-labe1 ">Giới tính</label>
+                                <!-- <div class="col-sm-4"> -->
+                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-6" autocomplete="off">
+                                    <label class="btn btn-outline-primary option_buttons" for="btn-check-outlined-6">Chọn</label>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#mobile_option_box-21823" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <!-- <span class="visually-hidden">trước</span> -->
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#mobile_option_box-21823" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <!-- <span class="visually-hidden">Next</span> -->
+                    </button>
+                    </div>
             </div>
         </div>
         <style>
@@ -175,14 +304,15 @@
             <button type="button" class="btn btn-primary" id="view_stat_btn-3823" >Xem thống kê</button>
         </div>
         
-        <div id="chartSectTitle_container-15823" class="BaOVQ8 tz5f0K chartSectTitle_container-15823 wixui-rich-text" data-testid="richTextElement">
-            <h5 class="font_5 wixui-rich-text__text">
-            <span class="wixui-rich-text__text">Biểu đồ</span>
-            </h5>
-        </div>
+        
 
-        <div id="chart_container-8823" class="clearfix">        
-            <canvas id="chart-3823"></canvas>
+        <div id="chart_container-8823" class="clearfix">    
+            <div id="chartSectTitle_container-15823" class="BaOVQ8 tz5f0K chartSectTitle_container-15823 wixui-rich-text" data-testid="richTextElement" >
+                <h5 class="font_5 wixui-rich-text__text" style="margin-top: -110px;">
+                <span class="wixui-rich-text__text">Biểu đồ</span>
+                </h5>
+            </div>    
+            <canvas id="chart-3823" ></canvas>
         </div>
 
         
