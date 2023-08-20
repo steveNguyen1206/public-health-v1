@@ -13125,4 +13125,9 @@ body.ZR3zoU {
       /* </style> */
     /* </pages-css> */
 
-  
+#menu_icon_container-13823{
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}

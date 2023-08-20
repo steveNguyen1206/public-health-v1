@@ -30,18 +30,17 @@ body.device-mobile-optimized {
   display: table;
 }
 
-.option_buttons-2823{
-  /* width: 100% !important; */
-  background-color: transparent; /* Transparent background */
-  border: 2px solid white; /* White border */
-  border-radius: 4px; /* 7px border radius */
+.option_buttons{
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 4px;
   font-size: medium;
   text-align: center;
   color: white;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  /* padding-left: 4%;
-  padding-right: 4%; */
+  justify-content: center;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .form-select:disabled{
@@ -7188,7 +7187,7 @@ z-index: 54;
 --above-all-in-container: 10000;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #PAGE_SECTIONSuk6in {
     --above-all-in-container: 49;
 }
@@ -7223,7 +7222,7 @@ grid-template-columns: 1fr;
 --container-display: grid;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 .comp-kvupzas5-container {
     row-gap: 5vw;
     column-gap: 10vw;
@@ -7269,10 +7268,10 @@ position: relative;
 --top: 0px;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #backgrndImage_container-15823 {
     margin-bottom: 0px;
-    grid-area: 1/1/3/2;
+    grid-area: 1/1/4/2;
 }
 }
 
@@ -7314,7 +7313,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #pageTitle_container-15823 {
     margin-left: 40px;
     margin-right: 40px;
@@ -7327,7 +7326,7 @@ position: relative;
 #pageTitle_container-15823 {
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 155px;
+    margin-top: 100px;
     margin-bottom: 0%;
 }
 }
@@ -7339,14 +7338,6 @@ position: relative;
 --textAlign: center;
 }
 
-@media screen  and (max-width: 1000px) {
-#pageTitle_container-15823 {
-    --minViewportSize: 320;
-    --maxViewportSize: 1000;
-    --textScale__minFontSize: 18;
-    --textScale__maxFontSize: 55;
-}
-}
 
 @media screen  and (max-width: 1015px) {
 #pageTitle_container-15823 {
@@ -7440,17 +7431,12 @@ grid-template-columns: 1fr;
 --container-display: grid;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #optionBox_container-15823 {
-    grid-area: 1/1/3/2;
+    grid-area: 2/1/3/2;
 }
 }
 
-@media screen  and (max-width: 1015px) {
-#optionBox_container-15823 {
-    grid-area: 1/1/3/2;
-}
-}
 
 #optionBox_container-15823 {
 --brw: 2px;
@@ -7513,7 +7499,7 @@ grid-template-columns: 1fr;
 --container-display: grid;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #comp-lkskprbs {
     grid-area: 1/1/3/2;
 }
@@ -7555,7 +7541,7 @@ position: relative;
 --top: 60px;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #chartSectTitle_container-15823 {
     grid-area: 2/1/3/2;
 }
@@ -7660,7 +7646,7 @@ grid-template-columns: 1fr;
 --alpha-bg: 1;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzat84_r_comp-kbgajy18 {
     --alpha-bg: 0;
 }
@@ -7691,7 +7677,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzat84_r_comp-kkmqi5lg {
     --l_display: unset;
     height: 35px;
@@ -7737,7 +7723,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzat84_r_comp-kd5peeyu {
     --l_display: none;
     align-self: center;
@@ -7905,7 +7891,7 @@ width: 0;
 height: 0;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzatf_r_comp-kd5px9hr {
     height: 107.42857142857143vh;
     width: 100vw;
@@ -7955,7 +7941,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzatf_r_comp-kkmqi5tc {
     height: 30px;
     width: 30px;
@@ -7992,7 +7978,7 @@ position: relative;
 --top: 0px;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzatf_r_comp-kd5px9kk {
     width: 80%;
     margin-left: 0px;
@@ -8065,7 +8051,7 @@ sans-serif;
 --alpha-bgs:0;
 }
 
-@media screen  and (max-width: 1000px) {
+@media screen  and (max-width: 1015px) {
 #comp-kvupzatf_r_comp-kd5px9kk {
     --bgexpanded: var(--color_11);
     --fntSubMenu: var(--font_8);
@@ -8351,7 +8337,7 @@ text-decoration: none;
 text-align: center
 }
 
-@media (min-width: 320px) and (max-width: 1000px) {
+@media (min-width: 320px) and (max-width: 1015px) {
 #uk6in {
     --shc-mutated-brightness: 10, 14, 22
 }
