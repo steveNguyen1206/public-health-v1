@@ -1,5 +1,6 @@
 from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, url_for
-from database import get_all_persons, add_family_person, get_all_families, get_dist_person_num,get_num_persons_of_districts,get_age_groups,get_population,get_household,get_gender,get_occupation,get_num_persons_of_provinces,get_num_persons_of_family
+from database import *
+from model.algorithms import simulation_data, simulation_sample_data
 from algorithms import simulation
 
 app = Flask(__name__)
@@ -29,6 +30,27 @@ def api_get_all_persons():
     persons = get_all_persons()
     # print(users)
     return jsonify(persons)
+
+# thực hiện simulation trên dữ liệu từ cơ sở dữ liệu
+@app.route('/api-simu')
+def api_simulation():
+    HH_dict = get_household()
+    population = get_population()  
+    acquaintance_size = int(request.args.get('acq'))
+    simu = simulation_data(population, HH_dict, acquaintance_size)
+    # print(simu) 
+    return jsonify(simu)
+
+# thực hiện simulation trên dữ liệu tự tạo
+@app.route('/api-simu-sample/')
+def api_simulation_sample():
+    population_size = int(request.args.get('size'))
+    acquaintance_size = int(request.args.get('acq'))
+    print(population_size)
+    simu = simulation_sample_data(population_size, acquaintance_size)
+    # print(simu)
+    return jsonify(simu)
+
 
 # @app.route("/api/family/all")
 # def api_get_all_families():
