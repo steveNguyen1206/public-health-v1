@@ -12,14 +12,14 @@ function changeErrorStyle(elementSelect){
     elementSelect.classList.add("did-error-input");
 }
 
-function checkConstraints_distribution(elementIndex) {
-    console.log(`${elementIndex}_initial_form-15823`);
-    const selectBox = document.getElementById(`${elementIndex}_selectBox-16823`);
-    const inputBox = document.getElementById(`${elementIndex}_inputBox-16823`);
+function checkConstraints_distribution(elementIndex, mode) {
+    // console.log(`${elementIndex}_initial_form-15823`);
+    const selectBox = document.getElementById(`${elementIndex}_selectBox-16823-${mode}`);
+    const inputBox = document.getElementById(`${elementIndex}_inputBox-16823-${mode}`);
 
-    const initialSelect = document.getElementById(`${elementIndex}_initial_form-15823`);
-    const selectChoice = document.getElementById(`${elementIndex}_distri_select-15823`);
-    const inputContent = document.getElementById(`${elementIndex}_value_inpt-15823`);
+    const initialSelect = document.getElementById(`${elementIndex}_initial_form-15823-${mode}`);
+    const selectChoice = document.getElementById(`${elementIndex}_distri_select-15823-${mode}`);
+    const inputContent = document.getElementById(`${elementIndex}_value_inpt-15823-${mode}`);
 
     const inputVal = inputContent.value;
     const selectVal = selectChoice.value;
@@ -48,9 +48,10 @@ function checkConstraints_distribution(elementIndex) {
     return true;
 }
 
-function checkIntegerBox(elementIndex){
-    const inputBox = document.getElementById(`${elementIndex}_inputBox-16823`);
-    const inputContent = document.getElementById(`${elementIndex}_value_inpt-15823`);
+function checkIntegerBox(elementIndex, mode){
+    console.log(`${elementIndex}_inputBox-16823-${mode}`);
+    const inputBox = document.getElementById(`${elementIndex}_inputBox-16823-${mode}`);
+    const inputContent = document.getElementById(`${elementIndex}_value_inpt-15823-${mode}`);
     
     const intReg = /^\d+$/;
     if(intReg.test(inputContent.value) === false){
@@ -60,14 +61,15 @@ function checkIntegerBox(elementIndex){
     return true;
 }
 
-function checkAllConstrains(){
+function checkAllConstrains(mode){
+    
     for (let i = 1; i <= 4; i++) {
-        if(checkConstraints_distribution(i) === false){
+        if(checkConstraints_distribution(i, mode) === false){
             return false;
         }
     }
     for (let i = 5; i <= 6; i++) {
-        if(checkIntegerBox(i) === false){
+        if(checkIntegerBox(i, mode) === false){
             return false;
         }
     }
@@ -122,10 +124,10 @@ function codeToInputName(code){
     }
 }
 
-function fetchData_idx(elementIndex) {
-    const initialSelect = document.getElementById(`${elementIndex}_initial_form-15823`);
-    const selectChoice = document.getElementById(`${elementIndex}_distri_select-15823`);
-    const inputContent = document.getElementById(`${elementIndex}_value_inpt-15823`);
+function fetchData_idx(elementIndex, mode) {
+    const initialSelect = document.getElementById(`${elementIndex}_initial_form-15823-${mode}`);
+    const selectChoice = document.getElementById(`${elementIndex}_distri_select-15823-${mode}`);
+    const inputContent = document.getElementById(`${elementIndex}_value_inpt-15823-${mode}`);
 
     var property = parseInputContent_toProperty(inputContent.value);
     var type;
@@ -145,12 +147,12 @@ function fetchData_idx(elementIndex) {
     return jsonData;
 }
 
-function fetchData(){
+function fetchData(mode){
     var jsonData = {};
 
     for (let i = 1; i <= 4; i++) {
         const key = codeToInputName(i);
-        const dictionary = fetchData_idx(i);
+        const dictionary = fetchData_idx(i, mode);
         jsonData[key] = dictionary;
     }
 
@@ -158,7 +160,7 @@ function fetchData(){
         jsonData[codeToInputName(i)] = {
             "type": "Fixed",
             "properties": {
-                "Giá trị": parseInt(document.getElementById(`${i}_value_inpt-15823`).value)
+                "Giá trị": parseInt(document.getElementById(`${i}_value_inpt-15823-${mode}`).value)
             }
         };
     }
@@ -186,15 +188,6 @@ function sendJsonData(data) {
 function createLineChart(jsonData, element_id) {
     var ctx = document.getElementById(element_id).getContext('2d');
     console.log(jsonData)
-    // json_data = {
-    //     "days": data["day"].tolist(),
-    //     "susceptible": data["susceptible"].tolist(),
-    //     "incubated": data["incubated"].tolist(),
-    //     "infected": data["infected"].tolist(),
-    //     "vaccinated": data["vaccinated"].tolist(),
-    //     "removed": data["removed"].tolist(),
-    //     "deceased": data["deceased"].tolist(),
-    // }
 
     var lineChart = new Chart(ctx, {
         type: 'line',
@@ -306,9 +299,17 @@ const submitSimul = document.querySelector('#see_simul_btn-15823');
 
 submitSimul.addEventListener('click', function(){
     removeErrorStyle();
+    var mode;
+    const mobileActiv = document.querySelector('#options_container-2823.mobile-ui').style.display;
+    if (mobileActiv != 'none'){
+        mode = 'mobile';
+    }else{
+        mode = 'desktop';
+    }
+    console.log(mode);
 
-    if(checkAllConstrains()===true){
-        const jsonData = fetchData();
+    if(checkAllConstrains(mode)===true){
+        const jsonData = fetchData(mode);
         // sendJsonData(jsonData); // Send the JSON data to the server
 
         fetch('/api/simul')
@@ -320,6 +321,7 @@ submitSimul.addEventListener('click', function(){
           }
         })
         .then(data => {
+            document.getElementById('chart_container-8823').style.display = 'block';
             createLineChart(data, 'linechart-3823');
         })
         .catch(error => console.error("FETCH ERROR:", error));

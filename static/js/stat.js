@@ -315,7 +315,7 @@ function updateChart(jdata) {
   var ctx = newCanvas.getContext("2d")
   newCanvas.style.width = "100%";
   newCanvas.style.height = "100%";
-  newCanvas.style.marginTop = "60px";
+  // newCanvas.style.marginTop = "60px";
   var bar_Colors = [
     'rgba(255, 99, 132, 0.5)',
     'rgba(54, 162, 235, 0.5)',

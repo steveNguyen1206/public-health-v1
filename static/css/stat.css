@@ -7471,6 +7471,17 @@ grid-template-columns: 1fr;
   --top: 60px;
 }
 
+@media screen and (max-width: 1015px){
+  #chart_container-8823{
+    min-height: 300px;
+    height: 350px;
+    width: 90%;
+    overflow-x: auto;
+    overflow-y: auto;
+    margin-bottom: 20%;
+  }
+}
+
 
 #comp-lkskprbs {
 min-height: 449.54918049986395px;
