@@ -17,6 +17,8 @@
                 <div class="header-addr-wrapper">
                    <label for="" class="header-label">Địa chỉ gia đình</label>
                   <input type="text" class="form-control header-form addr-form model-btn" placeholder="..." id="family-addr" name="family-addr" model="family-addr" required />
+                  <!-- <input type="text" id="test"  required> -->
+                
                 </div>
               </div>
       
@@ -75,66 +77,74 @@
 
 
         </tbody>
-      </table>   
+      </table>  
+      
+      
 
       <h5 class="mb-3">Sinh hoạt gia đình</h5>
       <div class="family-habit-wrapper">
         <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="private-room">
+          <input class="form-check-input" type="checkbox" role="switch" id="private-room" name="private-room">
           <label class="form-check-label" for="private-room">Có phòng riêng cho các thành viên</label>
         </div>
 
         <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="di-truyen">
+          <input class="form-check-input" type="checkbox" role="switch" id="di-truyen" name="di-truyen">
           <label class="form-check-label" for="di-truyen">Gia đình có tiểu sử bệnh di truyền</label>
         </div>
 
         <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="di-ung">
+          <input class="form-check-input" type="checkbox" role="switch" id="di-ung" name="di-ung">
           <label class="form-check-label" for="di-ung">Có thành viên có bệnh dị ứng</label>
         </div>
 
         <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="tiep-xuc">
+          <input class="form-check-input" type="checkbox" role="switch" id="tiep-xuc" name="tiep-xuc">
           <label class="form-check-label" for="tiep-xuc">Có tiếp xúc với người mắc bệnh truyền nhiễm trong 6 tháng qua</label>
         </div>
 
         <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="dinh-duong">
+          <input class="form-check-input" type="checkbox" role="switch" id="dinh-duong" name="dinh-duong">
           <label class="form-check-label" for="dinh-duong">Có thói quen ăn uống và dinh dưỡng lành mạnh</label>
         </div>
 
         <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="an-chung">
+          <input class="form-check-input" type="checkbox" role="switch" id="an-chung" name="an-chung">
           <label class="form-check-label" for="an-chung">Có thói quen dùng cơm chung</label>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="gan-kcn" name="gan-kcn">
+          <label class="form-check-label" for="gan-kcn">Gia đình sinh sống gần khu công nghiệp</label>
         </div>
 
         <div id="travel-wrapper">
           <div class="form-check form-switch mb-3">
-            <input class="form-check-input" type="checkbox" role="switch" id="travel-input">
+            <input class="form-check-input" type="checkbox" role="switch" id="travel-input" name="travel-input">
             <label class="form-check-label" for="travel-input">Có thường xuyên đi du lịch</label>
           </div>
 
-          <div id="travel-often-wrapper" class="container row display-none">
-            <div class="col-sm mb-3 form-check">
-              <input class="form-check-input" type="radio" name="travel-often" id="travel-often1">
+          <div id="travel-often-wrapper" class="mrow display-none">
+            <div class="mb-3 mcol mcol-3 s-col-full form-check">
+              <input class="form-check-input" type="radio" name="travel-often" id="travel-often1" value="1">
               <label class="form-check-label" for="travel-often1">
                 Hàng tuần
               </label>
             </div>
-            <div class="col-sm mb-3 form-check">
-              <input class="form-check-input" type="radio" name="travel-often" id="travel-often2">
+            <div class="mb-3 mcol mcol-3 s-col-full form-check">
+              <input class="form-check-input" type="radio" name="travel-often" id="travel-often2" value="2">
               <label class="form-check-label" for="travel-often2">
                 Hàng tháng
               </label>
             </div>
 
-            <div class="col-sm mb-3 form-check">
-              <input class="form-check-input" type="radio" name="travel-often" id="travel-often2">
+            <div class="mb-3 mcol mcol-3 s-col-full form-check">
+              <input class="form-check-input" type="radio" name="travel-often" id="travel-often2" value="3">
               <label class="form-check-label" for="travel-often2">
                 3 tháng / lần
               </label>
             </div>
+
           </div>
 
           <script>
@@ -154,10 +164,7 @@
         
         </div>
 
-        <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" role="switch" id="gan-kcn">
-          <label class="form-check-label" for="gan-kcn">Gia đình sinh sống gần khu công nghiệp</label>
-        </div>
+        
 
       </div>
 

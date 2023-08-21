@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, text, insert
 from dotenv.main import load_dotenv
+from itertools import groupby
 import os
 
 load_dotenv()
@@ -60,7 +61,7 @@ def get_num_persons_of_districts():
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        print(res)
+        # print(res)
         return res
     
 def get_num_persons_of_provinces():
@@ -115,29 +116,37 @@ def get_occupation():
 
 def get_population():
     with engine.connect() as conn:
-        data = conn.execute(text("select id,family_id,gender,(YEAR(NOW()) - birth_year) as age from person")).all()
+        data = conn.execute(text("select id,family_id,gender,(YEAR(NOW()) - birth_year) as age from person order by id")).all()
         res = []
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        # print(users)
+        print(res)
         return res
     
+def key_func(k):
+    return k['family_id']
+
 def get_household():
     with engine.connect() as conn:
-        data = conn.execute(text("select family_id, id from person")).all()
+        data = conn.execute(text("select p.family_id, p.id from person p where p.in_house = 1 order by family_id")).all()
         res = []
         # print(data[0].__getitem__(0))
         for row in data:
             res.append(row2dict(row))
-        # print(users)
-        return res
+
+        hh_dict = {}
+        for key, value in groupby(res, key_func):
+            hh_dict[key - 1] =  [item['id'] - 1 for item in list(value)]
+
+        print(hh_dict)
+        return hh_dict
 
 def add_family_person(data):
     with engine.connect() as conn:
         insert_family_query = text("insert into family(hhsize, addr1,addr2,addr3) values (:hhsize, :addr1, :addr2, :addr3)")
         get_last_id_query = text("SELECT LAST_INSERT_ID()")
-        insert_person_query = text("INSERT INTO person (family_id, birth_year, gender, occupation) VALUES (:famID, :birth_year, :gender, :occupation)")
+        insert_person_query = text("INSERT INTO person (family_id, birth_year, gender, occupation, p_addr1, p_addr2, p_addr3, in_house) VALUES (:famID, :birth_year, :gender, :occupation, :p_addr1, :p_addr2, :p_addr3, :in_house)")
 
         hhsize = data['household-size']
         addr = data['family-addr']
@@ -153,17 +162,36 @@ def add_family_person(data):
         last_id = conn.execute(get_last_id_query).all()[0].__getitem__(0)
         print(last_id)
         for i in range (1, int(hhsize)+1):
+
             gender = data[f"gender_{i}"]
             birth_year = data[f"birth-year_{i}"]
             occupation = data[f"occupation_{i}"]
+
+            p_addr = data[f"addr_{i}"]
+            p_addr_list = p_addr.strip().split(',')
+            p_addr1 = p_addr_list[0]
+            p_addr2 = p_addr_list[1]
+            p_addr3 = p_addr_list[2]
+            if p_addr1 == addr1 and p_addr2 == addr2 and p_addr3 == addr3:
+                in_house = 1
+            else:
+                in_house = 0
             conn.execute(insert_person_query,
                         [
-                            {"famID": last_id, "birth_year": birth_year, "gender":gender, "occupation": occupation}
+                            {"famID": last_id, 
+                             "birth_year": birth_year, 
+                             "gender":gender, 
+                             "occupation": occupation,
+                             "p_addr1": p_addr1,
+                             "p_addr2": p_addr2,
+                             "p_addr3": p_addr3,
+                             "in_house": in_house}
                         ])
         conn.commit()
 
 # get_all_families()
 # get_all_persons()
 # get_all_families()
+# get_population()
 
     

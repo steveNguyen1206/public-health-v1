@@ -5,7 +5,6 @@ import  pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import lognorm, bernoulli
 from itertools import combinations
-import time
 
 '''
 How to use MESA to support Agent-Based Modeling
@@ -83,20 +82,21 @@ def ring_based_vaccination(edge,
                            weight, 
                            agent_status,
                            agent_vaccine_wait_period, 
-                           i, 
+                           agent_infected, 
                            pr_base, 
                            num_vaccine, 
-                           reach_rate = 1):
+                           reach_rate):
+    
     risk = {}
     contacts = {}
-    for group in edge[i]:
-        contacts.extend(edge[i][group])
+    for i in agent_infected:
+        contacts = get_all_contacts(edge[i])
 
     contacts_of_contacts = {}
     for j in contacts:
         sub_contacts = {}
         for group in edge[j]:
-            contacts_of_contacts[j].extend(edge[j][group])
+            contacts_of_contacts[j]= get_all_contacts(edge[j])
     
     for c in contacts:
         # Update risk for contacts if they are SUSCEPTIBLE
@@ -123,19 +123,39 @@ def ring_based_vaccination(edge,
             if bernoulli.rvs(reach_rate, 1 - reach_rate) == 1:
                 if agent_status[i] == INCUBATED:
                     if bernoulli.rvs(0.0002, 1 - 0.0002) != 1:
+                        
                         agent_status[i] = VACCINATED
                         agent_vaccine_wait_period = 9
-                
+                elif agent_status[i] == SUSCEPTIBLE:
+                    agent_status[i] = VACCINATED
+                    agent_vaccine_wait_period = 9
                 vax_used = vax_used + 1
+
             
         
         if vax_used >= num_vaccine:
             break
     
     remaining_vaccines = num_vaccine - vax_used
-    
+    #randomly vaccinate the rest of the population
     if remaining_vaccines > 0:
-        pass
+        for i in range(N):
+            if agent_status[i] == SUSCEPTIBLE:
+                agent_status[i] = VACCINATED
+                agent_vaccine_wait_period = 9
+                remaining_vaccines = remaining_vaccines - 1
+            if remaining_vaccines == 0:
+                break
+    
+        
+    # while remaining_vaccines > 0:
+    #     i= random.choice(list(range(N)))
+    #     if agent_status[i] == SUSCEPTIBLE:
+    #         agent_status[i] = VACCINATED
+    #         agent_vaccine_wait_period = 9
+    #         remaining_vaccines = remaining_vaccines - 1
+    #         print(remaining_vaccines)
+    
 
 
 def simulation(N, 
@@ -187,7 +207,6 @@ def simulation(N,
                              HH_dict=HH_dict, 
                              non_HH_dict=non_HH_dict)
         edge_weight = weight_sampling(N,edge,contact_dist)
-
         
         # For every agents in the network:
         for i in range(N):
@@ -230,27 +249,30 @@ def simulation(N,
                 agent_infectious_period[i] = agent_infectious_period[i] - 1
 
             # If they are infected and their infectious period has finished,
-            elif agent_status[i] == INFECTED and agent_infectious_period[i] <= 0:
+            if agent_status[i] == INFECTED and agent_infectious_period[i] <= 0:
                 if bernoulli.rvs(cfr) == 1:
                     # they can die from the disease,
                     agent_status[i] = DEAD
+                    agent_infected.remove(i)
                 else:
                 #   or recover.
                     agent_status[i] = SURVIVED
+                    agent_infected.remove(i)
 
             # If they are incubated:
-            elif agent_status[i] == INCUBATED:
+            if agent_status[i] == INCUBATED:
                 # If the incubation has ended,
                 if agent_incubation_period[i] <= 0:
                     # they becomes infectious, initialize their infectious time.  
                     agent_status[i] = INFECTED
+                    agent_infected.append(i)
                     agent_infectious_period[i] = lognorm.rvs(s=0.1332, scale=np.exp(2.2915))
                 else:
                 # If not, substract incubation time by 1.
                     agent_incubation_period[i] = agent_incubation_period[i] - 1
             
             # If they has been vaccinated:
-            elif agent_status[i] == VACCINATED:
+            if agent_status[i] == VACCINATED:
                 # If the waiting time has ended, they is now immune 
                 if agent_vaccine_wait_period[i] <= 0:
                     agent_status[i] = IMMUNE
@@ -258,10 +280,11 @@ def simulation(N,
                     # Else, substract waiting time by 1.
                     agent_vaccine_wait_period[i] = agent_vaccine_wait_period[i] - 1
             
-            elif agent_status[i] in (SUSCEPTIBLE, REMOVED, DEAD):
+            if agent_status[i] in (SUSCEPTIBLE, REMOVED, DEAD):
                 pass
             
             
+        ring_based_vaccination(edge,edge_weight,agent_status,9,agent_infected,pr_base,num_vaccine,reach_rate=0.7)
         count_status = [0, 0, 0, 0, 0, 0]
         
         # Count the number of agents having the same status.
@@ -283,31 +306,7 @@ def simulation(N,
     return res
 
 
-contact_matrix = np.array([[0.2, 2.0, 1.2], [2.0, 3.6, 1.5], [1.2, 1.5, 5.3]])
-
-
-contact_dist = {
-    "household": {
-        "percentage": [0.163, 
-                       0.403, 
-                       0.17, 
-                       0.026, 
-                       0.1, 
-                       0.138],
-        "risk_ratio": [9.7, 
-                       8.3,
-                       5.6,
-                       4.9,
-                       1.3,
-                       1
-                       ]
-    },
-    "non_household": {
-        "percentage": [1],
-        "risk_ratio": [2.45],
-    },  
-}
-                       
+                   
 def population_sample(N,
                        family_size,
                        acquaintance_size,
@@ -344,139 +343,59 @@ def population_sample(N,
                 non_HH_dict[i][class_type[acquaintance]].append(acquaintance)
                 
             
-        left = right
+        left = right + 1
         family_index = family_index + 1
         
     return class_type, HH_dict, non_HH_dict
 
+contact_matrix = np.array([[0.2, 2.0, 1.2], [2.0, 3.6, 1.5], [1.2, 1.5, 5.3]])
+contact_dist = {
+    "household": {
+        "percentage": [0.163, 
+                       0.403, 
+                       0.17, 
+                       0.026, 
+                       0.1, 
+                       0.138],
+        "risk_ratio": [9.7, 
+                       8.3,
+                       5.6,
+                       4.9,
+                       1.3,
+                       1
+                       ]
+    },
+    "non_household": {
+        "percentage": [1],
+        "risk_ratio": [2.45],
+    },  
+}
 
-# return class_type from age
-def class_type_return(age):
-    if age < 10:
-        return 0
-    if age < 18:
-        return 1
-    return 2
-
-# dựa vào hh_dict và populaiton trả về từ backend, tính toán ra class_type và nội suy ra non_hhdict
-# cách nội suy ra non_hhidct tương tự như phiên bản của Trung
-# trong số những người ko cùng chung gia đình với agent, random theo poison số lượng những người agent quen biết
-def nonhousehold_interpolaton(
-                       population,
-                       HH_dict,
-                       acquaintance_size):
-    
-    non_HH_dict = {}
-
-    # Classtype
-    class_type = [class_type_return(i['age']) for i in population]
-
-    # id_list là danh sách tất cả các agent
-    # id_to_fam là dictionary suy ngược lại từ agent ra family_id của agent đó
-    id_list = []
-    id_to_fam = {}
-    for key, value in HH_dict.items():
-        for i in value:
-            id_list.append(i)
-            id_to_fam[i] = key
-
-    id_list = set(id_list)
-    # print(id_to_fam)
-
-    # nội suy ra none household dict
-    for agent in range(len(population)):
-        possible_acquaintances = list(id_list - 
-                                      (set(HH_dict[id_to_fam[agent]])
-                                       if agent in id_to_fam else set()))
-        print('pa', possible_acquaintances)
-        non_HH_dict[agent] = {0: [], 1: [], 2: []}
-        num_of_acquaintances = np.random.poisson(lam=acquaintance_size)
-        acquaintances = random.sample(possible_acquaintances, num_of_acquaintances)
-        for acquaintance in acquaintances:
-            print('a', acquaintance)
-            print('ct', class_type[acquaintance])
-            print('a', agent)
-            non_HH_dict[agent][class_type[acquaintance]].append(acquaintance)
-        
-    return class_type, non_HH_dict
-
-# giả lập trên dữ liệu tự tạo
-def simulation_sample_data(population_size, acquaintance_size):
-    N = population_size
-    class_type, HH_dict, non_HH_dict = population_sample(N,
-                                                        3,
-                                                        acquaintance_size,
-                                                        [4.5, 3.5, 2])
-    start_time = time.time() #------------------------
-    
-    simu = simulation(N=N,
-                    T=200,
-                    HH_dict=HH_dict,
-                    non_HH_dict=non_HH_dict,
-                    contact_matrix=contact_matrix,
-                    class_type=class_type,
-                    num_vaccine = 0,
-                    num_seed_case = 5,
-                    pr_base=0.01962,
-                    cfr=0.854)
-    end_time = time.time() #--------------------------
-
-    elapsed_time = end_time - start_time
-
-    print(f"Elapsed time: {elapsed_time} seconds")
-    simu.to_csv("result.csv", sep=";")
-
-    plot = simu[['susceptible', 'incubated', 'infected', 'dead', 'removed']] \
-        .div(N) \
-        .plot()
-    plot.set_xlabel("Day")
-    plot.set_ylabel("Ratio of population")
-    plot.set_title('Simulation')
-    plot.set_xticks(range(0, len(simu), 20))
-    plt.savefig('./model/result.jpg')
-    return simu.to_dict()
+N = 3000
+class_type, HH_dict, non_HH_dict = population_sample(N,
+                                                     4,
+                                                     10,
+                                                     [1/3.0, 1/3.0, 1/3.0])
 
 
+simu = simulation(N=N,
+                  T=150,
+                  HH_dict=HH_dict,
+                  non_HH_dict=non_HH_dict,
+                  contact_matrix=contact_matrix,
+                  class_type=class_type,
+                  num_vaccine = 10,
+                  num_seed_case = 5,
+                  pr_base=0.01962,
+                  cfr=0.7)
 
-# giả lập trên dữ liệu trả về từ backend
-def simulation_data(population, HH_dict, aquaitance_size):
-    class_type, non_HH_dict = nonhousehold_interpolaton(population, HH_dict, aquaitance_size)
-    N = len(population)
-    start_time = time.time() #------------------------
-    simu = simulation(N=N,
-                    T=200,
-                    HH_dict=HH_dict,
-                    non_HH_dict=non_HH_dict,
-                    contact_matrix=contact_matrix,
-                    class_type=class_type,
-                    num_vaccine = 0,
-                    num_seed_case = 5,
-                    pr_base=0.01962,
-                    cfr=0.854)
-    end_time = time.time() #--------------------------
+simu.to_csv("result.csv", sep=";")
 
-    elapsed_time = end_time - start_time
-
-    print(f"Elapsed time: {elapsed_time} seconds")
-    simu.to_csv("result.csv", sep=";")
-
-    plot = simu[['susceptible', 'incubated', 'infected', 'dead', 'removed']] \
-        .div(N) \
-        .plot()
-    plot.set_xlabel("Day")
-    plot.set_ylabel("Ratio of population")
-    plot.set_title('Simulation')
-    plot.set_xticks(range(0, len(simu), 20))
-    plt.savefig('./model/result.jpg')
-    return simu.to_dict()
-
-if __name__ == '__main__':
-    simulation_sample_data(500)
-
-
-
-
-    
-    
-    
-    
+plot = simu[['susceptible', 'incubated', 'infected', 'dead', 'removed']] \
+    .div(N) \
+    .plot()
+plot.set_xlabel("Day")
+plot.set_ylabel("Ratio of population")
+plot.set_title('Simulation')
+plot.set_xticks(range(0, len(simu), 20))
+plt.show()
