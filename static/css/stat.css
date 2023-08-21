@@ -7206,7 +7206,7 @@ z-index: 54;
 }
 
 #comp-kvupzas5 {
-height: auto;
+height: fit-content;
 min-height: 0px;
 top: calc(var(--top) + var(--sticky-top) + var(--wix-ads-top-height) * var(--is-sticky));
 align-self: stretch;

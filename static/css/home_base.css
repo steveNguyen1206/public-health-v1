@@ -489,7 +489,9 @@ a {
   margin: 0 auto;
   min-height: 100%;
   position: relative;
-  top: var(--wix-ads-top-height)
+  top: var(--wix-ads-top-height);
+  height: fit-content;
+  max-height: auto;
 }
 
 #site-root img:not([src]) {

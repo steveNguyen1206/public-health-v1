@@ -386,7 +386,7 @@ view_stat_btn.addEventListener('click', function() {
     }
   })
   .then(data => {
-    
+    document.getElementById('chart_container-8823').style.display = 'block';
     updateChart(data);
   })
   .catch(error => console.error("FETCH ERROR:", error));
