@@ -1,6 +1,7 @@
 import numpy as np
 from agent import Agent
 import random
+from random_generator import RandomGenerator
 
 class Population:
     def __init__(self):
@@ -74,3 +75,22 @@ class Population:
         
         return agents
 
+
+    def interpolate_non_household_connections(
+                       agents_array: list[Agent],
+                       acquaintane_size_generator: RandomGenerator.Generator):
+        pass
+        total_pop = len(agents_array)
+        possible_non_hh_connections_array = np.ndarray((total_pop))
+        
+        # Agent_i is the agent whose non-hh-dict is going to be generated for
+        for i, agent_i in enumerate(agents_array):
+            for agent_j in agents_array:
+                if agent_i != agent_j:
+                    if agent_j not in agent_i.family_members:
+                        possible_non_hh_connections_array[i]
+
+        
+        
+    
+    
