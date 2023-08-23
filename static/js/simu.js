@@ -300,7 +300,10 @@ const submitSimul = document.querySelector('#see_simul_btn-15823');
 submitSimul.addEventListener('click', function(){
     removeErrorStyle();
     var mode;
-    const mobileActiv = document.querySelector('#options_container-2823.mobile-ui').style.display;
+    const optionsContainer = document.querySelector('#options_container-2823.mobile-ui');
+    const computedStyle = window.getComputedStyle(optionsContainer);
+
+    const mobileActiv = computedStyle.getPropertyValue('display');
     if (mobileActiv != 'none'){
         mode = 'mobile';
     }else{

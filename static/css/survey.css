@@ -1,6 +1,6 @@
-html {
-
-}
+.display-none {
+    display: none;
+    }
 
 body {
     color: var(--text-light);
