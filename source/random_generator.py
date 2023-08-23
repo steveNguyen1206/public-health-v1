@@ -1,6 +1,7 @@
 import numpy as np
 import random
-import scipy.stats
+from scipy.stats import  lognorm
+
 
 class RandomGenerator:
     class Generator:

@@ -29,9 +29,6 @@ scalar_factors_distribution = {
         "weights": [0.25,0.25,0.5]
     }
 }
-
-
-
 contact_matrix = {
             "scalar_factor": "age_group",
             "values": {
@@ -67,7 +64,6 @@ weight_dist = {
         "values": [2.45],
     },  
 }
-
 n_pop = 700
 
 agents = Population.sample_population(n_pop, 
@@ -80,12 +76,12 @@ weight_sampler = WeightSampler(weight_dist)
 vaccine = Vaccine(num_vaccine=5, effciency=0.998, reach_rate=0.7, immune_period=9)
 ebola = Ebola()
 simulation = DiseaseSimulation(agents,
-                               200,
+                               100,
                                edge_sampler,
                                weight_sampler,
                                ebola,
                                vaccine)
-simulation.initialize_seed_cases(10)
+simulation.initialize_seed_cases(15)
 
 
 

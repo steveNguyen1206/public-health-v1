@@ -78,19 +78,30 @@ class Population:
 
     def interpolate_non_household_connections(
                        agents_array: list[Agent],
-                       acquaintane_size_generator: RandomGenerator.Generator):
+                       acquaintance_size_generator: RandomGenerator.Generator):
         pass
         total_pop = len(agents_array)
-        possible_non_hh_connections_array = np.ndarray((total_pop))
+        possible_non_hh_connections_array = [None]*total_pop
         
-        # Agent_i is the agent whose non-hh-dict is going to be generated for
+        # possible_non_hh_connections_array[i] contains a list of people different from agent_array[i] and who are not members of agent_array[i]'s family
         for i, agent_i in enumerate(agents_array):
+            possible_non_hh_connections_array[i] = list()
+            
             for agent_j in agents_array:
-                if agent_i != agent_j:
-                    if agent_j not in agent_i.family_members:
-                        possible_non_hh_connections_array[i]
+                if agent_i != agent_j and agent_j.id not in agent_i.family_members:
+                    possible_non_hh_connections_array[i].append(agent_j.id)
+        
+            possible_non_hh_connections_array[i] = np.array(possible_non_hh_connections_array[i])
 
+
+        for i, agent_i in enumerate(agents_array):
+            acquaintance_size = acquaintance_size_generator.generate_random_values()[0]
+            if acquaintance_size > possible_non_hh_connections_array[i].size:
+                acquaintance_size = possible_non_hh_connections_array[i].size
+            
+            agent_i.acquaintances = np.random.choice(possible_non_hh_connections_array[i], size=acquaintance_size,replace=False)
+            
+        return agents_array
         
-        
-    
-    
+
+
