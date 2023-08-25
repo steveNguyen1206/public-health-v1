@@ -108,6 +108,7 @@ class DiseaseSimulation:
 
                                 }]) 
             res = pd.concat([res, today],ignore_index=True)
+        self.result_df = res
         return res
     
     def ring_based_vaccination(self,edge,weight,daily_infected):

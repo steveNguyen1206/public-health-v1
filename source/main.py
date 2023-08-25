@@ -75,8 +75,9 @@ edge_sampler = EdgeSampler(agents,non_hh_contact_matrix=contact_matrix)
 weight_sampler = WeightSampler(weight_dist)
 vaccine = Vaccine(num_vaccine=5, effciency=0.998, reach_rate=0.7, immune_period=9)
 ebola = Ebola()
+n_days = 100
 simulation = DiseaseSimulation(agents,
-                               100,
+                               n_days,
                                edge_sampler,
                                weight_sampler,
                                ebola,
@@ -84,16 +85,20 @@ simulation = DiseaseSimulation(agents,
 simulation.initialize_seed_cases(15)
 
 
-
+# Simulation caller, with elapsed time calculated
 start_time = time.time() #------------------------
 res = simulation.run_simulation() 
 end_time = time.time() #--------------------------
 
 elapsed_time = end_time - start_time
 
+# Console information
+print("Population: ", n_pop)
+print("Simulation duration: ", n_days)
 print(f"Elapsed time: {elapsed_time} seconds")
 
 
+# Chart
 plot = res[['susceptible', 'incubated', 'infected', 'deceased', 'removed']].div(n_pop).plot()
 plot.set_xlabel("Day")
 plot.set_ylabel("Ratio of population")
@@ -103,48 +108,6 @@ plt.show()
 
 
 
-
-# class Simulation:
-#     def __init__(self):
-#         self.agents = []
-#         self.parameters = {}
-        
-    
-#     def init_population(self, df_pop, json_household):
-#         # Agent initialization, household included
-#         for index, row in df_pop.iterrows():
-#             # Two scalar factors: age and sex
-#             factors = {"age": row['age'],
-#                        "sex": row['sex']}
-            
-#             # Initializes with id and scalar_factors
-#             new_agent = Agent(id=row['id'],
-#                               scalar_factors=factors)
-            
-#             # Adds members of their respective family
-#             new_agent.family_members = json_household[row['family_id']].copy().remove(new_agent.id)
-#             self.agents.append(new_agent)
-        
-
-#     def init_parameters(self, json_parameters):
-#         self.parameters = json_parameters
-        
-        
-#     def init_acquaintances(self):
-#         n_pop = len(self.agents)
-#         random_list = list(range(n_pop))
-#         for agent in self.agents:
-#             n_acquaintances = np.random.poisson(lam=10)
-#             possible_acquaintance_indices = random.sample(random_list, n_acquaintances)
-#             for possible_acquaintance_index in possible_acquaintance_indices:
-#                 possible_acquaintance_id = self.agents[possible_acquaintance_index].id
-#                 if possible_acquaintance_id != agent.id and possible_acquaintance_id not in agent.family_members:
-#                     agent.acquaintances.append(possible_acquaintance_id)
-    
-
-#     def run():
-#         pass    
-    
     
     
     
