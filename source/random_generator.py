@@ -92,7 +92,7 @@ class RandomGenerator:
             return bernoulli.rvs(self.probability,size=size)
         
         
-    class  BinomialRandomGenerator(Generator):
+    class BinomialRandomGenerator(Generator):
         def __init__(self, p, n, json_data=None):
             super().__init__(p, n, json_data)
             if json_data is None:
@@ -108,6 +108,3 @@ class RandomGenerator:
                 size = 1
             return np.random.binomial(self.n,self.p,size)
         
-rand = RandomGenerator()
-gen = rand.create_from_json(data={"type": "random_Poisson", "properties": {"lambda":6}})
-print([gen.generate_random_values()[0] for _ in range(10)])

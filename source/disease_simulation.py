@@ -161,4 +161,3 @@ class DiseaseSimulation:
                 if remaining_vaccines == 0:
                     break
 
-

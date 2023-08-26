@@ -29,6 +29,7 @@ scalar_factors_distribution = {
         "weights": [0.25,0.25,0.5]
     }
 }
+
 contact_matrix = {
             "scalar_factor": "age_group",
             "values": {
@@ -43,6 +44,7 @@ contact_matrix = {
                           "adult": 5.3}
             }
         }
+
 weight_dist = {
     "family_members": {
         "weights": [0.163, 
